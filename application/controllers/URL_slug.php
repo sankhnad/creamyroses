@@ -21,6 +21,7 @@ class URL_slug extends CI_Controller {
 		}
 		
 		$data['categoryObj'] = $categoryObj;
+		
 		if($productObj){
 			$this->load->view('store/product-data');
 		}else if($categoryObj){
