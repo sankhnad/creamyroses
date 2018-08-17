@@ -471,4 +471,27 @@ if(! function_exists('getCustomerrData')){
 	}
 }
 
+if(! function_exists('getProductList')){
+
+    function getProductList($typeId='') {
+
+		$CI = & get_instance();
+
+		$where['b.isDeleted'] = '1';
+
+		$where['b.status'] = '1';	
+
+		if($typeId !=''){
+			$where['a.type_id'] = $typeId;	
+		}		
+
+		$hotelObj = $CI->manual_model->getProductList('b.*,c.url_slug as type_url,a.type_id', $where);
+
+		return $hotelObj;
+
+	}
+
+}
+
+
 ?>
