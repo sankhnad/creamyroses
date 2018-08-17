@@ -18,6 +18,8 @@ if(isset($CID)){
 	
 }
 
+$catListAry = getCategoryList(array('isDeleted' => '1'));
+
 //if(!AID || !isset($adminDATA[0]->fld_aid)){
 	//redirect(base_url().'login');
 //}

@@ -187,187 +187,27 @@
                             <div class="mega-menu-title">
                                 <h3><i class="fa fa-navicon"></i> All Categories</h3>
                             </div>
-                            <div class="mega-menu-category">
-                                <ul class="nav">
-                                    <li>
-                                        <a href="#"><i class="fa fa-home"></i> Delicious Cakes</a>
-                                        <div class="wrap-popup column1">
-                                            <div class="popup">
-                                                <ul class="nav">
-                                                    <li><a href="#">Home Version 1</a></li>
-                                                    <li><a href="#">Home Version 2</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-file-text"></i> Anniversary Cakes</a>
-                                        <div class="wrap-popup">
-                                            <div class="popup">
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <ul class="nav">
-                                                            <li><a href="#"><span>Grid</span></a> </li>
-                                                            <li> <a href="#"> <span>List</span> </a> </li>
-                                                            <li> <a href="#"> <span>Product Detail</span> </a> </li>
-                                                            <li> <a href="#"> <span>Shopping Cart</span> </a> </li>
-                                                            <li><a href="#"><span>Checkout</span></a> </li>
-                                                            <li> <a href="#"> <span>Wishlist</span> </a> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm-6 has-sep">
-                                                        <ul class="nav">
-                                                            <li> <a href="#"> <span>Dashboard</span> </a> </li>
-                                                            <li> <a href="#"> <span>Multiple Addresses</span> </a> </li>
-                                                            <li><a href="#"><span>Compare</span></a> </li>
-                                                            <li><a href="#"><span>Quick View</span></a> </li>
-                                                            <li><a href="#"><span>Newsletter</span></a> </li>
-                                                            <li><a href="#"><span>404 Error Page</span></a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="has-sub wide">
-                                        <a href="#"><i class="fa fa-gift"></i> Photo Cakes</a>
-                                        <div class="wrap-popup">
-                                            <div class="popup">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-6">
-                                                        <h3>Clothing</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#"><span>Western Wear</span></a> </li>
-                                                            <!--level2 nav-6-1-1-->
-                                                            <li> <a href="#"><span>Night Wear</span></a> </li>
-                                                            <!--level2 nav-6-1-1-->
-                                                            <li> <a href="#"><span>Ethnic Wear</span></a> </li>
-                                                            <!--level2 nav-6-1-1-->
-                                                            <li> <a href="#"><span>Designer Wear</span></a> </li>
-                                                            <!--level2 nav-6-1-1-->
-                                                        </ul>
-                                                        <br>
-                                                        <h3>Shoes</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#">Flat Shoes</a> </li>
-                                                            <li> <a href="#">Flat Sandals</a> </li>
-                                                            <li> <a href="#">Boots</a> </li>
-                                                            <li> <a href="#">Heels</a> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6 has-sep">
-                                                        <h3>Jwellery</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#">Bracelets</a> </li>
-                                                            <li> <a href="#">Necklaces &amp; Pendent</a> </li>
-                                                            <li> <a href="#">Pendants</a> </li>
-                                                            <li> <a href="#">Pins &amp; Brooches</a> </li>
-                                                        </ul>
-                                                        <br>
-                                                        <h3>Swimwear</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#">Swimsuits</a> </li>
-                                                            <li> <a href="#">Beach Clothing</a> </li>
-                                                            <li> <a href="#">Clothing</a> </li>
-                                                            <li> <a href="#">Bikinis</a> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4 has-sep hidden-sm">
-                                                        <div class="custom-menu-right">
-                                                            <div class="box-banner media">
-                                                                <div class="add-right"><img src="http://htmldemo.themessoft.com/lilac/version5/images/menu-img1.jpg"  alt=""></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-suitcase"></i> 5 Star Cakes</a>
-                                        <div class="wrap-popup">
-                                            <div class="popup">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-6">
-                                                        <h3>Clothing</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#">Casual Dresses</a> </li>
-                                                            <li> <a href="#">Evening</a> </li>
-                                                            <li> <a href="#">Designer</a> </li>
-                                                            <li> <a href="#">Party</a> </li>
-                                                        </ul>
-                                                        <br>
-                                                        <h3>Sunglasses</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#"><span>Ray Ban</span></a> </li>
-                                                            <li> <a href="#"><span>Fasttrack</span></a> </li>
-                                                            <li> <a href="#"><span>Police</span></a> </li>
-                                                            <li> <a href="#"><span>Oakley</span></a> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6 has-sep">
-                                                        <h3>Watches</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#"><span>Fasttrack</span></a> </li>
-                                                            <li> <a href="#"><span>Casio</span></a> </li>
-                                                            <li> <a href="#"><span>Titan</span></a> </li>
-                                                            <li> <a href="#"><span>Tommy-Hilfiger</span></a> </li>
-                                                        </ul>
-                                                        <br>
-                                                        <h3>Shoes</h3>
-                                                        <ul class="nav">
-                                                            <li> <a href="#"><span>Sport Shoes</span></a> </li>
-                                                            <li> <a href="#"><span>Casual Shoes</span></a> </li>
-                                                            <li> <a href="#"><span>Leather Shoes</span></a> </li>
-                                                            <li> <a href="#"><span>Canvas shoes</span></a> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4 has-sep hidden-sm">
-                                                        <div class="custom-menu-right">
-                                                            <div class="box-banner media">
-                                                                <div class="add-right"><img src="http://htmldemo.themessoft.com/lilac/version5/images/menu-img2.jpg" alt=""></div>
-                                                            </div>
-                                                            <div class="box-banner media">
-                                                                <div class="add-right"><img src="http://htmldemo.themessoft.com/lilac/version5/images/menu-img3.jpg" alt=""></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="nosub"><a href="#"><i class="fa fa-camera"></i> Designer Cakes</a></li>
-                                    <li class="nosub"><a href="#"><i class="fa fa-bed"></i> FLowers</a></li>
-                                    <li class="nosub"><a href="#"><i class="fa fa-child"></i> Combos</a></li>
-                                    <li class="more-menu">
-                                        <a href="#"><i class="fa fa-heart"></i> Heart-Shape Cakes</a>
-                                        <div class="wrap-popup column1">
-                                            <div class="popup">
-                                                <ul class="nav">
-                                                    <li><a href="#">Accessories</a></li>
-                                                    <li><a href="#">Hats and Gloves</a></li>
-                                                    <li><a href="#">Lifestyle</a></li>
-                                                    <li><a href="#">Bras</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="more-menu">
-                                        <a href="#"><i class="fa fa-archive"></i> 2-3 Tier Cakes</a>
-                                        <div class="wrap-popup column1">
-                                            <div class="popup">
-                                                <ul class="nav">
-                                                    <li> <a href="#"> Wallets </a> </li>
-                                                    <li> <a href="#"> Laptop Bags</a> </li>
-                                                    <li> <a href="#"> Belts </a> </li>
-                                                    <li> <a href="#"> Bakpacks </a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="nosub"><a href="#"><i class="fa fa-shopping-basket"></i> Fondant Cakes</a></li>
-                                </ul>
-                            </div>
+                            
+							<div class="mega_menu_NAV">
+									<?php
+										function get_menu( $items, $class = '', $k = '1' ) {
+											$html = '<ul class="navMeg'.$k++.'">';
+											foreach ( $items as $key => $value ) {
+
+												$html .= '<li><a href="'.base_url().$value['url_slug'].'"><i class="fa fa-home"></i> '.$value['name'].'</a>';
+												if ( array_key_exists( 'child', $value ) ) {
+													$html .= get_menu( $value[ 'child' ], 'child', $k );
+												}
+												$html .= "</li>";
+											}
+											$html .= "</ul>";
+											return $html;
+										}
+										echo get_menu($catListAry[1]);
+									?>
+							</div>
+							
+							
                         </div>
                     </div>
                 </div>

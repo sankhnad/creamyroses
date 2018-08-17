@@ -1,3 +1,10 @@
+$('.navMeg1 > li')
+.mouseenter(function() {
+	$(this).find(' > ul').show();
+})
+.mouseleave(function() {
+	$(this).find(' > ul').hide();
+});
 $(document).on("submit", ".register_customer", function (e) {
 	e.preventDefault();
 	$.ajax({
