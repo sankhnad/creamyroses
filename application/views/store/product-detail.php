@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <![endif]-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- Favicons Icon -->
-        <link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-        <link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-        <title>Product Details || Cakes</title>
-        <!-- Mobile Specific -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <?php include("include/style.php"); ?>
-    </head>
+<head>
+<head>
+	<?php include('includes/commonfile.php');?>
+	<title><?=$categoryObj[0]->name?> | Creamy Roses</title>
+	<?php include("includes/style.php"); ?>
+</head>
     <body class="shopping-cart-page">
         <div id="page">
-        <?php include("include/header.php"); ?>
+        <?php include("includes/header.php"); ?>
 
         <!-- Main Container -->
         <section class="main-container col1-layout">
@@ -448,8 +438,8 @@
         </section>
         <!-- Main Container End --> 
 
-        <?php include("include/footer.php"); ?>
-        <?php include("include/script.php"); ?>
+        <?php include("includes/footer.php"); ?>
+        <?php include("includes/script.php"); ?>
         <script type="text/javascript" src="assets/js/cloud-zoom.js"></script>
     </body>
 </html>

@@ -59,7 +59,24 @@ class URL_slug extends CI_Controller {
 		
 		
 		if($slugURL2){
-			$productObj = $this->common_model->getAll( '*', 'product', array('url_slug' => $slugURL2, 'status'=>'1', 'isDeleted'=>'1'));	
+			$categoryObj = $this->common_model->getAll( '*', 'category', array('url_slug' => $slugURL1, 'status'=>'1', 'isDeleted'=>'1'));
+			$select = array(
+				'b.*',
+				'c.name as c_name',
+				'c.url_slug as c_url_slug',
+			);
+			
+			$where = array(
+				'b.url_slug' => $slugURL2,
+				'b.isDeleted'=>'1',
+				'c.isDeleted'=>'1',
+				'b.status'=>'1',
+				'c.status'=>'1',				
+			);
+			
+			$select = str_replace( " , ", " ", implode( ", ", $select));
+			
+			$productDataObj = $this->manual_model->getProductListing($select, $where);
 		}else{
 			$slugURL = $slugURL2 ? $slugURL2 : $slugURL1;
 			
@@ -96,7 +113,7 @@ class URL_slug extends CI_Controller {
 		if($productListObj){
 			$this->load->view( 'store/product-listing', $data);
 		} else if($productDataObj){
-			$this->load->view( 'store/product-data', $data);
+			$this->load->view( 'store/product-detail', $data);
 		} else {
 			$this->load->view( 'admin/404' );
 		}

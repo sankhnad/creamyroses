@@ -112,7 +112,7 @@
 										</div>
 										<div class="item-info">
 											<div class="info-inner">
-												<div class="item-title"> <a title="Retis lapen casen" href="product-detail.php"> Retis lapen casen </a> </div>
+												<div class="item-title"> <a title="<?=$productList->p_name?>" href="product-detail.php"> <?=$productList->p_name?> </a> </div>
 												<div class="item-content">
 													<div class="item-price">
 														<div class="price-box">
