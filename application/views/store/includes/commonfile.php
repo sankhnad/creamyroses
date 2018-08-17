@@ -14,8 +14,6 @@ if(isset($CID)){
 
 	$customerObj  = getCustomerrData($where);
 	$customerName = $customerObj[0]->fname;
-
-	
 }
 
 $catListAry = getCategoryList(array('isDeleted' => '1'));

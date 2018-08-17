@@ -81,7 +81,7 @@ if(in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
 	$iDefDB_hostname = 'localhost';
 	$iDefDB_username = 'root';
 	$iDefDB_password = '';
-	$iDefDB_database = 'store';
+	$iDefDB_database = 'creamyroses';
 }else{
 	$iDefDB_hostname = 'localhost';
 	$iDefDB_username = 'creamyroses';

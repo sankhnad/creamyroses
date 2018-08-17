@@ -1,3 +1,4 @@
+<div id="page">
 <!--Start: Choose City Modal Box -->
 <div class="modal fade" <?=CITY ? '': 'data-backdrop="static" data-keyboard="false"' ?>  id="ChooseCity" role="dialog">
     <div class="modal-dialog modal-lg">
