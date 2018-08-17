@@ -107,6 +107,7 @@
 							<div class="new-arrivals-block">
 							<?php foreach($typeAry as $typeData){ 
 									if($typeData->sort_order == 1){
+											$productObj = getProductList($typeData->type_id);
 							?>
 								<div class="block-title">
 									<h2><?=$typeData->name;?></h2>
@@ -114,163 +115,30 @@
 								<div id="new-arrivals-slider" class="product-flexslider hidden-buttons">
 									<div class="home-block-inner"> </div>
 									<div class="slider-items slider-width-col4 products-grid block-content">
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product10.jpg"> </a>
-														<div class="new-label new-top-left">new</div>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														
-														<div class="item-content">
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+										<?php foreach($productObj as $data){ ?>
+												<div class="item">
+													<div class="item-inner">
+														<div class="item-img">
+															<div class="item-img-info"> <a class="product-image" title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <img alt="<?=$data->name?>" src="<?=$iURL_product?><?=$data->image?>"> </a>
+																<div class="new-label new-top-left">new</div>
+																
 															</div>
-															
+														</div>
+														<div class="item-info">
+															<div class="info-inner">
+																<div class="item-title"> <a title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <?=$data->name?> </a> </div>
+																
+																<div class="item-content">
+																	<div class="item-price">
+																		<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+																	</div>
+																	
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product11.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 155.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item --> 
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product12.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 185.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product13.jpg"> </a>
-														<div class="new-label new-top-left">new</div>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 235.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product14.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 225.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product16.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 335.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product22.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item --> 
+										<?php } ?>
 									</div>
 								</div>
 							<?php }} ?>
@@ -287,6 +155,7 @@
 							<div class="new-arrivals-block">
 							<?php foreach($typeAry as $typeData){ 
 									if($typeData->sort_order == 2){
+										$productObj = getProductList($typeData->type_id);
 							?>
 								<div class="block-title">
 									<h2><?=$typeData->name;?></h2>
@@ -294,163 +163,30 @@
 								<div id="new-arrivals-slider" class="product-flexslider hidden-buttons">
 									<div class="home-block-inner"> </div>
 									<div class="slider-items slider-width-col4 products-grid block-content">
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product10.jpg"> </a>
-														<div class="new-label new-top-left">new</div>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														
-														<div class="item-content">
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+										<?php foreach($productObj as $data){ ?>
+												<div class="item">
+													<div class="item-inner">
+														<div class="item-img">
+															<div class="item-img-info"> <a class="product-image" title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <img alt="<?=$data->name?>" src="<?=$iURL_product?><?=$data->image?>"> </a>
+																<div class="new-label new-top-left">new</div>
+																
 															</div>
-															
+														</div>
+														<div class="item-info">
+															<div class="info-inner">
+																<div class="item-title"> <a title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <?=$data->name?> </a> </div>
+																
+																<div class="item-content">
+																	<div class="item-price">
+																		<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+																	</div>
+																	
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product11.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 155.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item --> 
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product12.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 185.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product13.jpg"> </a>
-														<div class="new-label new-top-left">new</div>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 235.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product14.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 225.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product16.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 335.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product22.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item --> 
+										<?php } ?>
 									</div>
 								</div>
 							<?php }} ?>
@@ -466,11 +202,7 @@
 							<?php foreach($typeAry as $typeData){ 
 									if($typeData->sort_order > 2){
 									
-												$where = array(
-														'isDeleted' => '1',
-														'status' => '1',
-														'type_id' => $typeData->type_id,
-												);
+										$productObj = getProductList($typeData->type_id);
 												
 									
 							?>
@@ -480,163 +212,30 @@
 								<div id="new-arrivals-slider" class="product-flexslider hidden-buttons">
 									<div class="home-block-inner"> </div>
 									<div class="slider-items slider-width-col4 products-grid block-content">
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product10.jpg"> </a>
-														<div class="new-label new-top-left">new</div>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														
-														<div class="item-content">
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+										<?php foreach($productObj as $data){ ?>
+												<div class="item">
+													<div class="item-inner">
+														<div class="item-img">
+															<div class="item-img-info"> <a class="product-image" title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <img alt="<?=$data->name?>" src="<?=$iURL_product?><?=$data->image?>"> </a>
+																<div class="new-label new-top-left">new</div>
+																
 															</div>
-															
+														</div>
+														<div class="item-info">
+															<div class="info-inner">
+																<div class="item-title"> <a title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <?=$data->name?> </a> </div>
+																
+																<div class="item-content">
+																	<div class="item-price">
+																		<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+																	</div>
+																	
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product11.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 155.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item --> 
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product12.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 185.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product13.jpg"> </a>
-														<div class="new-label new-top-left">new</div>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 235.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product14.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 225.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product16.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 335.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Item -->
-										<div class="item">
-											<div class="item-inner">
-												<div class="item-img">
-													<div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="#"> <img alt="Retis lapen casen" src="<?=$iURL_storeAssts?>products-images/product22.jpg"> </a>
-														
-													</div>
-												</div>
-												<div class="item-info">
-													<div class="info-inner">
-														<div class="item-title"> <a title="Retis lapen casen" href="#"> Retis lapen casen </a> </div>
-														<div class="item-content">
-															
-															<div class="item-price">
-																<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span> </div>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Item --> 
+										<?php } ?>
 									</div>
 								</div>
 							<?php }} ?>

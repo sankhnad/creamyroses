@@ -112,4 +112,16 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
+	
+	function getProductList($select, $where){
+		$this->db->select($select);
+		$this->db->from('product_to_type AS a');
+		$this->db->join('product AS b', 'a.product_id = b.product_id', 'LEFT');
+		$this->db->join('type AS c', 'a.type_id = c.type_id', 'LEFT');
+		$this->db->where($where);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result();		
+	}
+
 }
