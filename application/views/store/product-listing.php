@@ -3,7 +3,7 @@
 <head>
 <head>
 	<?php include('includes/commonfile.php');?>
-	<title>Product List | Creamy Roses</title>
+	<title><?=$categoryObj[0]->name?> | Creamy Roses</title>
 	<?php include("includes/style.php"); ?>
 </head>
 
@@ -16,12 +16,11 @@
 			<div class="row">
 
 				<div class="col-sm-9 col-sm-push-3">
-
 					<!-- Breadcrumbs -->
 					<div class="breadcrumbs">
 						<ul>
-							<li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
-							<li class="category1599"> <a href="#">Shop</a>
+							<li class="home"> <a href="<?=base_url()?>" title="Go to Home Page">Home</a> <span>/</span> </li>
+							<li class="category1599"> <a href="<?=base_url()?><?=$categoryObj[0]->url_slug?>"><?=$categoryObj[0]->name?></a>
 								<!-- <span>/</span> -->
 							</li>
 							<!-- <li class="category1599"> <a href="#" > Delicious Cakes</a> </li> -->
@@ -31,12 +30,11 @@
 
 					<div class="page-title">
 						<h2 class="page-heading"> 
-							<span class="page-heading-title">Shop</span> 
+							<span class="page-heading-title"><?=$categoryObj[0]->name?></span> 
 						</h2>
 					</div>
-
+					
 					<article class="col-main">
-
 						<div class="toolbar">
 							<div class="display-product-option">
 								<div class="pages">
@@ -62,10 +60,8 @@
 												<a href="#">Relevance<span class="right-arrow"></span></a>
 												<ul>
 													<!-- <li><a href="#">Relevance</a></li> -->
-													<li><a href="#">Price Low-High</a>
-													</li>
-													<li><a href="#">Price High-Low</a>
-													</li>
+													<li><a href="#">Price Low-High</a></li>
+													<li><a href="#">Price High-Low</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -95,19 +91,28 @@
 
 						<div class="category-products">
 							<ul class="products-grid">
+								<?php foreach($productListObj as $productList){
+									$diff = abs(strtotime($productList->p_created_on) - strtotime(date( "Y-m-d H:i:s", time() )));
+	
+									$date1 = new DateTime(date( "Y-m-d H:i:s", time() ));
+									$date2 = new DateTime($productList->p_created_on);
+									$interval = $date1->diff($date2);
+								?>
 								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
 									<div class="item-inner">
 										<div class="item-img">
 											<div class="item-img-info">
-												<a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product16.jpg" alt="Retis lapen casen"></a>
+												<a href="<?=base_url()?><?=$categoryObj[0]->url_slug?>/<?=$productList->p_url_slug?>" title="<?=$productList->p_name?>" class="product-image"><img src="<?=base_url()?>uploads/product/thumb/<?=$productList->p_image?>" alt="<?=$productList->p_name?>"></a>
+												<?php if($interval->d < 30){?>
 												<div class="new-label new-top-left">New</div>
+												<?php } ?>
 												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
 												</div>
 											</div>
 										</div>
 										<div class="item-info">
 											<div class="info-inner">
-												<div class="item-title"> <a title="Retis lapen casen" href="product-detail.php"> Retis lapen casen </a> </div>
+												<div class="item-title"> <a title="<?=$productList->p_name?>" href="product-detail.php"> <?=$productList->p_name?> </a> </div>
 												<div class="item-content">
 													<div class="item-price">
 														<div class="price-box">
@@ -120,272 +125,7 @@
 										</div>
 									</div>
 								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product2.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left label-green">20% off</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product3.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left label-green">30% off</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info">
-												<a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product19.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left">New</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"> <a title="Retis lapen casen" href="product-detail.php"> Retis lapen casen </a> </div>
-												<div class="item-content">
-													<div class="item-price">
-														<div class="price-box">
-															<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> 100.00 </span> </p>
-															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> 90.00 </span> </p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product20.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left label-green">29% off</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product21.jpg" alt="Retis lapen casen"></a>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info">
-												<a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product22.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left">New</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"> <a title="Retis lapen casen" href="product-detail.php"> Retis lapen casen </a> </div>
-												<div class="item-content">
-													<div class="item-price">
-														<div class="price-box">
-															<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> 100.00 </span> </p>
-															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> 90.00 </span> </p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product23.jpg" alt="Retis lapen casen"></a>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product24.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left label-green">30% off</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info">
-												<a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product16.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left">New</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"> <a title="Retis lapen casen" href="product-detail.php"> Retis lapen casen </a> </div>
-												<div class="item-content">
-													<div class="item-price">
-														<div class="price-box">
-															<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> 100.00 </span> </p>
-															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> 90.00 </span> </p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product2.jpg" alt="Retis lapen casen"></a>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
-									<div class="item-inner">
-										<div class="item-img">
-											<div class="item-img-info"><a href="product-detail.php" title="Retis lapen casen" class="product-image"><img src="assets/products-images/product3.jpg" alt="Retis lapen casen"></a>
-												<div class="new-label new-top-left label-green">20% off</div>
-												<div class="label-wishlist"><i class="fab fa-gratipay"></i>
-												</div>
-											</div>
-										</div>
-										<div class="item-info">
-											<div class="info-inner">
-												<div class="item-title"><a href="product-detail.php" title="Retis lapen casen">Retis lapen casen</a> </div>
-												<div class="item-content">
-													<div class="rating">
-													</div>
-													<div class="item-price">
-														<div class="price-box"><span class="regular-price"><span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
+								<?php } ?>
 							</ul>
 						</div>
 

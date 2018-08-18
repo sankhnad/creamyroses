@@ -100,13 +100,23 @@ class Manual_model extends CI_Model {
 		return $query->result();
 	}
 	
-	
 	function getFullLocationData($select, $where){
 		$this->db->select($select);
 		$this->db->from('location_area AS a');
 		$this->db->join('location_pin AS b', 'a.pin = b.pin', 'LEFT');
 		$this->db->join('location_city AS c', 'b.cid = c.cid', 'LEFT');
 		$this->db->join('location_state AS d', 'c.sid = d.sid', 'LEFT');		
+		$this->db->where($where);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result();		
+	}
+	
+	function getProductListing($select, $where){
+		$this->db->select($select);
+		$this->db->from('product_to_category AS a');
+		$this->db->join('product AS b', 'a.product_id = b.product_id', 'LEFT');
+		$this->db->join('category AS c', 'a.category_id = c.category_id', 'LEFT');		
 		$this->db->where($where);
 		$query = $this->db->get();
 		//echo $this->db->last_query();
@@ -123,5 +133,4 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
-
 }
