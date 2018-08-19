@@ -154,6 +154,7 @@
 
 							 <?php } ?>
                             <div class="block-company-wrapper hidden-xs"><a title="Sell on Creamy Roses" href="#">Sell on Creamy Roses</a></div>
+                            <div class="block-company-wrapper hidden-xs"><a title="Baby Photography" href="<?=base_url();?>baby-photography">Baby Photography</a></div>
                         </div>
                     </div>
                     <!-- End Header Top Links --> 

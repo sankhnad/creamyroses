@@ -23,4 +23,9 @@ class Home extends CI_Controller {
 		set_cookie('CITY',$id,3600*9999);
 		echo json_encode(array('status'=>'success'));
 	}
+	
+	public function babyPhotoPage(){
+		$this->load->view('store/baby');
+	}
+
 }

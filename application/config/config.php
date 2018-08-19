@@ -325,7 +325,7 @@ $config['default_path'] = array(
 		'adminAssts' => $config['base_url'].'assets/admin/',
 		'vendor' => $config['base_url'].'uploads/vendor/',
 		'type' => $config['base_url'].'uploads/type/',
-
+		'babyAssts' => $config['base_url'].'assets/baby/',
 	);
 /*
 |--------------------------------------------------------------------------
