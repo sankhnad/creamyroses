@@ -84,6 +84,7 @@ class URL_slug extends CI_Controller {
 			
 			
 			$select = array(
+				'b.product_id as p_product_id',
 				'b.name as p_name',
 				'b.url_slug as p_url_slug',
 				'b.image as p_image',

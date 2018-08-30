@@ -493,5 +493,42 @@ if(! function_exists('getProductList')){
 
 }
 
+if(! function_exists('getProductPrice')){
+
+    function getProductPrice($prdId='') {
+
+		$CI = & get_instance();
+
+
+		if($prdId !=''){
+			$where['product_id'] = $prdId;	
+		}		
+
+		$productPriceObj = $CI->common_model->getAll( '*', 'product_price', $where, 'product_price asc');
+
+		return $productPriceObj;
+
+	}
+
+}
+
+if(! function_exists('getDiscount')){
+
+    function getDiscount($type, $prdctAmnt, $discountVal) {
+
+		$totalDiscount = 0;
+		if($type == 'F'){
+			$totalDiscount = $prdctAmnt - $discountVal;
+		}else if($type == 'P'){
+			$totalDiscount = $prdctAmnt - ($prdctAmnt*$discountVal/100);
+		}
+
+		return $totalDiscount;
+
+	}
+
+}
+
+
 
 ?>

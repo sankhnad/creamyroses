@@ -9,7 +9,7 @@
 
 </head>
 <body class="shopping-cart-page">
-<div id="page">
+	
 
 	<?php include("includes/header.php"); ?>
 
@@ -115,12 +115,33 @@
 								<div id="new-arrivals-slider" class="product-flexslider hidden-buttons">
 									<div class="home-block-inner"> </div>
 									<div class="slider-items slider-width-col4 products-grid block-content">
-										<?php foreach($productObj as $data){ ?>
+										<?php
+										 foreach($productObj as $data){ 
+										 			$priceObj = getProductPrice($data->product_id);
+													if(count($priceObj) > 0){
+														$price = $priceObj[0]->product_price;
+														$discount_price = getDiscount($priceObj[0]->discount_type, $priceObj[0]->product_price, $priceObj[0]->discount);
+
+													}else{
+														$price = 0;
+														$discount_price = 0;
+													}
+													
+													$diff = abs(strtotime($data->created_on) - strtotime(date( "Y-m-d H:i:s", time() )));
+													$date1 = new DateTime(date( "Y-m-d H:i:s", time() ));
+													$date2 = new DateTime($data->created_on);
+													$interval = $date1->diff($date2);
+
+													
+
+										 ?>
 												<div class="item">
 													<div class="item-inner">
 														<div class="item-img">
 															<div class="item-img-info"> <a class="product-image" title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <img alt="<?=$data->name?>" src="<?=$iURL_product?><?=$data->image?>"> </a>
-																<div class="new-label new-top-left">new</div>
+																<?php if($interval->days < 30){?>
+																	<div class="new-label new-top-left">New</div>
+																<?php } ?>
 																
 															</div>
 														</div>
@@ -130,7 +151,15 @@
 																
 																<div class="item-content">
 																	<div class="item-price">
-																		<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+																		<div class="price-box">
+																			<?php if($discount_price > 0){ ?>
+																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($discount_price,2)?> </span> </p>
+																			<?php }else{ ?>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<?php } ?>
+
+																		</div>
 																	</div>
 																	
 																</div>
@@ -163,12 +192,31 @@
 								<div id="new-arrivals-slider" class="product-flexslider hidden-buttons">
 									<div class="home-block-inner"> </div>
 									<div class="slider-items slider-width-col4 products-grid block-content">
-										<?php foreach($productObj as $data){ ?>
+										<?php foreach($productObj as $data){ 
+										 			$priceObj = getProductPrice($data->product_id);
+													if(count($priceObj) > 0){
+														$price = $priceObj[0]->product_price;
+														$discount_price = getDiscount($priceObj[0]->discount_type, $priceObj[0]->product_price, $priceObj[0]->discount);
+
+													}else{
+														$price = 0;
+														$discount_price = 0;
+													}
+													
+													$diff = abs(strtotime($data->created_on) - strtotime(date( "Y-m-d H:i:s", time() )));
+													$date1 = new DateTime(date( "Y-m-d H:i:s", time() ));
+													$date2 = new DateTime($data->created_on);
+													$interval = $date1->diff($date2);
+													
+													
+										?>
 												<div class="item">
 													<div class="item-inner">
 														<div class="item-img">
 															<div class="item-img-info"> <a class="product-image" title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <img alt="<?=$data->name?>" src="<?=$iURL_product?><?=$data->image?>"> </a>
-																<div class="new-label new-top-left">new</div>
+																<?php if($interval->days < 30){?>
+																	<div class="new-label new-top-left">New</div>
+																<?php } ?>
 																
 															</div>
 														</div>
@@ -178,7 +226,15 @@
 																
 																<div class="item-content">
 																	<div class="item-price">
-																		<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+																		<div class="price-box">
+																			<?php if($discount_price > 0){ ?>
+																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($discount_price,2)?> </span> </p>
+																			<?php }else{ ?>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<?php } ?>
+
+																		</div>
 																	</div>
 																	
 																</div>
@@ -212,12 +268,30 @@
 								<div id="new-arrivals-slider" class="product-flexslider hidden-buttons">
 									<div class="home-block-inner"> </div>
 									<div class="slider-items slider-width-col4 products-grid block-content">
-										<?php foreach($productObj as $data){ ?>
+										<?php foreach($productObj as $data){ 
+										 			$priceObj = getProductPrice($data->product_id);
+													if(count($priceObj) > 0){
+														$price = $priceObj[0]->product_price;
+														$discount_price = getDiscount($priceObj[0]->discount_type, $priceObj[0]->product_price, $priceObj[0]->discount);
+
+													}else{
+														$price = 0;
+														$discount_price = 0;
+													}
+													
+													$diff = abs(strtotime($data->created_on) - strtotime(date( "Y-m-d H:i:s", time() )));
+													$date1 = new DateTime(date( "Y-m-d H:i:s", time() ));
+													$date2 = new DateTime($data->created_on);
+													$interval = $date1->diff($date2);
+										
+										?>
 												<div class="item">
 													<div class="item-inner">
 														<div class="item-img">
 															<div class="item-img-info"> <a class="product-image" title="<?=$data->name?>" href="<?=base_url();?><?=$data->url_slug?>"> <img alt="<?=$data->name?>" src="<?=$iURL_product?><?=$data->image?>"> </a>
-																<div class="new-label new-top-left">new</div>
+																<?php if($interval->days < 30){?>
+																	<div class="new-label new-top-left">New</div>
+																<?php } ?>
 																
 															</div>
 														</div>
@@ -227,7 +301,15 @@
 																
 																<div class="item-content">
 																	<div class="item-price">
-																		<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
+																		<div class="price-box">
+																			<?php if($discount_price > 0){ ?>
+																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($discount_price,2)?> </span> </p>
+																			<?php }else{ ?>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<?php } ?>
+
+																		</div>
 																	</div>
 																	
 																</div>
