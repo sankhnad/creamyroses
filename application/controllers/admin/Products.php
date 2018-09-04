@@ -360,21 +360,29 @@ class Products extends CI_Controller {
 			$this->common_model->bulkSaveData('product_price', $productPriceData);
 		}
 		
-		if(isset($files)){
+		if(count($files) > 0){
+				//echo '<pre>';print_r($files);
+				//echo "===".$number_of_files;die;
+				$insertImgData = array();
 				for($i=0;$i<$number_of_files;$i++){
-					$_FILES['images']['name'] 		= $files['name'][$i];
-					$_FILES['images']['type']		= $files['type'][$i];
-					$_FILES['images']['tmp_name'] 	= $files['tmp_name'][$i];
-					$_FILES['images']['error'] 		= $files['error'][$i];
-					$_FILES['images']['size'] 		= $files['size'][$i];
-					$imageName = uploadFiles('images', $path = 'uploads/product/', 'thumb', 360, 360 );
-					$insertImgData[] = array(
-							'image' => $imageName,
-							'product_id' => $pid 
-					);
+					
+					if($files['name'][$i] !=''){
+						$_FILES['images']['name'] 		= $files['name'][$i];
+						$_FILES['images']['type']		= $files['type'][$i];
+						$_FILES['images']['tmp_name'] 	= $files['tmp_name'][$i];
+						$_FILES['images']['error'] 		= $files['error'][$i];
+						$_FILES['images']['size'] 		= $files['size'][$i];
+						$imageName = uploadFiles('images', $path = 'uploads/product/', 'thumb', 360, 360 );
+						$insertImgData[] = array(
+								'image' => $imageName,
+								'product_id' => $pid 
+						);
+					}
 				}
 				
-				$this->common_model->bulkSaveData('product_images', $insertImgData);	
+				if(count($insertImgData) > 0){
+					$this->common_model->bulkSaveData('product_images', $insertImgData);
+				}	
 		}
 	
 		
