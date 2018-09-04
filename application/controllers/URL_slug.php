@@ -114,9 +114,24 @@ class URL_slug extends CI_Controller {
 		if($productListObj){
 			$this->load->view( 'store/product-listing', $data);
 		} else if($productDataObj){
-			$imageObj = array();
-			$imageObj = $this->common_model->getAll( '*', 'product_images', array('product_id' => $productDataObj[0]->product_id));
-			$data['imageObj'] = $imageObj;
+			$imageObj = $delivarySlotObj = array();
+			
+			$imageObj 			= $this->common_model->getAll( '*', 'product_images', array('product_id' => $productDataObj[0]->product_id));
+			$data['imageObj']   = $imageObj;
+			
+			$slotWhere = array(
+				'a.product_id'=>$productDataObj[0]->product_id,
+				'b.status'=>'1',
+				'b.status'=>'1',				
+			);
+			
+			
+			$slotSelect = array(
+				'b.*',
+			);
+
+			$delivarySlotObj = $this->manual_model->getProductDeliverySlot($slotSelect, $slotWhere);
+			$data['delivarySlotObj'] = $delivarySlotObj;
 			$this->load->view( 'store/product-detail', $data);
 		} else {
 			$this->load->view( 'admin/404' );

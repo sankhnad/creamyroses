@@ -21,6 +21,28 @@
 		$price = 0;
 		$discount_price = 0;
 	}
+	
+	
+	if(count($delivarySlotObj) > 0){
+		
+		$shippingMethodList='';
+		$shippingPrice='';
+		foreach($delivarySlotObj as $shipData){
+				
+				if($shipData->price > 0){
+					$shippingPrice = '<i class="fa fa-inr" aria-hidden="true"></i>&nbsp;'.$shipData->price;
+				}else{
+					$shippingPrice = 'Free';
+				}
+		
+				$shippingMethodList.='<option value="'.encode($shipData->option_id).'">'.$shipData->name.'&nbsp;('.$shippingPrice.')</option>';
+		}
+		//echo $shippingMethodList;die;
+	
+	}else{
+		$price = 0;
+		$discount_price = 0;
+	}
 	//echo '<pre>';print_r($productDataObj[0]->description);die;
 ?>
 
@@ -115,11 +137,11 @@
                                             <div class="check-pincode">
                                                 <div class="pull-left">
                                                     <div class="row">
-                                                        <label class="col-md-1">Delivery</label>
+                                                        <label class="col-md-1">Area & City (or) Pin</label>
                                                         <div class='col-sm-4'>
                                                             <div class="form-group">
                                                                 <div class='input-group date' id='datetimepicker1'>
-                                                                    <input type='text' class="form-control" placeholder="Enter Pincode" />
+                                                                    <input type='text' class="form-control" placeholder="Area & City (or) Pin" />
                                                                     <span class="input-group-addon btn-check">
                                                                         Change
                                                                     </span>
@@ -164,11 +186,7 @@
                                                     </div>
                                                     <div class="pull-left">
                                                         <div class="row">
-                                                            <div class='col-sm-8'>
-                                                                <div class="form-group">
-                                                                    <h5><input type="checkbox" name="" /> Midnight Delivery (For Delivery between 10 PM - 12:30 AM)</h5>
-                                                                </div>
-                                                            </div>
+                                                            
                                                             <script type="text/javascript">
                                                                 $(function () {
                                                                     $('#datetimepicker1').datetimepicker();

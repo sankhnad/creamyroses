@@ -46,8 +46,7 @@
                         <div class="breadcrumbs" style="float: left;">
                             <ul>
                                 <li class="home"> <a href="./" title="Go to Home Page">Home</a> <span>/</span> </li>
-                                <li class="category1600"> <a href="shop.php" title="">Shop</a> <span>/</span> </li>
-                                <li class="category1601"> <strong>Heart Shape Choco </strong> </li>
+                                <li class="category1601"> <strong><?=$productDataObj[0]->name?> </strong> </li>
                             </ul>
                         </div>
                         <!-- Breadcrumbs End --> 
@@ -64,20 +63,24 @@
                                         <div class="product-img-box col-lg-4 col-sm-6 col-xs-12">
                                             <div class="new-label new-top-left"> New </div>
                                             <div class="product-image">
-                                                <div class="product-full"> <img id="product-zoom" src="assets/products-images/product1.jpg" data-zoom-image="assets/products-images/product1.jpg" alt="product-image"/> </div>
-                                                <div class="more-views">
-                                                    <div class="slider-items-products">
-                                                        <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
-                                                            <div class="slider-items slider-width-col4 block-content">
-                                                                <div class="more-views-items"> <a href="#" data-image="assets/products-images/product2.jpg" data-zoom-image="assets/products-images/product2.jpg"> <img id="product-zoom"  src="assets/products-images/product2.jpg" alt="product-image"/> </a></div>
-                                                                <div class="more-views-items"> <a href="#" data-image="assets/products-images/product3.jpg" data-zoom-image="assets/products-images/product3.jpg"> <img id="product-zoom"  src="assets/products-images/product3.jpg" alt="product-image"/> </a></div>
-                                                                <div class="more-views-items"> <a href="#" data-image="assets/products-images/product2.jpg" data-zoom-image="assets/products-images/product4.jpg"> <img id="product-zoom"  src="assets/products-images/product2.jpg" alt="product-image"/> </a></div>
-                                                                <div class="more-views-items"> <a href="#" data-image="assets/products-images/product1.jpg" data-zoom-image="assets/products-images/product5.jpg"> <img id="product-zoom"  src="assets/products-images/product1.jpg" alt="product-image"/> </a> </div>
-                                                                <div class="more-views-items"> <a href="#" data-image="assets/products-images/product2.jpg" data-zoom-image="assets/products-images/product6.jpg"> <img id="product-zoom"  src="assets/products-images/product2.jpg" alt="product-image" /> </a></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div class="product-full"> <img id="product-zoom" src="<?=$iURL_product?><?=$productDataObj[0]->image?>" data-zoom-image="assets/products-images/product1.jpg" alt="product-image"/> </div>
+												<?php if(count($imageObj) > 0){ ?>
+															<div class="more-views">
+																<div class="slider-items-products">
+																	<div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
+																		<div class="slider-items slider-width-col4 block-content">
+																		
+																			<?php foreach($imageObj as $imgData){ ?>
+																							<div class="more-views-items"> 
+																								<a href="#" data-image="<?=$iURL_product?><?=$imgData->image?>" data-zoom-image="<?=$iURL_product?><?=$imgData->image?>"> <img id="product-zoom"  src="<?=$iURL_product?><?=$imgData->image?>" alt="product-image"/> </a>
+																							</div>
+																			<?php } ?>																		
+																			
+																		</div>
+																	</div>
+																</div>
+															</div>
+												<?php } ?>
                                             </div>
                                             <!-- end: more-images --> 
                                         </div>
@@ -99,7 +102,7 @@
 																<p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> <i class="fa fa-inr" aria-hidden="true"></i><span id="discount_price"> <?=number_format($discount_price,2)?> </span></span> </p>
 																<p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> <i class="fa fa-inr" aria-hidden="true"></i><span id="normalPrice"> <?=number_format($price,2)?> </span></span> </p>
 																<p class="availability in-stock in-off pull-right"><span>(<i class="fa fa-inr" aria-hidden="true"></i>
-																<span id="calDiscount"><?=$priceObj[0]->discount?></span> Off)</span></p>
+																<?=$priceObj[0]->discount?> Off)</span></p>
 															<?php
 															 }else{ ?>
 															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
@@ -225,9 +228,9 @@
                                             <div class="email-addto-box">
                                                 <ul class="add-to-links">
                                                     <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
-                                                    <li><span class="separator">|</span> <a class="link-compare" href="compare.html"><span>Add to Compare</span></a></li>
+                                                    <!--<li><span class="separator">|</span> <a class="link-compare" href="compare.html"><span>Add to Compare</span></a></li>-->
                                                 </ul>
-                                                <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
+                                                <!--<p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>-->
                                             </div>
                                         </div>
 
@@ -263,44 +266,22 @@
                                         <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
                                             <li class="active"> <a href="#product_tabs_description" data-toggle="tab">Description </a> </li>
                                             <li> <a href="#product_tabs_custom" data-toggle="tab">Delivery Information</a> </li>
-                                            <li> <a href="#product_tabs_custom1" data-toggle="tab">Care Instructions</a> </li>
+                                            <li> <a href="#product_tabs_custom1" data-toggle="tab">Refund Instructions</a> </li>
                                         </ul>
                                         <div id="productTabContent" class="tab-content">
                                             <div class="tab-pane fade in active" id="product_tabs_description">
                                                 <div class="std">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.</p>
-                                                    <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
+                                                    <?=$productDataObj[0]->description?>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="product_tabs_custom">
                                                 <div class="product-tabs-content-inner clearfix">
-                                                    <p><strong>Lorem Ipsum</strong><span>&nbsp;is
-                                                        simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                                        has been the industry's standard dummy text ever since the 1500s, when 
-                                                        an unknown printer took a galley of type and scrambled it to make a type
-                                                        specimen book. It has survived not only five centuries, but also the 
-                                                        leap into electronic typesetting, remaining essentially unchanged. It 
-                                                        was popularised in the 1960s with the release of Letraset sheets 
-                                                        containing Lorem Ipsum passages, and more recently with desktop 
-                                                        publishing software like Aldus PageMaker including versions of Lorem 
-                                                        Ipsum.</span>
-                                                    </p>
+                                                    <?=$productDataObj[0]->delivery_description?>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="product_tabs_custom1">
                                                 <div class="product-tabs-content-inner clearfix">
-                                                    <p> <strong> Comfortable </strong><span>&nbsp;preshrunk shirts. Highest Quality Printing.  6.1 oz. 100% preshrunk heavyweight cotton Shoulder-to-shoulder taping Double-needle sleeves and bottom hem     
-                                                        Lorem Ipsumis
-                                                        simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                                        has been the industry's standard dummy text ever since the 1500s, when 
-                                                        an unknown printer took a galley of type and scrambled it to make a type
-                                                        specimen book. It has survived not only five centuries, but also the 
-                                                        leap into electronic typesetting, remaining essentially unchanged. It 
-                                                        was popularised in the 1960s with the release of Letraset sheets 
-                                                        containing Lorem Ipsum passages, and more recently with desktop 
-                                                        publishing software like Aldus PageMaker including versions of Lorem 
-                                                        Ipsum.</span>
-                                                    </p>
+                                                   <?=$productDataObj[0]->refund_description ?>
                                                 </div>
                                             </div>
                                         </div>

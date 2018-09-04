@@ -133,4 +133,14 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
+	function getProductDeliverySlot($select, $where){
+		$this->db->select($select);
+		$this->db->from('product_to_delivary_option AS a');
+		$this->db->join('delivery_option AS b', 'a.delivery_option_id = b.option_id', 'LEFT');
+		$this->db->where($where);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result();		
+	}
+
 }
