@@ -96,18 +96,11 @@
                                             <div class="price-block">
                                                 <div class="price-box">
 															<?php if($discount_price > 0){ ?>
-																<p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> <i class="fa fa-inr" aria-hidden="true"></i> <?=number_format($discount_price,2)?> </span> </p>
-																<p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> <i class="fa fa-inr" aria-hidden="true"></i> <?=number_format($price,2)?> </span> </p>
+																<p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> <i class="fa fa-inr" aria-hidden="true"></i><span id="discount_price"> <?=number_format($discount_price,2)?> </span></span> </p>
+																<p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> <i class="fa fa-inr" aria-hidden="true"></i><span id="normalPrice"> <?=number_format($price,2)?> </span></span> </p>
+																<p class="availability in-stock in-off pull-right"><span>(<i class="fa fa-inr" aria-hidden="true"></i>
+																<span id="calDiscount"><?=$priceObj[0]->discount?></span> Off)</span></p>
 															<?php
-															if($priceObj[0]->discount_type == 'F'){?>
-																<p class="availability in-stock in-off pull-right"><span>(<i class="fa fa-inr" aria-hidden="true"></i><?=$priceObj[0]->discount?> Off)</span></p>
-															<?php
-															}else{?>
-																<p class="availability in-stock in-off pull-right"><span>(<?=$priceObj[0]->discount?>% Off)</span></p>
-															<?php
-															}
-															
-															
 															 }else{ ?>
 															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
 															<?php } ?>
@@ -339,6 +332,7 @@
                                                                         <div class="item-price">
                                                                             <div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -476,6 +470,7 @@
             </div>
         </section>
         <!-- Main Container End --> 
+
 
         <?php include("includes/footer.php"); ?>
         <?php include("includes/script.php"); ?>

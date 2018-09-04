@@ -6,13 +6,19 @@ if ( $productAray ) {
 	$isStatus 		= $productAray[ 0 ]->status;
 	$img 			= $productAray[ 0 ]->image;
 	$sort	 		= $productAray[ 0 ]->sort_number;
+	$prdStock 		= $productAray[ 0 ]->product_stock;
+	$outOfStockId 	= $productAray[ 0 ]->stock_status_id;
 	$sku 			= $productAray[ 0 ]->sku_code;
+	$subStock 		= $productAray[ 0 ]->subtract_stock;
 	$availDate 		= date( 'd/m/Y', strtotime( $productAray[ 0 ]->date_available ) );
 	$metaTTitle 	= $productAray[ 0 ]->meta_title;
 	$metaTDesc 		= $productAray[ 0 ]->meta_description;
 	$metaTKey 		= $productAray[ 0 ]->meta_keyword;
 	$description 	= $productAray[ 0 ]->description;
 	$isEggless 	   		= $productAray[ 0 ]->isEggless;
+	$sMsgOptProdct 		= $productAray[ 0 ]->isMsgOptProdct;
+	$isMsgOptCrd 		= $productAray[ 0 ]->isMsgOptCrd;
+	$isTissuePacking 	= $productAray[ 0 ]->isTissuePacking;
 
 	$deliveryDesc 	= $productAray[ 0 ]->delivery_description;
 	$refundDesc 	= $productAray[ 0 ]->refund_description;
@@ -134,9 +140,6 @@ if(count($slctPrice) > 0){
 									</li>
 									<li>
 										<a data-toggle="tab" href="#policyTab"><i class="green ace-icon fas fa-user-secret bigger-120"></i> Policy</a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#imageTab"><i class="green ace-icon fas fa-user-secret bigger-120"></i> Images</a>
 									</li>
 								</ul>
 								<!-- Tab panes -->
@@ -345,49 +348,6 @@ if(count($slctPrice) > 0){
 											</div>
 											<div class="clearfix"></div>
 										</div>
-										<div id="imageTab" class="tab-pane ">
-										<div class="col-sm-12">
-					
-											<div class="form-group">
-					
-											<label class="col-md-12">Select Multiple Images (Use <strong>Ctrl</strong> button) </label>
-											<div class="col-md-6">
-											  <input name="images[]" multiple type="file" data-allowed-file-extensions="png jpg gif jpeg" class="dropify"  data-default-file="<?=$iURL_product?><?=$img ? 'default.jpg' : 'default.jpg'?>"/>
-											</div>
-					
-											</div>
-					
-										</div>
-										<?php 
-										if(count($moreImagesArr)>0){ ?>	
-										<div class="col-sm-12">
-											  <div class="row">
-											  <label class="col-md-12">Slider Images </label>
-												<div class="col-sm-12">
-												  <div class="row">
-												  <?php 
-												  
-													foreach($moreImagesArr as $data) { 
-														$id = encode($data->id);
-													?>
-															<div class="col-sm-3 col-md-3">
-															  <div class="img-upload">
-																<div class="col-12 bg-head3 imageDiv"> <img src="<?=$iURL_hotel?><?=$data->image?>" alt="<?=$data->image?>">
-																  <button type="button" onClick="deleteHotelImages(this,'<?=$id?>','images')" class="btn btn-primary btn-sm" style="width: 100%;">Remove Image</button>
-																</div>
-															  </div>
-															</div>
-												  <?php 
-													}
-												  ?>
-												  </div>
-												</div>
-											  </div>
-											</div>
-										<?php } 
-										?>
-										<div class="clearfix"></div>
-									  </div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12 mt20">

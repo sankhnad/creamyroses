@@ -143,7 +143,7 @@ class Products extends CI_Controller {
 		$data['slctDiscType'] = array();
 		$data['selctDisc'] = array();
 		$data['slctPrice'] = array();
-
+		$data['moreImagesArr'] = array();
 
 		$data['typeAry'] = $this->common_model->getAll('*', 'type', array('isDeleted'=>1));
 		$data['deliveryOptAry']  = $this->common_model->getAll( 'option_id,name', 'delivery_option', array('isDeleted' => '1', 'status' => '1' ));
@@ -166,13 +166,14 @@ class Products extends CI_Controller {
 		$data['deliveryOptAry']  	= $this->common_model->getAll( 'option_id,name', 'delivery_option', array('isDeleted' => '1', 'status' => '1' ));
 		$data['relatedProductAry']  = $this->common_model->getAll( '*', 'product', array( 'isDeleted' => '1', 'status' => '1' ) );
 		$data['productSelectsAry']  = $this->common_model->getAll( '*', 'product_to_related', array( 'product_id' => $id ) );
+		$data['moreImagesArr']  = $this->common_model->getAll( '*', 'product_images', array( 'product_id' => $id ) );
 		
 		$data['typeSelectsAry'] 	= $this->common_model->getAll( '*', 'product_to_type', array('product_id' => $id ) );
 		$data['deliveryOptSelectsAry'] 	= $this->common_model->getAll( '*', 'product_to_delivary_option', array('product_id' => $id ) );
 		
 		$productPriceMainAry =  $this->common_model->getAll( '*', 'product_price', array('product_id' => $id ) );
 
-
+	   $slctQntityTypeAry = $slctQntity = $slctPrice = $slctDiscType = $selctDisc =  array();
 		
 		foreach($productPriceMainAry as $priceObjData){
 			$slctQntityTypeAry[] = $priceObjData->quantity_type;
@@ -277,6 +278,11 @@ class Products extends CI_Controller {
 			$data['image'] = uploadFiles('img', $path = 'uploads/product/', 'thumb', 360, 360 );
 		}
 		
+		$number_of_files = sizeof($_FILES['images']['tmp_name']);
+		$files 			 = $_FILES['images'];
+
+		
+		
 		if($pid){
 			$this->common_model->updateData('product', array('product_id'=>$pid), $data);
 			$this->common_model->deleteData('product_to_type', array('product_id'=>$pid));	
@@ -353,6 +359,25 @@ class Products extends CI_Controller {
 			}
 			$this->common_model->bulkSaveData('product_price', $productPriceData);
 		}
+		
+		if(isset($files)){
+				for($i=0;$i<$number_of_files;$i++){
+					$_FILES['images']['name'] 		= $files['name'][$i];
+					$_FILES['images']['type']		= $files['type'][$i];
+					$_FILES['images']['tmp_name'] 	= $files['tmp_name'][$i];
+					$_FILES['images']['error'] 		= $files['error'][$i];
+					$_FILES['images']['size'] 		= $files['size'][$i];
+					$imageName = uploadFiles('images', $path = 'uploads/product/', 'thumb', 360, 360 );
+					$insertImgData[] = array(
+							'image' => $imageName,
+							'product_id' => $pid 
+					);
+				}
+				
+				$this->common_model->bulkSaveData('product_images', $insertImgData);	
+		}
+	
+		
 		echo json_encode(array('status'=> $status, 'id' => $id));		
 	}
 	
