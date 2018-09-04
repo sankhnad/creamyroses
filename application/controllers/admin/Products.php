@@ -453,4 +453,22 @@ class Products extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
+	
+	function deleteImageData() {
+		if(!$this->input->is_ajax_request() || !AID ) {
+			exit( 'Unauthorized Access!!' );
+		}
+		
+		$id = decode($this->input->post('id'));
+		$type = $this->input->post('type');
+		$data = array('isDeleted'=>0);
+		
+		if($type == 'images'){
+			$this->common_model->deleteData('product_images', array('id'=>$id));
+		}
+		
+		
+		echo json_encode( array( 'status' => 'success' ) );
+	}
+
 }

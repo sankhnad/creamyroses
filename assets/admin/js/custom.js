@@ -3655,3 +3655,43 @@ function getQuantity(selfObj){
 	$('.quantity select[name="quantity[]"]').val(defaultListing);
 
 }
+
+// delete hotel banner images
+function deleteProductImages(selfObj, id, type) {
+	swal({
+		title: "Are you sure!!",
+		text: "Do you want to you want to delete this Image?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes",
+		cancelButtonText: "No"
+	}).then(function () {
+		var dataString = {
+			id: id,
+			type: type
+		};
+		$.ajax({
+			url: admin_url + 'products/deleteImageData',
+			dataType: 'json',
+			type: "POST",
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (data) {
+				if (data.status == 'success') {
+					timerAlert('Successful!!', 'Image has been deleted Successfully');
+					$(selfObj).parent(".imageDiv").remove();
+					
+				}else{
+					swal("Oops!!", msg, "error");
+				}
+			},
+			error: function () {
+				csrfError();
+			},
+		});
+
+	});
+}
