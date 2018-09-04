@@ -372,7 +372,7 @@ if(count($slctPrice) > 0){
 													?>
 															<div class="col-sm-3 col-md-3">
 															  <div class="img-upload">
-																<div class="col-12 bg-head3 imageDiv"> <img src="<?=$iURL_hotel?><?=$data->image?>" alt="<?=$data->image?>">
+																<div class="col-12 bg-head3 imageDiv"> <img src="<?=$iURL_product?><?=$data->image?>" alt="<?=$data->image?>">
 																  <button type="button" onClick="deleteHotelImages(this,'<?=$id?>','images')" class="btn btn-primary btn-sm" style="width: 100%;">Remove Image</button>
 																</div>
 															  </div>
