@@ -316,3 +316,43 @@ function gotoPageView(url) {
 function insertOtpMobile(mobile){
 	$('input[name="otpMobile"]').val(mobile);
 }
+
+function getPriceByWeight(weightId){
+	var dataString = {
+		id: weightId,
+	};
+	$.ajax({
+		url: base_url + 'process/getPrice',
+		dataType: 'json',
+		type: 'POST',
+		data: dataString,
+		beforeSend: function () {
+			showLoader();
+		},
+		success: function (data) {
+			var obj = data.result;
+			var price;
+			var discountVal;
+			var discountType;
+			var discount_price = data.discountPrice;
+
+			$.each(obj, function (key, value) {
+					price		 = value.product_price;
+					discountVal	 = value.discount;
+					discountType = value.discount_type;
+
+			});
+			
+			$('#normalPrice').text(price);
+			if(discount_price > 0){
+				$('#discount_price').text(discount_price);
+			}
+			
+			
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+
+}

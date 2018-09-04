@@ -5,8 +5,8 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-<!--                <button type="button" class="close" data-dismiss="modal">&times;</button>
--->                <h4 class="modal-title text-center">Choose City</h4>
+				<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+				<h4 class="modal-title text-center">Choose City</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -14,9 +14,8 @@
                         <div class="search-box">
                             <form id="search_mini_form" action="#" method="get">
                                 <!-- Autocomplete End code -->
-<!--                                <input id="search" type="text" name="q" value="" placeholder="Search City..." class="searchbox" maxlength="128">
--->								<input id="search" type="search" onKeyUp="filterCity(this)" placeholder="Search City..." class="searchbox">
-
+								<!--<input id="search" type="text" name="q" value="" placeholder="Search City..." class="searchbox" maxlength="128">-->
+								<input id="search" type="search" onKeyUp="filterCity(this)" placeholder="Search City..." class="searchbox">
                                 <button type="submit" title="Search" class="search-btn-bg" id="submit-button"></button>
                             </form>
                         </div>
@@ -33,7 +32,7 @@
 							}?>
                         </ul>
                     </div>
-<!--                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<!--<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <ul>
                             <li><a href="#">Nashik </a></li>
                             <li><a href="#">Faridabad</a></li> 
@@ -117,8 +116,8 @@
                             <li><a href="#">Tirunelveli </a></li>
                             <li><a href="#">Malegaon</a></li>
                         </ul>
-                    </div>
--->                </div>
+                    </div>-->
+				</div>
             </div>
         </div>
     </div>
@@ -136,25 +135,32 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                     <div class="toplinks">
                         <div class="links"> 
-                            <div class="block-company-wrapper hidden-xs"><a href="<?=base_url()?>login">Login/Register</a></div>            
-                            <div class="block-company-wrapper hidden-xs"><a title="Membership" href="membership.php">Membership</a></div>
+                            <?php if(!isset($CID)){?>
+								<div class="block-company-wrapper hidden-xs">
+									<a href="<?=base_url()?>login">Login/Register</a>
+								</div>
+							<?php } ?>
+                            <!--<div class="block-company-wrapper hidden-xs"><a title="Membership" href="membership.php">Membership</a></div>-->
 							<?php if(isset($CID)){?>
-										<div class="dropdown block-company-wrapper hidden-xs">
-											<a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> Hi, <?=isset($customerName)?$customerName:'';?> <span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li role="presentation"><a href="<?=base_url()?>logout">Logout </a> </li>
+							
+							<div class="dropdown block-company-wrapper hidden-xs">
+								<a class="block-company dropdown-toggle" href="#" type="button" data-toggle="dropdown">
+									Hi, <?=isset($customerName)?$customerName:'';?> <span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="<?=base_url()?>profile">My Profile</a> </li>
+									<li><a href="<?=base_url()?>orders">Orders</a> </li>
+									<li><a href="<?=base_url()?>wishlist">Wishlist</a> </li>
+									<li><a href="<?=base_url()?>logout">Logout </a> </li>
+								</ul>
+							</div>
 
-<!--												<li role="presentation"><a href="#">Calendar </a> </li>
-												<li role="presentation"><a href="#"> Add Birthday</a> </li>
-												<li role="presentation"><a href="#"> Anniversary</a> </li>
-												<li role="presentation"><a href="#">Boss Birthday</a> </li>
--->											</ul>
-										</div>  
-										<div class="block-company-wrapper hidden-xs"><a title="Wishlist" href="wishlist.php">Wishlist</a></div>
+							<div class="block-company-wrapper hidden-xs">
+								<a title="Wishlist" href="wishlist">Wishlist</a>
+							</div>
 
-							 <?php } ?>
-                            <div class="block-company-wrapper hidden-xs"><a title="Sell on Creamy Roses" href="#">Sell on Creamy Roses</a></div>
-                            <div class="block-company-wrapper hidden-xs"><a title="Baby Photography" href="<?=base_url();?>baby-photography">Baby Photography</a></div>
+							<?php } ?>
+                            <div class="block-company-wrapper hidden-xs"><a title="Sell on Creamy Roses" href="<?=base_url()?>contact-us">Sell on Creamy Roses</a></div>
                         </div>
                     </div>
                     <!-- End Header Top Links --> 
@@ -187,7 +193,7 @@
                     <div class="mega-container visible-lg visible-md visible-sm visible-xs">
                         <div class="navleft-container">
                             <div class="mega-menu-title">
-                                <h3><i class="fa fa-navicon"></i> All Categories</h3>
+                                <h3><i class="fas fa-bars"></i> All Categories</h3>
                             </div>
                             
 							<div class="mega_menu_NAV">
@@ -208,8 +214,6 @@
 										echo get_menu($catListAry[1]);
 									?>
 							</div>
-							
-							
                         </div>
                     </div>
                 </div>
@@ -226,7 +230,6 @@
                 </div>
 
                 <div class="col-lg-5 col-md-3 col-sm-3 col-xs-12  card_wishlist_area">
-
                     <div class="mm-toggle-wrap">
                         <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">Menu</span> </div>
                     </div>

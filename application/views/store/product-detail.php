@@ -1,3 +1,29 @@
+<?php
+	$priceObj = getProductPrice($productDataObj[0]->product_id);
+	//echo '<pre>';print_r($productDataObj);die;
+	if(count($priceObj) > 0){
+		$price = $priceObj[0]->product_price;
+		$discount_price = getDiscount($priceObj[0]->discount_type, $priceObj[0]->product_price, $priceObj[0]->discount);
+		
+		$weightList='';
+		$selCount = 1;
+		foreach($priceObj as $priceData){
+			if($selCount == 1){
+				$weightList.='<option selected="selected" value="'.encode($priceData->id).'">'.$priceData->quantity.'&nbsp;'.$priceData->quantity_type.'</option>';
+			}else{
+				$weightList.='<option value="'.encode($priceData->id).'">'.$priceData->quantity.'&nbsp;'.$priceData->quantity_type.'</option>';
+			}
+			$selCount++;
+		}
+		//echo $prdctSizeList;die;
+	
+	}else{
+		$price = 0;
+		$discount_price = 0;
+	}
+	//echo '<pre>';print_r($productDataObj[0]->description);die;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +85,7 @@
                                         <div class="product-shop col-lg-8 col-sm-6 col-xs-12">
                                             <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div>
                                             <div class="product-name">
-                                                <h1>Heart Shape Choco</h1>
+                                                <h1><?=$productDataObj[0]->name?></h1>
                                             </div>
                                             <div class="ratings">
                                                 <div class="rating-box">
@@ -69,10 +95,17 @@
                                             </div>
                                             <div class="price-block">
                                                 <div class="price-box">
-                                                    <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> <i class="fa fa-inr" aria-hidden="true"></i> 309.99 </span> </p>
-                                                    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> <i class="fa fa-inr" aria-hidden="true"></i> 315.99 </span> </p>
-                                                    <p class="availability in-stock pull-right"><span>In Stock</span></p>
-                                                    <p class="availability in-stock in-off pull-right"><span>(19% Off)</span></p>
+															<?php if($discount_price > 0){ ?>
+																<p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> <i class="fa fa-inr" aria-hidden="true"></i><span id="discount_price"> <?=number_format($discount_price,2)?> </span></span> </p>
+																<p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> <i class="fa fa-inr" aria-hidden="true"></i><span id="normalPrice"> <?=number_format($price,2)?> </span></span> </p>
+																<p class="availability in-stock in-off pull-right"><span>(<i class="fa fa-inr" aria-hidden="true"></i>
+																<span id="calDiscount"><?=$priceObj[0]->discount?></span> Off)</span></p>
+															<?php
+															 }else{ ?>
+															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+															<?php } ?>
+<!--                                                    <p class="availability in-stock pull-right"><span>In Stock</span></p>
+-->                                                    
                                                 </div>
                                             </div>
 
@@ -101,23 +134,22 @@
 
                                             <div class="short-description">
                                                 <h2>Quick Overview</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum... </p>
+                                                <p><?=substr($productDataObj[0]->description,0,160)?> </p>
                                             </div>
                                             <div class="weight-eggless-selector">
                                                 <div class="weight-selector">
                                                     <div class="pull-left">
-                                                        <select name="" id="weight-sel">
-                                                            <option value="14">Select Weight <sup>*</sup></option>
-                                                            <option value="14">0.5 Kg</option>
-                                                            <option value="15">1 Kg</option>
-                                                            <option value="16">2 Kg</option>
-                                                            <option value="17">3 Kg</option>
-                                                            <option value="18">4 Kg</option>
+                                                        <select name="" id="weight-sel" onChange="getPriceByWeight(this.value)">
+															<?=$weightList;?>
                                                         </select>
                                                     </div>
                                                     <div class="eggless-selector">
-                                                        <p>Make it eggless <input type="checkbox" name="" /></p>
-                                                        <small>Rs. 100</small>
+														<?php if($productDataObj[0]->isEggless ==1){?>
+															<p>Make it eggless <input type="checkbox" checked="checked" name="isEggless"  /></p>
+															<!--<small>Rs. 100</small>-->
+														<?php }else{ ?>
+															<p>Make it eggless <input type="checkbox" name="isEggless"/></p>
+														<?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -300,6 +332,7 @@
                                                                         <div class="item-price">
                                                                             <div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 245.00</span> </span> </div>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -437,6 +470,7 @@
             </div>
         </section>
         <!-- Main Container End --> 
+
 
         <?php include("includes/footer.php"); ?>
         <?php include("includes/script.php"); ?>
