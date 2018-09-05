@@ -56,6 +56,10 @@
 														<label for="email">Mobile <span class="required">*</span></label>
 														<input type="text" placeholder="Contact Number" class="input-text required-entry" name="mobile" onBlur="insertOtpMobile(this.value)">
 													</li>
+													<li>
+														<label for="email">Referral Code </label>
+														<input type="text" placeholder="Referral Code" class="input-text required-entry" name="assign_rferral_code">
+													</li>
 													
 													<li>
 														<label for="pass">Password <span class="required">*</span></label>

@@ -57,11 +57,15 @@ class Login extends CI_Controller {
 		}
 		//echo '<pre>';print_r($this->input->post());die;
 		$status = '';
-		$fname = $this->input->post('fname');
-		$lname = $this->input->post('lname');
-		$email = $this->input->post('email');
-		$mobile = $this->input->post('mobile');
-		$password = $this->input->post('password');		
+		
+		$fname 				 = $this->input->post('fname');
+		$lname 				 = $this->input->post('lname');
+		$email 				 = $this->input->post('email');
+		$mobile 			 = $this->input->post('mobile');
+		$password 			 = $this->input->post('password');		
+		$assign_rferral_code = trim($this->input->post('assign_rferral_code'));		
+		$rferral_code 		 = 'CRS'.generateRandom(5, 'number');
+		$ref_amount = 20;
 		
 		$chekEmail = $this->checkCustEmailAvlb( $email, 'email');
 		
@@ -80,16 +84,42 @@ class Login extends CI_Controller {
 
 		$mobile_otp = 	generateRandom(5,$type='number');
 		$data = array(
-			'fname'	=> $fname,
-			'lname'	=> $lname,
-			'email'	=> $email,
-			'mobile'=> str_replace(' ', '', $mobile),
-			'mobile_otp'	=> $mobile_otp,
-			'password'=> md5($password),
-			'created_on'=> date("Y-m-d H:i:s", time()),
+				'fname'					=> $fname,
+				'lname'					=> $lname,
+				'email'					=> $email,
+				'mobile'				=> str_replace(' ', '', $mobile),
+				'mobile_otp'			=> $mobile_otp,
+				'password'				=> md5($password),
+				'referral_code'			=> $rferral_code,
+				'created_on'			=> date("Y-m-d H:i:s", time()),
 		);
 		
 		$id = $this->common_model->saveData( "customer", $data );	
+		
+		if($assign_rferral_code){
+			$refObj = $this->common_model->getAll("id", 'customer', array('referral_code'=>$assign_rferral_code));
+			if($refObj){
+				$sql = 'SELECT SUM(amount) as iTotal FROM `referals` WHERE status = "1" AND ref_cid = "'.$refObj[0]->id.'" AND created_on >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)';
+				$totalAmount = $this->common_model->customQuery($sql);
+				
+				
+				if($totalAmount[0]['iTotal']< 1000){
+					$refData = array(
+							'ref_cid'			=> $refObj[0]->id,
+							'used_by_cid'		=> $id,
+							'amount'			=> $ref_amount,
+							'status'			=> '1',
+							'created_on'		=> date("Y-m-d H:i:s", time()),
+					);				
+					$this->common_model->saveData( "referals", $refData);
+				}
+			}
+		}
+		$dataAray = array(
+			'otp' => $data['mobile_otp'],
+			'number' => $data['mobile'],
+		);
+		sendCommonSMS('activateAccount', $dataAray);
 		
 		echo json_encode( array( 'status' => 'success'));
 	}
