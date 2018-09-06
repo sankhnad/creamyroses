@@ -1,5 +1,31 @@
-$('.navMeg1 > li')
-.mouseenter(function() {
+function addToWishList(selfObj, pid){
+	var dataString = {
+		pid: pid,
+	};
+	$.ajax({
+		url: base_url + 'profile/addToWishList',
+		dataType: 'json',
+		type: 'POST',
+		data: dataString,
+		beforeSend: function () {
+			showLoader();
+		},
+		success: function (obj){
+			$(selfObj).find('i').toggleClass('fas far');
+			if(obj.status == 'error'){
+				swal("Login Please", "To add this product in your wishlist you must have to login in your account ", "warning");
+				$(selfObj).find('i').removeClass('fas').addClass('far');
+			}else if(obj.status == 'success'){
+				
+			}
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+}
+
+$('.navMeg1 > li').mouseenter(function() {
 	$(this).find(' > ul').show();
 })
 .mouseleave(function() {

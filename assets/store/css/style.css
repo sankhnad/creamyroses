@@ -2790,7 +2790,7 @@ our-features-box .feature-box {
 .slider-items-products .owl-buttons .owl-next a:before {
 	font-family: 'FontAwesome';
 	font-style: normal;
-	font-weight: normal;
+	font-weight: 900;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
 	content: "\f105";
@@ -2802,7 +2802,7 @@ our-features-box .feature-box {
 .slider-items-products .owl-buttons .owl-prev a:before {
 	font-family: 'FontAwesome';
 	font-style: normal;
-	font-weight: normal;
+	font-weight: 900;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
 	content: "\f104";
@@ -3031,6 +3031,10 @@ our-features-box .feature-box {
 	text-align: center;
 	font-family: FontAwesome;
 	font-size: 11px;
+}
+.add-to-links a:focus{
+	color: #f37869;
+	text-decoration: none;
 }
 
 .bestseller-pro .box-hover .add-to-links li a:hover {
@@ -8810,7 +8814,7 @@ ol#compare-items li.last {
 	margin-left: 0px;
 }
 
-.product-view .email-friend a:before {
+.product-view .email-friend:before {
 	content: "\f0e0";
 	font-family: FontAwesome;
 	font-size: 14px;
@@ -8821,7 +8825,6 @@ ol#compare-items li.last {
 	color: #f37869;
 	line-height: normal;
 	font-weight: normal;
-	vertical-align: top;
 	display: block;
 	height: 40px;
 	border: 0px #ececec solid;
@@ -8865,6 +8868,7 @@ ol#compare-items li.last {
 	font-family: FontAwesome;
 	font-size: 13px;
 	margin-right: 3px;
+	font-weight: 900;
 }
 
 .product-view .product-shop .add-to-links .link-compare {

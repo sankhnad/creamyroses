@@ -57,7 +57,7 @@ class URL_slug extends CI_Controller {
 		
 		$categoryObj = $this->common_model->getAll( '*', 'category', array('url_slug' => $slugURL, 'status'=>'1', 'isDeleted'=>'1'));
 		
-		$data[ 'categoryObj' ] = $categoryObj;
+		$data['categoryObj'] = $categoryObj;
 		
 		if($categoryObj){
 			$select = array(
@@ -88,6 +88,7 @@ class URL_slug extends CI_Controller {
 				'b.*',
 				'c.name as c_name',
 				'c.url_slug as c_url_slug',
+				'c.category_id',
 			);
 			$where = array(
 				'b.url_slug' => $slugURL,
@@ -107,9 +108,21 @@ class URL_slug extends CI_Controller {
 				);
 				
 				$data['imageObj'] = $this->common_model->getAll( '*', 'product_images', array('product_id' => $productDataObj[0]->product_id));
-				$data['delivarySlotObj'] = $this->manual_model->getProductDeliverySlot(array('b.*'), $slotWhere);;
+				
+				$data['delivarySlotObj'] = $this->manual_model->getProductDeliverySlot(array('b.*'), $slotWhere);
+				
+				if(!$categoryObj){
+					$data['categoryObj'] = $this->common_model->getAll( '*', 'category', array('category_id' => $productDataObj[0]->category_id, 'status'=>'1', 'isDeleted'=>'1'));
+				}
+				
 				$data['productDataObj'] = $productDataObj;
-				$this->load->view('store/product-detail', $data);
+				
+				if($data['categoryObj']){					
+					$this->load->view('store/product-detail', $data);
+				}else{
+					$this->load->view('admin/404', $data);
+				}
+				
 			}else{
 				$this->load->view('admin/404');
 			}

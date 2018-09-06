@@ -17,4 +17,26 @@ class Profile extends CI_Controller {
 		$data['activeNav'] = 'Register';		
 		$this->load->view('store/register', $data);
 	}
+	
+	function addToWishList(){
+		$pid = $this->input->post('pid');
+		$cid = $this->session->userdata('CID');
+		if(!$cid){
+			echo json_encode(array('status'=>'error'));
+			exit;
+		}
+		$table = 'wish_list';
+		$data = array(
+			'pid' => $pid,
+			'cid' => $cid,
+		);
+		$wishLIst = getProductWishList($pid, $cid);
+		if($wishLIst){
+			$this->common_model->deleteData($table, $data);
+		}else{
+			$this->common_model->saveData($table, $data);
+		}
+		echo json_encode(array('status'=>'success'));
+		exit;
+	}
 }
