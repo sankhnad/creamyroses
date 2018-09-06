@@ -28,11 +28,11 @@ class Login extends CI_Controller {
 		$remember = $this->input->post( 'remember');
 		$smsVerify = $this->manual_model->check_isSMS_verifieds($email);
 		
-		if(count($smsVerify)< 0){
+		if(empty($smsVerify)){
+			//echo "===22";die;
 			echo json_encode( array( 'status' => 'pending' ) );
 			return(false);
 		}
-		
 		$result = $this->manual_model->checkLoginCustomerEmail($email);
 		if($result){
 			if($password == $result[0]->password){
@@ -194,6 +194,14 @@ class Login extends CI_Controller {
 		}
 		echo json_encode( array( 'status' => $status ) );
 	}
+	
+	function verif_otp(){
+		$data['activeNav'] = 'Register';
+		$data['isverify']  = 1; 		
+		$this->load->view('store/register', $data);
+	}
+
+	
 
 
 }

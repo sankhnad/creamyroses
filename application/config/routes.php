@@ -61,5 +61,5 @@ $route['logout'] = 'admin/login/logout';
 $route['registration'] = 'login/registerView';
 $route['logout'] = 'login/logout';
 $route['baby-photography'] = 'home/babyPhotoPage';
-
+$route['verify'] = 'login/verif_otp';
 $route['404'] = 'errror404/index';

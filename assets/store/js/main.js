@@ -419,6 +419,11 @@ $(document).on("submit", "#login_customer", function (e) {
 					confirmButtonColor: '#FF9494',
 					type: 'warning'
 				});
+				$('#register_customer').remove();
+				$('#confirmOTP_customer').show();
+
+				var redirectUrl = base_url+'verif_otp';
+				gotoPage(redirectUrl)
 			}else if (obj.status == 'success') {
 				var redictURL = window.location.hash.substring(1);
 				redictURL = redictURL ? redictURL : base_url;
