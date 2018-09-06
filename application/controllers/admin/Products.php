@@ -226,6 +226,7 @@ class Products extends CI_Controller {
 		$pid			= decode($this->input->post('pid'));
 		$name 			= trim($this->input->post('name'));
 		$slug 			= $this->input->post('url_slug');
+		$tag 			= trim($this->input->post('tag'));
 		$price			= $this->input->post('price');
 		$status 		= $this->input->post( 'isStatus' ) ? $this->input->post( 'isStatus' ) : '0';
 		$desc 			= trim($this->input->post('desc'));
@@ -247,6 +248,7 @@ class Products extends CI_Controller {
 		$data = array(
 			'name' 			=> $name,
 			'url_slug' 		=> $slug,
+			'tags' 			=> $tag,
 			'status' 		=> $status,
 			'description' 	=> $desc,
 			'sku_code' 		=> $sku,

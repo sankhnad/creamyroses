@@ -18046,3 +18046,57 @@ a.shop-now-btn {
   letter-spacing: 0.5px;
   padding: 7px 0;
 }
+
+/* validation css */
+
+.errorInput {
+    background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 99% center / 20px auto !important;
+    border: 1px solid #eb5151 !important;
+ 
+}
+.errorInput[readonly] {
+    background-image: url("../images/error.png");
+    background-position: 99% center;
+    background-repeat: no-repeat;
+    background-size: 20px auto;
+    border: 1px solid #eb5151;
+}
+.errorDropdown {
+    border: 1px solid #eb5151;
+    position: relative;
+}
+.errorDropdown::before {
+    background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 0 0 / 20px auto;
+    content: "";
+    height: 20px;
+    position: absolute;
+    right: 27px;
+    top: 6px;
+    width: 20px;
+    z-index: 4;
+}
+.errorRadio div:last-child label {
+    background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 99% center / 20px auto;
+    padding-right: 30px;
+}
+.errorRadio i {
+    border: 1px solid #eb5151;
+}
+.errorCheckBox {
+    background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 98% center / 20px auto;
+    border: 1px solid #eb5151;
+    padding-bottom: 3px;
+    padding-right: 30px;
+    padding-top: 3px;
+}
+.errorCheckBox i {
+    margin-left: 3px;
+}
+.errorFileType {
+    background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 99% center / 20px auto;
+    border: 1px solid #eb5151;
+}
+.errorTextArea {
+    background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 99% 3px / 20px auto;
+    border: 1px solid #eb5151;
+}

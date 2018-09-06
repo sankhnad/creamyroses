@@ -36,12 +36,12 @@
                                         <strong>Create New Account</strong>
                                         <div class="content">
                                             <p>By creating an account with our store.</p>
-												<form class="register_customer">
+												<form id="register_customer" novalidate>
 												  <ul class="form-list">
 
 													<li>
 														<label for="email">First Name <span class="required">*</span></label>
-														<input type="text" placeholder="Full Name" class="input-text required-entry"  name="fname">
+														<input type="text" placeholder="Full Name" class="input-text required-entry"  name="fname" required>
 													</li>
 													<li>
 														<label for="email">Last Name </label>
@@ -50,24 +50,24 @@
 
 													<li>
 														<label for="email">Email Address <span class="required">*</span></label>
-														<input type="text" placeholder="Email Address" class="input-text required-entry" name="email">
+														<input type="text" placeholder="Email Address" class="input-text required-entry" name="email" required>
 													</li>
 													<li>
 														<label for="email">Mobile <span class="required">*</span></label>
-														<input type="text" placeholder="Contact Number" class="input-text required-entry" name="mobile" onBlur="insertOtpMobile(this.value)">
+														<input type="text" placeholder="Contact Number" class="input-text required-entry" name="mobile" onBlur="insertOtpMobile(this.value)" required>
 													</li>
 													<li>
 														<label for="email">Referral Code </label>
-														<input type="text" placeholder="Referral Code" class="input-text required-entry" name="assign_rferral_code">
+														<input type="text" placeholder="Referral Code" class="input-text required-entry" name="assign_rferral_code" required>
 													</li>
 													
 													<li>
 														<label for="pass">Password <span class="required">*</span></label>
-														<input type="password" placeholder="Password" class="input-text required-entry validate-password" name="password">
+														<input type="password" placeholder="Password" class="input-text required-entry validate-password" name="password" required>
 													</li>
 													<li>
 														<label for="pass">Confirm Password <span class="required">*</span></label>
-														<input type="password" placeholder="Password" class="input-text required-entry validate-password" >
+														<input type="password" placeholder="Password" class="input-text required-entry validate-password" required>
 													</li>
 												</ul>
 												
@@ -78,7 +78,7 @@
 
 												</form>
 												
-												<form class="confirmOTP_customer">
+												<form id="confirmOTP_customer" novalidate style="display:none">
 													<ul class="form-list">
 														<li>
 															<label for="email">Mobile Number </label>
@@ -86,7 +86,7 @@
 														</li>
 														<li>
 															<label for="email">OTP </label>
-															<input type="text" class="input-text required-entry" name="otp" placeholder="Enter Your OTP">
+															<input type="text" class="input-text required-entry" name="otp" placeholder="Enter Your OTP" required>
 														</li>
 														
 														<li class="col-sm-12 text-center">

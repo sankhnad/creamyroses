@@ -3,6 +3,7 @@ if ( $productAray ) {
 	$catSelctIDs 	= array();
 	$prdctName		= $productAray[ 0 ]->name;
 	$url_slug 		= $productAray[ 0 ]->url_slug;
+	$tags 			= $productAray[ 0 ]->tags;
 	$isStatus 		= $productAray[ 0 ]->status;
 	$img 			= $productAray[ 0 ]->image;
 	$sort	 		= $productAray[ 0 ]->sort_number;
@@ -159,6 +160,13 @@ if(count($slctPrice) > 0){
 															<span class="help-block slugErr"> This URL slug is not available </span>
 														</div>
 													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="required">Product Tag </label>
+															<input name="tags" type="text" class="form-control" data-role="tagsinput" value="<?=$tags?>" />
+														</div>
+													</div>
+													
 													
 													<div class="col-md-4">
 														<div class="form-group">
@@ -177,7 +185,14 @@ if(count($slctPrice) > 0){
 															</select>
 														</div>
 													</div>
-													<div class="col-md-4">		
+													
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>Description</label>
+															<textarea name="desc" rows="8" class="summernote"><?=$description?></textarea>
+														</div>
+													</div>
+													<div class="col-md-6">		
 														<div class="form-group">
 															<label>&nbsp;</label>
 															<div class="borderChexBx">
@@ -187,12 +202,6 @@ if(count($slctPrice) > 0){
 																  <span class="switchS-label" data-on="Active" data-off="Inactive"></span> <span class="switchS-handle"></span> 
 																</label>
 															</div>
-														</div>
-													</div>
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Description</label>
-															<textarea name="desc" rows="8" class="summernote"><?=$description?></textarea>
 														</div>
 													</div>
 												</div>
