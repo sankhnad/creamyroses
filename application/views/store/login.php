@@ -38,15 +38,15 @@
                                         <strong>Registered Customers</strong>
                                         <div class="content">
                                             <p>If you have an account with us, please log in.</p>
-											<form class="login_customer">
+											<form id="login_customer" novalidate>
 												<ul class="form-list">
 													<li>
 														<label for="email">Email Address <span class="required">*</span></label>
-														<input type="text" title="Email Address" class="input-text required-entry" name="email">
+														<input type="text" title="Email Address" class="input-text" name="email" required>
 													</li>
 													<li>
 														<label for="pass">Password <span class="required">*</span></label>
-														<input type="password" title="Password"  class="input-text required-entry validate-password" name="password">
+														<input type="password" title="Password"  class="input-text" name="password" required>
 													</li>
 												</ul>
                                             <p class="required">* Required Fields</p>

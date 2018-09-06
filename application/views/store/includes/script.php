@@ -1,5 +1,7 @@
 <!-- JavaScript --> 
 <script src="<?=$iURL_storeAssts?>js/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="<?=$iURL_storeAssts?>js/validate.min.js"></script>
+
 <script src="<?=$iURL_storeAssts?>js/wow.min.js"></script>
 <script src="<?=$iURL_storeAssts?>bootstrap-3.3.7/js/bootstrap.min.js"></script> 
 <script src="<?=$iURL_adminAssts?>js/bootstrap-select.min.js"></script>
