@@ -10,10 +10,9 @@ class URL_slug extends CI_Controller {
 
 	public
 	function index() {
-		$slugURL1 = $this->uri->segment( 1 );
-		$slugURL2 = $this->uri->segment( 2 );
 		$productDataObj = $productListObj = $categoryObj = array();
-		$urlSlug = $slugURL2;
+		$slugURL1 = $this->uri->segment(1);
+		$slugURL2 = $this->uri->segment(2);
 		
 		$select = array(
 			'c.category_id as c_category_id',
@@ -28,7 +27,6 @@ class URL_slug extends CI_Controller {
 			'c.meta_description as c_meta_description',
 			'c.meta_keyword as c_meta_keyword',
 			'c.description as c_description',
-			'c.mobile_display as c_mobile_display',
 			'c.status as c_status',
 			'c.created_on as c_created_on',
 			'c.modified_on as c_modified_on',
@@ -40,14 +38,8 @@ class URL_slug extends CI_Controller {
 			'b.image as p_image',
 			'b.sku_code as p_sku_code',
 			'b.date_available as p_date_available',
-			'b.product_stock as p_product_stock',
-			'b.subtract_stock as p_subtract_stock',
-			'b.stock_status_id as p_stock_status_id',
 			'b.sort_number as p_sort_number',
 			'b.isEggless as p_isEggless',
-			'b.isMsgOptProdct as p_isMsgOptProdct',
-			'b.isMsgOptCrd as p_isMsgOptCrd',
-			'b.isTissuePacking as p_isTissuePacking',
 			'b.meta_title as p_meta_title',
 			'b.meta_keyword as p_meta_keyword',
 			'b.meta_description as p_meta_description',
@@ -57,32 +49,17 @@ class URL_slug extends CI_Controller {
 			'b.modified_on as p_modified_on',
 		);
 		
-		
 		if($slugURL2){
-			$categoryObj = $this->common_model->getAll( '*', 'category', array('url_slug' => $slugURL1, 'status'=>'1', 'isDeleted'=>'1'));
-			$select = array(
-				'b.*',
-				'c.name as c_name',
-				'c.url_slug as c_url_slug',
-			);
-			
-			$where = array(
-				'b.url_slug' => $slugURL2,
-				'b.isDeleted'=>'1',
-				'c.isDeleted'=>'1',
-				'b.status'=>'1',
-				'c.status'=>'1',				
-			);
-			
-			$select = str_replace( " , ", " ", implode( ", ", $select));
-			
-			$productDataObj = $this->manual_model->getProductListing($select, $where);
-		}else{
-			$slugURL = $slugURL2 ? $slugURL2 : $slugURL1;
-			
-			$categoryObj = $this->common_model->getAll( '*', 'category', array('url_slug' => $slugURL, 'status'=>'1', 'isDeleted'=>'1'));
-			
-			
+			$slugURL = $slugURL2;
+		}else if($slugURL1){
+			$slugURL = $slugURL1;
+		}
+		
+		$categoryObj = $this->common_model->getAll( '*', 'category', array('url_slug' => $slugURL, 'status'=>'1', 'isDeleted'=>'1'));
+		
+		$data[ 'categoryObj' ] = $categoryObj;
+		
+		if($categoryObj){
 			$select = array(
 				'b.product_id as p_product_id',
 				'b.name as p_name',
@@ -102,39 +79,40 @@ class URL_slug extends CI_Controller {
 				'c.status'=>'1',				
 			);
 			
-			$select = str_replace( " , ", " ", implode( ", ", $select));
-			
+			$select = str_replace( " , ", " ", implode( ", ", $select));			
 			$productListObj = $this->manual_model->getProductListing($select, $where);
-		}
-
-		$data[ 'productDataObj' ] = $productDataObj;
-		$data[ 'productListObj' ] = $productListObj;
-		$data[ 'categoryObj' ] = $categoryObj;
-
-		if($productListObj){
-			$this->load->view( 'store/product-listing', $data);
-		} else if($productDataObj){
-			$imageObj = $delivarySlotObj = array();
-			
-			$imageObj 			= $this->common_model->getAll( '*', 'product_images', array('product_id' => $productDataObj[0]->product_id));
-			$data['imageObj']   = $imageObj;
-			
-			$slotWhere = array(
-				'a.product_id'=>$productDataObj[0]->product_id,
-				'b.status'=>'1',
-				'b.status'=>'1',				
-			);
-			
-			
-			$slotSelect = array(
+			$data[ 'productListObj' ] = $productListObj;
+			$this->load->view('store/product-listing', $data);
+		}else{
+			$select = array(
 				'b.*',
+				'c.name as c_name',
+				'c.url_slug as c_url_slug',
 			);
-
-			$delivarySlotObj = $this->manual_model->getProductDeliverySlot($slotSelect, $slotWhere);
-			$data['delivarySlotObj'] = $delivarySlotObj;
-			$this->load->view( 'store/product-detail', $data);
-		} else {
-			$this->load->view( 'admin/404' );
+			$where = array(
+				'b.url_slug' => $slugURL,
+				'b.isDeleted'=>'1',
+				'c.isDeleted'=>'1',
+				'b.status'=>'1',
+				'c.status'=>'1',				
+			);
+			$select = str_replace( " , ", " ", implode( ", ", $select));			
+			$productDataObj = $this->manual_model->getProductListing($select, $where);
+			
+			if($productDataObj){
+				$slotWhere = array(
+					'a.product_id'=>$productDataObj[0]->product_id,
+					'b.status'=>'1',
+					'b.status'=>'1',				
+				);
+				
+				$data['imageObj'] = $this->common_model->getAll( '*', 'product_images', array('product_id' => $productDataObj[0]->product_id));
+				$data['delivarySlotObj'] = $this->manual_model->getProductDeliverySlot(array('b.*'), $slotWhere);;
+				$data['productDataObj'] = $productDataObj;
+				$this->load->view('store/product-detail', $data);
+			}else{
+				$this->load->view('admin/404');
+			}
 		}
 	}
 }

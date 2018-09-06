@@ -9,15 +9,11 @@
 
 </head>
 <body class="shopping-cart-page">
-	
-
 	<?php include("includes/header.php"); ?>
-
 	<!-- Start: Slider Sec -->
 	<section class="slid-sec main-slid-sec">
 	    <div class="container-fluid">
 	      	<div class="row">
-
 				<!-- Main Slider -->
 				<div class="col-md-3 hide"> 
 					<!-- New line required  -->
@@ -29,10 +25,8 @@
 						</div>
 					</div>
 				</div>
-		        
 		        <!-- Main Slider  -->
-		        <div class="col-md-12 no-padding"> 
-					
+		        <div class="col-md-12 no-padding">					
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					    <!-- Indicators -->
 					    <ol class="carousel-indicators">
@@ -70,11 +64,8 @@
 					      <span class="glyphicon glyphicon-chevron-right"></span>
 					      <span class="sr-only">Next</span>
 					    </a>
-					  </div>		          
-
-		          
+					  </div>
 		        </div>
-
 	      	</div>
 	    </div>
 	</section>
@@ -97,7 +88,8 @@
 							<div class="figcaption">
 								<div class="banner-content left top"><b><span style="color: #fff; font-size: 12px; letter-spacing:1px">TODAYS OFFER</span></b><br>
 									<span style="color: #ffffff; font-size: 24px; padding-top:5px">Men's shoes <br style="color: #ffffff; font-size: 24px;">
-									collection</span></div>
+									collection</span>
+								</div>
 							</div>
 							<a href="#" style="color:#fff" class="left bottom btn_type_1" rel="nofollow">Read more</a></div>
 					</div>
@@ -486,7 +478,7 @@
 
 <?php include("includes/script.php"); ?>
 
-<script type="text/javascript" src="<?=$iURL_storeAssts?>js/countdown.js"></script> 
+	<script type="text/javascript" src="<?=$iURL_storeAssts?>js/countdown.js"></script> 
 	<!-- Hot Deals Timer 1--> 
 	<script type="text/javascript">
 		var dthen1 = new Date("12/25/17 11:59:00 PM");

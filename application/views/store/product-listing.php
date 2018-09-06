@@ -91,7 +91,8 @@
 
 						<div class="category-products">
 							<ul class="products-grid">
-								<?php 
+								<?php
+								if($productListObj){
 								foreach($productListObj as $productList){
 									$diff = abs(strtotime($productList->p_created_on) - strtotime(date( "Y-m-d H:i:s", time() )));
 	
@@ -107,8 +108,7 @@
 									}else{
 										$price = 0;
 										$discount_price = 0;
-									}
-									
+									}									
 								?>
 								<li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6">
 									<div class="item-inner">
@@ -141,7 +141,12 @@
 										</div>
 									</div>
 								</li>
-								<?php } ?>
+								<?php 
+									}
+								}else{
+									echo 'No Record Found';
+								}
+								?>
 							</ul>
 						</div>
 

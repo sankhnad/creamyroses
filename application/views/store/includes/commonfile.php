@@ -16,7 +16,7 @@ if(isset($CID)){
 	$customerName = $customerObj[0]->fname;
 }
 
-$catListAry = getCategoryList(array('isDeleted' => '1'));
+$catListAry = getCategoryList(array('isDeleted' => '1', 'status' => '1'));
 
 //if(!AID || !isset($adminDATA[0]->fld_aid)){
 	//redirect(base_url().'login');

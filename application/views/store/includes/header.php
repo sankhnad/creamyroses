@@ -125,8 +125,7 @@
 <!--End: Choose City Modal Box -->
 
 <!--Start: Main Header -->
-<header >
-
+<header>
     <!--Start:  Top Content -->
     <div class="header-container">
         <div class="container">
@@ -188,7 +187,6 @@
     <nav class="">
         <div class="container-fluid">
             <div class="row">
-
                 <div class="col-md-3 col-xs-12 col-sm-3 hidden-xs">
                     <div class="mega-container visible-lg visible-md visible-sm visible-xs">
                         <div class="navleft-container">
@@ -197,22 +195,21 @@
                             </div>
                             
 							<div class="mega_menu_NAV">
-									<?php
-										function get_menu( $items, $class = '', $k = '1' ) {
-											$html = '<ul class="navMeg'.$k++.'">';
-											foreach ( $items as $key => $value ) {
-
-												$html .= '<li><a href="'.base_url().$value['url_slug'].'"><i class="fa fa-home"></i> '.$value['name'].'</a>';
-												if ( array_key_exists( 'child', $value ) ) {
-													$html .= get_menu( $value[ 'child' ], 'child', $k );
-												}
-												$html .= "</li>";
+								<?php
+									function get_menu($items, $class = '', $k = '1' ) {
+										$html = '<ul class="navMeg'.$k++.'">';
+										foreach($items as $key => $value){
+											$html .= '<li><a href="'.base_url().$value['url_slug'].'"><i class="fa fa-home"></i> '.$value['name'].'</a>';
+											if ( array_key_exists( 'child', $value ) ) {
+												$html .= get_menu( $value[ 'child' ], 'child', $k );
 											}
-											$html .= "</ul>";
-											return $html;
+											$html .= "</li>";
 										}
-										echo get_menu($catListAry[1]);
-									?>
+										$html .= "</ul>";
+										return $html;
+									}
+									echo get_menu($catListAry[1]);
+								?>
 							</div>
                         </div>
                     </div>
