@@ -264,6 +264,21 @@ if(! function_exists('ispendingContact')){
 	}
 }
 
+if(! function_exists('getProductWishList')){
+	function getProductWishList($pid, $cid){
+		$CI = & get_instance();
+		if(!$pid|| !$cid){
+			return(false);
+		}
+		$data = array(
+			'pid' => $pid,
+			'cid' => $cid,
+		);
+		return $CI->common_model->getAll('id', 'wish_list', $data);
+	}
+}
+
+
 if(! function_exists('ispendingBank')){
 	function ispendingBank(){
 		$CI = & get_instance();
