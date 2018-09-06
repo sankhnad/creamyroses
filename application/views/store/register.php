@@ -86,11 +86,11 @@
 														</li>
 														<li>
 															<label for="email">OTP </label>
-															<input type="text" class="input-text required-entry" name="otp" placeholder="Enter Your TOP">
+															<input type="text" class="input-text required-entry" name="otp" placeholder="Enter Your OTP">
 														</li>
 														
 														<li class="col-sm-12 text-center">
-															<button type="submit" class="button login"><span>Change Number</span></button>
+															<!--<button type="submit" class="button login"><span>Change Number</span></button>-->
 															<button type="button" class="button login"><span>Confirm OTP</span></button>
 														</li>
 														
