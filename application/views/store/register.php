@@ -82,7 +82,7 @@
 													<ul class="form-list">
 														<li>
 															<label for="email">Mobile Number </label>
-															<input type="mobile" name="otpMobile"  disabled  class="input-text required-entry">
+															<input type="mobile" name="otpMobile" readonly="readonly" class="input-text required-entry">
 														</li>
 														<li>
 															<label for="email">OTP </label>
@@ -91,7 +91,7 @@
 														
 														<li class="col-sm-12 text-center">
 															<!--<button type="submit" class="button login"><span>Change Number</span></button>-->
-															<button type="button" class="button login"><span>Confirm OTP</span></button>
+															<button type="submit" class="button login"><span>Confirm OTP</span></button>
 														</li>
 														
 													</ul>

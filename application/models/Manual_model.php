@@ -142,5 +142,18 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
+	
+	function check_isSMS_verifieds($data='') {
+		if($data !=''){
+			$this->db->select('id, password, status, isEmail_verified, isSMS_verified');
+			$this->db->from('customer');
+			$this->db->where('email',$data);
+			$this->db->where('isSMS_verified','1');
+			$query = $this->db->get();
+			//echo $this->db->last_query();
+			return $query->result();
+		}
+	}
+
 
 }

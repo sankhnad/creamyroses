@@ -26,8 +26,14 @@ class Login extends CI_Controller {
 		$email = $this->input->post( 'email' );
 		$password = md5( $this->input->post( 'password' ) );
 		$remember = $this->input->post( 'remember');
-		$result = $this->manual_model->checkLoginCustomerEmail($email);
+		$smsVerify = $this->manual_model->check_isSMS_verifieds($email);
 		
+		if(count($smsVerify)< 0){
+			echo json_encode( array( 'status' => 'pending' ) );
+			return(false);
+		}
+		
+		$result = $this->manual_model->checkLoginCustomerEmail($email);
 		if($result){
 			if($password == $result[0]->password){
 				if($result[0]->status == '1'){
@@ -167,5 +173,27 @@ class Login extends CI_Controller {
         unset( $_SESSION['CREATED']);
         redirect( base_url() . 'login');
     }
+	
+	function checkOtp() {
+		if(!$this->input->is_ajax_request()) {
+			exit( 'No direct script access allowed' );
+		}
+		//echo '<pre>';print_r($this->input->post());die;
+		$mobile  	= $this->input->post('otpMobile');
+		$otp	    = $this->input->post('otp');
+		$checkOtp 	= $this->common_model->getAll("id", 'customer', array('mobile_otp'=>$otp,'mobile'=>$mobile));
+		
+		if(count($checkOtp) > 0){
+			$data = array(
+				'isSMS_verified' => '1',
+			);
+			$this->common_model->updateData('customer', array('mobile'=>$mobile), $data);
+			$status = 'success';
+		}else{
+			$status = 'otp-error';
+		}
+		echo json_encode( array( 'status' => $status ) );
+	}
+
 
 }
