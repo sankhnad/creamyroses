@@ -14,6 +14,8 @@ class Login extends CI_Controller {
 	}
 		
 	function registerView(){
+		$data['isverify']  = 0; 		
+
 		$data['activeNav'] = 'Register';		
 		$this->load->view('store/register', $data);
 	}

@@ -36,7 +36,7 @@
                                         <strong>Create New Account</strong>
                                         <div class="content">
                                             <p>By creating an account with our store.</p>
-												<form id="register_customer" novalidate>
+												<form id="register_customer" novalidate <?=$isverify==1?'style="display:none"':'';?>>
 												  <ul class="form-list">
 
 													<li>
@@ -78,7 +78,7 @@
 
 												</form>
 												
-												<form id="confirmOTP_customer" novalidate style="display:none">
+												<form id="confirmOTP_customer" novalidate <?=$isverify!=1?'style="display:none"':'';?>>
 													<ul class="form-list">
 														<li>
 															<label for="email">Mobile Number </label>
