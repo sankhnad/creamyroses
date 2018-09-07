@@ -32,7 +32,7 @@ class Login extends CI_Controller {
 		
 		if(empty($smsVerify)){
 			//echo "===22";die;
-			echo json_encode( array( 'status' => 'pending' ) );
+			echo json_encode( array( 'status' => 'pending','password' => $password ) );
 			return(false);
 		}
 		$result = $this->manual_model->checkLoginCustomerEmail($email);
@@ -198,6 +198,12 @@ class Login extends CI_Controller {
 	}
 	
 	function verif_otp(){
+		
+		$password 			= $this->uri->segment( 2 );
+		$customerObj	 	= $this->common_model->getAll("id", 'customer', array('password'=>$password));
+		
+		echo '<pre>';print_r($customerObj);die;
+
 		$data['activeNav'] = 'Register';
 		$data['isverify']  = 1; 		
 		$this->load->view('store/register', $data);

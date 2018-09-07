@@ -448,7 +448,7 @@ $(document).on("submit", "#login_customer", function (e) {
 				$('#register_customer').remove();
 				$('#confirmOTP_customer').show();
 
-				var redirectUrl = base_url+'verif_otp';
+				var redirectUrl = base_url+'verify/'+obj.password;
 				gotoPage(redirectUrl)
 			}else if (obj.status == 'success') {
 				var redictURL = window.location.hash.substring(1);
