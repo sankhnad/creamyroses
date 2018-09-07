@@ -80,8 +80,7 @@ if(count($slctPrice) > 0){
 
 <head>
 	<?php include('includes/commonfile.php');?>
-	<title>
-		<?=$typeLbl?> Product | POCHI Admin</title>
+	<title> <?=$typeLbl?> Product | POCHI Admin</title>
 	<link href="<?=$iURL_assets?>admin/js/dropify/dist/css/dropify.min.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" href="<?=$iURL_adminAssts?>js/zTreeStyle/zTreeStyle.css" type="text/css">
 	<link rel="stylesheet" href="<?=$iURL_adminAssts?>js/rateyo-rating/jquery.rateyo.css" type="text/css">

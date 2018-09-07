@@ -129,10 +129,10 @@
 													<div class="item-price">
 														<div class="price-box">
 															<?php if($discount_price > 0){ ?>
-															<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
-															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($discount_price,2)?> </span> </p>
+															<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
+															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($discount_price,2)?> </span> </p>
 															<?php }else{ ?>
-															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+															<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
 															<?php } ?>
 														</div>
 													</div>
@@ -263,7 +263,7 @@
 									<a href="shopping_cart.html" title="Fisher-Price Bubble Mower" class="product-image"><img src="assets/products-images/product10.jpg" alt="Fisher-Price Bubble Mower"></a>
 									<div class="product-details">
 										<div class="access"> <a href="shopping_cart.html" title="Remove This Item" class="btn-remove1"> <span class="icon"></span> Remove </a> </div>
-										<strong>1</strong> x <span class="price"><i class="fa fa-rupee"></i> 19.99</span>
+										<strong>1</strong> x <span class="price"><i class="fas fa-rupee-sign"></i> 19.99</span>
 										<p class="product-name"> <a href="shopping_cart.html">Retis lapen casen...</a> </p>
 									</div>
 								</li>
@@ -271,9 +271,8 @@
 									<a href="shopping_cart.html" title="Prince Lionheart Jumbo Toy Hammock" class="product-image"><img src="assets/products-images/product1.jpg" alt="Prince Lionheart Jumbo Toy Hammock"></a>
 									<div class="product-details">
 										<div class="access"> <a href="shopping_cart.html" title="Remove This Item" class="btn-remove1"> <span class="icon"></span> Remove </a> </div>
-										<strong>1</strong> x <span class="price"><i class="fa fa-rupee"></i> 8.00</span>
+										<strong>1</strong> x <span class="price"><i class="fas fa-rupee-sign"></i> 8.00</span>
 										<p class="product-name"> <a href="shopping_cart.html"> Retis lapen casen...</a> </p>
-										<!--access clearfix-->
 									</div>
 								</li>
 							</ul>
@@ -287,8 +286,8 @@
 								<dt class="odd">Price</dt>
 								<dd class="odd">
 									<ol>
-										<li> <a href="#"><span class="price"><i class="fa fa-rupee"></i> 0.00</span> - <span class="price"><i class="fa fa-rupee"></i> 99.99</span></a> (6) </li>
-										<li> <a href="#"><span class="price"><i class="fa fa-rupee"></i> 100.00</span> and above</a> (6) </li>
+										<li> <a href="#"><span class="price"><i class="fas fa-rupee-sign"></i> 0.00</span> - <span class="price"><i class="fas fa-rupee-sign"></i> 99.99</span></a> (6) </li>
+										<li> <a href="#"><span class="price"><i class="fas fa-rupee-sign"></i> 100.00</span> and above</a> (6) </li>
 									</ol>
 								</dd>
 								<dt class="even">Manufacturer</dt>

@@ -21,7 +21,7 @@
 						<div class="like-bnr">
 							<!-- <h5>Ultra-portable Bluetooth</h5>
 							<h4>M5 Speaker Audio</h4>
-							<span class="price"><i class="fa fa-rupee"></i> 570.00</span> <a href="#." class="btn-round margin-top-10">Shop now</a> --> 
+							<span class="price"><i class="fas fa-rupee-sign"></i> 570.00</span> <a href="#." class="btn-round margin-top-10">Shop now</a> --> 
 						</div>
 					</div>
 				</div>
@@ -145,10 +145,10 @@
 																	<div class="item-price">
 																		<div class="price-box">
 																			<?php if($discount_price > 0){ ?>
-																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
-																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($discount_price,2)?> </span> </p>
+																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($discount_price,2)?> </span> </p>
 																			<?php }else{ ?>
-																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
 																			<?php } ?>
 
 																		</div>
@@ -220,10 +220,10 @@
 																	<div class="item-price">
 																		<div class="price-box">
 																			<?php if($discount_price > 0){ ?>
-																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
-																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($discount_price,2)?> </span> </p>
+																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($discount_price,2)?> </span> </p>
 																			<?php }else{ ?>
-																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
 																			<?php } ?>
 
 																		</div>
@@ -295,10 +295,10 @@
 																	<div class="item-price">
 																		<div class="price-box">
 																			<?php if($discount_price > 0){ ?>
-																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
-																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($discount_price,2)?> </span> </p>
+																			<p class="old-price"><span class="price-label">Regular Price:</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($discount_price,2)?> </span> </p>
 																			<?php }else{ ?>
-																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fa fa-rupee"></i> <?=number_format($price,2)?> </span> </p>
+																			<p class="special-price"><span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span> </p>
 																			<?php } ?>
 
 																		</div>
@@ -361,7 +361,7 @@
 											<div class="item-title"> <a href="#" title="Retis lapen casen"> Retis lapen casen </a> </div>
 											<div class="item-content">
 												<div class="item-price">
-													<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fa fa-rupee"></i> 125.00</span> </span> </div>
+													<div class="price-box"> <span class="regular-price"> <span class="price"><i class="fas fa-rupee-sign"></i> 125.00</span> </span> </div>
 												</div>
 											</div>
 										</div>

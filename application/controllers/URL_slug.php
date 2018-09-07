@@ -98,8 +98,7 @@ class URL_slug extends CI_Controller {
 				'c.status'=>'1',				
 			);
 			$select = str_replace( " , ", " ", implode( ", ", $select));			
-			$productDataObj = $this->manual_model->getProductListing($select, $where);
-			
+			$productDataObj = $this->manual_model->getProductListing($select, $where, 'a.product_id');
 			if($productDataObj){
 				$slotWhere = array(
 					'a.product_id'=>$productDataObj[0]->product_id,
