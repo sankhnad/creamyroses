@@ -422,7 +422,6 @@ $(document).on("submit", "#register_customer", function (e) {
 $(document).on("submit", "#login_customer", function (e) {
 	e.preventDefault();
 	if (!validateForm('login_customer')) return false; 
-
 	$.ajax({
 		url: base_url + 'login/check',
 		dataType: 'json',
@@ -439,8 +438,8 @@ $(document).on("submit", "#login_customer", function (e) {
 					type: 'warning'
 				});
 			} else if (obj.status == 'pending') {
-				swal("Pending Verification!!", "Your account is not verified yet. Please verify your account first", "error");
-				$('#adminlogin').remove();
+				 $('#confirmOTP_customer input[name="otpMobile"]').val(obj.mobile);
+				$('#login_customer').remove();
 				$('#confirmOTP_customer').show();
 			}else if (obj.status == 'success') {
 				var redictURL = window.location.hash.substring(1);

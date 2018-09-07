@@ -71,25 +71,6 @@
 												<div class="space-4"></div>
 											</fieldset>
 										</form>
-										
-										<form id="confirmOTP_customer" novalidate style="display:none;">
-													<ul class="form-list">
-														<li>
-															<label for="email">Mobile Number </label>
-															<input type="mobile" name="otpMobile" readonly="readonly" class="input-text required-entry">
-														</li>
-														<li>
-															<label for="email">OTP </label>
-															<input type="text" class="input-text required-entry" name="otp" placeholder="Enter Your OTP" required>
-														</li>
-														
-														<li class="col-sm-12 text-center">
-															<!--<button type="submit" class="button login"><span>Change Number</span></button>-->
-															<button type="submit" class="button login"><span>Confirm OTP</span></button>
-														</li>
-														
-													</ul>
-												</form>
 									</div>
 									<!-- /.widget-main -->
 									<div class="toolbar clearfix">

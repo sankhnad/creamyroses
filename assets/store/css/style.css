@@ -18340,3 +18340,7 @@ a.shop-now-btn {
 	font-weight: 600;
 	margin-left: 5px;
 }
+
+.hide-now {
+	display: none;
+}

@@ -28,14 +28,16 @@ class Login extends CI_Controller {
 		$email = $this->input->post( 'email' );
 		$password = md5( $this->input->post( 'password' ) );
 		$remember = $this->input->post( 'remember');
-		$smsVerify = $this->manual_model->check_isSMS_verifieds($email);
-		
-		if(empty($smsVerify)){
-			//echo "===22";die;
-			echo json_encode( array( 'status' => 'pending','password' => $password ) );
+		//$smsVerify = $this->manual_model->check_isSMS_verifieds($email);
+		$result = $this->manual_model->checkLoginCustomerEmail($email);
+
+		$mobile 	 = $result[0]->mobile;
+		$isSmsVerify = $result[0]->isSMS_verified;
+
+		if($isSmsVerify != '1'){
+			echo json_encode( array( 'status' => 'pending','mobile' => $mobile ) );
 			return(false);
 		}
-		$result = $this->manual_model->checkLoginCustomerEmail($email);
 		if($result){
 			if($password == $result[0]->password){
 				if($result[0]->status == '1'){
@@ -56,7 +58,7 @@ class Login extends CI_Controller {
 			$status = 'error';
 		}
 		
-		echo json_encode(array('status' => $status));
+		echo json_encode(array('status' => $status,'mobile' => $status));
 	}
 	
 	function register() {
