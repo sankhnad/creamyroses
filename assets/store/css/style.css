@@ -9014,7 +9014,6 @@ ol#compare-items li.last {
 
 .product-view .product-shop .price-block {
 	position: relative;
-	margin-bottom: 15px;
 }
 
 .product-view .product-shop .price-box {
@@ -18103,4 +18102,241 @@ a.shop-now-btn {
 .errorTextArea {
     background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 99% 3px / 20px auto;
     border: 1px solid #eb5151;
+}
+.pinValiMsg{
+	color: #a94442;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	display: none;
+}
+.mt15{
+	margin-top: 15px !important;
+}
+
+.pro-desc {
+	display: block;
+	vertical-align: top;
+	text-align: left;
+	margin: 0 0 0 0;
+	position: relative;
+}
+
+.pro-desc .seprator {
+	border-top: 1px solid #ccc;
+	width: 100%;
+	display: block;
+	margin: 10px 0 0 0;
+}
+
+.pro-desc .pro-title h1 {
+	font-size: 26px;
+	font-weight: bold;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	margin-top: 0px;
+	color: #414141;
+	padding-top: 0;
+}
+
+.pro-desc .product-price-area {
+	display: inline-block;
+	width: 100%;
+}
+
+.pro-desc .product-price-area .js-price1 {
+	color: #006e00;
+	font-size: 28px;
+	padding: 10px 0 0 0;
+	margin: 0;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.pro-desc .product-price-area .price {
+	display: inline-block;
+	font-size: 16px;
+	color: red;
+	padding-left: 10px;
+}
+
+.pro-desc .product-price-area .listPrice {
+	text-decoration: line-through;
+}
+
+.pro-desc .product-price-area .product-addon-wrap .js-addon-desc .addformtocart .topaddbut {
+	position: absolute;
+	width: auto;
+	bottom: 3px;
+	z-index: 9;
+	display: inline-block;
+	left: 30px;
+}
+
+.pro-desc .product-price-area .product-addon-wrap .js-addon-desc .addformtocart .topaddbut .js-cart-button {
+	background-image: linear-gradient(277deg, #70d596, #58996d);
+	color: #ffffff;
+	text-decoration: none;
+	max-width: 277px;
+	display: block;
+	text-align: center;
+	line-height: 40px;
+	text-transform: uppercase;
+	font-size: 15px;
+	width: 277px;
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+	font-weight: bold;
+}
+
+.product-addon-wrap .js-addon-desc h3 {
+	margin: 10px 0 0 0 !important;
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.product-addon-wrap .js-addon-desc .cake-attribute {
+	padding: 0;
+	margin: 11pt 0 20pt 0;
+}
+
+.product-addon-wrap .js-addon-desc .cake-attribute li {
+	display: inline-block;
+	border: 1px solid #ccc;
+	padding: 10px 15px 10px 15px;
+	margin: 0 10px 0 0;
+	font-size: 11.4px;
+	cursor: pointer;
+	background-color: #f7f7f7;
+}
+
+.product-addon-wrap .js-addon-desc .cake-attribute li.active {
+	background-color: #5ca273;
+	color: #ffffff;
+}
+
+.js-product-desc .js-pro-title {
+	margin-top: 0;
+	padding-bottom: 5px;
+	text-overflow: ellipsis;
+	margin-bottom: 0;
+	white-space: nowrap;
+	width: 350px;
+	overflow: hidden;
+}
+.product-contain p,
+.caring-tips p {
+	font-size: 18px;
+	padding: 0;
+	margin: 10px 0 10px 0;
+	display: inline-block;
+}
+
+.product-contain ul,
+.caring-tips ul {
+	padding: 0 0 10px 0px;
+	margin: 0;
+	border-bottom: 1px solid #ccc;
+	float: left;
+	width: 100%;
+}
+
+.product-contain ul .show-more,
+.caring-tips ul .show-more {
+	float: left;
+	margin-left: 10px;
+	font-size: 14px;
+	color: #4894d4;
+	cursor: pointer;
+}
+
+.product-contain ul li,
+.caring-tips ul li {
+	list-style: none;
+	line-height: 20px;
+	font-size: 14px;
+	color: #181818;
+	width: auto;
+	float: left;
+	clear: both;
+}
+
+.product-contain ul li::before,
+.caring-tips ul li::before {
+	content: "";
+	padding: 4px;
+	background: #565656;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 0 5px 0 0;
+	vertical-align: middle;
+}
+
+.js-upgrade-title {
+  color: #181818;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: normal;
+}
+.delivery_lbl_b {
+  float: left;
+  font-size: 14px;
+  margin-right: 5px;
+  padding-top: 5px;
+}
+.delivery_bx_b {
+  float: left;
+  width: 250px;
+}
+.boxTopShap {
+  border-top: 1px solid #ccc;
+  display: block;
+  margin-top: 15px;
+  padding-top: 20px;
+}
+.boxAddToCartB{
+	
+}
+.js-cart-button {
+	background-image: linear-gradient(277deg, #70d596, #58996d);
+	border-radius: 0;
+	color: #ffffff;
+	display: block;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 40px;
+	margin: 0;
+	max-width: 277px;
+	padding: 0;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	width: 49%;
+	float: left;
+	opacity: 0.95;
+	transition: all .4s ease;
+}
+.js-cart-button_buy{
+	background-image: linear-gradient(277deg, #f37869, #f3a769);
+	float: right;
+}
+.js-cart-button:hover{
+	transform: scale(1.05);
+	opacity: 1;
+}
+.boxEmailAddWish{
+	text-align: center;
+}
+
+.boxEmailAddWish li {
+	display: inline-block;
+	margin-right: 30px;
+	margin-top: 25px;
+}
+.boxEmailAddWish li span{
+	font-size: 13px;
+	font-weight: 600;
+	margin-left: 5px;
 }

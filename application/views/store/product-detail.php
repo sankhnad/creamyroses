@@ -9,9 +9,9 @@ if($priceObj){
 	$weightList = '';
 	$selCount = 1;
 	foreach ( $priceObj as $priceData ) {
-		if ( $selCount == 1 ) {
+		if ($selCount == 1){
 			$weightList .= '<option selected="selected" value="' . encode( $priceData->id ) . '">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</option>';
-		} else {
+		}else{
 			$weightList .= '<option value="' . encode( $priceData->id ) . '">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</option>';
 		}
 		$selCount++;
@@ -43,7 +43,7 @@ if($delivarySlotObj){
 
 <head>
 	<?php include('includes/commonfile.php');?>
-	<title><?=$categoryObj[0]->name?>| Creamy Roses</title>
+	<title><?=$productDataObj[0]->name?> | Creamy Roses</title>
 	<?php include("includes/style.php"); ?>
 </head>
 
@@ -88,132 +88,12 @@ if($delivarySlotObj){
 										</div>
 										<?php } ?>
 									</div>
-								</div>
-
-								<div class="product-shop col-lg-8 col-sm-6 col-xs-12">
-									<div class="product-next-prev"> 
-										<a class="product-next" href="#"><span></span></a> 
-										<a class="product-prev" href="#"><span></span></a> 
+									<div class="boxAddToCartB">
+										<button class="js-cart-button" type="button">Add to Cart</button>
+										<button class="js-cart-button js-cart-button_buy" type="button">Buy Now</button>
 									</div>
-									<div class="product-name">
-										<h1><?=$productDataObj[0]->name?></h1>
-									</div>
-									<div class="ratings"></div>
-									
-									<div class="price-block">
-										<div class="price-box">
-											<?php if($discount_price > 0){ ?>
-											<p class="special-price"> 
-												<span class="price-label">Special Price</span> <span id="product-price-48" class="price"> <i class="fas fa-rupee-sign" aria-hidden="true"></i><span id="discount_price"> <?=number_format($discount_price,2)?> </span></span>
-											</p>
-											<p class="old-price"> 
-												<span class="price-label">Regular Price:</span> <span class="price"> <i class="fas fa-rupee-sign" aria-hidden="true"></i><span id="normalPrice"> <?=number_format($price,2)?> </span></span>
-											</p>
-											<p class="availability in-stock in-off pull-right">
-												<span>(<i class="fas fa-rupee-sign" aria-hidden="true"></i> <?=$priceObj[0]->discount?> Off)</span>
-											</p>
-											<?php } else { ?>
-											<p class="special-price">
-												<span class="price-label">Special Price</span> <span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($price,2)?> </span>
-											</p>
-											<?php } ?>
-										</div>
-									</div>
-
-									<div class="check-pincode">
-										<div class="pull-left">
-											<div class="row">
-												<label class="col-md-1">Delivery</label>
-												<div class='col-sm-4'>
-													<div class="form-group">
-														<div class='input-group date' id='datetimepicker1'>
-															<input type='text' class="form-control" placeholder="Enter Pincode"/>
-															<span class="input-group-addon btn-check">
-																	Change
-																</span>
-														
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="short-description">
-										<h2>Quick Overview</h2>
-										<?=substr($productDataObj[0]->description,0,160)?>
-									</div>
-									<div class="weight-eggless-selector">
-										<div class="weight-selector">
-											<div class="pull-left">
-												<select name="" id="weight-sel" onChange="getPriceByWeight(this.value)">
-													<?=$weightList;?>
-												</select>
-											</div>
-											<div class="eggless-selector">
-												<?php if($productDataObj[0]->isEggless ==1){?>
-												<p>Make it eggless <input type="checkbox" checked="checked" name="isEggless"/>
-												</p>
-												<!--<small>Rs. 100</small>-->
-												<?php }else{ ?>
-												<p>Make it eggless <input type="checkbox" name="isEggless"/>
-												</p>
-												<?php } ?>
-											</div>
-										</div>
-									</div>
-
-									<div class="date-time-selector">
-										<div class="weight-selector">
-											<div class="eggless-selector"></div>
-											<div class="pull-left">
-												<div class="row">
-													<div class='col-sm-8'>
-														<div class="form-group">
-															<h5><input type="checkbox" name="" /> Midnight Delivery (For Delivery between 10 PM - 12:30 AM)</h5>
-														</div>
-													</div>
-												</div>
-
-												<div class="row">
-													<div class='col-sm-3'>
-														<div class="form-group">
-															<div class='input-group date' id='datetimepicker1'>
-																<input type='text' class="form-control" placeholder="Select Date"/>
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-												</div>
-
-												<div class="row">
-													<div class='col-sm-3'>
-														<div class="form-group">
-															<div class='input-group date' id='datetimepicker3'>
-																<input type='text' class="form-control" placeholder="Select Time"/>
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-time"></span>
-																</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="add-to-box">
-										<div class="add-to-cart">
-											<div class="pull-left">
-												<button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
-											</div>
-											<button class="button btn-buy" title="Buy Now" type="button">Buy Now</button>
-										</div>
-									</div>
-									<div class="email-addto-box">
-										<ul class="add-to-links">
+									<div class="boxEmailAddWish">
+										<ul>
 											<li>
 												<a onClick="addToWishList(this, '<?=$productDataObj[0]->product_id?>')" href="javascript:;">
 													<?php 
@@ -231,6 +111,64 @@ if($delivarySlotObj){
 										</ul>
 										
 									</div>
+								</div>
+
+								<div class="product-shop col-lg-8 col-sm-6 col-xs-12">									
+									<div class="pro-desc">
+										<div class="pro-title">
+											<h1 class="js-pro-title"><?=$productDataObj[0]->name?></h1>
+										</div>
+										<div class="seprator"></div>
+										<div class="product-contain">
+											<p>Quick Overview</p><br>
+											<?=trimData($productDataObj[0]->description, 160, true)?>
+										</div>
+										<div class="seprator"></div>
+										<div class="product-price-area">
+											<div class="product-price-details">
+												<p class="js-price1"> <span>Rs.</span> <span><?=number_format($price,2)?></span></p>
+											</div>
+											<div class="product-addon-wrap">
+												<div class="js-addon-desc">
+													<div class="item-list">
+														<h3>Select Weight</h3>
+														<ul class="cake-attribute">
+															<li class="first active">0.5 Kg</li>
+															<li>1 Kg</li>
+															<li>2 Kg</li>
+															<li>3 Kg</li>
+															<li class="last">4 Kg</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+										<label class="js-upgrade-title"><input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> type="checkbox" /> Do you want to make it Eggless ? Rs. 50</label><br>
+										<label class="js-upgrade-title"><input type="checkbox" /> Midnight Delivery (For Delivery between 10 PM - 12:30 AM)</label>
+										
+										<div class="boxTopShap">
+											<div class="delivery_lbl_b">Delivery</div>
+											<div class="form-group delivery_bx_b">
+												<div class='input-group'>
+													<input type='text' class="form-control" placeholder="Enter delivery pincode"/>
+													<span class="input-group-addon btn-check">
+														Check
+													</span>
+													<span class="pinValiMsg">Not a valid pincode  Please enter 6 digit pincode  We dont deliver in this area. </span>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<div class="seprator"></div>
+									
+									</div>
+									<div class="clearfix"></div>
+									<div class="product-next-prev"> 
+										<a class="product-next" href="#"><span></span></a> 
+										<a class="product-prev" href="#"><span></span></a> 
+									</div>
+									
+									
 								</div>
 							</div>
 

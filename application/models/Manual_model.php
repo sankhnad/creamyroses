@@ -112,12 +112,17 @@ class Manual_model extends CI_Model {
 		return $query->result();		
 	}
 	
-	function getProductListing($select, $where){
+	function getProductListing($select, $where, $groupBy=''){
 		$this->db->select($select);
 		$this->db->from('product_to_category AS a');
 		$this->db->join('product AS b', 'a.product_id = b.product_id', 'LEFT');
 		$this->db->join('category AS c', 'a.category_id = c.category_id', 'LEFT');		
 		$this->db->where($where);
+		
+		if($groupBy){
+			$this->db->group_by($groupBy);
+		}
+		
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result();		
@@ -133,6 +138,7 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
+	
 	function getProductDeliverySlot($select, $where){
 		$this->db->select($select);
 		$this->db->from('product_to_delivary_option AS a');
