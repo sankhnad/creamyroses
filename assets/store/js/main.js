@@ -439,17 +439,9 @@ $(document).on("submit", "#login_customer", function (e) {
 					type: 'warning'
 				});
 			} else if (obj.status == 'pending') {
-				swal({
-					title: 'Pending Verification!!',
-					text: 'Your account is not verified yet. Please verify your account first',
-					confirmButtonColor: '#FF9494',
-					type: 'warning'
-				});
-				$('#register_customer').remove();
+				swal("Pending Verification!!", "Your account is not verified yet. Please verify your account first", "error");
+				$('#adminlogin').remove();
 				$('#confirmOTP_customer').show();
-
-				var redirectUrl = base_url+'verify/'+obj.password;
-				gotoPage(redirectUrl)
 			}else if (obj.status == 'success') {
 				var redictURL = window.location.hash.substring(1);
 				redictURL = redictURL ? redictURL : base_url;
