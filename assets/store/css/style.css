@@ -18104,3 +18104,7 @@ a.shop-now-btn {
     background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 99% 3px / 20px auto;
     border: 1px solid #eb5151;
 }
+
+.hide-now {
+	display: none;
+}

@@ -55,7 +55,22 @@
                                                 <a class="forgot-word" href="#">Forgot Your Password?</a> 
                                             </div>
 											</form>
-
+											<form id="confirmOTP_customer" novalidate class="hide-now">
+											  <ul class="form-list">
+												<li>
+												  <label for="email">Mobile Number </label>
+												  <input type="mobile" name="otpMobile" readonly="readonly" class="input-text">
+												</li>
+												<li>
+												  <label for="email">OTP <span class="required">*</span></label>
+												  <input type="text" class="input-text required-entry" name="otp" placeholder="Enter Your OTP" required>
+												</li>
+												<li class="col-sm-12 text-center">
+												  <!--<button type="submit" class="button login"><span>Change Number</span></button>-->
+												  <button type="submit" class="button login"><span>Confirm OTP</span></button>
+												</li>
+											  </ul>
+											</form>
                                         </div>
                                     </div>
                                 </fieldset>
