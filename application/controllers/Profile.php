@@ -19,8 +19,9 @@ class Profile extends CI_Controller {
 	}
 	
 	function addToWishList(){
+		//echo '<pre>';print_r($this->session->userdata());die;
 		$pid = $this->input->post('pid');
-		$cid = $this->session->userdata('CID');
+		$cid = decode($this->session->userdata('CID'));
 		if(!$cid){
 			echo json_encode(array('status'=>'error'));
 			exit;
@@ -38,5 +39,13 @@ class Profile extends CI_Controller {
 		}
 		echo json_encode(array('status'=>'success'));
 		exit;
+	}
+	
+	function wishlistListing(){
+		$pid = $this->input->post('pid');
+		$cid = decode($this->session->userdata('CID'));
+		
+		
+		$this->load->view('store/wishlist', $data);
 	}
 }

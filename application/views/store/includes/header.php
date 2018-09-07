@@ -154,11 +154,11 @@
 								</ul>
 							</div>
 
-							<div class="block-company-wrapper hidden-xs">
+<!--							<div class="block-company-wrapper hidden-xs">
 								<a title="Wishlist" href="wishlist">Wishlist</a>
 							</div>
 
-							<?php } ?>
+-->							<?php } ?>
                             <div class="block-company-wrapper hidden-xs"><a title="Sell on Creamy Roses" href="<?=base_url()?>contact-us">Sell on Creamy Roses</a></div>
                         </div>
                     </div>

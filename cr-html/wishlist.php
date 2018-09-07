@@ -56,7 +56,7 @@
                             <div class="description std">
                               <div class="inner">A Black Multi-Coloured Printed Leggings for Women from Softwear.</div>
                             </div>
-                            <textarea title="Comment" onblur="focusComment(this)" onfocus="focusComment(this)" cols="5" rows="3" name="description[31]" style="height: 50px; width: 96%;"></textarea></td>
+                            <textarea title="Comment" onBlur="focusComment(this)" onFocus="focusComment(this)" cols="5" rows="3" name="description[31]" style="height: 50px; width: 96%;"></textarea></td>
                           <td data-rwd-label="Quantity" class="wishlist-cell2 customer-wishlist-item-quantity"><div class="cart-cell">
                               <div class="add-to-cart-alt">
                                 <input type="text" value="1" name="qty[31]" class="input-text qty validate-not-negative-number" pattern="\d*">
@@ -66,7 +66,7 @@
                               <div class="price-box"> <span id="product-price-39" class="regular-price"> <span class="price">$99.00</span> </span> </div>
                             </div></td>
                           <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
-                              <button class="button btn-cart" onclick="addWItemToCart(31);" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
+                              <button class="button btn-cart" onClick="addWItemToCart(31);" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
                             </div>
                             <p><a href="#/" class="">Edit</a></p></td>
                           <td class="wishlist-cell5 customer-wishlist-item-remove last"><a class="remove-item" title="Clear Cart"  href="#"><span><span></span></span></a></td>
@@ -78,7 +78,7 @@
                             <div class="description std">
                               <div class="inner">A Black Multi-Coloured Printed Leggings for Women from Softwear.</div>
                             </div>
-                            <textarea title="Comment" onblur="focusComment(this)" onfocus="focusComment(this)" cols="5" rows="3" name="description[31]" style="height: 50px; width: 96%;"></textarea></td>
+                            <textarea title="Comment" onBlur="focusComment(this)" onFocus="focusComment(this)" cols="5" rows="3" name="description[31]" style="height: 50px; width: 96%;"></textarea></td>
                           <td data-rwd-label="Quantity" class="wishlist-cell2 customer-wishlist-item-quantity"><div class="cart-cell">
                               <div class="add-to-cart-alt">
                                 <input type="text" value="1" name="qty[31]" class="input-text qty validate-not-negative-number" pattern="\d*">
@@ -88,7 +88,7 @@
                               <div class="price-box"> <span id="product-price-39" class="regular-price"> <span class="price">$99.00</span> </span> </div>
                             </div></td>
                           <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
-                              <button class="button btn-cart" onclick="addWItemToCart(31);" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
+                              <button class="button btn-cart" onClick="addWItemToCart(31);" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
                             </div>
                             <p><a href="#" class="">Edit</a></p></td>
                           <td class="wishlist-cell5 customer-wishlist-item-remove last"><a class="remove-item" title="Clear Cart"  href="#"><span><span></span></span></a></td>
@@ -98,7 +98,7 @@
                     </table>
                     <div class="buttons-set buttons-set2">
                       <button class="button btn-share" title="Share Wishlist" name="save_and_share" type="submit"><span>Share Wishlist</span></button>
-                      <button class="button btn-add" onclick="addAllWItemsToCart()" title="Add All to Cart" type="button"><span>Add All to Cart</span></button>
+                      <button class="button btn-add" onClick="addAllWItemsToCart()" title="Add All to Cart" type="button"><span>Add All to Cart</span></button>
                       <button class="button btn-update" title="Update Wishlist" name="do" type="submit"><span>Update Wishlist</span></button>
                     </div>
                   </fieldset>
