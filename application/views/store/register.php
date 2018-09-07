@@ -58,7 +58,7 @@
 													</li>
 													<li>
 														<label for="email">Referral Code </label>
-														<input type="text" placeholder="Referral Code" class="input-text required-entry" name="assign_rferral_code" required>
+														<input type="text" placeholder="Referral Code" class="input-text required-entry" name="assign_rferral_code">
 													</li>
 													
 													<li>

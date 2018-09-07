@@ -202,7 +202,7 @@ class Login extends CI_Controller {
 		$password 			= $this->uri->segment( 2 );
 		$customerObj	 	= $this->common_model->getAll("id", 'customer', array('password'=>$password));
 		
-		echo '<pre>';print_r($customerObj);die;
+		//echo '<pre>';print_r($customerObj);die;
 
 		$data['activeNav'] = 'Register';
 		$data['isverify']  = 1; 		
