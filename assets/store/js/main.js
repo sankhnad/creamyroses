@@ -1,28 +1,62 @@
-function addToWishList(selfObj, pid){
-	var dataString = {
-		pid: pid,
-	};
-	$.ajax({
-		url: base_url + 'profile/addToWishList',
-		dataType: 'json',
-		type: 'POST',
-		data: dataString,
-		beforeSend: function () {
-			showLoader();
-		},
-		success: function (obj){
-			$(selfObj).find('i').toggleClass('fas far');
-			if(obj.status == 'error'){
-				swal("Login Please", "To add this product in your wishlist you must have to login in your account ", "warning");
-				$(selfObj).find('i').removeClass('fas').addClass('far');
-			}else if(obj.status == 'success'){
-				
+function addToWishList(selfObj, pid, type){
+	
+	if (type == 'delete') {
+		swal({
+			title: "Are you sure!!",
+			text: "Do you want to you want to delete this record?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes",
+			cancelButtonText: "No"
+		}).then(function () {
+				var dataString = {
+					pid: pid,
+				};
+				$.ajax({
+					url: base_url + 'profile/addToWishList',
+					dataType: 'json',
+					type: 'POST',
+					data: dataString,
+					beforeSend: function () {
+						showLoader();
+					},
+					success: function (obj){
+						timerAlert('Successful!!', 'Record has been successfully deleted', 'reload');
+					},
+					error: function () {
+						csrfError();
+					}
+				});
+
+		});
+	} else {	
+	
+		var dataString = {
+			pid: pid,
+		};
+		$.ajax({
+			url: base_url + 'profile/addToWishList',
+			dataType: 'json',
+			type: 'POST',
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (obj){
+				$(selfObj).find('i').toggleClass('fas far');
+				if(obj.status == 'error'){
+					swal("Login Please", "To add this product in your wishlist you must have to login in your account ", "warning");
+					$(selfObj).find('i').removeClass('fas').addClass('far');
+				}else if(obj.status == 'success'){
+					
+				}
+			},
+			error: function () {
+				csrfError();
 			}
-		},
-		error: function () {
-			csrfError();
-		}
-	});
+		});
+	}
 }
 
 $('.navMeg1 > li').mouseenter(function() {

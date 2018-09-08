@@ -9,7 +9,7 @@ class Profile extends CI_Controller {
 	}
 	
 	function index(){
-		$data['activeNav'] = 'Login';		
+		$data['activeNav'] = 'profile';		
 		$this->load->view('store/profile', $data);
 	}
 	
@@ -42,10 +42,46 @@ class Profile extends CI_Controller {
 	}
 	
 	function wishlistListing(){
+		$data['activeNav'] = 'wishlist';		
+
 		$pid = $this->input->post('pid');
 		$cid = decode($this->session->userdata('CID'));
 		
-		
+			$select = array(
+				'b.product_id as p_product_id',
+				'b.name as p_name',
+				'b.url_slug as p_url_slug',
+				'b.image as p_image',
+				'b.description as p_desc',
+			);
+			
+			$where = array(
+				'a.cid' => $cid,
+				'b.isDeleted'=>'1',
+				'b.status'=>'1',
+			);
+			
+			$select = str_replace( " , ", " ", implode( ", ", $select));			
+			$productListObj = $this->manual_model->getWishlistListing($select, $where);		
+			$data['productListObj'] = $productListObj;
+			//echo '<pre>';print_r($productListObj);die;
+	
 		$this->load->view('store/wishlist', $data);
 	}
+	
+	function address(){
+		$data['activeNav'] = 'address';		
+		$this->load->view('store/address-book', $data);
+	}
+	
+	function orders(){
+		$data['activeNav'] = 'orders';		
+		$this->load->view('store/orders', $data);
+	}
+	function addAddress(){
+		$data['activeNav'] = 'address';		
+		$this->load->view('store/addressData', $data);
+	}
+
+
 }

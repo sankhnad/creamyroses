@@ -3,7 +3,7 @@
 
 <head>
 	<?php include('includes/commonfile.php');?>
-		<title>Account Information | Creamy Roses</title>
+		<title>Address Book | Creamy Roses</title>
 	<?php include("includes/style.php"); ?>
 </head>
 
@@ -26,19 +26,33 @@
 									
 									<div class="box-account">
 										<div class="page-title">
-											<h2>Account Information</h2>
-										</div>
-										<div class="col2-set">
-											<div class="col-1">
-												<h5>Contact Information</h5>
-												<a href="#">Edit</a>
-												<p>John Doe<br> john.doe@gmail.com
-													<br>
-													<a href="#">Change Password</a> </p>
-											</div>
-											
+											<h2>Address Information</h2>
 										</div>
 										
+										<div class="col2-set">
+											<h4>Address Book</h4>
+											<div class="manage_add"><a href="<?=base_url()?>add-address">Add Addresses</a> </div>
+											<div class="col-1">
+												<h5>Primary Billing Address</h5>
+												<address>John Doe<br>
+                          aundh<br>
+                          tyyrt,  Alabama, 46532<br>
+                          United States<br>
+                          T: 454541 <br>
+                          <a href="#">Edit Address</a>
+                          </address>
+											</div>
+											<div class="col-2">
+												<h5>Primary Shipping Address</h5>
+												<address>John Doe<br>  
+                          aundh<br>
+                          tyyrt,  Alabama, 46532<br>
+                          United States<br>
+                          T: 454541 <br>
+                          <a href="#">Edit Address</a>
+                          </address>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

@@ -120,7 +120,7 @@ class Manual_model extends CI_Model {
 		$this->db->where($where);
 		
 		if($groupBy){
-			$this->db->group_by($groupBy);
+			//$this->db->group_by($groupBy);
 		}
 		
 		$query = $this->db->get();
@@ -163,9 +163,8 @@ class Manual_model extends CI_Model {
 
 	function getWishlistListing($select, $where){
 		$this->db->select($select);
-		$this->db->from('product_to_category AS a');
-		$this->db->join('product AS b', 'a.product_id = b.product_id', 'LEFT');
-		$this->db->join('category AS c', 'a.category_id = c.category_id', 'LEFT');		
+		$this->db->from('wish_list AS a');
+		$this->db->join('product AS b', 'a.pid = b.product_id', 'LEFT');
 		$this->db->where($where);
 		$query = $this->db->get();
 		//echo $this->db->last_query();

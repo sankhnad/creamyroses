@@ -64,4 +64,7 @@ $route['baby-photography'] = 'home/babyPhotoPage';
 $route['(verify)/(:any)'] = 'login/verif_otp/$1';
 $route['404'] = 'errror404/index';
 $route['wishlist'] = 'profile/wishlistListing';
+$route['address-book'] = 'profile/address';
+$route['orders'] = 'profile/orders';
+$route['add-address'] = 'profile/addAddress';
 
