@@ -898,4 +898,34 @@ function deleteAddress(selfObj, aid) {
 	});
 }
 
+$(document).on("submit", "#customerAddEdit", function (e) {
+	e.preventDefault();
+	if (!validateForm('customerAddEdit')) return false; 
+
+	var msg = 'updated';
+	$.ajax({
+		url: base_url + 'profile/customerAddEdit',
+		dataType: 'json',
+		type: 'POST',
+		data: new FormData(this),
+		processData: false,
+		contentType: false,
+		success: function (data) {
+			if (data.status == 'user-error') {
+				swal("Sorry!", "This phone number is not available, choose a different phone number.", "error");
+			} else if (data.status == 'email-error') {
+				swal("Sorry!", "This email address is not available, choose a different email address.", "error");
+			} else {
+				$('input[name="id"]').val(data.cid);
+				timerAlert('Successfull!', 'Information has been successfully ' + msg);
+				$('.titleAre').text('Customer');
+				$('.mangAdresBtn').show();
+				manageAddressPan();
+			}
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+});
 

@@ -9,7 +9,11 @@ class Profile extends CI_Controller {
 	}
 	
 	function index(){
-		$data['activeNav'] = 'profile';		
+		$data['activeNav'] = 'profile';	
+		$cid = decode($this->session->userdata('CID'));
+		$customerData = $this->common_model->getAll('*', 'customer', array('isDeleted'=>'1', 'id'=>$cid));
+		$data['customerData'] = $customerData;
+
 		$this->load->view('store/profile', $data);
 	}
 	
@@ -189,5 +193,45 @@ class Profile extends CI_Controller {
 		}
 		$this->load->view('store/addressData', $data);
 	}
+	
+	function customerAddEdit() {
+		if(!$this->input->is_ajax_request()) {
+			exit( 'No direct script access allowed' );
+		}
+		
+		$output = '';
+		$cid 		= decode($this->session->userdata('CID'));
+		$fname 		= $this->input->post('fname');
+		$lname 		= $this->input->post('lname');
+		$mobile = $this->input->post('mobile');		
+		//$gender = $this->input->post('gender') == '1' ? 'M' : 'F';
+		$dob = $this->input->post('dob') ? convertData($this->input->post('dob')) : NULL;
+		$doa = $this->input->post('doa') ? convertData($this->input->post('doa')) : NULL;
+		
+
+		$data = array(
+			'fname'	=> $fname,
+			'lname'	=> $lname,
+			//'email'	=> $email,
+			'mobile'=> preg_replace('/\s+/', '', $mobile),
+			//'gender'=> $gender,
+			'dob'	=> $dob,
+			'doa'	=> $doa,
+		);
+		
+		
+		
+		$avtar = $_FILES['avtar']['name'];
+		if($avtar){
+			$data['avtar'] = uploadFiles('avtar', $path = 'uploads/profile/', 'thumb', 360, 360 );
+		}		
+		
+		if($cid){		
+			$this->common_model->updateData('customer', array('id'=>$cid), $data);
+		}
+			
+		echo json_encode( array( 'status' => true, 'cid' => encode($cid)) );
+	}
+
 
 }
