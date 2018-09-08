@@ -803,4 +803,99 @@ $(document).on("submit", "#confirmOTP_customer", function (e) {
 	});
 });
 
+$(document).on("submit", "#editNewAddress", function (e) {
+	e.preventDefault();
+		if (!validateForm('editNewAddress')) return false; 
+
+	var id = $('input[name="cid"]').val();
+	if (id != '') {
+		var msg = 'updated';
+	} else {
+		var msg = 'added';
+	}
+	$.ajax({
+		url: base_url + 'profile/editNewAddress',
+		dataType: 'json',
+		type: 'POST',
+		data: new FormData(this),
+		processData: false,
+		contentType: false,
+		success: function (data) {
+			var url = base_url+'address-book';
+			timerAlert('Successfull!', 'Successfully ' + msg, url);
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+});
+
+function setDefaultAddress(selfObj, aid, cid) {
+	var dataString = {
+		aid: aid,
+		cid: cid
+	};
+	$.ajax({
+		url: base_url + 'profile/setDefaultAddress',
+		dataType: 'json',
+		type: "POST",
+		data: dataString,
+		beforeSend: function () {
+			showLoader();
+		},
+		success: function (data) {
+			$('.boxAddressDis').removeClass('defaultAdsULI');
+			$(selfObj).closest('.boxAddressDis').addClass('defaultAdsULI');
+		},
+		error: function () {
+			csrfError();
+		},
+	});
+}
+
+function deleteAddress(selfObj, aid) {
+	var adress = '<ul>' + $('.addressULLI').html() + '</ul>';
+	swal({
+		title: "Confirm Deletion!!",
+		html: "<div class='confrmDletMs'>" + adress + "<br><br>Please note: Deleting this address will not delete any pending orders being shipped to this address. To ensure uninterrupted fulfillment of future orders, please update any wishlists, subscribe and save settings and periodical subscriptions using this address.</div>",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes",
+		cancelButtonText: "No"
+	}).then(function () {
+		var dataString = {
+			id: aid,
+		};
+		$.ajax({
+			url: base_url + 'profile/deleteAddress',
+			dataType: 'json',
+			type: "POST",
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (data) {
+				if (data.status == 'child') {
+					if (type == 'state') {
+						var msg = 'You cannot delete this state until the city of this state get deleted. So, please delete all cities of this state first';
+					} else if (type == 'city') {
+						var msg = 'You cannot delete this city until the area of this city get deleted. So, please delete all areas of this city first';
+					} else if (type == 'area') {
+
+					}
+					swal("Oops!!", msg, "error");
+				} else if (data.status == 'success') {
+					timerAlert('Successful!!', 'Record has been deleted Successfully');
+					$(selfObj).closest('.col-sm-4').fadeOut('slow');
+				}
+			},
+			error: function () {
+				csrfError();
+			},
+		});
+
+	});
+}
+
 

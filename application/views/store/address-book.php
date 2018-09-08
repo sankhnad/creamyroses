@@ -26,32 +26,72 @@
 									
 									<div class="box-account">
 										<div class="page-title">
-											<h2>Address Information</h2>
+											<h2>Address Book</h2>
 										</div>
 										
 										<div class="col2-set">
-											<h4>Address Book</h4>
+											
 											<div class="manage_add"><a href="<?=base_url()?>add-address">Add Addresses</a> </div>
-											<div class="col-1">
-												<h5>Primary Billing Address</h5>
-												<address>John Doe<br>
-                          aundh<br>
-                          tyyrt,  Alabama, 46532<br>
-                          United States<br>
-                          T: 454541 <br>
-                          <a href="#">Edit Address</a>
-                          </address>
-											</div>
-											<div class="col-2">
-												<h5>Primary Shipping Address</h5>
-												<address>John Doe<br>  
-                          aundh<br>
-                          tyyrt,  Alabama, 46532<br>
-                          United States<br>
-                          T: 454541 <br>
-                          <a href="#">Edit Address</a>
-                          </address>
-											</div>
+									<?php foreach($addressList as $addressData){?>
+									
+									<div class="col-sm-4">
+										<div class="boxAddressDis <?=$addressData->isDefault == '1' ? 'defaultAdsULI':'' ?>">
+											<div class="defultBxRa">Default Address</div>
+											<ul class="addressULLI">
+												<?php
+												$aidEncripted = encode($addressData->aid);
+												if($addressData->type == '0'){
+													$aTyp = 'Home Address';
+													$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+												}else if($addressData->type == '1'){
+													$aTyp = 'Office Address';
+													$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+													echo '<li>' . $addressData->remarks . ''.$aTyp.'</li>';
+													$aTyp = '';
+												}else if($addressData->type == '2'){
+													$aTyp = 'Others';
+													$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+												}
+												if ( $addressData->name ) {
+													echo '<li>' . $addressData->name . ''.$aTyp.'</li>';
+												}
+												if ( $addressData->address_line_1 ) {
+													echo '<li>' . $addressData->address_line_1 . ',</li>';
+												}
+												if ( $addressData->address_line_2 ) {
+													echo '<li>' . $addressData->address_line_2 . ',</li>';
+												}
+												if ( $addressData->landmark ) {
+													echo '<li>' . $addressData->landmark . ',</li>';
+												}
+												if ( $addressData->city ) {
+													echo '<li>' . $addressData->city . ', ' . $addressData->cityName . ',</li>';
+												}
+												if ( $addressData->pin ) {
+													echo '<li>India - ' . $addressData->pin . '</li>';
+												} else {
+													echo '<li>India</li>';
+												}
+												if ( $addressData->mobile ) {
+													echo '<li>Phone number: ' . $addressData->mobile . '</li>';
+												}
+																				
+												if ($addressData->type == '2'){
+													echo '<li>Remarks: ' . $addressData->remarks . '</li>';
+												}
+												?>
+											</ul>
+											<ul class="actionAdresULLI">
+												<li><a href="<?=base_url();?>profile/getAddress/<?=$aidEncripted?>">Edit</a></li>
+												<li><a href="javascript:void(0)" onClick="deleteAddress(this, '<?=$aidEncripted?>')">Delete</a></li>
+												<li><a href="javascript:void(0)" onClick="setDefaultAddress(this, '<?=$aidEncripted?>','<?=$CID?>')">Set as Default</a></li>
+											</ul>
+										</div>
+									</div>
+									<?php } ?>
+
+											
+											
 										</div>
 									</div>
 								</div>

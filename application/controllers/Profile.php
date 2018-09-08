@@ -71,6 +71,11 @@ class Profile extends CI_Controller {
 	
 	function address(){
 		$data['activeNav'] = 'address';		
+		$data['stateAry'] = $this->common_model->getAll('sid, stateName', 'location_state', array('status'=>'1', 'isDeleted'=>'1'));
+		$addressList = $this->manual_model->getFullCustomerAddress(array('a.isDeleted'=>'1'), array('a.isDefault','asc'));
+
+		$data['addressList'] = $addressList;
+
 		$this->load->view('store/address-book', $data);
 	}
 	
@@ -79,9 +84,110 @@ class Profile extends CI_Controller {
 		$this->load->view('store/orders', $data);
 	}
 	function addAddress(){
-		$data['activeNav'] = 'address';		
+		$data['activeNav'] = 'address';	
+		$data['data'] = array();	
+		
+		$data['stateAry'] = $this->common_model->getAll('sid, stateName', 'location_state', array('status'=>'1', 'isDeleted'=>'1'));
 		$this->load->view('store/addressData', $data);
 	}
 
+	function editNewAddress(){
+		if(!$this->input->is_ajax_request()) {
+			exit( 'No direct script access allowed' );
+		}
+		$aid = decode($this->input->post('aid'));
+		$cid = decode($this->session->userdata('CID'));
+		
+		$name 			= trim($this->input->post('name'));
+		$mobile 		= $this->input->post('mobile');
+		$pin 			= $this->input->post('pin');
+		$addresline1 	= trim($this->input->post('addresline1'));
+		$addresline2 	= trim($this->input->post('addresline2'));
+		$landmark 		= trim($this->input->post('landmark'));
+		$city 			= trim($this->input->post('city'));
+		$state 			= $this->input->post('state');
+		$isDefault 		= $this->input->post('isDefault');
+		$type 			= $this->input->post('type');
+		$remarks 		= $this->input->post('remarks');		
+		
+		$data = array(
+			'cid'		=> $cid,
+			'name'		=> rtrim($name,','),
+			'mobile'	=> str_replace(' ', '', $mobile),
+			'pin'		=> $pin,
+			'address_line_1'=> rtrim($addresline1,','),
+			'address_line_2'=> rtrim($addresline2,','),
+			'landmark'	=> rtrim($landmark,','),
+			'city'		=> rtrim($city,','),
+			'stateCode'	=> $state,
+			'type'	=> $type,
+			'remarks'	=> $remarks,
+		);
+		
+		$table = 'address';
+		if($isDefault){
+			$this->common_model->updateData($table, array('isDefault'=>'1', 'cid'=>$cid), array('isDefault'=>'0'));
+			$data['isDefault'] = '1';
+		}else{
+			$data['isDefault'] = '0';
+		}
+		
+		if($aid){		
+			$this->common_model->updateData($table, array('aid'=>$aid), $data);
+		}else{
+			$data['created_on'] = date( "Y-m-d H:i:s", time() );
+			$aid = $this->common_model->saveData($table, $data );
+		}
+		echo json_encode(array('status'=>'success'));
+	}
+
+	function deleteAddress(){
+		$tbl = 'address';
+		$this->input->post('id');
+		$aid = decode($this->input->post('id'));
+		$where = array('aid'=>$aid);
+		$data = array(
+			'isDeleted'=> '0',
+		);
+		
+		$this->common_model->updateData($tbl, $where, $data);
+		echo json_encode( array( 'status' => 'success' ) );
+	}	
+
+	function setDefaultAddress(){
+		$tbl = 'address';
+		$aid = decode($this->input->post('aid'));
+		$cid = decode($this->input->post('cid'));
+		$this->common_model->updateData($tbl, array('isDefault'=>'1'), array('isDefault'=>'0', 'cid'=>$cid));
+		
+		$aid = decode($this->input->post('aid'));
+		$where = array('aid'=>$aid);
+		$data = array(
+			'isDefault'=> '1',
+		);
+		
+		$this->common_model->updateData($tbl, $where, $data);
+		echo json_encode( array( 'status' => true ) );
+	}
+
+	function getAddress($addressId){
+		$data['activeNav'] = 'address';		
+		$data['stateAry'] = $this->common_model->getAll('sid, stateName', 'location_state', array('status'=>'1', 'isDeleted'=>'1'));
+
+		$output = '';
+		$aid = decode($addressId);
+		$cid = decode($this->session->userdata('CID'));
+		$where = array(
+			'cid'		=> $cid,
+			'aid'		=> $aid,
+			'isDeleted'		=> '1',
+		);
+		if($aid){
+			$data['data'] = $this->common_model->getAll('*', 'address', $where);
+		}else{
+			$data['data'] = array();
+		}
+		$this->load->view('store/addressData', $data);
+	}
 
 }
