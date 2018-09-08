@@ -6,13 +6,15 @@ if($priceObj){
 	$price = $priceObj[0]->product_price;
 	$discount_price = getDiscount( $priceObj[ 0 ]->discount_type, $priceObj[ 0 ]->product_price, $priceObj[ 0 ]->discount );
 
+
 	$weightList = '';
 	$selCount = 1;
+	//echo '<pre>';print_r($priceObj);die;
 	foreach ( $priceObj as $priceData ) {
 		if ($selCount == 1){
-			$weightList .= '<option selected="selected" value="' . encode( $priceData->id ) . '">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</option>';
+			$weightList .= '<li class="active" onClick="getPriceByWeight('.$priceData->id.',this)">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</li>';
 		}else{
-			$weightList .= '<option value="' . encode( $priceData->id ) . '">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</option>';
+			$weightList .= '<li onClick="getPriceByWeight('.$priceData->id.',this)">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</li>';
 		}
 		$selCount++;
 	}
@@ -30,8 +32,8 @@ if($delivarySlotObj){
 		} else {
 			$shippingPrice = 'Free';
 		}
-
-		$shippingMethodList .= '<option value="' . encode( $shipData->option_id ) . '">' . $shipData->name . '&nbsp;(' . $shippingPrice . ')</option>';
+								
+		$shippingMethodList .= '<input type="radio" name="delivery_tiem[]" value="' . encode( $shipData->option_id ) . '">' . $shipData->name . '&nbsp;(' . $shippingPrice . ')<br/>';
 	}
 } else {
 	$price = 0;
@@ -126,35 +128,32 @@ if($delivarySlotObj){
 										<div class="seprator"></div>
 										<div class="product-price-area">
 											<div class="product-price-details">
-												<p class="js-price1"> <span>Rs.</span> <span><?=number_format($price,2)?></span></p>
+												<p class="js-price1"> <span>Rs.</span> <span id="discount_price"><?=number_format($price,2)?></span></p>
 											</div>
 											<div class="product-addon-wrap">
 												<div class="js-addon-desc">
 													<div class="item-list">
 														<h3>Select Weight</h3>
 														<ul class="cake-attribute">
-															<li class="first active">0.5 Kg</li>
-															<li>1 Kg</li>
-															<li>2 Kg</li>
-															<li>3 Kg</li>
-															<li class="last">4 Kg</li>
+															<?=$weightList?>
 														</ul>
 													</div>
 												</div>
 											</div>
 										</div>
-										<label class="js-upgrade-title"><input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> type="checkbox" /> Do you want to make it Eggless ? Rs. 50</label><br>
-										<label class="js-upgrade-title"><input type="checkbox" /> Midnight Delivery (For Delivery between 10 PM - 12:30 AM)</label>
+										<label class="js-upgrade-title"><input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> type="checkbox" /> Do you want to make it Eggless ? <!--Rs. 50--></label><br>
+										<label class="js-upgrade-title"><?=$shippingMethodList?>
+										<!--<input type="radio" /> Midnight Delivery (For Delivery between 10 PM - 12:30 AM)</label>-->
 										
 										<div class="boxTopShap">
 											<div class="delivery_lbl_b">Delivery</div>
 											<div class="form-group delivery_bx_b">
 												<div class='input-group'>
-													<input type='text' class="form-control" placeholder="Enter delivery pincode"/>
-													<span class="input-group-addon btn-check">
+													<input type='text' class="form-control numericOnly" placeholder="Enter delivery pincode" id="pincode" required/>
+													<span class="input-group-addon btn-check" onClick="checkPinCode()">
 														Check
 													</span>
-													<span class="pinValiMsg">Not a valid pincode  Please enter 6 digit pincode  We dont deliver in this area. </span>
+													<span id="errormsg" class="pinValiMsg">Not a valid pincode  Please enter 6 digit pincode  We dont deliver in this area. </span>
 												</div>
 											</div>
 										</div>
@@ -176,8 +175,8 @@ if($delivarySlotObj){
 								<div class="add_info">
 									<ul id="product-detail-tab" class="nav nav-tabs product-tabs">
 										<li class="active"> <a href="#description_tab" data-toggle="tab">Description </a> </li>
-										<li> <a href="#delivery_tab" data-toggle="tab">Delivery Information</a> </li>
-										<li> <a href="#care_tab" data-toggle="tab">Care Instructions</a> </li>
+										<li> <a href="#delivery_tab" data-toggle="tab">Delivery Policy</a> </li>
+										<li> <a href="#care_tab" data-toggle="tab">Refund Policy</a> </li>
 									</ul>
 									<div id="productTabContent" class="tab-content">
 										<div class="tab-pane fade in active" id="description_tab">

@@ -734,7 +734,7 @@ function insertOtpMobile(mobile){
 	$('input[name="otpMobile"]').val(mobile);
 }
 
-function getPriceByWeight(weightId){
+function getPriceByWeight(weightId,selfObj){
 	var dataString = {
 		id: weightId,
 	};
@@ -752,7 +752,7 @@ function getPriceByWeight(weightId){
 			var discountVal;
 			var discountType;
 			var discount_price = data.discountPrice;
-
+			
 			$.each(obj, function (key, value) {
 					price		 = value.product_price;
 					discountVal	 = value.discount;
@@ -762,6 +762,8 @@ function getPriceByWeight(weightId){
 			
 			$('#normalPrice').text(price);
 			if(discount_price > 0){
+				//$(selfObj).addClass('active');
+				 $(selfObj).addClass('active').siblings().removeClass('active');
 				$('#discount_price').text(discount_price);
 			}
 			
@@ -929,3 +931,31 @@ $(document).on("submit", "#customerAddEdit", function (e) {
 	});
 });
 
+function checkPinCode(){
+	var pincode = $('#pincode').val();	
+	var dataString = {
+		pincode: pincode,
+	};
+	if(pincode!=''){
+		$.ajax({
+			url: base_url + 'process/getPincode',
+			dataType: 'json',
+			type: "POST",
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (data) {
+				if(data.result == 'error'){
+					$('#errormsg').removeClass('pinValiMsg');
+					$('#pincode').val('');
+				}
+			},
+			error: function () {
+				csrfError();
+			},
+		});
+	}else{
+		swal("Sorry!", "Enter valid pincode.", "error");
+	}
+}
