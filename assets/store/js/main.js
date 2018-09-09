@@ -968,3 +968,46 @@ function checkPinCode(){
 		swal("Sorry!", "Enter valid pincode.", "error");
 	}
 }
+
+function selectAddress(aid, cid) {
+	var dataString = {
+		aid: aid,
+		cid: cid,
+	};
+	$.ajax({
+		url: base_url + 'checkout/getAddress',
+		dataType: 'json',
+		type: 'POST',
+		data: dataString,
+		success: function (data) {
+			$("#addressAddEdit").hide();
+			alert(data.name)
+			$('#editNewAddress input[name="aid"]').val(aid);
+			$('#editNewAddress input[name="name"]').val(data.name);
+			$('#editNewAddress input[name="mobile"]').val(data.mobile);
+			$('#editNewAddress input[name="pin"]').val(data.pin);
+			$('#editNewAddress input[name="addresline1"]').val(data.address_line_1);
+			$('#editNewAddress input[name="addresline2"]').val(data.address_line_2);
+			$('#editNewAddress input[name="landmark"]').val(data.landmark);
+			$('#editNewAddress input[name="city"]').val(data.city);
+			$('#editNewAddress select[name="state"]').val(data.sid);
+			var isDefault = data.isDefault == '1' ? true : false;
+			$('#editNewAddress input[name="isDefault"]').prop('checked', isDefault);
+			$('#editNewAddress input[name="type"][value="' + data.type + '"]').prop('checked', true);
+			
+			if(data.type == '0'){
+				$('.otherTypAdrs label').html('Remarks');
+			}else if(data.type == '1'){
+				$('.otherTypAdrs label').html('Office Name');
+			}else if(data.type == '2'){
+				$('.otherTypAdrs label').html('Other');
+			}
+			//$('#editNewAddress input[name="remarks"]').val(data.remarks);
+			//$("#addressAddEdit").modal();
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+}
+

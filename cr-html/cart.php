@@ -458,7 +458,26 @@
                           <td><h2 class="product-name"> <a href="#/women-s-crepe-printed-black/">Sample Product</a> </h2></td>
                           <td class="a-center"><a title="Edit item parameters" class="edit-bnt" href="#configure/id/15945/"></a></td>
                           <td class="a-right"><span class="cart-price"> <span class="price"><i class="fa fa-rupee"></i> 70.00</span> </span></td>
-                          <td class="a-center movewishlist"><input maxlength="12" class="input-text qty" title="Qty" size="4" value="1" name="cart[15945][qty]"></td>
+
+                          <td class="a-center movewishlist">
+
+
+    <div class="input-group">
+        <span class="input-group-btn">
+        <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+        <span class="glyphicon glyphicon-minus"></span>
+        </button>
+        </span>
+        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+        <span class="input-group-btn">
+        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+        <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        </span>
+    </div>
+
+                          </td>
+
                           <td class="a-right movewishlist"><span class="cart-price"> <span class="price"><i class="fa fa-rupee"></i> 70.00</span> </span></td>
                           <td class="a-center last"><a class="button remove-item" title="Remove item" href="#"><span><span>Remove item</span></span></a></td>
                         </tr>
@@ -468,7 +487,25 @@
                           <td><h2 class="product-name"> <a href="#women-s-u-tank-top/">Sample Product</a> </h2></td>
                           <td class="a-center"><a title="Edit item parameters" class="edit-bnt" href="#configure/id/15946/"></a></td>
                           <td class="a-right"><span class="cart-price"> <span class="price"><i class="fa fa-rupee"></i> 7.38</span> </span></td>
-                          <td class="a-center movewishlist"><input maxlength="12" class="input-text qty" title="Qty" size="4" value="1" name="cart[15946][qty]"></td>
+
+                          <td class="a-center movewishlist">
+
+<div class="input-group">
+        <span class="input-group-btn">
+        <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+        <span class="glyphicon glyphicon-minus"></span>
+        </button>
+        </span>
+        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+        <span class="input-group-btn">
+        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+        <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        </span>
+</div>
+
+                          </td>
+
                           <td class="a-right movewishlist"><span class="cart-price"> <span class="price"><i class="fa fa-rupee"></i> 7.38</span> </span></td>
                           <td class="a-center last"><a class="button remove-item" title="Remove item" href="#"><span><span>Remove item</span></span></a></td>
                         </tr>
@@ -709,5 +746,51 @@
    $('#addonProduct').modal('show');
     }); 
 </script> -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+var quantitiy=0;
+   $('.quantity-right-plus').click(function(e){
+        
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        
+        // If is not undefined
+            
+            $('#quantity').val(quantity + 1);
+
+          
+            // Increment
+        
+    });
+
+     $('.quantity-left-minus').click(function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        
+        // If is not undefined
+      
+            // Increment
+            if(quantity>0){
+            $('#quantity').val(quantity - 1);
+            }
+    });
+    
+});
+
+</script>
+
+<style type="text/css">
+  .data-table input {
+    margin: 0px;
+    padding: 10px;
+    width: 40px !important;
+}
+</style>
 </body>
 </html>

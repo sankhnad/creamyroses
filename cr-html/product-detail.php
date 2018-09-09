@@ -14,6 +14,8 @@
         <title>Product Details || Cakes</title>
         <!-- Mobile Specific -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link href="assets/date-time/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
         <?php include("include/style.php"); ?>
     </head>
     <body class="shopping-cart-page">
@@ -100,11 +102,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <script type="text/javascript">
-                                                            $(function () {
-                                                                $('#datetimepicker1').datetimepicker();
-                                                            });
-                                                        </script>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,9 +131,7 @@
 
                                             <div class="date-time-selector">
                                                 <div class="weight-selector">
-                                                    <div class="eggless-selector">
-                                                        
-                                                    </div>
+                                                    <div class="eggless-selector"></div>
                                                     <div class="pull-left">
                                                         <div class="row">
                                                             <div class='col-sm-8'>
@@ -144,49 +139,33 @@
                                                                     <h5><input type="checkbox" name="" /> Midnight Delivery (For Delivery between 10 PM - 12:30 AM)</h5>
                                                                 </div>
                                                             </div>
-                                                            <script type="text/javascript">
-                                                                $(function () {
-                                                                    $('#datetimepicker1').datetimepicker();
-                                                                });
-                                                            </script>
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class='col-sm-3'>
-                                                                <div class="form-group">
-                                                                    <div class='input-group date' id='datetimepicker1'>
-                                                                        <input type='text' class="form-control" placeholder="Select Date" />
-                                                                        <span class="input-group-addon">
-                                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
+                                                            <div class='col-sm-12'>
+            <div class="form-group">
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input2" value="" /><br/>
+            </div>
                                                             </div>
-                                                            <script type="text/javascript">
-                                                                $(function () {
-                                                                    $('#datetimepicker1').datetimepicker();
-                                                                });
-                                                            </script>
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class='col-sm-3'>
-                                                                <div class="form-group">
-                                                                    <div class='input-group date' id='datetimepicker3'>
-                                                                        <input type='text' class="form-control" placeholder="Select Time" />
-                                                                        <span class="input-group-addon">
-                                                                            <span class="glyphicon glyphicon-time"></span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
+                                                            <div class='col-sm-12'>
+
+            <div class="form-group">
+                <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input3" value="" /><br/>
+            </div>
                                                             </div>
-                                                            <script type="text/javascript">
-                                                                $(function () {
-                                                                    $('#datetimepicker3').datetimepicker({
-                                                                        format: 'LT'
-                                                                    });
-                                                                });
-                                                            </script>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -208,33 +187,9 @@
                                                 <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="product-shop col-lg-4 col-sm-4 col-xs-12">
-                                            <div class="xpress-product-sec">
-                                                <form action="post">
-                                                <div class="price-box-in text-center">
-                                                <p class="special-price"> 
-                                                <span class="price-label">Special Price</span> 
-                                                <span id="product-price-48" class="price"> <i class="fa fa-inr" aria-hidden="true"></i> 309.99 </span> 
-                                                </p>
-                                                </div>
-                                                <div class="main-content-form">
-                                                <div class="form-group">                           
-                                                <input type="text" name=""  class="form-control" placeholder="* Area & City (or) PIN" />
-                                                <span id="selectedlocality" class=""></span>
-                                                </div>
-                                                <div class="form-group">                           
-                                                <input type="date" name=""  class="form-control" placeholder="When?" />
-                                                </div>
-                                                </div>
-                                                <div class="add-to-box">
-                                                <button onclick="productAddToCartForm.submit(this)" class="button btn-cart btn-block" title="Add to Cart" type="button">Add to Cart</button>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </div> -->
                                     </form>
                                 </div>
+
                                 <!-- Start: Details Tab  -->
                                 <div class="product-collateral">
                                     <div class="add_info">
@@ -285,6 +240,7 @@
                                     </div>
                                 </div>
                                 <!-- End: Details Tab  -->
+
                                 <!-- Start: Related Product Slider -->
                                 <div class="featured-pro-block">
                                     <div class="slider-items-products">
@@ -439,6 +395,7 @@
                                     </div>
                                 </div>
                                 <!-- End: Related Product Slider --> 
+
                             </div>
                         </article>
                         <!--  ///*///======    End article  ========= //*/// --> 
@@ -451,5 +408,42 @@
         <?php include("include/footer.php"); ?>
         <?php include("include/script.php"); ?>
         <script type="text/javascript" src="assets/js/cloud-zoom.js"></script>
+        
+        <script type="text/javascript" src="assets/date-time/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="assets/date-time/js/locales/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+        <script type="text/javascript">
+            $('.form_datetime').datetimepicker({
+                //language:  'fr',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
+            });
+            $('.form_date').datetimepicker({
+                language:  'fr',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0
+            });
+            $('.form_time').datetimepicker({
+                language:  'fr',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 1,
+                minView: 0,
+                maxView: 1,
+                forceParse: 0
+            });
+        </script>
+
     </body>
 </html>
