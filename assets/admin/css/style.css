@@ -18049,3 +18049,14 @@ table.fixTblShort thead .sorting::after, table.fixTblShort thead .sorting_asc::a
 	width: 100%;	height: 170px;
 		padding: 0px 0px;
 }
+
+.tbltagSnC .bootstrap-tagsinput {
+	border: medium none;
+	padding: 0;
+	box-shadow: none;
+}
+
+.tbltagSnC .bootstrap-tagsinput input:focus {
+  border: medium none;
+  box-shadow: none;
+}

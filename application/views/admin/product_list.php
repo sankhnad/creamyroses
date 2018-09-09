@@ -64,7 +64,7 @@
 									<tr>
 										<th width="10%">Image</th>
 										<th width="30%">Name</th>
-										<th width="15%">SKU Code</th>
+										<th width="15%">Created On</th>
 										<th width="10%">Status</th>
 										<th width="10%">Action</th>
 									</tr>

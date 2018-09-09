@@ -30,11 +30,12 @@ function addToWishList(selfObj, pid, type){
 				});
 
 		});
-	} else {	
-	
+	} else {
 		var dataString = {
 			pid: pid,
 		};
+		$(selfObj).find('i').toggleClass('fas far');
+		$(selfObj).find('m').text('Added');
 		$.ajax({
 			url: base_url + 'profile/addToWishList',
 			dataType: 'json',
@@ -43,11 +44,11 @@ function addToWishList(selfObj, pid, type){
 			beforeSend: function () {
 				showLoader();
 			},
-			success: function (obj){
-				$(selfObj).find('i').toggleClass('fas far');
+			success: function (obj){				
 				if(obj.status == 'error'){
 					swal("Login Please", "To add this product in your wishlist you must have to login in your account ", "warning");
 					$(selfObj).find('i').removeClass('fas').addClass('far');
+					$(selfObj).find('m').text('Add');
 				}else if(obj.status == 'success'){
 					
 				}

@@ -41,17 +41,16 @@ class Products extends CI_Controller {
 		$recordsTotal = $this->common_model->countResults($tbl, array('isDeleted'=>"1"));
 
 		$aColumns=array(
-			'name',
-			'sku_code',
-			'status',
 			'image',
+			'name',
 			'created_on',
+			'status',
 			'product_id',
 		);
 		
 		$iSQL = " FROM ".$tbl;
 
-		$quryTmp = $this->datatablemodel->multi_tbl_list( $aColumns, 0 );
+		$quryTmp = $this->datatablemodel->multi_tbl_list( $aColumns, 2 );
 		$sWhere = $quryTmp[ 'where' ] ? $quryTmp[ 'where' ] : ' WHERE 1 = 1 ';
 		$sOrder = $quryTmp[ 'order' ];
 		$sLimit = $quryTmp[ 'limit' ];		
@@ -126,7 +125,7 @@ class Products extends CI_Controller {
 			$row[] = '<img width="100px" src=\''.$avtarURL.'\' />';
 			$row[] = $fullName;
 
-			$row[] = $aRow['sku_code'];
+			$row[] = date('jS M Y | h:i A', strtotime($aRow['created_on']));
 			
 			$row[] = $status;			
 			$row[] = '<div class="action-buttons">'.$btnAra.'</div>';
@@ -480,5 +479,4 @@ class Products extends CI_Controller {
 		
 		echo json_encode( array( 'status' => 'success' ) );
 	}
-
 }

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<head>
 	<?php include('includes/commonfile.php');?>
 	<title>Home | Creamy Roses</title>
 	<?php include("includes/style.php"); ?>
-</head>
-
 </head>
 <body class="shopping-cart-page">
 	<?php include("includes/header.php"); ?>
@@ -81,7 +78,8 @@
 							<div class="figcaption">
 								<div class="banner-content left top"><span style="color: #ffffff; font-size: 12px; letter-spacing:1px; font-weight:600">DIGITAL LIFE</span><br>
 									<span style="font-size: 24px; color: #ffffff;">Slim, smart and <br style="color: #ffffff; font-size: 24px;">
-									beautiful</span></div>
+									beautiful</span>
+								</div>
 							</div>
 							<a href="#" style="color:#fff" class="left bottom btn_type_1" rel="nofollow">Read more</a></div>
 						<div class="figure banner-with-effects effect-sadie1 banner-width  with-button" style="background-color:#ffffff"><img src="<?=$iURL_storeAssts?>images/shoes-banner.jpg" alt="">
@@ -109,23 +107,19 @@
 									<div class="slider-items slider-width-col4 products-grid block-content">
 										<?php
 										 foreach($productObj as $data){ 
-										 			$priceObj = getProductPrice($data->product_id);
-													if(count($priceObj) > 0){
-														$price = $priceObj[0]->product_price;
-														$discount_price = getDiscount($priceObj[0]->discount_type, $priceObj[0]->product_price, $priceObj[0]->discount);
+											$priceObj = getProductPrice($data->product_id);
+											if(count($priceObj) > 0){
+												$price = $priceObj[0]->product_price;
+												$discount_price = getDiscount($priceObj[0]->discount_type, $priceObj[0]->product_price, $priceObj[0]->discount);
+											}else{
+												$price = 0;
+												$discount_price = 0;
+											}
 
-													}else{
-														$price = 0;
-														$discount_price = 0;
-													}
-													
-													$diff = abs(strtotime($data->created_on) - strtotime(date( "Y-m-d H:i:s", time() )));
-													$date1 = new DateTime(date( "Y-m-d H:i:s", time() ));
-													$date2 = new DateTime($data->created_on);
-													$interval = $date1->diff($date2);
-
-													
-
+											$diff = abs(strtotime($data->created_on) - strtotime(date( "Y-m-d H:i:s", time() )));
+											$date1 = new DateTime(date( "Y-m-d H:i:s", time() ));
+											$date2 = new DateTime($data->created_on);
+											$interval = $date1->diff($date2);
 										 ?>
 												<div class="item">
 													<div class="item-inner">
@@ -434,7 +428,7 @@
 							<div class="row">
 
 								<div class="col-lg-12 space">
-									<div class="feature-box"> <span class="fa fa-headphones"></span>
+									<div class="feature-box"> <span class="far fa-life-ring"></span>
 										<div class="content">
 											<h3>Help Center</h3>
 											<p>Lorem ipsum dolor sit amet</p>
@@ -442,7 +436,7 @@
 									</div>
 								</div>
 								<div class="col-lg-12 space">
-									<div class="feature-box"> <span class="fa fa-share"></span>
+									<div class="feature-box"> <span class="fas fa-hand-holding-usd"></span>
 										<div class="content">
 											<h3>Easy RETURNS</h3>
 											<p>Lorem ipsum dolor sit amet</p>
@@ -450,7 +444,7 @@
 									</div>
 								</div>
 								<div class="col-lg-12 space">
-									<div class="feature-box last"> <span class="fa fa-truck"></span>
+									<div class="feature-box last"> <span class="fas fa-truck"></span>
 										<div class="content">
 											<h3>Fastest Delivery</h3>
 											<p>Lorem ipsum dolor sit amet</p>
@@ -458,7 +452,7 @@
 									</div>
 								</div>
 								<div class="col-lg-12 space">
-									<div class="feature-box last"> <span class="fa fa-phone"></span>
+									<div class="feature-box last"> <span class="fas fa-phone-volume"></span>
 										<div class="content">
 											<h3>Helpline  +0800 567 345</h3>
 											<p>Lorem ipsum dolor sit amet</p>

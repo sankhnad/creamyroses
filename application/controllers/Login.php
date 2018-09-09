@@ -35,7 +35,12 @@ class Login extends CI_Controller {
 		$isSmsVerify = $result[0]->isSMS_verified;
 
 		if($isSmsVerify != '1'){
-			echo json_encode( array( 'status' => 'pending','mobile' => $mobile ) );
+			echo json_encode( array( 'status' => 'pending','mobile' => $mobile ));
+			$dataAray = array(
+				'otp' => $result[0]->mobile_otp,
+				'number' => $mobile,
+			);
+			sendCommonSMS('activateAccount', $dataAray);
 			return(false);
 		}
 		if($result){
@@ -210,8 +215,4 @@ class Login extends CI_Controller {
 		$data['isverify']  = 1; 		
 		$this->load->view('store/register', $data);
 	}
-
-	
-
-
 }

@@ -8,7 +8,7 @@ if ( $productAray ) {
 	$img 			= $productAray[ 0 ]->image;
 	$sort	 		= $productAray[ 0 ]->sort_number;
 	$sku 			= $productAray[ 0 ]->sku_code;
-	$availDate 		= date( 'd/m/Y', strtotime( $productAray[ 0 ]->date_available ) );
+	$availDate 		= date('d/m/Y', strtotime($productAray[0]->date_available));
 	$metaTTitle 	= $productAray[ 0 ]->meta_title;
 	$metaTDesc 		= $productAray[ 0 ]->meta_description;
 	$metaTKey 		= $productAray[ 0 ]->meta_keyword;
@@ -34,6 +34,7 @@ if ( $productAray ) {
 	$sMsgOptProdct 		= 1;
 	$isMsgOptCrd 		= 1;
 	$isTissuePacking 	= 1;
+	$availDate = date('d/m/Y');
 }
 
 $typeList = $relatedPrdctList = '';
@@ -159,9 +160,9 @@ if(count($slctPrice) > 0){
 															<span class="help-block slugErr"> This URL slug is not available </span>
 														</div>
 													</div>
-													<div class="col-md-4">
-														<div class="form-group">
-															<label class="required">Product Tag </label>
+													<div class="col-md-8">
+														<div class="form-group tbltagSnC">
+															<label class="required">Product Tag </label><br>
 															<input name="tags" type="text" class="form-control" data-role="tagsinput" value="<?=$tags?>" />
 														</div>
 													</div>
@@ -172,15 +173,6 @@ if(count($slctPrice) > 0){
 															<label>Delivery Option</label>
 															<select name="delivery_option[]"  multiple="multiple" class="selectpicker"  title="Select Delivery Option" data-live-search="true" data-size="5"  data-width="100%" >
 																<?=$delOptList?>
-															</select>
-														</div>
-													</div>
-													
-													<div class="col-md-4">
-														<div class="form-group">
-															<label>Related Products</label>
-															<select name="related_product[]"  multiple="multiple" class="selectpicker"  title="Select Related Products" data-live-search="true" data-size="5"  data-width="100%" >
-																<?=$relatedPrdctList?>
 															</select>
 														</div>
 													</div>
@@ -253,7 +245,7 @@ if(count($slctPrice) > 0){
 												<div class="form-group">
 													<label>&nbsp;</label>
 													<div class="borderChexBx">
-														<label>Eggless option required?</label>
+														<label>Eggless option?</label>
 														<label class="switchS switchSCuStatus">
 														  <input name="isEggless" value="1" class="switchS-input"  type="checkbox" <?=$isEggless == '1' ? 'checked' : ''?>>
 														  <span class="switchS-label" data-on="Yes" data-off="No"></span> <span class="switchS-handle"></span> 

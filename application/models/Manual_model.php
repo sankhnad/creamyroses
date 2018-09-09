@@ -71,7 +71,7 @@ class Manual_model extends CI_Model {
 	
 	function checkLoginCustomerEmail($data='') {
 		if($data !=''){
-			$this->db->select('id, password, status, isEmail_verified, isSMS_verified, mobile');
+			$this->db->select('id, password, status, isEmail_verified, isSMS_verified, mobile, mobile_otp');
 			$this->db->from('customer');
 			$this->db->where('email',$data);
 			$this->db->where('isDeleted','1');

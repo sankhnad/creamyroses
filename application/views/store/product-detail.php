@@ -1,13 +1,15 @@
 <?php
-$cid = $this->session->userdata('CID');
+$cid = decode($this->session->userdata('CID'));
 $priceObj = getProductPrice($productDataObj[0]->product_id);
+
+$weightList = $shippingPrice = $shippingMethodList = '';
 
 if($priceObj){
 	$price = $priceObj[0]->product_price;
 	$discount_price = getDiscount( $priceObj[ 0 ]->discount_type, $priceObj[ 0 ]->product_price, $priceObj[ 0 ]->discount );
 
 
-	$weightList = '';
+	
 	$selCount = 1;
 	//echo '<pre>';print_r($priceObj);die;
 	foreach ( $priceObj as $priceData ) {
@@ -24,8 +26,7 @@ if($priceObj){
 }
 
 if($delivarySlotObj){
-	$shippingMethodList = '';
-	$shippingPrice = '';
+	
 	foreach ( $delivarySlotObj as $shipData ) {
 		if ( $shipData->price > 0 ) {
 			$shippingPrice = '<i class="fas fa-rupee-sign" aria-hidden="true"></i>&nbsp;' . $shipData->price;
@@ -101,10 +102,12 @@ if($delivarySlotObj){
 													<?php 
 														$wishClas = 'far'; 
 												   		if($cid){
-															$wishClas = getProductWishList($productDataObj[0]->product_id, $cid) ? 'fas' : 'far';
+															$wishListData = getProductWishList($productDataObj[0]->product_id, $cid);
+															$wishClas =  $wishListData ? 'fas' : 'far';
+															$wishLbl = $wishListData ? 'Added' : 'Add';
 														}
 													?>
-													<span><i class="<?=$wishClas?> fa-heart"></i> &nbsp; Add to Wishlist</span>
+													<span><i class="<?=$wishClas?> fa-heart"></i> &nbsp; <m><?=$wishLbl?></m> to Wishlist</span>
 												</a>
 											</li>
 											<li>

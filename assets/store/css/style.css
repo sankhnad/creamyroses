@@ -1549,7 +1549,7 @@ ul.currencies_list li a:hover {
 .top-cart-content {
 	display: none;
 	position: absolute;
-	top: 54px;
+	top: 50px;
 	right: 0px;
 	background: #fff;
 	padding: 0;
@@ -2353,7 +2353,6 @@ nav {
 .our-features-box .feature-box span {
 	display: inline-block;
 	font-size: 18px;
-	font-weight: normal;
 	padding-top: 0px;
 	text-transform: none;
 	margin-right: 5px;
@@ -2390,7 +2389,6 @@ our-features-box .feature-box {
 .our-features-box .feature-box span {
 	display: inline-block;
 	font-size: 18px;
-	font-weight: normal;
 	padding: 10px 10px;
 	text-transform: none;
 	margin-right: 10px;
@@ -18448,3 +18446,4 @@ a.shop-now-btn {
 .cityLisingFilter, .cityLisingModel{
 	display: none;
 }
+

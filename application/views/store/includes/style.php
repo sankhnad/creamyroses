@@ -1,7 +1,7 @@
 <!-- Favicons Icon -->
 <link rel="shortcut icon" href="<?=$iURL_storeAssts?>images/favicon.ico" type="image/x-icon" />
 
-<link rel="stylesheet" href="<?=$iURL_storeAssts?>fontawesome-free-5.3.1/css/all.css" crossorigin="anonymous">
+<link rel="stylesheet" href="<?=$iURL_storeAssts?>fontawesome-free-5.3.1-web/css/all.css" crossorigin="anonymous">
 <link href="<?=$iURL_storeAssts?>js/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
 <!-- CSS Style -->
