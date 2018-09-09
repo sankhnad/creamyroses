@@ -67,4 +67,5 @@ $route['wishlist'] = 'profile/wishlistListing';
 $route['address-book'] = 'profile/address';
 $route['orders'] = 'profile/orders';
 $route['add-address'] = 'profile/addAddress';
+$route['add-new-address'] = 'checkout/addAddress';
 
