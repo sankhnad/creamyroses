@@ -940,8 +940,54 @@ $(document).on("submit", "#customerAddEdit", function (e) {
 	});
 });
 
-function checkPinCode(){
-	var pincode = $('#pincode').val();	
+function getProductDeliverySlot(pid){
+	var dataString = {
+		pid: pid,
+	};
+	$.ajax({
+		url: base_url + 'process/getProductDeliverySlot',
+		dataType: 'json',
+		type: "POST",
+		data: dataString,
+		beforeSend: function () {
+			showLoader();
+		},
+		success: function (obj) {
+			console.log(obj);
+			var shippingPrice = '';
+			var htmlTml = '<ul>';
+			$.each(obj, function (key, value){
+				
+				
+				if(value.price > 0){
+					shippingPrice = '<i class="fas fa-rupee-sign"></i> '+value.price;
+				}else{
+					shippingPrice = 'Free';
+				}
+				
+				htmlTml += '<li><label><input type="radio" name="slotType" value="'+value.option_id+'"> '+value.name+'('+shippingPrice+')</label></li>';
+			});
+			htmlTml += '</ul>';
+			$('.deliverySlotOption').html(htmlTml)
+		},
+		error: function () {
+			csrfError();
+		},
+	});
+}
+
+function checkPinCode(selfObj){
+	var pincode = $('#pincode').val();
+	$('.pinValiMsg, .pinValiSuccMsg').hide();	
+	if($.trim($(selfObj).text().toLowerCase()) == 'change'){
+		$('#pincode').val('');
+		$(selfObj).html('Check')
+		return false;
+	}
+	if(pincode.length < 6){
+		$('.pinValiMsg').html('Please enter 6 digit pincode').show();
+		return false;
+	}
 	var dataString = {
 		pincode: pincode,
 	};
@@ -956,8 +1002,13 @@ function checkPinCode(){
 			},
 			success: function (data) {
 				if(data.result == 'error'){
-					$('#errormsg').removeClass('pinValiMsg');
+					$('.pinValiMsg').html('We dont deliver in this area.').show();
 					$('#pincode').val('');
+					$(selfObj).html('Check');
+				}else{
+					$('.pinValiSuccMsg').show();
+					$('.pinValiSuccMsg m').html(pincode);
+					$(selfObj).html('Change');
 				}
 			},
 			error: function () {

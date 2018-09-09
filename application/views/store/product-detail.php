@@ -1,8 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head>
 <?php
 $cid = decode($this->session->userdata('CID'));
+$pid = $productDataObj[0]->product_id;
 $priceObj = getProductPrice($productDataObj[0]->product_id);
 
-$weightList = $shippingPrice = $shippingMethodList = '';
+$weightList = $shippingPrice = '';
 $price = $discount_price = $fristWeightID = 0;
 
 if($priceObj){
@@ -19,25 +23,12 @@ if($priceObj){
 		$selCount++;
 	}
 }
-
-if($delivarySlotObj){	
-	foreach ( $delivarySlotObj as $shipData ) {
-		if ( $shipData->price > 0 ) {
-			$shippingPrice = '<i class="fas fa-rupee-sign" aria-hidden="true"></i>&nbsp;' . $shipData->price;
-		} else {
-			$shippingPrice = 'Free';
-		}
-								
-		$shippingMethodList .= '<input type="radio" name="delivery_tiem[]" value="' . encode( $shipData->option_id ) . '">' . $shipData->name . '&nbsp;(' . $shippingPrice . ')<br/>';
-	}
-}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
 	<?php include('includes/commonfile.php');?>
+	
 	<title><?=$productDataObj[0]->name?> | Creamy Roses</title>
+	
 	<?php include("includes/style.php"); ?>
 </head>
 
@@ -147,23 +138,52 @@ if($delivarySlotObj){
 												</div>
 											</div>
 										</div>
-										<label class="js-upgrade-title"><input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> type="checkbox" /> Do you want to make it Eggless ? <!--Rs. 50--></label><br>
-										<label class="js-upgrade-title"><?=$shippingMethodList?>
-										<!--<input type="radio" /> Midnight Delivery (For Delivery between 10 PM - 12:30 AM)</label>-->
+										<label class="js-upgrade-title">
+											<input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> type="checkbox" /> Do you want to make it Eggless ? <!--Rs. 50-->
+										</label><br>
 										
+										<div class="clearfix"></div>
 										<div class="boxTopShap">
 											<div class="delivery_lbl_b">Delivery</div>
 											<div class="form-group delivery_bx_b">
 												<div class='input-group'>
-													<input type='text' class="form-control numericOnly" placeholder="Enter delivery pincode" id="pincode" required/>
-													<span class="input-group-addon btn-check" onClick="checkPinCode()">
-														Check
+													<input type='text' maxlength="6" value="<?=$this->session->userdata('PIN_CODE')?>" class="form-control integersOnly" placeholder="Enter delivery pincode" id="pincode" required/>
+													<span class="input-group-addon btn-check" onClick="checkPinCode(this)">
+														<?=$this->session->userdata('PIN_CODE') ? 'Change' : 'Check'?>
 													</span>
-													<span id="errormsg" class="pinValiMsg">Not a valid pincode  Please enter 6 digit pincode  We dont deliver in this area. </span>
+													<span class="pinValiMsg"> </span>
+													<span class="pinValiSuccMsg <?=$this->session->userdata('PIN_CODE') ? 'show_now_inline' : ''?>">Delivery Location PIN Code:  <m><?=$this->session->userdata('PIN_CODE')?></m>  </span>
 												</div>
 											</div>
+											<div class="clearfix"></div>
+										</div>										
+										<div class="clearfix"></div>
+										<div class="seprator"></div>
+										<div class="msgOnCakOp">
+											<label>Message on Cake:</label>
+											<input type="text" class="form-control" />
 										</div>
 										<div class="clearfix"></div>
+										<div class=""><br>
+											<label>Select Date of Delivery</label>
+											<div class="input-group col-md-4 date dateDelivryInp">
+												<input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+											</div>
+										</div>
+										<div class="deliverySlotOption"></div>
+										
+										<div class=""><br>
+											<label>Select Time of Delivery</label>
+											<div class="input-group col-md-4">
+												<select class="selectpicker">
+													<option>10:00 AM - 11:00 AM</option>
+													<option>11:00 AM - 12:00 PM</option>
+													<option>12:00 PM - 01:00 PM</option>
+												</select>
+											</div>
+										</div>
+										
+										
 										<div class="seprator"></div>
 									</div>
 									<div class="clearfix"></div>
@@ -370,7 +390,21 @@ if($delivarySlotObj){
 	<?php include("includes/footer.php"); ?>
 	<?php include("includes/script.php"); ?>
 	<script>
-		getPriceByWeight(<?=$fristWeightID?>,this)
+		getPriceByWeight(<?=$fristWeightID?>,this);
+		function initDateDelivry(){
+			var date = new Date();
+				date.setDate(date.getDate()-0);
+			$('.dateDelivryInp').datepicker({
+				format: "dd/mm/yyyy",
+				todayHighlight: true,
+				todayBtn: "linked",
+				autoclose: true,
+				startDate: date
+			}).on('changeDate', function(e) {
+				getProductDeliverySlot(<?=$pid?>);
+			});
+		}
+		initDateDelivry()
 	</script>
 	<script type="text/javascript" src="<?=$iURL_storeAssts?>js/cloud-zoom.js"></script>
 </body>

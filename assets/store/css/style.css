@@ -18101,12 +18101,16 @@ a.shop-now-btn {
     background: rgba(0, 0, 0, 0) url("../images/error.png") no-repeat scroll 99% 3px / 20px auto;
     border: 1px solid #eb5151;
 }
-.pinValiMsg{
+.pinValiMsg, .pinValiSuccMsg{
 	color: #a94442;
 	position: absolute;
-	top: 100%;
-	left: 0;
+	top: 25%;
+	left: 105%;
 	display: none;
+	width: 100%;
+}
+.pinValiSuccMsg{
+	color: #28a745;
 }
 .mt15{
 	margin-top: 15px !important;
@@ -18470,6 +18474,21 @@ a.shop-now-btn {
 .before_discount {
   text-decoration: line-through;
 }
-.pinValiMsg{
-	
+.msgOnCakOp{
+	margin: 5px 0;
+}
+.msgOnCakOp label{
+    font-size: 13px;
+}
+
+.show_now_block{
+	display: block;
+}
+.show_now_inline{
+	display: inline-block;
+}
+.deliverySlotOption ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
 }

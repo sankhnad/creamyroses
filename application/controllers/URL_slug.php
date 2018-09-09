@@ -108,8 +108,6 @@ class URL_slug extends CI_Controller {
 				
 				$data['imageObj'] = $this->common_model->getAll( '*', 'product_images', array('product_id' => $productDataObj[0]->product_id));
 				
-				$data['delivarySlotObj'] = $this->manual_model->getProductDeliverySlot(array('b.*'), $slotWhere);
-				
 				if(!$categoryObj){
 					$data['categoryObj'] = $this->common_model->getAll( '*', 'category', array('category_id' => $productDataObj[0]->category_id, 'status'=>'1', 'isDeleted'=>'1'));
 				}
