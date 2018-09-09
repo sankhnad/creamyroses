@@ -747,27 +747,35 @@ function getPriceByWeight(weightId,selfObj){
 		beforeSend: function () {
 			showLoader();
 		},
-		success: function (data) {
-			var obj = data.result;
-			var price;
-			var discountVal;
-			var discountType;
-			var discount_price = data.discountPrice;
+		success: function (obj) {
+			var finalPrice, pSymbol, rSymbol, discountedPrice = '';
+			finalPrice = pSymbol = rSymbol = '';
 			
-			$.each(obj, function (key, value) {
-					price		 = value.product_price;
-					discountVal	 = value.discount;
-					discountType = value.discount_type;
-
-			});
+			var price		 = obj[0].product_price;
+			var discountVal	 = obj[0].discount;
+			var discountType = obj[0].discount_type;
+			var quantity 	 = obj[0].quantity;
+			var quantity_type= obj[0].quantity_type;			
 			
-			$('#normalPrice').text(price);
-			if(discount_price > 0){
-				//$(selfObj).addClass('active');
-				 $(selfObj).addClass('active').siblings().removeClass('active');
-				$('#discount_price').text(discount_price);
+			if(discountType == 'F'){
+				finalPrice = price - discountVal;
+				rSymbol = '<i class="fas fa-rupee-sign"></i>';
+			}else if(discountType == 'P'){
+				finalPrice = price - (price*discountVal/100);
+				pSymbol = '%';				
+							
 			}
+			$('.before_discount').html(price);	
+			$('.final_price').html(finalPrice.toFixed(2));
+			$('.discount_type m').html(rSymbol+' '+discountVal+''+pSymbol);
+			$(selfObj).addClass('active').siblings().removeClass('active');
 			
+			if(discountVal){
+				$('.js-price1-discount, .js-discount-type').css('display','inline-block');
+			}else{
+				finalPrice = discountVal;
+				$('.js-price1-discount, .js-discount-type').hide();
+			}
 			
 		},
 		error: function () {

@@ -4,8 +4,7 @@ class Process extends CI_Controller {
 	public
 	function __construct() {
 		parent::__construct();
-	}
-	
+	}	
 	
 	public function getPrice(){
 		if(!$this->input->is_ajax_request()){
@@ -13,11 +12,8 @@ class Process extends CI_Controller {
 		}
 		$id 			= $this->input->post('id');
 		$priceObj 		= $this->common_model->getAll( '*', 'product_price', array('id' => $id));
-		$discount_price	= getDiscount($priceObj[0]->discount_type, $priceObj[0]->product_price, $priceObj[0]->discount);
-
-		$data['discount_price'] = $discount_price;
 	
-		echo json_encode(array('result'=>$priceObj,'discountPrice'=>$discount_price));
+		echo json_encode($priceObj);
 	}
 
 	public function getPincode(){
@@ -35,5 +31,4 @@ class Process extends CI_Controller {
 	
 		echo json_encode(array('result'=>$result));
 	}
-
 }

@@ -1,5 +1,6 @@
 <!-- JavaScript --> 
 <script src="<?=$iURL_storeAssts?>js/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="<?=$iURL_storeAssts?>js/bootstrap-datepicker.min.js"></script>
 <script src="<?=$iURL_storeAssts?>js/validate.min.js"></script>
 
 <script src="<?=$iURL_storeAssts?>js/wow.min.js"></script>

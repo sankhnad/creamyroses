@@ -18447,3 +18447,29 @@ a.shop-now-btn {
 	display: none;
 }
 
+.js-price1-discount{
+	font-size: 15px;
+	font-weight: normal;
+	color: #999;
+	margin: 0 3px 0 6px;
+	display: inline-block;
+}
+.js-discount-type {
+  display: inline-block;
+}
+.js-discount-type .discount_type {
+  background-color: #4caf50;
+  border-radius: 30px;
+  color: #fff;
+  display: block;
+  line-height: 14px;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+.before_discount {
+  text-decoration: line-through;
+}
+.pinValiMsg{
+	
+}

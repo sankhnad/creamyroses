@@ -528,22 +528,14 @@ if(! function_exists('getProductPrice')){
 }
 
 if(! function_exists('getDiscount')){
-
     function getDiscount($type, $prdctAmnt, $discountVal) {
-
 		$totalDiscount = 0;
 		if($type == 'F'){
 			$totalDiscount = $prdctAmnt - $discountVal;
 		}else if($type == 'P'){
 			$totalDiscount = $prdctAmnt - ($prdctAmnt*$discountVal/100);
 		}
-
 		return $totalDiscount;
-
 	}
-
 }
-
-
-
 ?>

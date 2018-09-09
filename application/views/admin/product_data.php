@@ -160,13 +160,13 @@ if(count($slctPrice) > 0){
 															<span class="help-block slugErr"> This URL slug is not available </span>
 														</div>
 													</div>
+													
 													<div class="col-md-8">
 														<div class="form-group tbltagSnC">
 															<label class="required">Product Tag </label><br>
 															<input name="tags" type="text" class="form-control" data-role="tagsinput" value="<?=$tags?>" />
 														</div>
 													</div>
-													
 													
 													<div class="col-md-4">
 														<div class="form-group">

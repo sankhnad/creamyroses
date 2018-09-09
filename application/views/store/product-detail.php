@@ -3,30 +3,24 @@ $cid = decode($this->session->userdata('CID'));
 $priceObj = getProductPrice($productDataObj[0]->product_id);
 
 $weightList = $shippingPrice = $shippingMethodList = '';
+$price = $discount_price = $fristWeightID = 0;
 
 if($priceObj){
 	$price = $priceObj[0]->product_price;
-	$discount_price = getDiscount( $priceObj[ 0 ]->discount_type, $priceObj[ 0 ]->product_price, $priceObj[ 0 ]->discount );
-
-
-	
+	$discount_price = getDiscount( $priceObj[ 0 ]->discount_type, $priceObj[ 0 ]->product_price, $priceObj[ 0 ]->discount );	
 	$selCount = 1;
-	//echo '<pre>';print_r($priceObj);die;
 	foreach ( $priceObj as $priceData ) {
 		if ($selCount == 1){
 			$weightList .= '<li class="active" onClick="getPriceByWeight('.$priceData->id.',this)">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</li>';
+			$fristWeightID = $priceData->id;
 		}else{
 			$weightList .= '<li onClick="getPriceByWeight('.$priceData->id.',this)">' . $priceData->quantity . '&nbsp;' . $priceData->quantity_type . '</li>';
 		}
 		$selCount++;
 	}
-}else{
-	$price = 0;
-	$discount_price = 0;
 }
 
-if($delivarySlotObj){
-	
+if($delivarySlotObj){	
 	foreach ( $delivarySlotObj as $shipData ) {
 		if ( $shipData->price > 0 ) {
 			$shippingPrice = '<i class="fas fa-rupee-sign" aria-hidden="true"></i>&nbsp;' . $shipData->price;
@@ -36,9 +30,6 @@ if($delivarySlotObj){
 								
 		$shippingMethodList .= '<input type="radio" name="delivery_tiem[]" value="' . encode( $shipData->option_id ) . '">' . $shipData->name . '&nbsp;(' . $shippingPrice . ')<br/>';
 	}
-} else {
-	$price = 0;
-	$discount_price = 0;
 }
 ?>
 <!DOCTYPE html>
@@ -100,7 +91,8 @@ if($delivarySlotObj){
 											<li>
 												<a onClick="addToWishList(this, '<?=$productDataObj[0]->product_id?>')" href="javascript:;">
 													<?php 
-														$wishClas = 'far'; 
+														$wishClas = 'far';
+														$wishLbl = 'Add';
 												   		if($cid){
 															$wishListData = getProductWishList($productDataObj[0]->product_id, $cid);
 															$wishClas =  $wishListData ? 'fas' : 'far';
@@ -126,12 +118,23 @@ if($delivarySlotObj){
 										<div class="seprator"></div>
 										<div class="product-contain">
 											<p>Quick Overview</p><br>
-											<?=trimData($productDataObj[0]->description, 160, true)?>
+											<?=trimData($productDataObj[0]->description, 350, true)?>
+											<?=strlen($productDataObj[0]->description) > 350 ? ' <a class="readmoreAncher" href="#description_tab">read more</a>' : ''?>
 										</div>
 										<div class="seprator"></div>
 										<div class="product-price-area">
 											<div class="product-price-details">
-												<p class="js-price1"> <span>Rs.</span> <span id="discount_price"><?=number_format($price,2)?></span></p>
+												<p class="js-price1">
+													<span><i class="fas fa-rupee-sign"></i></span>
+													<span class="final_price"><?=number_format($price,2)?></span>
+												</p>
+												<p class="js-price1-discount">
+													<span><i class="fas fa-rupee-sign"></i></span>
+													<span class="before_discount">wait</span>
+												</p>
+												<p class="js-discount-type">
+													<span class="discount_type"><m><i class="fas fa-rupee-sign"></i> wait</m> OFF</span>
+												</p>
 											</div>
 											<div class="product-addon-wrap">
 												<div class="js-addon-desc">
@@ -162,15 +165,12 @@ if($delivarySlotObj){
 										</div>
 										<div class="clearfix"></div>
 										<div class="seprator"></div>
-									
 									</div>
 									<div class="clearfix"></div>
 									<div class="product-next-prev"> 
 										<a class="product-next" href="#"><span></span></a> 
 										<a class="product-prev" href="#"><span></span></a> 
-									</div>
-									
-									
+									</div>									
 								</div>
 							</div>
 
@@ -369,6 +369,9 @@ if($delivarySlotObj){
 
 	<?php include("includes/footer.php"); ?>
 	<?php include("includes/script.php"); ?>
+	<script>
+		getPriceByWeight(<?=$fristWeightID?>,this)
+	</script>
 	<script type="text/javascript" src="<?=$iURL_storeAssts?>js/cloud-zoom.js"></script>
 </body>
 </html>
