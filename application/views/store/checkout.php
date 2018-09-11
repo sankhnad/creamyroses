@@ -356,6 +356,9 @@ if ( $defaultAddress ) {
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 									<div class="manage_add"><a href="<?=base_url()?>add-address">Add Addresses</a> </div>
+									<div class="row">
+									
+									
 									<?php foreach($addressList as $addressData){?>
 												<div class="col-sm-4">
 													<div class="boxAddressDis <?=$addressData->isDefault == '1' ? 'defaultAdsULI':'' ?>">
@@ -410,6 +413,9 @@ if ( $defaultAddress ) {
 													</div>
 												</div>
 									<?php } ?>
+									
+									
+									</div>
 									</div>
 
 			</div>
