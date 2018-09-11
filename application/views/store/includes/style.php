@@ -8,7 +8,6 @@
 <!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="<?=$iURL_storeAssts?>bootstrap-3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?=$iURL_storeAssts?>css/bootstrap-datepicker3.standalone.css">
-<script src="js/"></script>
 <link rel="stylesheet" href="<?=$iURL_adminAssts?>css/bootstrap-select.min.css" />
 <!-- <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" media="all"> -->
 <link rel="stylesheet" href="<?=$iURL_storeAssts?>css/simple-line-icons.css" media="all">

@@ -1,5 +1,53 @@
-function addToWishList(selfObj, pid, type){
-	
+function addToCart(selfObj, type){
+	if(!$('.pinValiSuccMsg m').html()){
+		var msg = 'Please check delivery PIN code';
+	}else if(!$('.price_id').val()){
+		var msg = 'Please select cake weight';
+	}else if(!$('.delivery_date').val()){
+		var msg = 'Please select delivery date';
+	}else if(!$('select.delivery_time_slot').val()){
+		var msg = 'please select delivery time';
+	}else if(!$('.pid').val()){
+		var msg = 'Please refresh your page';
+	}
+	if(msg){
+		swal('Oops!!', msg, 'error');
+		return false;
+	}
+	var dataString = {
+		pid: $('.pid').val(),
+		delivary_option_id : $('input[name="slotType"]').val(),
+		pin_code : $('.pin_code').val(),
+		is_eggless : $('.isEggless').is(':checked') ? '1' : '0',
+		price_id : $('.price_id').val(),
+		cake_message : $('.cake_message').val(),
+		delivery_date : $('.delivery_date').val(),
+		delivery_time_slot : $('select.delivery_time_slot').val(),
+	};
+	$.ajax({
+		url: base_url + 'cart/addToCart',
+		dataType: 'json',
+		type: 'POST',
+		data: dataString,
+		beforeSend: function () {
+			$(selfObj).html('<i class="fas fa-circle-notch fa-spin"></i> Please Wait..').addClass('disabled');
+		},
+		success: function (){
+			if(type == 'buy'){
+				gotoPage(base_url+'cart');
+			}else{
+				$(selfObj).html('Add more to cart').removeClass('disabled');
+				scrollToTop('#search_mini_form');
+			}
+		},
+		error: function () {
+			csrfError();
+			$(selfObj).removeClass('disabled');
+		}
+	});
+}
+
+function addToWishList(selfObj, pid, type){	
 	if (type == 'delete') {
 		swal({
 			title: "Are you sure!!",
@@ -10,25 +58,24 @@ function addToWishList(selfObj, pid, type){
 			confirmButtonText: "Yes",
 			cancelButtonText: "No"
 		}).then(function () {
-				var dataString = {
-					pid: pid,
-				};
-				$.ajax({
-					url: base_url + 'profile/addToWishList',
-					dataType: 'json',
-					type: 'POST',
-					data: dataString,
-					beforeSend: function () {
-						showLoader();
-					},
-					success: function (obj){
-						timerAlert('Successful!!', 'Record has been successfully deleted', 'reload');
-					},
-					error: function () {
-						csrfError();
-					}
-				});
-
+			var dataString = {
+				pid: pid,
+			};
+			$.ajax({
+				url: base_url + 'profile/addToWishList',
+				dataType: 'json',
+				type: 'POST',
+				data: dataString,
+				beforeSend: function () {
+					showLoader();
+				},
+				success: function (obj){
+					timerAlert('Successful!!', 'Record has been successfully deleted', 'reload');
+				},
+				error: function () {
+					csrfError();
+				}
+			});
 		});
 	} else {
 		var dataString = {
@@ -762,8 +809,7 @@ function getPriceByWeight(weightId,selfObj){
 				rSymbol = '<i class="fas fa-rupee-sign"></i>';
 			}else if(discountType == 'P'){
 				finalPrice = price - (price*discountVal/100);
-				pSymbol = '%';				
-							
+				pSymbol = '%';
 			}
 			$('.before_discount').html(price);	
 			$('.final_price').html(finalPrice.toFixed(2));
@@ -776,7 +822,7 @@ function getPriceByWeight(weightId,selfObj){
 				finalPrice = discountVal;
 				$('.js-price1-discount, .js-discount-type').hide();
 			}
-			
+			$('.price_id').val(weightId);
 		},
 		error: function () {
 			csrfError();
@@ -957,8 +1003,6 @@ function getProductDeliverySlot(pid){
 			var shippingPrice = '';
 			var htmlTml = '<ul>';
 			$.each(obj, function (key, value){
-				
-				
 				if(value.price > 0){
 					shippingPrice = '<i class="fas fa-rupee-sign"></i> '+value.price;
 				}else{
@@ -1062,3 +1106,10 @@ function selectAddress(aid, cid) {
 	});
 }
 
+function scrollToTop(area, target){
+	var scrolTo = area ? $(area).offset().top : 0;
+	var target = target ? target : 'html, body';
+	$(target).animate({
+		scrollTop: scrolTo
+	}, 1000);
+}

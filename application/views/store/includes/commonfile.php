@@ -3,7 +3,12 @@ include('paths.php');
 $adminDATA  = unserialize(adminDATA);
 $cityListsObj = getCitiesList();
 
-$CID = $this->session->userdata( 'CID');
+$CID = $this->session->userdata('CID');
+$SESSION_ID = $this->session->userdata('SESSION_ID');
+if(!$SESSION_ID){
+	$SESSION_ID = generateRandom(15);
+	$this->session->set_userdata('SESSION_ID', $SESSION_ID);
+}
 
 if(isset($CID)){
 	$id = decode($CID);

@@ -538,4 +538,32 @@ if(! function_exists('getDiscount')){
 		return $totalDiscount;
 	}
 }
+
+if(! function_exists('getDiscountFormat')){
+	function getDiscountFormat($obj){		
+		$finalPrice		= '';
+		$price		 	= $obj['product_price'];
+		$discountVal	= $obj['discount'];
+		$discountType 	= $obj['discount_type'];
+		$quantity 	 	= $obj['quantity'];
+		$quantity_type	= $obj['quantity_type'];			
+
+		if($discountType == 'F'){
+			$finalPrice = $price - $discountVal;
+		}else if($discountType == 'P'){
+			$finalPrice = $price - ($price*$discountVal/100);
+		}
+		
+		if(!$discountVal){
+			$finalPrice = $discountVal;
+		}
+		return array(
+			'oreginal_price'=>$price,
+			'final_price' => $finalPrice,
+			'discount_value' => $discountVal,
+			'quantity' => $quantity,
+			'quantity_type' => $quantity_type,
+		);
+	}
+}
 ?>

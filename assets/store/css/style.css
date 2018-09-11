@@ -1438,7 +1438,6 @@ ul.currencies_list li a:hover {
 	display: inline-block;
 	/* line-height: 40px; */
 	text-align: center;
-	font-weight: normal;
 	margin-right: 11px;
 	background: #80daa5;
 	padding: 15px 0px;
@@ -1508,7 +1507,6 @@ ul.currencies_list li a:hover {
 	display: inline-block;
 	font-family: FontAwesome;
 	font-size: 14px;
-	font-weight: normal;
 	margin-right: 10px;
 	text-align: center;
 }
@@ -6887,7 +6885,6 @@ figure.effect p {
 	font-family: FontAwesome;
 	font-size: 12px;
 	padding-right: 5px;
-	font-weight: normal;
 }
 
 .button-compare:before {
@@ -6895,7 +6892,6 @@ figure.effect p {
 	font-family: FontAwesome;
 	font-size: 12px;
 	padding-right: 5px;
-	font-weight: normal;
 }
 
 .button-clear:before {
@@ -6903,7 +6899,6 @@ figure.effect p {
 	font-family: FontAwesome;
 	font-size: 12px;
 	padding-right: 5px;
-	font-weight: normal;
 }
 
 .button-subscribe:before {
@@ -6911,7 +6906,6 @@ figure.effect p {
 	font-family: FontAwesome;
 	font-size: 12px;
 	padding-right: 5px;
-	font-weight: normal;
 }
 
 .button-vote:before {
@@ -6919,7 +6913,6 @@ figure.effect p {
 	font-family: FontAwesome;
 	font-size: 12px;
 	padding-right: 5px;
-	font-weight: normal;
 }
 
 .block {
@@ -8849,14 +8842,12 @@ ol#compare-items li.last {
 
 .product-view .product-shop .add-to-links .link-wishlist {
 	color: #f37869;
-	line-height: normal;
 	font-weight: normal;
 	vertical-align: top;
 	display: block;
 	height: 40px;
 	border: 0px #ececec solid;
 	line-height: 36px;
-	vertical-align: top;
 	text-align: center;
 	transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s;
 }
@@ -11133,38 +11124,14 @@ input#coupon_code {
 	text-align: center;
 }
 
-#shopping-cart-table a.remove-item {
-	background-color: #fff;
-	background-image: none;
-	color: #333;
-	cursor: pointer;
-	padding: 0px;
-	border-radius: 0px;
-	cursor: pointer;
-	text-decoration: none;
-	float: left;
-	transition: all 0.3s linear;
-	border: none;
-}
-
-#shopping-cart-table a.remove-item span {
-	display: none
-}
-
-#shopping-cart-table a.remove-item:before {
-	content: "\f014";
+a.remove-item:before {
+	content: "\f2ed";
 	font-family: FontAwesome;
 	font-size: 14px;
-	font-weight: normal;
+	font-weight: 900;
 }
-
-#shopping-cart-table a.remove-item:hover {
-	padding: 0px;
-	color: #f23534;
-}
-
-#shopping-cart-table .remove-item span span {
-	display: none;
+a.remove-item:hover:before{
+	color: red;
 }
 
 #shopping-cart-table dl {
@@ -11250,7 +11217,6 @@ button.button.btn-proceed-checkout:before {
 	font-family: FontAwesome;
 	font-size: 16px;
 	padding-right: 5px;
-	font-weight: normal;
 }
 
 button.button.btn-proceed-checkout span {
@@ -12682,11 +12648,6 @@ a.button.wishlist {
 	background: #f8f8f8
 }
 
-.data-table input,
-data-table select,
-data-table textarea {
-	margin: 3px;
-}
 
 .data-table p {
 	margin: 10px 0;
@@ -12721,9 +12682,15 @@ data-table textarea {
 }
 
 .cart-table tbody th,
-.cart-table tbody td {
+.cart-table tbody td{
 	border-bottom: 1px solid #eaeaea;
 	vertical-align: middle;
+}
+.data-table.cart-table tr {
+    border: 1px solid #ccc;
+}
+.cart-table tbody > tr:nth-of-type(2n+1) {
+    background-color: #f9f9f9;
 }
 
 .cart-table tbody th h2,
@@ -18491,4 +18458,30 @@ a.shop-now-btn {
     list-style: none;
     padding: 0;
     margin-top: 15px;
+}
+.discntPriceTol{
+	position: relative;
+}
+
+.discntPriceTol::before {
+  color: #000;
+  content: "-";
+  position: absolute;
+  right: 109%;
+  top: 0;
+}
+.ml1{
+	margin-left: 1px !important;
+}
+.ml2{
+	margin-left: 2px !important;
+}
+.ml3{
+	margin-left: 3px !important;
+}
+.ml4{
+	margin-left: 4px !important;
+}
+.ml5{
+	margin-left: 5px !important;
 }

@@ -48,6 +48,11 @@ class Login extends CI_Controller {
 				if($result[0]->status == '1'){
 					$id = encode($result[0]->id);
 					$this->session->set_userdata( 'CID', $id);
+					$cid = $this->session->userdata('CID');
+					$SESSION_ID = $this->session->userdata('SESSION_ID');
+					
+					$this->common_model->updateData('order_details', array('session_id'=> $SESSION_ID), array('cid'=>$result[0]->id));
+					
 					if($remember){
 						set_cookie('CID',$id,3600*9999); 
 						get_cookie('CID'); 

@@ -162,10 +162,10 @@ span {
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     background: #ffffff;
     border-radius: 3px 3px 0 0;
-    color: #3ab54a;
+    color: #3ab54a !important;
     font-weight: 600;
     padding: 15px 15px 12px;
-    border-bottom: 2px solid #3ab54a;
+    border-bottom: 1px solid #3ab54a !important;
 }
 .nav-tabs.product-tabs > li > a {
     color: #777;

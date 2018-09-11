@@ -120,7 +120,7 @@ class Manual_model extends CI_Model {
 		$this->db->where($where);
 		
 		if($groupBy){
-			//$this->db->group_by($groupBy);
+			$this->db->group_by($groupBy);
 		}
 		
 		$query = $this->db->get();
@@ -170,5 +170,18 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
-
+	
+	function updateCartQty($id='',$type='+', $quantity = 1){
+		if(!$id){
+			return false;
+		}
+		$cidData = '';
+		$cid = $this->session->userdata('CID');
+		if($type == '+'){
+			$sql = 'UPDATE `order_details` SET `quantity` = `quantity`+'.$quantity.' WHERE `id` = "'.$id.'"';
+		}else{
+			$sql = 'UPDATE `order_details` SET `quantity` = `quantity`-'.$quantity.' WHERE `id` = "'.$id.'"';
+		}
+		$query = $this->db->query($sql);
+	}
 }

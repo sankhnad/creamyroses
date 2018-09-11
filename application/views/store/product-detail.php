@@ -74,8 +74,9 @@ if($priceObj){
 										<?php } ?>
 									</div>
 									<div class="boxAddToCartB">
-										<button class="js-cart-button" type="button">Add to Cart</button>
-										<button class="js-cart-button js-cart-button_buy" type="button">Buy Now</button>
+										<input type="hidden" class="pid" value="<?=$pid?>" />
+										<button class="js-cart-button" onClick="addToCart(this)" type="button">Add to Cart</button>
+										<button class="js-cart-button js-cart-button_buy" onClick="addToCart(this, 'buy')" type="button">Buy Now</button>
 									</div>
 									<div class="boxEmailAddWish">
 										<ul>
@@ -97,7 +98,6 @@ if($priceObj){
 												<a class="email-friend" href="mailto:info@creamyroses.com?subject=Creamyroses&body=Have a look to this URL to get delicious cake - <?='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>"><span>Email to a Friend</span></a>
 											</li>
 										</ul>
-										
 									</div>
 								</div>
 
@@ -131,6 +131,7 @@ if($priceObj){
 												<div class="js-addon-desc">
 													<div class="item-list">
 														<h3>Select Weight</h3>
+														<input type="hidden" class="price_id" />
 														<ul class="cake-attribute">
 															<?=$weightList?>
 														</ul>
@@ -139,7 +140,7 @@ if($priceObj){
 											</div>
 										</div>
 										<label class="js-upgrade-title">
-											<input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> type="checkbox" /> Do you want to make it Eggless ? <!--Rs. 50-->
+											<input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> class="isEggless" type="checkbox" /> Do you want to make it Eggless ? <!--Rs. 50-->
 										</label><br>
 										
 										<div class="clearfix"></div>
@@ -147,7 +148,7 @@ if($priceObj){
 											<div class="delivery_lbl_b">Delivery</div>
 											<div class="form-group delivery_bx_b">
 												<div class='input-group'>
-													<input type='text' maxlength="6" value="<?=$this->session->userdata('PIN_CODE')?>" class="form-control integersOnly" placeholder="Enter delivery pincode" id="pincode" required/>
+													<input type='text' maxlength="6" value="<?=$this->session->userdata('PIN_CODE')?>" class="form-control pin_code integersOnly" placeholder="Enter delivery pincode" id="pincode" required/>
 													<span class="input-group-addon btn-check" onClick="checkPinCode(this)">
 														<?=$this->session->userdata('PIN_CODE') ? 'Change' : 'Check'?>
 													</span>
@@ -161,28 +162,27 @@ if($priceObj){
 										<div class="seprator"></div>
 										<div class="msgOnCakOp">
 											<label>Message on Cake:</label>
-											<input type="text" class="form-control" />
+											<input type="text" class="form-control cake_message" />
 										</div>
 										<div class="clearfix"></div>
 										<div class=""><br>
 											<label>Select Date of Delivery</label>
 											<div class="input-group col-md-4 date dateDelivryInp">
-												<input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+												<input type="text" class="form-control delivery_date"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 											</div>
 										</div>
 										<div class="deliverySlotOption"></div>
 										
-										<div class=""><br>
+										<div><br>
 											<label>Select Time of Delivery</label>
 											<div class="input-group col-md-4">
-												<select class="selectpicker">
+												<select class="selectpicker delivery_time_slot">
 													<option>10:00 AM - 11:00 AM</option>
 													<option>11:00 AM - 12:00 PM</option>
 													<option>12:00 PM - 01:00 PM</option>
 												</select>
 											</div>
 										</div>
-										
 										
 										<div class="seprator"></div>
 									</div>

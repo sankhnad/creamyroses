@@ -408,7 +408,7 @@ class Products extends CI_Controller {
 		$iCount = $iCount[0]->totl;
 		
 		if($iCount > 0 && $type == 'prd'){
-			$iTotalAry = $this->manual_model->findDubliSlug($slug,'product');
+			$iTotalAry = $this->manual_model->findDubliSlug('product', $slug);
 			$iTotal = $iTotalAry[0]->iTotal;			
 			$slug = $slug.($iTotal);
 		}
