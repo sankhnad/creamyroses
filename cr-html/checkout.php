@@ -110,6 +110,31 @@
                                     </div>
                                     <div id="collapseTwo" class="panel-collapse collapse">
                                         <div class="panel-body">
+
+                                            <table class="table table-striped" style="font-weight: bold;">
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Rupam Rathaur<br /> 8218405963</td>
+                                                    <td>Harinagar, Jaitpur, Badarpur, AGRA 110044 (Uttar Pradesh)</td>
+                                                    <td><a href="#" class="btn btn-success btn-sm">use this address</a></td>                          
+                                                    <td style="width: 100px;"><a href="#" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a> <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-times-circle"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Rupam Rathaur<br /> 8218405963</td>
+                                                    <td>Harinagar, Jaitpur, Badarpur, AGRA 110044 (Uttar Pradesh)</td>
+                                                    <td><a href="#" class="btn btn-success btn-sm">use this address</a></td>                           
+                                                    <td style="width: 100px;"><a href="#" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a> <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-times-circle"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Rupam Rathaur<br /> 8218405963</td>
+                                                    <td>Harinagar, Jaitpur, Badarpur, AGRA 110044 (Uttar Pradesh)</td>
+                                                    <td><a href="#" class="btn btn-success btn-sm">use this address</a></td>                           
+                                                    <td style="width: 100px;"><a href="#" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a> <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-times-circle"></i></a></td>
+                                                </tr>
+
+                                            </table>
                                             <b>Help us keep your account safe and secure, please verify your billing
                                                 information.</b>
                                             <br/><br/>
@@ -266,92 +291,100 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <span class='payment-errors'></span>
-                                            <fieldset>
-                                                <legend>What method would you like to pay with today?</legend>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label" for="card-holder-name">Name on
-                                                        Card</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" stripe-data="name"
-                                                               id="name-on-card" placeholder="Card Holder's Name">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    
+<table class="table" border="1">
+    <thead>
+        <tr class="active">
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Products</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://d24pyncn3hxs0c.cloudfront.net/sites/default/files/styles/uc_cart/public/love-quotient-9988317gf-A.jpg?itok=v4Jd1Rqm"></td>
+            <td>1</td>
+            <td>Love Quotient<br/><small><a href="#" >Uploaded Image</a></small></td>
+            <td>Rs.499</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td colspan="5"> &nbsp; </td>
+            <td colspan="1" align="right">Subtotal:</td>
+            <td align="right">Rs.499</td>
+        </tr>
+        <tr>
+            <td colspan="5"> &nbsp; </td>
+            <td colspan="1" align="right">Order total:</td>
+            <td align="right">Rs.499</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="coupon-form-wrap">
+    <div class="js-coupon-container" style="display: block;">
+        <div class="js-coupon-header">Apply Coupon Code Here</div>
+        <div class="content">
+            <div class="form-item form-type-textfield form-item-code"> <input placeholder="Enter coupon code" type="text" id="edit-code" name="code" value="" size="15" maxlength="128" class="form-text"></div>
+            <input type="submit" id="edit-apply" name="uc-coupon-apply" value="Apply" class="form-submit ajax-processed">
+        </div>
+    </div>
+</div>
+
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">Payment Method</div>
+                                                        <div class="panel-body">
+
+                                                           <div class="payment-top">
+                                                              <div class="payment-method">
+                                                                 <div class="form-item form-type-radios form-item-panes-payment-payment-method form-disabled">
+                                                                    
+                                                                    <div class="form-radios" id="edit-panes-payment-payment-method--2">
+                                                                       <div class="form-item form-type-radio form-item-panes-payment-payment-method form-disabled">
+                                                                          <div class="payment-radios"><input type="radio"  name="optradio" class="form-radio ajax-processed" checked="checked" id="edit-panes-payment-payment-method-secureebs--2"><label class="option">Payment via <strong><font size="3" color="#666666">Debit Card</font></strong> or <strong><font size="3" color="#FF9900">Net Banking</font></strong> </label></div>
+
+                                                                          <div class="payment-radios"> <input type="radio"  name="optradio" class="form-radio ajax-processed" id="edit-panes-payment-payment-method-secureebs--3"> <label class="option">Payment via <strong><font size="3" color="#FF9900">Credit Card</font></strong> </label></div>
+
+                                                                          <div class="payment-radios"> <input type="radio"  name="optradio" class="form-radio ajax-processed" id="paypal-wps"> <label class="option">Payment via <img src="https://d598e6i8i1kkq.cloudfront.net/sites/all/themes/facd7/images/checkout/paypal.png"></label></div>
+
+                                                                          <div class="payment-radios"> <input type="radio"  name="optradio" class="form-radio ajax-processed" id="payumoney"> <label class="option">Payment via <img src="https://d598e6i8i1kkq.cloudfront.net/sites/all/themes/facd7/images/checkout/pay-u-money-logo.png" style="vertical-align: middle;"> </label></div>
+
+                                                                          <div class="payment-radios"> <input type="radio"  name="optradio" class="form-radio ajax-processed" id="mobikwik"><label class="option">Payment via MobiKwik </label></div>
+
+                                                                          <div class="payment-radios"> <input type="radio"  name="optradio" class="form-radio ajax-processed" id="paytm"><label for="paytm" class="option">Payment via <img src="https://d598e6i8i1kkq.cloudfront.net/sites/all/themes/facd7/images/checkout/paytm.png"> </label></div>
+                                                                       </div>
+                                                                    </div>
+                                                                 </div>
+                                                              </div>
+                                                           </div>
+                                                           <div class="payment-btm">
+                                                              <fieldset class="form-wrapper uc-cart-checkout-review-tandc" id="uc_ct-pane">
+                                                                 <div class="fieldset-wrapper">
+                                                                    <div class="form-item form-type-checkboxes form-item-panes-uc-ct-uc-tc-agree">
+                                                                       <label ><strong>Terms and Conditions <span class="form-required" >*</span></strong></label>
+                                                                       <div id="edit-panes-uc-ct-uc-tc-agree" class="form-checkboxes">
+                                                                          <div class="form-item form-type-checkbox form-item-panes-uc-ct-uc-tc-agree-uc-tc"> <input type="checkbox" id="edit-panes-uc-ct-uc-tc-agree-uc-tc" class="form-checkbox"> <label class="option" > <em>I agree with the <a class="viewTermAndCond" href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('midnight-container').style.display='block'">terms and conditions</a>.</em> </label><span class="error" style="color:#e9322d;float:left;font-size:13px;margin:6px 0 0;clear:both;display:none;">Please select terms and conditions.</span></div>
+                                                                       </div>
+                                                                    </div>
+                                                                 </div>
+                                                              </fieldset> 
+                                                              <div class="paymentbtn"> <input type="button" class="btn btn-success" id="uc-common-form" value="Make Payment"></div>
+                                                           </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label" for="card-number">Card
-                                                        Number</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" stripe-data="number"
-                                                               id="card-number" placeholder="Debit/Credit Card Number">
-                                                        <br/>
-                                                        <div><img class="pull-right"
-                                                                  src="https://s3.amazonaws.com/hiresnetwork/imgs/cc.png"
-                                                                  style="max-width: 250px; padding-bottom: 20px;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label" for="expiry-month">Expiration
-                                                            Date</label>
-                                                        <div class="col-sm-9">
-                                                            <div class="row">
-                                                                <div class="col-xs-3">
-                                                                    <select class="form-control col-sm-2"
-                                                                            data-stripe="exp-month" id="card-exp-month"
-                                                                            style="margin-left:5px;">
-                                                                        <option>Month</option>
-                                                                        <option value="01">Jan (01)</option>
-                                                                        <option value="02">Feb (02)</option>
-                                                                        <option value="03">Mar (03)</option>
-                                                                        <option value="04">Apr (04)</option>
-                                                                        <option value="05">May (05)</option>
-                                                                        <option value="06">June (06)</option>
-                                                                        <option value="07">July (07)</option>
-                                                                        <option value="08">Aug (08)</option>
-                                                                        <option value="09">Sep (09)</option>
-                                                                        <option value="10">Oct (10)</option>
-                                                                        <option value="11">Nov (11)</option>
-                                                                        <option value="12">Dec (12)</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-xs-3">
-                                                                    <select class="form-control" data-stripe="exp-year"
-                                                                            id="card-exp-year">
-                                                                        <option value="2016">2016</option>
-                                                                        <option value="2017">2017</option>
-                                                                        <option value="2018">2018</option>
-                                                                        <option value="2019">2019</option>
-                                                                        <option value="2020">2020</option>
-                                                                        <option value="2021">2021</option>
-                                                                        <option value="2022">2022</option>
-                                                                        <option value="2023">2023</option>
-                                                                        <option value="2024">2024</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label" for="cvv">Card CVC</label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" class="form-control" stripe-data="cvc"
-                                                                   id="card-cvc" placeholder="Security Code">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-offset-3 col-sm-9">
-                                                        </div>
-                                                    </div>
-                                            </fieldset>
-                                            <button type="submit" class="btn btn-success btn-lg" style="width:100%;">Pay
-                                                Now
-                                            </button>
-                                            <br/>
-                                            <div style="text-align: left;"><br/>
-                                                By submiting this order you are agreeing to our <a href="/legal/billing/">universal
-                                                    billing agreement</a>, and <a href="/legal/terms/">terms of service</a>.
-                                                If you have any questions about our products or services please contact us
-                                                before placing this order.
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -407,7 +440,38 @@
 </section>
 <!-- Main Container End --> 
  
+<style type="text/css">
+    table.table {
+        border-color: #a1a1 !important;
+    }
 
+.js-coupon-header {
+    font-size: 12px;
+}
+.coupon-form-wrap .form-type-textfield {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.coupon-form-wrap input.form-text {
+    width: 95%;
+    padding: 7px 0 7px 10px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+}
+.js-coupon-container input.form-submit {
+    background: #ccc;
+    border: none;
+    padding: 6px 15px 6px 15px;
+    color: #464646;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-left: -15px;
+}
+
+</style>
 
 <?php include("include/footer.php"); ?>
 

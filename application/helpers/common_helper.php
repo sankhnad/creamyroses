@@ -539,6 +539,7 @@ if(! function_exists('getDiscount')){
 	}
 }
 
+
 if(! function_exists('getDiscountFormat')){
 	function getDiscountFormat($obj){		
 		$finalPrice		= '';
@@ -564,6 +565,61 @@ if(! function_exists('getDiscountFormat')){
 			'quantity' => $quantity,
 			'quantity_type' => $quantity_type,
 		);
+	}
+}
+if(! function_exists('updateOrderStatus')){
+    function updateOrderStatus($oderId,$transactionId) {
+		$CI = & get_instance();
+		
+		$data['transaction_id'] = $transactionId;	
+		$id = $CI->common_model->updateData('orders', array('order_id'=>$oderId), $data);
+		
+	
+		$where['a.order_id'] = $oderId;	
+		$orderObj 		   = $CI->manual_model->getOrderDetails('a.*,b.fname,b.lname,b.email',$where);
+		$customer_email    = $orderObj[0]->email;
+		
+		$where1['a.order_id'] = $oderId;	
+		$orderDetailsObj	= $CI->manual_model->getOrderDetailsData('a.*,b.product_name', $where1);
+		
+		$where2['order_id'] = $oderId;	
+		$billingObj			= $CI->common_model->getAll('*', 'shipping', $where2);
+
+		
+		$CI->load->helper('url');
+		$CI->load->library('email');
+		$config['charset'] = 'iso-8859-1';
+		$config['wordwrap'] = TRUE;
+		$config['mailtype'] = 'html';
+		$CI->email->initialize($config);
+		$CI->email->from('info@jk', 'CR');
+		$CI->email->to($customer_email);
+		$CI->email->bcc('info@jk');
+		$CI->email->subject('Your order for Order Id '.$oderId.' is confirmed');	
+
+
+		$data['orderObj']	 	 = $orderObj;
+		$data['orderDetailsObj'] = $orderDetailsObj;
+		$data['billingObj'] 	 = $billingObj;
+		$data['payment_mode']= 'Online';
+		
+		$email = $CI->load->view("store/template/order_confirmation", $data,true);	
+		//echo '<pre>';print_r($email);die;
+		
+		$CI->email->message( $email );
+		$CI->email->send();				
+		
+		return $id;
+	}
+
+}
+
+if(! function_exists('getOrderDetails')){
+    function getOrderDetails($orderId) {
+		$CI = & get_instance();
+		$where['a.order_id'] = $orderId;	
+		$orderObj 		     = $CI->manual_model->getOrderDetailsData('a.*,b.product_name', $where);
+		return $orderObj;
 	}
 }
 ?>

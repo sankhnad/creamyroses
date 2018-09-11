@@ -104,6 +104,93 @@ class Checkout extends CI_Controller {
 		}
 		echo json_encode( array('aid' => encode($aid)) );
 	}
+	
+	function order(){
+			if($this->session->userdata('CID') != ''){
+				$CID = decode($this->session->userdata('CID'));
+			}
+			$cart = $this->cart->contents();
+			if($this->session->userdata('cid') != ''){
+				$coupon_id = $this->session->userdata('cid');
+			}
+			if($this->session->userdata('type') != ''){
+				$discount_type = $this->session->userdata('type');
+			}
+			if($this->session->userdata('discount') != ''){
+				$discount = $this->session->userdata('discount');
+			}
 
+
+			if(count($cart) > 0){
+				$post = $this->input->post();
+			
+				$orderAry = array(
+					'customer_id' 		=> $CID,
+					'price' 			=> $post['amount'],
+					'coupon_id' 		=> $coupon_id,
+					'discount_type' 	=> $discount_type,
+					'discount' 			=> $discount,
+					'created_on' 		=> date("Y-m-d H:i:s", time()),
+				);	
+			
+				$order_id = $this->common_model->saveData('orders', $orderAry);	
+			
+				if ($cart = $this->cart->contents()){
+					foreach ($cart as $item){
+						$order_detailAry [] = array(
+							'order_id' 			=> $order_id,
+							'product_id' 		=> $item['id'],
+							'unit_price' 		=> $item['price'],
+							'qty' 				=> $item['qty'],
+							'sub_total_price' 	=> $item['subtotal'],
+							'created_on' 		=>date("Y-m-d H:i:s", time())
+						);	
+					}
+					$this->common_model->bulkSaveData('oder_details', $order_detailAry);
+				}
+			
+				$billingAry = array(
+					'order_id'	 	=> $order_id,
+					'fname' 		=> $post['fname'],
+					'lname' 		=> $post['lname'],
+					'company_name' 	=> $post['company'],
+					'email' 		=> $post['email'],
+					'phone' 		=> $post['phone'],
+					'address' 		=> $post['address'],
+					'country' 		=> $post['country'],
+					'state' 		=> $post['state'],
+					'city' 			=> $post['city'],
+					'zip_code' 		=> $post['pincode'],
+					'created_on' 	=> date("Y-m-d H:i:s", time()),
+				);
+						
+				$billing_id = $this->common_model->saveData('shipping', $billingAry);	
+				
+			
+			
+				$data['transactionId'] = 1;
+				$data['order_id'] 	   = $order_id;
+				$data['p_list'] 	   = $p_list;
+				$data['pr_list'] 	   = $pr_list;
+				$data['pcategory_id']  = $pcategory_id;
+				$data['sc_list'] 	   = $subCategory;
+				$data['cart'] 	   	   = $cartData;
+			}else{
+			
+				$data['transactionId'] = '';
+			
+			}
+			$this->cart->destroy();
+			$this->session->unset_userdata('cid');
+			$this->session->unset_userdata('code');
+			$this->session->unset_userdata('type');
+			$this->session->unset_userdata('discount');
+
+			$data['cartData'] 	= $this->cart->contents();
+			
+			$this->load->view('store/response', $data);
+
+			
+	} 
 
 }

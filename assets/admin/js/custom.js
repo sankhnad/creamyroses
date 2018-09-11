@@ -3695,3 +3695,67 @@ function deleteProductImages(selfObj, id, type) {
 
 	});
 }
+
+function orderQuickView(oid) {
+	var dataString =  {
+		oid: oid,
+	};
+	
+	$.ajax({
+		url: admin_url + 'orders/orderQuickView/',
+		dataType: 'json',
+		type: "POST",
+		data: dataString,
+		beforeSend: function () {
+			showLoader();
+		},
+		success: function (obj) {
+			if (obj.requestStatus == 'error') {
+				swal("Sorry!", "No record found.", "error");
+			} else {
+				if (obj.kycStatus == '0') {
+					obj.kycStatus = 'Rejected';
+					var kycStCls = 'badge-danger';
+					obj.comment = 'Reason: ' + obj.comment;
+				} else if (obj.kycStatus == '1') {
+					obj.kycStatus = 'Verified';
+					var kycStCls = 'badge-success';
+					obj.comment = 'KYC status is Verified'
+				} else if (obj.kycStatus == '2') {
+					obj.kycStatus = 'Pending';
+					var kycStCls = 'badge-warning';
+					obj.comment = 'KYC status is Pending Verification';
+				}
+
+				if (obj.custStatus == '0') {
+					obj.custStatus = 'Inactive';
+					var custStCls = '';
+				} else if (obj.custStatus == '1') {
+					obj.custStatus = 'Active';
+					var custStCls = 'badge-success';
+				}
+
+				$('.cuName').html(obj.fname + ' ' + obj.lname);
+				$('.cuLastLogin').html(obj.lastLogin);
+				$('.cuUsername').html(obj.username);
+				$('.cuEmail').html(obj.email);
+				$('.cuCustStatus span').html(obj.custStatus).addClass(custStCls);
+				$('.cuRegDate').html(obj.registrationDate);
+				$('.cuGender').html(obj.gender);
+				$('.cuPhone').html(obj.phone);
+				$('.cuProfileType').html(obj.profileType);
+				$('.cuProfileID').html(obj.profileID);
+				$('.cuAccountNo').html(obj.accountNo);
+				$('.cuKYCType').html(obj.kycType);
+				$('.cuKYCID').html(obj.idNumber);
+				$('.cuKYCStatus span').attr('title', obj.comment).tooltip('fixTitle').html(obj.kycStatus).addClass(kycStCls);
+				$('.viewModbC').attr('href', base_url + 'customers/view/' + cid);
+				$('#customerQuickVwTbl').modal();
+			}
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+}
+
