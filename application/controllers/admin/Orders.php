@@ -9,7 +9,7 @@ class Orders extends CI_Controller {
 	}
 	
 	function index() {
-		$data['couponInfoAry'] = $this->common_model->getAll('*', 'orders', array('isDeleted'=>'1'));
+		$data['couponInfoAry'] = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1'));
 		$this->load->view( 'admin/orders_list', $data);
 	}
 	
@@ -49,7 +49,7 @@ class Orders extends CI_Controller {
 			}
 		}
 		
-		$recordsTotal = $this->common_model->countResults('orders', array('isDeleted'=>'1'));
+		$recordsTotal = $this->common_model->countResults('orders', array('is_Deleted'=>'1'));
 		
 		$aColumns=array(
 			'order_id',
@@ -61,13 +61,13 @@ class Orders extends CI_Controller {
 			'phone_number',
 			'coupon',
 			'status_type',
-			'isDeleted',
+			'is_Deleted',
 			'payment_mode',
 			'created_on',
 		);
 
 		$iSQL = "FROM orders";
-		$sAnd = " AND isDeleted = '1'";
+		$sAnd = " AND is_Deleted = '1'";
 		$quryTmp = $this->datatablemodel->multi_tbl_list($aColumns, 3);
 		$sWhere = $quryTmp['where'] ? $quryTmp['where'] : ' WHERE 1 = 1 ';
 		$sOrder = $quryTmp['order'];
@@ -132,7 +132,7 @@ class Orders extends CI_Controller {
 			}
 			
 						  
-			$btnAra = '<a onClick="orderQuickView(\''.$id.'\')" class="blue" data-tooltip="tooltip"  href="javascript:;"> <i class="ace-icon fas fa-search-plus bigger-130"></i></a>';
+			$btnAra = '<a href="'.admin_url().'orders/orderQuickView/'.$id.'/" class="blue" data-tooltip="tooltip" > <i class="ace-icon fas fa-search-plus bigger-130"></i></a>';
 
 			
 			if($aRow['payment_mode'] == '1'){
@@ -157,66 +157,55 @@ class Orders extends CI_Controller {
 		echo json_encode( $results );
 	}
 	
-	function orderQuickView(){
-		if(!$this->input->is_ajax_request() || !AID) {
-			exit('Unauthorized Access');
-		}
-		$oid = decode($this->input->post('oid'));
+	function orderQuickView($orderId){
+		$oid = decode($orderId);
 		$aColumns=array(
-			'a.last_login',
-			'a.username',
-			'a.first_name',
-			'a.last_name',
-			'a.email',
-			'a.is_active',
-			'a.date_joined',
+			'a.pin_code',
+			'a.is_eggless',
+			'a.actual_price',
+			'a.discount',
+			'a.total_price',
+			'a.cake_message',
+			'a.quantity',
+			'a.delivery_date',
+			'a.delivery_time_slot',
 			
-			'b.gender',
-			'b.msisdn',
-			'b.pin',
-			'b.profile_type',
-			'b.profile_id',
 			
-			'c.account',
+			'b.invoice_no',
+			'b.transaction_id',
+			'b.payment_mode',
+			'b.customer_id',
+			'b.address',
+			'b.pin_code',
+			'b.phone_number',
+			'b.coupon',
+			'b.status_type',
+			'b.created_on',
 			
-			'd.kyc_type',
-			'd.status',		
-			'd.id_number',
-			'd.comment',
+			
+			'd.name',
 		);
 		
 		
-		$data = $this->manual_model->getFullCustomerData(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.id'=>$cid));
+		$orderDetailsObj = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.oid'=>$oid));
+		
+		$orderObj		 = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1','order_id'=>$oid));
+		$customer_id 	 = $orderObj[0]->customer_id;
+		$billingAddressObj = $this->common_model->getAll('*', 'address', array('isDeleted'=>'1','isDefault'=>'1','cid'=>$customer_id));
 		
 		if(!$data){
 			echo json_encode(array('requestStatus'=>'error'));
 			exit;
 		}
 		
-		$result = array(
-			'requestStatus'=>'success',
-			'lastLogin'=> $data[0]->last_login ? date('jS M Y | h:i A', strtotime($data[0]->last_login)) : 'Naver Login',
-			'username'=> $data[0]->username,
-			'fname'=> $data[0]->first_name,
-			'lname'=> $data[0]->last_name,
-			'email' => $data[0]->email,
-			'custStatus' => $data[0]->is_active,
-			'registrationDate' => date('jS M Y | h:i A', strtotime($data[0]->date_joined)),
-			
-			'gender' => $data[0]->gender == 'M' ? 'Male' : 'Female',
-			'phone' => $data[0]->msisdn,
-			'profileType' => $data[0]->profile_type == 'I' ? 'Individual' : 'Corporate',
-			'profileID' => $data[0]->profile_id,
-			
-			'accountNo' => $data[0]->account,
-			
-			'kycType' => ucfirst($data[0]->kyc_type),
-			'kycStatus' => $data[0]->status,
-			'idNumber' => $data[0]->id_number,
-			'comment' => $data[0]->comment,
-		);
+		$data['orderDetailsObj']   =  $orderDetailsObj;
+		$data['orderObj'] 		   =  $orderObj;
+		$data['orderDetailsObj']   =  $orderDetailsObj;
+		$data['billingAddressObj'] =  $billingAddressObj;
+		$this->load->view( 'admin/temolate/order_confirmation', $data);
+
 		
-		echo json_encode($result);
+		
 	}
 	
 

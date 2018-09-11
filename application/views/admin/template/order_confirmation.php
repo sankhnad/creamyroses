@@ -17,13 +17,13 @@
             </tr>
             <tr>
             	<td colspan="2" style="border-bottom:solid 1px #999; padding:0px 10px;">
-                	<p>Hi <?php echo ucwords($customer_name);?></p>
+                	<p>Hi Jai</p>
                     <p>Thank you for your order</p>
                     <p>We have received your order. We will send you an Email and SMS the moment your order items are dispatched to your address</p>
                     <p>
-                       Order ID: <span style="color:#00bbe6;"><?php echo $order_no;?></span><br />
+                       Order ID: <span style="color:#00bbe6;"><?php // echo $order_no;?></span><br />
                        Order Date: <span style="color:#00bbe6;"><?php echo date('d-m-Y');?></span><br />
-                       Payment Mode: <span style="color:#00bbe6;"><?php echo $payment_mode;?></span>
+                       Payment Mode: <span style="color:#00bbe6;"><?php //echo $payment_mode;?></span>
                     </p>
                 </td>
             </tr>
