@@ -170,5 +170,16 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
+	
+	function getOrderDetails($select, $where){
+		$this->db->select($select);
+		$this->db->from('orders AS a');
+		$this->db->join('customer AS b', 'a.customer_id = b.id', 'LEFT');
+		$this->db->where($where);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result();		
+	}
+
 
 }
