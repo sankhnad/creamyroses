@@ -3697,11 +3697,12 @@ function deleteProductImages(selfObj, id, type) {
 }
 
 function orderQuickView(oid) {
-	var dataString = {
+	var dataString =  {
 		oid: oid,
 	};
+	
 	$.ajax({
-		url: base_url + 'orders/orderQuickView/',
+		url: admin_url + 'orders/orderQuickView/',
 		dataType: 'json',
 		type: "POST",
 		data: dataString,
