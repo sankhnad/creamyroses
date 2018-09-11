@@ -16,6 +16,9 @@ class Cart extends CI_Controller {
 	}
 	
 	function addToCart(){
+		if(!$this->input->is_ajax_request()) {
+			exit( 'No direct script access allowed' );
+		}
 		$session_id = $this->session->userdata('SESSION_ID');
 		$cid = decode($this->session->userdata('CID'));
 		$pid = $this->input->post('pid');
@@ -54,6 +57,28 @@ class Cart extends CI_Controller {
 			);
 			$cartData = $this->common_model->saveData($table, $data);
 		}
+		echo json_encode(array('status'=>'success'));
+	}
+	
+	function clearCartVal(){
+		if(!$this->input->is_ajax_request()) {
+			exit( 'No direct script access allowed' );
+		}
+		$session_id = $this->session->userdata('SESSION_ID');
+		$cid = decode($this->session->userdata('CID'));
+		
+		$table = 'order_details';
+		if($cid){
+			$data = array(
+				'cid' => $cid,
+			);
+		}else{
+			$data = array(
+				'session_id' => $session_id,
+			);
+		}
+		
+		$this->common_model->deleteData($table, $data);
 		echo json_encode(array('status'=>'success'));
 	}
 }

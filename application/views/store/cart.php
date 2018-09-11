@@ -25,8 +25,9 @@
 											<thead>
 												<tr>
 													<th width="5%">&nbsp;</th>
-													<th width="62%">Product Name</th>
-													<th class="text-left" width="10%">Unit Price</th>
+													<th width="47%">Product Name</th>
+													<th class="text-left" width="10%">Price</th>
+													<th class="text-left" width="5%">Unit </th>
 													<th class="text-center" width="11%">Qty</th>
 													<th class="text-center" width="10%">Sub Total</th>
 													<th width="2%">&nbsp;</th>
@@ -44,7 +45,7 @@
 													$productPriceObj = json_decode(json_encode($productPriceObj), true);
 													$productPrice = getDiscountFormat($productPriceObj[0]);
 													$oreginalPriceCount += $productPrice['oreginal_price'] * $cartProduct->quantity;
-													$discountValuePriceCount += isset($productPrice['discount_value']) ? $productPrice['discount_value'] * $cartProduct->quantity : 0;
+													$discountValuePriceCount += $productPrice['discount_value'] ? $productPrice['discount_value'] * $cartProduct->quantity : 0;
 												?>
 												<tr>
 													<td class="image">
@@ -56,17 +57,22 @@
 														</h2>
 													</td>
 													<td class="text-left">
-														
 														<span class="cart-price"> 
 															<span class="price">
 																<i class="fas fa-rupee-sign"></i> <?=number_format($productPrice['final_price'],2)?>
 															</span>
-														</span><br>
+														</span>
+														<?php if($productPrice['discount_value']){?>
+														<br>														
 														<span class="cart-price old-price"> 
 															<span class="price">
 																<i class="fas fa-rupee-sign"></i> <?=number_format($productPrice['oreginal_price'],2)?>
 															</span>
-														</span>														
+														</span>
+														<?php } ?>
+													</td>
+													<td>
+														<?=$productPrice['quantity_type']?>
 													</td>
 													<td class="text-center">
 														<div class="input-group">
@@ -94,14 +100,19 @@
 														<a class="remove-item" title="Remove item" href="javascript:;"></a>
 													</td>
 												</tr>
+												<?php }if(!$cartProductObj){ ?>
+												<tr>
+													<td colspan="7" class="boxTxEmptyCart">Your cart is empty</td>
+												</tr>
 												<?php } ?>
 											</tbody>
 											<tfoot>
 												<tr class="first last">
-													<td class="a-right last" colspan="6">
+													<td class="a-right last" colspan="7">
 														<button onclick="gotoPage(base_url+'checkout')" class="button btn-continue" title="Continue Shopping" type="button"><span>Continue Shopping</span></button>
-														
-														<button id="empty_cart_button" class="button btn-empty" title="Clear Cart" value="empty_cart" name="update_cart_action" type="submit"><span>Clear Cart</span></button>
+														<?php if($cartProductObj){?>
+														<button class="button btn-empty" onClick="clearCartVal()" type="button"><span>Clear Cart</span></button>
+														<?php } ?>
 													</td>
 												</tr>
 											</tfoot>
@@ -126,30 +137,34 @@
 											<tbody>
 												<tr>
 													<td colspan="1" class="a-left"> Subtotal </td>
-													<td class="a-right text-right"><span class="price"><i class="fas fa-rupee-sign"></i> <?=$oreginalPriceCount?></span>
+													<td class="a-right text-right"><span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($oreginalPriceCount, 2)?></span>
 													</td>
-												</tr>												
+												</tr>	
+												<?php if($discountValuePriceCount > 0){?>
 												<tr>
 													<td colspan="1" class="a-left"> Discount </td>
-													<td class="a-right text-right"><span class="price discntPriceTol"><i class="fas fa-rupee-sign"></i> <?=$discountValuePriceCount?></span>
+													<td class="a-right text-right"><span class="price discntPriceTol"><i class="fas fa-rupee-sign"></i> <?=number_format($discountValuePriceCount, 2)?></span>
 													</td>
-												</tr>												
+												</tr>	
+												<?php } ?>
 											</tbody>
 											<tfoot>
 												<tr>
 													<td colspan="1" class="a-left"><strong>Grand Total</strong>
 													</td>
-													<td class="a-right text-right"><strong><span class="price"><i class="fas fa-rupee-sign"></i> <?=$oreginalPriceCount - $discountValuePriceCount?></span></strong>
+													<td class="a-right text-right"><strong><span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format(($oreginalPriceCount - $discountValuePriceCount),2)?></span></strong>
 													</td>
 												</tr>
 											</tfoot>
 										</table>
+										<?php if(($oreginalPriceCount - $discountValuePriceCount) > 0){?>
 										<ul class="checkout">
 											<li>
 												<button class="button btn-proceed-checkout" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
 											</li>
 											<br>
 										</ul>
+										<?php } ?>
 									</div>
 								</div>
 							</div>

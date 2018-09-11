@@ -552,11 +552,13 @@ if(! function_exists('getDiscountFormat')){
 		if($discountType == 'F'){
 			$finalPrice = $price - $discountVal;
 		}else if($discountType == 'P'){
-			$finalPrice = $price - ($price*$discountVal/100);
+			if($discountVal){
+				$finalPrice = $price - ($price*$discountVal/100);
+			}
 		}
 		
 		if(!$discountVal){
-			$finalPrice = $discountVal;
+			$finalPrice = $price;
 		}
 		return array(
 			'oreginal_price'=>$price,

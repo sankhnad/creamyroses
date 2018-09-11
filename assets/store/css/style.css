@@ -18485,3 +18485,8 @@ a.shop-now-btn {
 .ml5{
 	margin-left: 5px !important;
 }
+.boxTxEmptyCart{
+	text-align: center;
+	font-size: 15px;
+	padding: 40px !important;
+}
