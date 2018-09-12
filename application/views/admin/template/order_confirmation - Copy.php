@@ -93,24 +93,9 @@ if ( $orderObj[ 0 ]->payment_mode == '1' ) {
             <td width="200px" style="text-align:right; border-bottom:#333 solid 1px; padding:5px 10px;"><b>Total</b> </td>
           </tr>
           <?php 
-		  			$subTotal = 0;
-					$shippingTotal = 0;
 					foreach($orderDetailsObj as $row){
-						if($row->is_eggless== 1){
-							$isEggLess = 'Yes ( + 100)';
-							$total_price = $row->total_price + 100;
-						}else{
-							$isEggLess = 'No';
-							$total_price = $row->total_price;
-						}
-						
-						$subTotal = $subTotal + $total_price;
-						if($row->shipingChrg > 0){
-							$shippingTotal = $shippingTotal + $row->shipingChrg;
-						}
-						
-						
-						
+					
+				
 					?>
           <tr>
             <td width="200px" style="line-height:25px; border-bottom:#333 solid 1px; padding:5px 10px;"><img height="80px" width="80px" src="<?=base_url()?>uploads/product/thumb/<?=$row->image?>" align="absmiddle"/> </td>
@@ -124,47 +109,34 @@ if ( $orderObj[ 0 ]->payment_mode == '1' ) {
             </td>
             <td width="200px" style="text-align:right; border-bottom:#333 solid 1px; padding:5px 10px;"><?=$row->discount?>
             </td>
-            <td width="200px" style="text-align:right; border-bottom:#333 solid 1px; padding:5px 10px;"><?=$isEggLess?>
+            <td width="200px" style="text-align:right; border-bottom:#333 solid 1px; padding:5px 10px;"><?=$row->discount?>
             </td>
-            <td width="200px" style="text-align:right; border-bottom:#333 solid 1px; padding:5px 10px;"><?=round($total_price,2)?>
+            <td width="200px" style="text-align:right; border-bottom:#333 solid 1px; padding:5px 10px;"><?=round($row->total_price,2)?>
             </td>
           </tr>
           <?php }?>
-		  <?php if($row->shipingChrg > 0){ 
-		 			$subTotal = $subTotal - $shippingTotal;
-		  ?>
-		            <tr>
-
-            <td colspan="7" style="padding-top:15px; text-align:right;"><b>Shipping Charges</b><br/>
+          <tr>
+            <td colspan="4" style="padding-top:15px; text-align:right;"><b>Shipping Charges</b><br/>
             </td>
-            <td style="text-align:right; padding:5px 10px;"><?=round($shippingTotal,2);?>
+            <td style="text-align:right; padding:5px 10px;"><?=round(234,2);?>
             </td>
           </tr>
-		  <?php } ?>
           <tr>
-            <td colspan="7" style="padding-top:15px; text-align:right; padding:5px 10px;"><b>Total</b><br/>
+            <td colspan="4" style="padding-top:15px; text-align:right; padding:5px 10px;"><b>Total</b><br/>
             </td>
             <td style="text-align:right; padding:5px 10px;"><b>
-              <?=round($subTotal,2);?>
+              <?=round(879,2);?>
               </b> </td>
           </tr>
         </table>
-        <?php if($orderObj[0]->coupon!=''){
-		
-					if($couponObj->type == '1')	{
-						$discountVal = 	$subTotal*$couponObj->discount/100;
-					}else if($couponObj->type == '2'){
-						$discountVal = $couponObj->discount;
-					}
-		
-		?>
+        <?php if($orderObj[0]->coupon!=''){?>
         <table width="100%" cellpadding="5" style="font-family:Arial, Helvetica, sans-serif; font-size:28px;">
           <tr>
             <td></td>
             <td width="35%" style="text-align:right; padding:5px 10px;">Discount Coupan Applied on
               <?=$orderObj[0]->coupon;?>
             </td>
-            <td width="25%" style="text-align:right; padding:5px 10px;"><b><?=round($discountVal,2)?></b> </td>
+            <td width="25%" style="text-align:right; padding:5px 10px;"><b>8888</b> </td>
           </tr>
         </table>
         <?php } ?>
