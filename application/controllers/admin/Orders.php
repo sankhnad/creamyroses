@@ -173,13 +173,18 @@ class Orders extends CI_Controller {
 			
 			'd.name',
 			'd.image',
+			
+			'e.price as shipingChrg',
 		);
 		
 		
 		
 		$orderObj		 	 = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1','order_id'=>$oid));
 		$cid 				 = $orderObj[0]->customer_id;
+		$coupon				 = $orderObj[0]->coupon;
 		$billingAddressObj 	 = $this->common_model->getAll('*', 'address', array('isDeleted'=>'1','isDefault'=>'1','cid'=>$cid));
+		$couponObj 	 		 = $this->common_model->getAll('*', 'coupon', array('name'=>$coupon));
+		
 		$orderDetailsObj 	 = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.oid'=>$oid,'a.is_in_cart'=>'0'));
 
 		
@@ -187,7 +192,8 @@ class Orders extends CI_Controller {
 		$data['orderObj'] 		   =  $orderObj;
 		$data['orderDetailsObj']   =  $orderDetailsObj;
 		$data['billingAddressObj'] =  $billingAddressObj;
-		//echo '<pre>';print_r($orderDetailsObj);die;		
+		$data['couponObj'] =  $couponObj;
+		//echo '<pre>';print_r($couponObj);die;		
 
 		$this->load->view( 'admin/template/order_confirmation', $data);
 
