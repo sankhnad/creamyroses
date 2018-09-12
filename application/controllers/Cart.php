@@ -82,4 +82,28 @@ class Cart extends CI_Controller {
 		$this->common_model->deleteData($table, $data);
 		echo json_encode(array('status'=>'success'));
 	}
+	
+	function removeCartItem(){
+		$id = $this->input->post('id');
+		if(!$this->input->is_ajax_request() || !$id) {
+			exit('No direct script access allowed');
+		}
+		$table = 'order_details';
+		
+		$where = array(
+			'id' => $id,
+		);
+		$this->common_model->deleteData($table, $where);
+		echo json_encode(array('status'=>'success'));
+	}
+	
+	function plusMinusCart(){
+		$id = $this->input->post('id');
+		$quantity = $this->input->post('quantity');
+		if(!$this->input->is_ajax_request() || !$id) {
+			exit('No direct script access allowed');
+		}
+		$this->common_model->updateData('order_details',array('id'=>$id), array('quantity'=>$quantity));
+		echo json_encode(array('status'=>'success'));
+	}
 }

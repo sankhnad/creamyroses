@@ -59,8 +59,8 @@
 													</td>
 													<td class="text-left">
 														<span class="cart-price"> 
-															<span class="price">
-																<i class="fas fa-rupee-sign"></i> <?=number_format($productPrice['final_price'],2)?>
+															<span class="price product_final_price<?=$cartProduct->id?>">
+																<i class="fas fa-rupee-sign"></i> <m><?=number_format($productPrice['final_price'],2)?></m>
 															</span>
 														</span>
 														<?php if($productPrice['discount_value']){?>
@@ -78,13 +78,13 @@
 													<td class="text-center">
 														<div class="input-group">
 														  <span class="input-group-btn">
-															  <button type="button" <?=$cartProduct->quantity == '1' ? 'disabled' : ''?> class="btn btn-danger btn-number"  data-type="minus" data-field="quant[<?=$productInfo[0]->product_id?>]">
+															  <button type="button" <?=$cartProduct->quantity == '1' ? 'disabled' : ''?> class="btn btn-danger btn-number"  data-type="minus" data-field="quant[<?=$cartProduct->id?>]">
 																<span class="glyphicon glyphicon-minus"></span>
 															  </button>
 														  </span>
-														  <input type="text" name="quant[<?=$productInfo[0]->product_id?>]" class="form-control text-center input-number" value="<?=$cartProduct->quantity?>" min="1" max="10">
+														  <input type="text" name="quant[<?=$cartProduct->id?>]" class="form-control text-center input-number" value="<?=$cartProduct->quantity?>" min="1" max="10">
 														  <span class="input-group-btn">
-															  <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[<?=$productInfo[0]->product_id?>]">
+															  <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[<?=$cartProduct->id?>]">
 																  <span class="glyphicon glyphicon-plus"></span>
 															  </button>
 														  </span>
@@ -92,13 +92,13 @@
 													</td>
 													<td class="text-center">
 														<span class="cart-price"> 
-															<span class="price">
-																<i class="fas fa-rupee-sign"></i> <?=number_format($productPrice['final_price'] * $cartProduct->quantity,2)?>
+															<span class="price product_total_price<?=$cartProduct->id?>">
+																<i class="fas fa-rupee-sign"></i> <m><?=number_format($productPrice['final_price'] * $cartProduct->quantity,2)?></m>
 															</span> 
 														</span>
 													</td>
 													<td class="text-center">
-														<a class="remove-item" onClick="removeCartItem()" title="Remove item" href="javascript:;"></a>
+														<a class="remove-item" onClick="removeCartItem(this, <?=$cartProduct->id?>)" title="Remove item" href="javascript:;"></a>
 													</td>
 												</tr>
 												<?php }if(!$cartProductObj){ ?>
@@ -161,7 +161,7 @@
 										<?php if(($oreginalPriceCount - $discountValuePriceCount) > 0){?>
 										<ul class="checkout">
 											<li>
-												<button class="button btn-proceed-checkout" gotoPage(base_url+'checkout') title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
+												<button class="button btn-proceed-checkout" onClick="gotoPage(base_url+'checkout')" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
 											</li>
 											<br>
 										</ul>
@@ -182,8 +182,13 @@
 		e.preventDefault();
 		fieldName = $(this).attr('data-field');
 		type = $(this).attr('data-type');
+		cartid = fieldName;
+		cartid = cartid.replace("quant[", "");
+		cartid = cartid.replace("]", "");
+		
 		var input = $("input[name='" + fieldName + "']");
 		var currentVal = parseInt(input.val());
+		
 		if (!isNaN(currentVal)) {
 			if (type == 'minus') {
 				if (currentVal > input.attr('min')) {
@@ -192,7 +197,7 @@
 				if (parseInt(input.val()) == input.attr('min')) {
 					$(this).attr('disabled', true);
 				}
-
+				
 			} else if (type == 'plus') {
 				if (currentVal < input.attr('max')) {
 					input.val(currentVal + 1).change();
@@ -201,6 +206,7 @@
 					$(this).attr('disabled', true);
 				}
 			}
+			plusMinusCart(cartid, parseInt(input.val()));
 		} else {
 			input.val(0);
 		}
@@ -209,26 +215,33 @@
 		$(this).data('oldValue', $(this).val());
 	});
 	$('.input-number').change(function() {
-
 		minValue = parseInt($(this).attr('min'));
 		maxValue = parseInt($(this).attr('max'));
 		valueCurrent = parseInt($(this).val());
-
+		var oldValue = $(this).data('oldValue');
 		name = $(this).attr('name');
+		cartid = name;
+		cartid = cartid.replace("quant[", "");
+		cartid = cartid.replace("]", "");
+		
+		var isUpdate = true;
 		if (valueCurrent >= minValue) {
 			$(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
 		} else {
 			alert('Sorry, the minimum value was reached');
-			$(this).val($(this).data('oldValue'));
+			$(this).val(oldValue);
+			isUpdate = false;
 		}
 		if (valueCurrent <= maxValue) {
 			$(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
 		} else {
 			alert('Sorry, the maximum value was reached');
-			$(this).val($(this).data('oldValue'));
+			$(this).val(oldValue);
+			isUpdate = false;
 		}
-
-
+		if(isUpdate){
+			plusMinusCart(cartid, valueCurrent);
+		}
 	});
 	$(".input-number").keydown(function(e) {
 		// Allow: backspace, delete, tab, escape, enter and .

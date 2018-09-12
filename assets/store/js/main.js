@@ -1,22 +1,52 @@
-function removeCartItem(){
+function plusMinusCart(id, quantity){
+	var product_final_price = $('.product_final_price'+id+' m').html();
+	$('.product_total_price'+id+' m').html((product_final_price * quantity).toFixed(2));
+	console.log(product_final_price);
+	var dataString = {
+		id: id,
+		quantity: quantity,
+	};
+	$.ajax({
+		url: base_url + 'cart/plusMinusCart',
+		dataType: 'json',
+		type: 'POST',
+		data: dataString,
+		beforeSend: function () {
+			showLoader();
+		},
+		success: function (obj){
+			
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+}
+
+function removeCartItem(selfObj, id){
 	swal({
 		title: "Are you sure!!",
-		text: "Do you want to remove your all cart data?",
+		text: "Do you want to remove this item?",
 		type: "warning",
 		showCancelButton: true,
 		confirmButtonColor: "#DD6B55",
 		confirmButtonText: "Yes",
 		cancelButtonText: "No"
 	}).then(function () {
+		var dataString = {
+			id: id,
+		};
 		$.ajax({
-			url: base_url + 'cart/clearCartVal',
+			url: base_url + 'cart/removeCartItem',
 			dataType: 'json',
 			type: 'POST',
+			data: dataString,
 			beforeSend: function () {
 				showLoader();
 			},
-			success: function (obj){
-				timerAlert('Successful!!', 'Now!, Your cart is empty.', 'reload');
+			success: function (){
+				timerAlert('Successful!!', 'Now!, Your cart is empty.', '', 500);
+				$(selfObj).closest('tr').remove();
 			},
 			error: function () {
 				csrfError();
@@ -24,6 +54,7 @@ function removeCartItem(){
 		});
 	});
 }
+
 function clearCartVal(){
 	swal({
 		title: "Are you sure!!",
