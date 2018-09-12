@@ -18490,3 +18490,8 @@ a.shop-now-btn {
 	font-size: 15px;
 	padding: 40px !important;
 }
+.emptyCartWarn {
+  list-style: none;
+  padding: 30px 13px;
+  font-size: 15px;
+}

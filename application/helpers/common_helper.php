@@ -624,4 +624,35 @@ if(! function_exists('getOrderDetails')){
 		return $orderObj;
 	}
 }
+if(! function_exists('getCartListingObj')){
+	function getCartListingObj(){
+		$CI = & get_instance();
+		$table = 'order_details';
+		$cid = decode($CI->session->userdata('CID'));
+		$where = array(
+			'is_in_cart'=>'1'
+		);
+		if($cid){
+			$where['cid'] = $cid;
+		}else{
+			$where['session_id'] = $CI->session->userdata('SESSION_ID');
+		}
+		
+		$data['cartProductObj'] = $CI->common_model->getAll('*', $table, $where);
+		if($data['cartProductObj']){
+/*			$productInfo = $CI->common_model->getAll('*', 'product', array('product_id' => $cartProduct->pid, 'status'=>'1'));
+			if(!$productInfo){
+			continue;
+			}
+			$productPriceObj = $CI->common_model->getAll('*', 'product_price', array('id' => $cartProduct->price_id));
+			$productPriceObj = json_decode(json_encode($productPriceObj), true);
+			$productPrice = getDiscountFormat($productPriceObj[0]);
+
+			$beforeDiscount_price += $productPrice['oreginal_price'] ? ($productPrice['oreginal_price'] * $cartProduct->quantity) : 0;
+
+			$afterDiscount_price += $productPrice['final_price'] * $cartProduct->quantity;*/
+		}
+		return($data);
+	}
+}
 ?>

@@ -1,7 +1,24 @@
 function plusMinusCart(id, quantity){
-	var product_final_price = $('.product_final_price'+id+' m').html();
-	$('.product_total_price'+id+' m').html((product_final_price * quantity).toFixed(2));
-	console.log(product_final_price);
+	var product_final_price = $('.product_final_price'+id+' m').html().replace(/,/g , '');
+	$('.product_total_price'+id+' m').html((product_final_price * parseFloat(quantity)).toFixed(2));
+	var temp_Qty, crid = '';
+	var beforeDiscount_price = 0;
+	var afterDiscount_price = 0;
+	var totalQty = 0;
+	$('.boxContinerCartVa tr').each(function(){
+		crid = $(this).data('crid');
+		temp_Qty = $('input[name="quant['+crid+']"]').val();
+		totalQty += parseInt(temp_Qty);
+		beforeDiscount_price += $('.product_discount_price'+crid+' m').html() ? (parseFloat($('.product_discount_price'+crid+' m').html().replace(/,/g , '')) * temp_Qty) : (parseFloat($('.product_final_price'+crid+' m').html().replace(/,/g , '')) * temp_Qty);
+		console.log(beforeDiscount_price);
+		afterDiscount_price += (parseFloat($('.product_final_price'+crid+' m').html().replace(/,/g , '')) * temp_Qty);
+	});
+	
+	$('.subTotalPrice m').html(beforeDiscount_price.toFixed(2));
+	$('.discountTotalPrice m').html((beforeDiscount_price - afterDiscount_price).toFixed(2));
+	$('.grandTotalPrice m').html((afterDiscount_price.toFixed(2)));
+	
+	$('.shoppingCartValue').html(totalQty+' Items/ <i class="fas fa-rupee-sign"></i> '+(afterDiscount_price.toFixed(2)));
 	var dataString = {
 		id: id,
 		quantity: quantity,
@@ -193,11 +210,9 @@ function addToWishList(selfObj, pid, type){
 
 $('.navMeg1 > li').mouseenter(function() {
 	$(this).find(' > ul').show();
-})
-.mouseleave(function() {
+}).mouseleave(function() {
 	$(this).find(' > ul').hide();
 });
-
 
 function validatePassword(val, selfObj) {
 	var validate = [];

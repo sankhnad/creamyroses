@@ -33,9 +33,9 @@
 													<th width="2%">&nbsp;</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody class="boxContinerCartVa">
 												<?php
-												$oreginalPriceCount = $discountValuePriceCount = 0;
+												$beforeDiscount_price = $afterDiscount_price = 0;
 												foreach($cartProductObj as $cartProduct){
 													$productInfo = $this->common_model->getAll('*', 'product', array('product_id' => $cartProduct->pid, 'status'=>'1'));
 													if(!$productInfo){
@@ -45,10 +45,11 @@
 													$productPriceObj = json_decode(json_encode($productPriceObj), true);
 													$productPrice = getDiscountFormat($productPriceObj[0]);
 													
-													$oreginalPriceCount += $productPrice['oreginal_price'] * $cartProduct->quantity;
-													$discountValuePriceCount += $productPrice['discount_value'] ? $productPrice['discount_value'] * $cartProduct->quantity : 0;
+													$beforeDiscount_price += $productPrice['oreginal_price'] ? ($productPrice['oreginal_price'] * $cartProduct->quantity) : 0;
+													
+													$afterDiscount_price += $productPrice['final_price'] * $cartProduct->quantity;
 												?>
-												<tr>
+												<tr data-crid="<?=$cartProduct->id?>">
 													<td class="image">
 														<a class="product-image" title="<?=$productInfo[0]->name?>" href="<?=base_url()?><?=$productInfo[0]->url_slug?>"><img width="75" alt="<?=$productInfo[0]->name?>" src="<?=$iURL_product?><?=$productInfo[0]->image?>"></a>
 													</td>
@@ -66,8 +67,8 @@
 														<?php if($productPrice['discount_value']){?>
 														<br>														
 														<span class="cart-price old-price"> 
-															<span class="price">
-																<i class="fas fa-rupee-sign"></i> <?=number_format($productPrice['oreginal_price'],2)?>
+															<span class="price product_discount_price<?=$cartProduct->id?>">
+																<i class="fas fa-rupee-sign"></i> <m><?=number_format($productPrice['oreginal_price'],2)?></m>
 															</span>
 														</span>
 														<?php } ?>
@@ -138,13 +139,13 @@
 											<tbody>
 												<tr>
 													<td colspan="1" class="a-left"> Subtotal </td>
-													<td class="a-right text-right"><span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format($oreginalPriceCount, 2)?></span>
+													<td class="a-right text-right"><span class="price subTotalPrice"><i class="fas fa-rupee-sign"></i> <m><?=number_format($beforeDiscount_price, 2)?></m></span>
 													</td>
 												</tr>	
-												<?php if($discountValuePriceCount > 0){?>
+												<?php if(($beforeDiscount_price - $afterDiscount_price) > 0){?>
 												<tr>
 													<td colspan="1" class="a-left"> Discount </td>
-													<td class="a-right text-right"><span class="price discntPriceTol"><i class="fas fa-rupee-sign"></i> <?=number_format($discountValuePriceCount, 2)?></span>
+													<td class="a-right text-right"><span class="price discntPriceTol discountTotalPrice"><i class="fas fa-rupee-sign"></i> <m><?=number_format($beforeDiscount_price - $afterDiscount_price, 2)?></m></span>
 													</td>
 												</tr>	
 												<?php } ?>
@@ -153,12 +154,12 @@
 												<tr>
 													<td colspan="1" class="a-left"><strong>Grand Total</strong>
 													</td>
-													<td class="a-right text-right"><strong><span class="price"><i class="fas fa-rupee-sign"></i> <?=number_format(($oreginalPriceCount - $discountValuePriceCount),2)?></span></strong>
+													<td class="a-right text-right"><strong><span class="price grandTotalPrice"><i class="fas fa-rupee-sign"></i> <m><?=number_format($afterDiscount_price,2)?></m></span></strong>
 													</td>
 												</tr>
 											</tfoot>
 										</table>
-										<?php if(($oreginalPriceCount - $discountValuePriceCount) > 0){?>
+										<?php if($afterDiscount_price > 0){?>
 										<ul class="checkout">
 											<li>
 												<button class="button btn-proceed-checkout" onClick="gotoPage(base_url+'checkout')" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
@@ -206,7 +207,6 @@
 					$(this).attr('disabled', true);
 				}
 			}
-			plusMinusCart(cartid, parseInt(input.val()));
 		} else {
 			input.val(0);
 		}
@@ -222,7 +222,8 @@
 		name = $(this).attr('name');
 		cartid = name;
 		cartid = cartid.replace("quant[", "");
-		cartid = cartid.replace("]", "");
+		cartid = parseInt(cartid.replace("]", ""));
+		
 		
 		var isUpdate = true;
 		if (valueCurrent >= minValue) {

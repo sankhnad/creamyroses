@@ -11,7 +11,16 @@ class Cart extends CI_Controller {
 	function index(){
 		$table = 'order_details';
 		$cid = decode($this->session->userdata('CID'));
-		$data['cartProductObj'] = $this->common_model->getAll('*', $table, array('cid'=>$cid));
+		$where = array(
+			'is_in_cart'=>'1'
+		);
+		if($cid){
+			$where['cid'] = $cid;
+		}else{
+			$where['session_id'] = $this->session->userdata('SESSION_ID');
+		}
+		
+		$data['cartProductObj'] = $this->common_model->getAll('*', $table, $where);
 		$this->load->view('store/cart', $data);
 	}
 	

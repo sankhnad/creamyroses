@@ -235,21 +235,17 @@
                         <div class="col-3 top-cart-contain">
                             <!-- Top Cart -->
                             <div class="mini-cart">
-                                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#"><span class="price hidden-xs">Shopping Cart</span> <span class="cart_count hidden-xs">2 Items/ $4580</span> </a></div>
+                                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#"><span class="price hidden-xs">Shopping Cart</span> <span class="cart_count hidden-xs shoppingCartValue">Cart empty</span> </a></div>
                                 <div>
                                     <div class="top-cart-content">
+										<?php $getCartListingObj = getCartListingObj();
+												if($getCartListingObj){
+											?>
                                         <!--block-subtitle-->
                                         <ul class="mini-products-list" id="cart-sidebar">
-                                            <li class="item first">
-                                                <div class="item-inner">
-                                                    <a class="product-image" title="Retis lapen casen" href="#l"><img alt="Retis lapen casen" src="http://htmldemo.themessoft.com/lilac/version5/products-images/product4.jpg"> </a>
-                                                    <div class="product-details">
-                                                        <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                        <!--access--><strong>1</strong> x <span class="price">$179.99</span>
-                                                        <p class="product-name"><a href="#">Retis lapen casen...</a> </p>
-                                                    </div>
-                                                </div>
-                                            </li>
+											<?php $getCartListingObj = getCartListingObj();
+												if($getCartListingObj){
+											?>
                                             <li class="item last">
                                                 <div class="item-inner">
                                                     <a class="product-image" title="Retis lapen casen" href="http://htmldemo.themessoft.com/lilac/version5/product_detail.html"><img alt="Retis lapen casen" src="http://htmldemo.themessoft.com/lilac/version5/products-images/product3.jpg"> </a>
@@ -260,21 +256,16 @@
                                                     </div>
                                                 </div>
                                             </li>
+											<?php }else{ echo '<li>Your cart is empty</li>';}?>
                                         </ul>
                                         <!--actions-->
                                         <div class="actions">
-                                            <button class="btn-checkout" title="Checkout" type="button"><span>Checkout</span> </button>
-                                            <a href="#" class="view-cart"><span>View Cart</span></a> 
+                                            <button class="btn-checkout" onClick="gotoPage(base_url+'checkout')" title="Checkout" type="button"><span>Checkout</span> </button>
+                                            <a href="javascript:;" onClick="gotoPage(base_url+'cart')" class="view-cart"><span>View Cart</span></a> 
                                         </div>
+										<?php }else{ echo '<li class="emptyCartWarn">Your cart is empty</li>';}?>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Top Cart -->
-                            <div id="ajaxconfig_info" style="display:none"> <a href="#/"></a>
-                                <input value="" type="hidden">
-                                <input id="enable_module" value="1" type="hidden">
-                                <input class="effect_to_cart" value="1" type="hidden">
-                                <input class="title_shopping_cart" value="Go to shopping cart" type="hidden">
                             </div>
                         </div>
                         <!-- mgk wishlist --> 
