@@ -9,10 +9,36 @@ class Checkout extends CI_Controller {
 	}
 	
 	function index(){
-		$cid 					= decode($this->session->userdata('CID'));
+		$session_id = $this->session->userdata('SESSION_ID');
+		$cid = decode($this->session->userdata('CID'));
+		
+		$aColumns=array(
+			'a.pin_code',
+			'a.is_eggless',
+			'a.actual_price',
+			'a.discount',
+			'a.total_price',
+			'a.cake_message',
+			'a.unit',
+			'a.quantity',
+			'a.delivery_date',
+			'a.delivery_time_slot',
+			
+			'd.name',
+			'd.image',
+			
+			'e.price as shipingChrg',
+		);
+		
+		$cartDetailsObj  = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.cid'=>$cid,'a.is_in_cart'=>'1'));
+
+		//echo '<pre>';print_r($cartDetailsObj);die;
+
+		
 		$addressList 			= $this->manual_model->getFullCustomerAddress(array('a.isDeleted'=>'1'), array('a.isDefault','asc'));
 		$defaultAddress			= $this->manual_model->getFullCustomerAddress(array('a.isDeleted'=>'1','a.isDefault'=>'1'), array('a.isDefault','asc'));
 		
+		$data['cartDetailsObj']	= $cartDetailsObj;
 		$data['defaultAddress']	= $defaultAddress;
 		$data['addressList'] 	= $addressList;
 		$data['stateAry'] 		= $this->common_model->getAll('sid, stateName', 'location_state', array('status'=>'1', 'isDeleted'=>'1'));

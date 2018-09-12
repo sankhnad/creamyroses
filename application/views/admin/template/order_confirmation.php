@@ -107,6 +107,7 @@ if ( $orderObj[ 0 ]->payment_mode == '1' ) {
 						$subTotal = $subTotal + $total_price;
 						if($row->shipingChrg > 0){
 							$shippingTotal = $shippingTotal + $row->shipingChrg;
+							$subTotal = $subTotal - $shippingTotal;
 						}
 						
 						
@@ -151,10 +152,10 @@ if ( $orderObj[ 0 ]->payment_mode == '1' ) {
         </table>
         <?php if($orderObj[0]->coupon!=''){
 		
-					if($couponObj->type == '1')	{
-						$discountVal = 	$subTotal*$couponObj->discount/100;
-					}else if($couponObj->type == '2'){
-						$discountVal = $couponObj->discount;
+					if($couponObj[0]->type == '1')	{
+						$discountVal = 	$subTotal*$couponObj[0]->discount/100;
+					}else if($couponObj[0]->type == '2'){
+						$discountVal = $couponObj[0]->discount;
 					}
 		
 		?>
@@ -167,12 +168,15 @@ if ( $orderObj[ 0 ]->payment_mode == '1' ) {
             <td width="25%" style="text-align:right; padding:5px 10px;"><b><?=round($discountVal,2)?></b> </td>
           </tr>
         </table>
-        <?php } ?>
+        <?php } 
+		
+		$gtandTotal = $subTotal - $discountVal;
+		?>
         <table width="100%" cellpadding="5" style="font-family:Arial, Helvetica, sans-serif; font-size:22px;">
           <tr>
             <td width="30%"></td>
             <td width="52%" style="text-align:right; padding:5px 10px;">Grand Total</td>
-            <td width="18%" style="text-align:right; padding:5px 10px;"><b> 9999</b> </td>
+            <td width="18%" style="text-align:right; padding:5px 10px;"><b> <?=round($gtandTotal,2)?></b> </td>
           </tr>
         </table></td>
     </tr>

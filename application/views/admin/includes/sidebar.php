@@ -109,14 +109,14 @@
 					</ul>
 				</li>
 				
-<!--				<li class="<?=$activeMenu == 'groups' ? 'active':''?>">
-					<a href="<?=admin_url()?>groups">
+				<li class="<?=$activeMenu == 'orders' ? 'active':''?>">
+					<a href="<?=admin_url()?>Orders">
 						<i class="menu-icon fas fa-list"></i>
-						<span class="menu-text"> Groups </span>
+						<span class="menu-text"> Orders </span>
 					</a>
 					<b class="arrow"></b>
 				</li>				
--->				
+				
 				<li class="<?=$activeMenu == 'fees_rate' ? 'active open':''?>">
 					<a href="javascript;:" class="dropdown-toggle"> <i class="menu-icon fas fa-percent"></i>
 						<span class="menu-text"> Fees and Rate</span>
