@@ -44,6 +44,7 @@
 													$productPriceObj = $this->common_model->getAll('*', 'product_price', array('id' => $cartProduct->price_id));
 													$productPriceObj = json_decode(json_encode($productPriceObj), true);
 													$productPrice = getDiscountFormat($productPriceObj[0]);
+													
 													$oreginalPriceCount += $productPrice['oreginal_price'] * $cartProduct->quantity;
 													$discountValuePriceCount += $productPrice['discount_value'] ? $productPrice['discount_value'] * $cartProduct->quantity : 0;
 												?>
@@ -72,7 +73,7 @@
 														<?php } ?>
 													</td>
 													<td>
-														<?=$productPrice['quantity_type']?>
+														<?=$productPrice['quantity'].' '.$productPrice['quantity_type']?>
 													</td>
 													<td class="text-center">
 														<div class="input-group">
@@ -97,7 +98,7 @@
 														</span>
 													</td>
 													<td class="text-center">
-														<a class="remove-item" title="Remove item" href="javascript:;"></a>
+														<a class="remove-item" onClick="removeCartItem()" title="Remove item" href="javascript:;"></a>
 													</td>
 												</tr>
 												<?php }if(!$cartProductObj){ ?>
@@ -109,7 +110,7 @@
 											<tfoot>
 												<tr class="first last">
 													<td class="a-right last" colspan="7">
-														<button onclick="gotoPage(base_url+'checkout')" class="button btn-continue" title="Continue Shopping" type="button"><span>Continue Shopping</span></button>
+														<button onclick="gotoPage(base_url)" class="button btn-continue" title="Continue Shopping" type="button"><span>Continue Shopping</span></button>
 														<?php if($cartProductObj){?>
 														<button class="button btn-empty" onClick="clearCartVal()" type="button"><span>Clear Cart</span></button>
 														<?php } ?>
@@ -160,7 +161,7 @@
 										<?php if(($oreginalPriceCount - $discountValuePriceCount) > 0){?>
 										<ul class="checkout">
 											<li>
-												<button class="button btn-proceed-checkout" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
+												<button class="button btn-proceed-checkout" gotoPage(base_url+'checkout') title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
 											</li>
 											<br>
 										</ul>

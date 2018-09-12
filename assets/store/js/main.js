@@ -1,3 +1,29 @@
+function removeCartItem(){
+	swal({
+		title: "Are you sure!!",
+		text: "Do you want to remove your all cart data?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes",
+		cancelButtonText: "No"
+	}).then(function () {
+		$.ajax({
+			url: base_url + 'cart/clearCartVal',
+			dataType: 'json',
+			type: 'POST',
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (obj){
+				timerAlert('Successful!!', 'Now!, Your cart is empty.', 'reload');
+			},
+			error: function () {
+				csrfError();
+			}
+		});
+	});
+}
 function clearCartVal(){
 	swal({
 		title: "Are you sure!!",

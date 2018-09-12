@@ -77,6 +77,7 @@ class Cart extends CI_Controller {
 				'session_id' => $session_id,
 			);
 		}
+		$data['is_in_cart'] = '1';
 		
 		$this->common_model->deleteData($table, $data);
 		echo json_encode(array('status'=>'success'));
