@@ -187,7 +187,6 @@ class Manual_model extends CI_Model {
 	function getOrderDetails($select, $where){
 		$this->db->select($select);
 		$this->db->from('order_details AS a');
-		$this->db->join('orders AS b', 'a.oid = b.order_id', 'LEFT');
 		$this->db->join('customer AS c', 'a.cid = c.id', 'LEFT');
 		$this->db->join('product AS d', 'a.pid = d.product_id', 'LEFT');
 		$this->db->join('delivery_option AS e', 'a.delivary_option_id = e.option_id', 'LEFT');
