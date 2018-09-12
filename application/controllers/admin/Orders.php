@@ -166,43 +166,30 @@ class Orders extends CI_Controller {
 			'a.discount',
 			'a.total_price',
 			'a.cake_message',
+			'a.unit',
 			'a.quantity',
 			'a.delivery_date',
 			'a.delivery_time_slot',
 			
-			
-			'b.invoice_no',
-			'b.transaction_id',
-			'b.payment_mode',
-			'b.customer_id',
-			'b.address',
-			'b.pin_code',
-			'b.phone_number',
-			'b.coupon',
-			'b.status_type',
-			'b.created_on',
-			
-			
 			'd.name',
+			'd.image',
 		);
 		
 		
-		$orderDetailsObj = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.oid'=>$oid));
 		
-		$orderObj		 = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1','order_id'=>$oid));
-		$customer_id 	 = $orderObj[0]->customer_id;
-		$billingAddressObj = $this->common_model->getAll('*', 'address', array('isDeleted'=>'1','isDefault'=>'1','cid'=>$customer_id));
-		
-		if(!$data){
-			echo json_encode(array('requestStatus'=>'error'));
-			exit;
-		}
+		$orderObj		 	 = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1','order_id'=>$oid));
+		$cid 				 = $orderObj[0]->customer_id;
+		$billingAddressObj 	 = $this->common_model->getAll('*', 'address', array('isDeleted'=>'1','isDefault'=>'1','cid'=>$cid));
+		$orderDetailsObj 	 = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.oid'=>$oid,'a.is_in_cart'=>'0'));
+
 		
 		$data['orderDetailsObj']   =  $orderDetailsObj;
 		$data['orderObj'] 		   =  $orderObj;
 		$data['orderDetailsObj']   =  $orderDetailsObj;
 		$data['billingAddressObj'] =  $billingAddressObj;
-		$this->load->view( 'admin/temolate/order_confirmation', $data);
+		//echo '<pre>';print_r($orderDetailsObj);die;		
+
+		$this->load->view( 'admin/template/order_confirmation', $data);
 
 		
 		
