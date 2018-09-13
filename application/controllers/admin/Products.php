@@ -187,13 +187,6 @@ class Products extends CI_Controller {
 		$data['slctPrice'] = $slctPrice;
 		$data['slctDiscType'] = $slctDiscType;
 		$data['selctDisc'] = $selctDisc;
-		
-		//echo '<pre>';print_r($slctQntityTypeAry);
-		//echo '<pre>';print_r($slctQntity);
-		//echo '<pre>';print_r($slctPrice);
-		//echo '<pre>';print_r($slctDiscType);
-		//echo '<pre>';print_r($selctDisc);die;
-		
 		$data['productAray'] = $productAray;
 		$data['parentArayList'] = $catOption;	
 			

@@ -297,10 +297,16 @@ if(count($slctPrice) > 0){
 														</select>
 													</td>
 													<td>
-														<input type="text" class="form-control" placeholder="Discount" name="discountValue[]" value="<?=$slctQntity[$i]?>" />
+														<input type="text" class="form-control" placeholder="Discount" name="discountValue[]" value="<?=$selctDisc[$i]?>" />
 													</td>
-													<td class="discountFinalValue"> 0.00			
-													</td>
+													<td class="discountFinalValue">
+														<?php if($slctDiscType[$i]== 'F'){
+																echo ($slctPrice[$i] - $selctDisc[$i]);
+															}else{
+																echo $slctPrice[$i] - ($slctPrice[$i]*$selctDisc[$i]/100);
+															}
+														?>
+													 </td>
 													<td class="text-center">
 														<button type="button" onClick="addRemovePriceTablBox(this, \'remove\')" class="removeMoreTbl"><i class="fas fa-minus-circle"></i></button>
 													</td>
