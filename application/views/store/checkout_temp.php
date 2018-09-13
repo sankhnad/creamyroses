@@ -9,7 +9,7 @@
 	}
 	$custInfoObj = getCustomerrData(array('id'=>decode($CID)));
 	?>
-	<title>My Wishlist | Creamy Roses</title>
+	<title>Checkout | Creamy Roses</title>
 	<?php include("includes/style.php"); ?>
 </head>
 
@@ -37,16 +37,23 @@
 					  </div>
 					</div>
 				  </div>
+					<div class="coupon-accordion">
+						<h3><span class="coupon" id="deliveryMethod">Click here to hide panel</span></h3>
+						<div class="coupon-content" id="deliveryMethodBox">
+							<div class="coupon-info">
+								This box is for time slot. Which have some comaptibility issue
+							</div>
+						</div>
+					</div>
 				</div>
 			  </div>
-			</div>
-			
+			</div>			
 			<div class="checkout-details-wrapper">
 			  <div class="row">
 				<div class="col-lg-6 col-md-6"> 
 				  <div class="billing-details-wrap">
 					<form action="#">
-					  <h3 class="shoping-checkboxt-title">Billing Details <span class="chooseAdresL">Choose Address</span></h3>
+					  <h3 class="shoping-checkboxt-title">Billing Details <span data-toggle="modal" data-target="#addressListing" onClick="$('.isShipingAddress').val('0')" class="chooseAdresL">Choose Address</span></h3>
 					  <div class="row">
 						<div class="col-lg-12">
 						  <p class="single-form-row">
@@ -117,7 +124,7 @@
 						  <div class="checkout-box-wrap">
 							<label id="chekout-box-2"> <input type="checkbox"> Ship to a different address?</label>
 							<div class="ship-box-info">
-								<h3 class="shoping-checkboxt-title">Shiping Address <span class="chooseAdresL">Choose Address</span></h3>
+								<h3 class="shoping-checkboxt-title">Shiping Address <span onClick="$('.isShipingAddress').val('1')" data-toggle="modal" data-target="#addressListing" class="chooseAdresL">Choose Address</span></h3>
 							  <div class="row">
 								<div class="col-lg-12">
 								  <p class="single-form-row">
@@ -273,6 +280,84 @@
 			</div>
 		</div>
 	</section>
+	
+	<div id="addressListing" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Select Address</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" class="isShipingAddress" />
+						   
+					<?php foreach($addressList as $addressData){?>				
+						<div class="col-sm-4">
+							<div class="boxAddressDis <?=$addressData->isDefault == '1' ? 'defaultAdsULI':'' ?>">
+								<div class="defultBxRa">Default Address</div>
+								<ul class="addressULLI">
+									<?php
+									$aidEncripted = encode($addressData->aid);
+									if($addressData->type == '0'){
+										$aTyp = 'Home Address';
+										$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+									}else if($addressData->type == '1'){
+										$aTyp = 'Office Address';
+										$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+										echo '<li>' . $addressData->remarks . ''.$aTyp.'</li>';
+										$aTyp = '';
+									}else if($addressData->type == '2'){
+										$aTyp = 'Others';
+										$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+									}
+									if ( $addressData->name ) {
+										echo '<li>' . $addressData->name . ''.$aTyp.'</li>';
+									}
+									if ( $addressData->address_line_1 ) {
+										echo '<li>' . $addressData->address_line_1 . ',</li>';
+									}
+									if ( $addressData->address_line_2 ) {
+										echo '<li>' . $addressData->address_line_2 . ',</li>';
+									}
+									if ( $addressData->landmark ) {
+										echo '<li>' . $addressData->landmark . ',</li>';
+									}
+									if ( $addressData->city ) {
+										echo '<li>' . $addressData->city . ', ' . $addressData->cityName . ',</li>';
+									}
+									if ( $addressData->pin ) {
+										echo '<li>India - ' . $addressData->pin . '</li>';
+									} else {
+										echo '<li>India</li>';
+									}
+									if ( $addressData->mobile ) {
+										echo '<li>Phone number: ' . $addressData->mobile . '</li>';
+									}
+
+									if ($addressData->type == '2'){
+										echo '<li>Remarks: ' . $addressData->remarks . '</li>';
+									}
+									?>
+								</ul>
+								<ul class="actionAdresULLI">
+									<li><a href="javascript:;">Select Address</a></li>
+									<li><a target="_blank" href="<?=base_url();?>profile/getAddress/<?=$aidEncripted?>">Edit</a></li>
+									<li><a href="javascript:void(0)" onClick="deleteAddress(this, '<?=$aidEncripted?>')">Delete</a></li>
+								</ul>
+							</div>
+						</div>
+					<?php } ?>
+					<div class="clearfix"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+
 	<?php include("includes/footer.php"); ?>
 	<?php include("includes/script.php"); ?>
 	<script>
@@ -282,12 +367,18 @@
 $( '#showcoupon' ).on('click', function() {
     $('#checkout-coupon' ).slideToggle(500);
 });
+$( '#deliveryMethod' ).on('click', function() {
+    $('#deliveryMethodBox' ).slideToggle(500);
+});
 $("#chekout-box-2").on("change",function(){
     $(".ship-box-info").slideToggle("100");
 });
 
 	</script>
 	<style>
+		#deliveryMethodBox {
+		  display: block;
+		}
 		.btCor {
 			  background-color: #d8d8d8 !important;
 			  padding: 2px !important;
@@ -311,7 +402,7 @@ $("#chekout-box-2").on("change",function(){
   color: #515151;
   font-size: 14px;
   font-weight: 400;
-  margin: 0 0 30px;
+  margin: 0 0 15px;
   padding: 20px;
   position: relative;
 }

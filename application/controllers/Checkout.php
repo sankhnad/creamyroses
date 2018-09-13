@@ -42,6 +42,11 @@ class Checkout extends CI_Controller {
 		$data['defaultAddress']	= $defaultAddress;
 		$data['addressList'] 	= $addressList;
 		$data['stateAry'] 		= $this->common_model->getAll('sid, stateName', 'location_state', array('status'=>'1', 'isDeleted'=>'1'));
+		
+		$addressList = $this->manual_model->getFullCustomerAddress(array('a.isDeleted'=>'1'), array('a.isDefault','asc'));
+
+		$data['addressList'] = $addressList;
+		
 		$this->load->view('store/checkout_temp', $data);
 		//$this->load->view('store/checkout', $data);
 	}

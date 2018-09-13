@@ -7409,6 +7409,7 @@ ul#magicat li .open-close,
 	cursor: pointer;
 	line-height: 16px;
 	color: #333;
+	font-weight: bold;
 }
 
 .sidebar .block-content li.last {
