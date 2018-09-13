@@ -32,91 +32,6 @@
 							}?>
                         </ul>
                     </div>
-					<!--<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <ul>
-                            <li><a href="#">Nashik </a></li>
-                            <li><a href="#">Faridabad</a></li> 
-                            <li><a href="#">Meerut </a></li>
-                            <li><a href="#">Rajkot </a></li>
-                            <li><a href="#">Kalyan-Dombivali </a></li>
-                            <li><a href="#">Vasai-Virar </a></li>
-                            <li><a href="#">Varanasi </a></li>
-                            <li><a href="#">Srinagar</a></li> 
-                            <li><a href="#">Aurangabad </a></li>
-                            <li><a href="#">Dhanbad </a></li>
-                            <li><a href="#">Amritsar</a></li> 
-                            <li><a href="#">Navi Mumbai </a></li>
-                            <li><a href="#">Allahabad </a></li>
-                            <li><a href="#">Ranchi </a></li>
-                            <li><a href="#">Howrah (city area) </a></li>
-                            <li><a href="#">Jabalpur </a></li>
-                            <li><a href="#">Gwalior </a></li>
-                            <li><a href="#">Vijayawada </a></li>
-                            <li><a href="#">Jodhpur </a></li>
-                            <li><a href="#">Raipur </a></li>
-                            <li><a href="#">Kota[22] </a></li>
-                            <li><a href="#">Guwahati </a></li>
-                            <li><a href="#">Chandigarh </a></li>
-                            <li><a href="#">Solapur</a></li> 
-                            <li><a href="#">Hubballi-Dharwad</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <ul>
-                            <li><a href="#">Tiruchirappalli[23] </a></li>
-                            <li><a href="#">Bareilly </a></li>
-                            <li><a href="#">Mysore </a></li>
-                            <li><a href="#">Tiruppur</a></li> 
-                            <li><a href="#">Gurgaon </a></li>
-                            <li><a href="#">Aligarh </a></li>
-                            <li><a href="#">Jalandhar </a></li>
-                            <li><a href="#">Bhubaneswar </a></li>
-                            <li><a href="#">Salem </a></li>
-                            <li><a href="#">Mira-Bhayandar </a></li>
-                            <li><a href="#">Warangal[24] </a></li>
-                            <li><a href="#">Thiruvananthapuram </a></li>
-                            <li><a href="#">Guntur[25]</a></li> 
-                            <li><a href="#">Bhiwandi </a></li>
-                            <li><a href="#">Saharanpur </a></li>
-                            <li><a href="#">Gorakhpur </a></li>
-                            <li><a href="#">Bikaner </a></li>
-                            <li><a href="#">Amravati </a></li>
-                            <li><a href="#">Noida </a></li>
-                            <li><a href="#">Jamshedpur</a></li> 
-                            <li><a href="#">Bhilai </a></li>
-                            <li><a href="#">Cuttack </a></li>
-                            <li><a href="#">Firozabad</a></li> 
-                            <li><a href="#">Kochi</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <ul>
-                            <li><a href="#">Nellore[26] </a></li>
-                            <li><a href="#">Bhavnagar </a></li>
-                            <li><a href="#">Dehradun </a></li>
-                            <li><a href="#">Durgapur </a></li>
-                            <li><a href="#">Asansol </a></li>
-                            <li><a href="#">Nanded </a></li>
-                            <li><a href="#">Kolhapur </a></li>
-                            <li><a href="#">Ajmer </a></li>
-                            <li><a href="#">Akola </a></li>
-                            <li><a href="#">Gulbarga </a></li>
-                            <li><a href="#">Jamnagar </a></li>
-                            <li><a href="#">Ujjain </a></li>
-                            <li><a href="#">Loni </a></li>
-                            <li><a href="#">Siliguri </a></li>
-                            <li><a href="#">Jhansi </a></li>
-                            <li><a href="#">Ulhasnagar </a></li>
-                            <li><a href="#">Jammu </a></li>
-                            <li><a href="#">Sangli-Miraj & Kupwad</a></li> 
-                            <li><a href="#">Mangalore </a></li>
-                            <li><a href="#">Erode[27] </a></li>
-                            <li><a href="#">Belgaum </a></li>
-                            <li><a href="#">Ambattur</a></li> 
-                            <li><a href="#">Tirunelveli </a></li>
-                            <li><a href="#">Malegaon</a></li>
-                        </ul>
-                    </div>-->
 				</div>
             </div>
         </div>
@@ -140,8 +55,7 @@
 								</div>
 							<?php } ?>
                             <!--<div class="block-company-wrapper hidden-xs"><a title="Membership" href="membership.php">Membership</a></div>-->
-							<?php if(isset($CID)){?>
-							
+							<?php if(isset($CID)){?>							
 							<div class="dropdown block-company-wrapper hidden-xs">
 								<a class="block-company dropdown-toggle" href="#" type="button" data-toggle="dropdown">
 									Hi, <?=isset($customerName)?$customerName:'';?> <span class="caret"></span>
@@ -153,12 +67,10 @@
 									<li><a href="<?=base_url()?>logout">Logout </a> </li>
 								</ul>
 							</div>
-
-<!--							<div class="block-company-wrapper hidden-xs">
+							<!-- <div class="block-company-wrapper hidden-xs">
 								<a title="Wishlist" href="wishlist">Wishlist</a>
-							</div>
-
--->							<?php } ?>
+							</div> -->
+							<?php } ?>
                             <div class="block-company-wrapper hidden-xs"><a title="Sell on Creamy Roses" href="<?=base_url()?>contact-us">Sell on Creamy Roses</a></div>
                         </div>
                     </div>
@@ -238,32 +150,58 @@
                                 <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#"><span class="price hidden-xs">Shopping Cart</span> <span class="cart_count hidden-xs shoppingCartValue">Cart empty</span> </a></div>
                                 <div>
                                     <div class="top-cart-content">
-										<?php $getCartListingObj = getCartListingObj();
+										<?php  $getCartListingObj = getCartListingObj();
 												if($getCartListingObj){
 											?>
                                         <!--block-subtitle-->
                                         <ul class="mini-products-list" id="cart-sidebar">
-											<?php $getCartListingObj = getCartListingObj();
-												if($getCartListingObj){
+											<?php 
+												$totalOrderQty = $afterDiscount_price = $beforeDiscount_price = $totalPriceAfterDiscount = 0;
+												foreach($getCartListingObj as $getCartListing){
+													
+													if(!$getCartListing->product_price){
+														removeInvalidCart($getCartListing->od_id);
+														continue;
+													}
+													$productPriceObj = json_decode(json_encode($getCartListing), true);
+													
+													$productPrice = getDiscountFormat($productPriceObj);
+													
+													$beforeDiscount_price += $productPrice['oreginal_price'] ? ($productPrice['oreginal_price'] * $getCartListing->order_quantity) : 0;
+													
+													
+													$afterDiscount_price += $productPrice['final_price'] * $getCartListing->order_quantity;
+													
+													$totalOrderQty += $getCartListing->order_quantity;
 											?>
                                             <li class="item last">
                                                 <div class="item-inner">
-                                                    <a class="product-image" title="Retis lapen casen" href="http://htmldemo.themessoft.com/lilac/version5/product_detail.html"><img alt="Retis lapen casen" src="http://htmldemo.themessoft.com/lilac/version5/products-images/product3.jpg"> </a>
+                                                    <a class="product-image" title="<?=$getCartListing->name?>" href="<?=base_url();?><?=$getCartListing->url_slug?>"><img alt="<?=$getCartListing->name?>" src="<?=$iURL_product?><?=$getCartListing->image?>"> </a>
                                                     <div class="product-details">
-                                                        <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                        <!--access--><strong>1</strong> x <span class="price">$80.00</span>
-                                                        <p class="product-name"><a href="#">Retis lapen casen...</a> </p>
+                                                        <div class="access"><a class="btn-remove1" onClick="removeCartItem(this, <?=$getCartListing->od_id?>)" href="javascript:;">Remove</a> <a class="btn-edit" onClick="gotoPage(base_url+'cart')" title="Edit item" href="javascript:;"><i class="icon-pencil"></i></a> </div>
+                                                        
+														<strong><?=$getCartListing->quantity?> <?=$getCartListing->quantity_type?></strong> <span class="price"><?=$getCartListing->order_quantity?> &nbsp; x &nbsp; <?=$productPrice['final_price']?> =  <?=number_format(($productPrice['final_price'] * $getCartListing->order_quantity),2)?></span>
+                                                        <p class="product-name"><a href="<?=base_url();?><?=$getCartListing->url_slug?>"><?=trimData($getCartListing->name, 30)?></a> </p>
                                                     </div>
                                                 </div>
                                             </li>
-											<?php }else{ echo '<li>Your cart is empty</li>';}?>
+											<?php } ?>
                                         </ul>
+										<script>
+											$('.shoppingCartValue').html('<?=$totalOrderQty?> Items/ <i class="fas fa-rupee-sign"></i> <?=$afterDiscount_price?>');
+										</script>
+										
+										
                                         <!--actions-->
                                         <div class="actions">
                                             <button class="btn-checkout" onClick="gotoPage(base_url+'checkout')" title="Checkout" type="button"><span>Checkout</span> </button>
                                             <a href="javascript:;" onClick="gotoPage(base_url+'cart')" class="view-cart"><span>View Cart</span></a> 
                                         </div>
-										<?php }else{ echo '<li class="emptyCartWarn">Your cart is empty</li>';}?>
+										<?php 
+											}else{
+												echo '<li class="emptyCartWarn">Your cart is empty</li>';
+											}
+										?>
                                     </div>
                                 </div>
                             </div>

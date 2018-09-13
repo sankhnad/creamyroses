@@ -1,3 +1,21 @@
+function updateCartValu(){
+	$.ajax({
+		url: base_url + 'cart/updateCartValu',
+		dataType: 'json',
+		type: 'POST',
+		beforeSend: function () {
+			showLoader();
+		},
+		success: function(obj){
+			console.log(obj);
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+
+}
+
 function plusMinusCart(id, quantity){
 	var product_final_price = $('.product_final_price'+id+' m').html().replace(/,/g , '');
 	$('.product_total_price'+id+' m').html((product_final_price * parseFloat(quantity)).toFixed(2));
@@ -62,7 +80,7 @@ function removeCartItem(selfObj, id){
 				showLoader();
 			},
 			success: function (){
-				timerAlert('Successful!!', 'Now!, Your cart is empty.', '', 500);
+				timerAlert('Successful!!', 'Now!, Your cart is empty.', 'reload', 500);
 				$(selfObj).closest('tr').remove();
 			},
 			error: function () {
@@ -104,10 +122,6 @@ function addToCart(selfObj, type){
 		var msg = 'Please check delivery PIN code';
 	}else if(!$('.price_id').val()){
 		var msg = 'Please select cake weight';
-	}else if(!$('.delivery_date').val()){
-		var msg = 'Please select delivery date';
-	}else if(!$('select.delivery_time_slot').val()){
-		var msg = 'please select delivery time';
 	}else if(!$('.pid').val()){
 		var msg = 'Please refresh your page';
 	}
@@ -140,6 +154,7 @@ function addToCart(selfObj, type){
 				$(selfObj).html('Add more to cart').removeClass('disabled');
 				scrollToTop('#search_mini_form');
 			}
+			updateCartValu();
 		},
 		error: function () {
 			csrfError();
@@ -894,14 +909,16 @@ function getPriceByWeight(weightId,selfObj){
 			showLoader();
 		},
 		success: function (obj) {
+			console.log(obj);
+			
 			var finalPrice, pSymbol, rSymbol, discountedPrice = '';
 			finalPrice = pSymbol = rSymbol = '';
 			
-			var price		 = obj[0].product_price;
-			var discountVal	 = obj[0].discount;
+			var price		 = parseFloat(obj[0].product_price);
+			var discountVal	 = parseFloat(obj[0].discount);
 			var discountType = obj[0].discount_type;
-			var quantity 	 = obj[0].quantity;
-			var quantity_type= obj[0].quantity_type;			
+			var quantity 	 = parseFloat(obj[0].quantity);
+			var quantity_type= obj[0].quantity_type;
 			
 			if(discountType == 'F'){
 				finalPrice = price - discountVal;
@@ -910,8 +927,9 @@ function getPriceByWeight(weightId,selfObj){
 				finalPrice = price - (price*discountVal/100);
 				pSymbol = '%';
 			}
+			
 			$('.before_discount').html(price);	
-			$('.final_price').html(finalPrice.toFixed(2));
+			$('.final_price').html(parseFloat(finalPrice).toFixed(2));
 			$('.discount_type m').html(rSymbol+' '+discountVal+''+pSymbol);
 			$(selfObj).addClass('active').siblings().removeClass('active');
 			

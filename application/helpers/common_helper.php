@@ -351,13 +351,16 @@ if(! function_exists('getTemplateEnSList')){
 }
 
 if(! function_exists('convertToSQLDate')){
-	function convertToSQLDate($date, $symbol = '/'){
+	function convertToSQLDate($date='', $symbol = '/'){
+		if(!$date){
+			return date("Y-m-d H:i:s", time());
+		}
 		$bothDate = explode("-", $date);
 		$startDate = explode( $symbol, trim($bothDate[0]));
-		$startDate = $startDate[2].'-'.$startDate[1].'-'.$startDate[0];
+		$startDate = $startDate[2].'-'.$startDate[0].'-'.$startDate[1];
 		if(isset($bothDate[1])){
 			$endDate = explode( $symbol, trim($bothDate[1]));			
-			$endDate = $endDate[2].'-'.$endDate[1].'-'.$endDate[0];
+			$endDate = $endDate[2].'-'.$endDate[0].'-'.$endDate[1];
 			return array($startDate, $endDate);
 		}else{
 			return $startDate;
@@ -479,8 +482,6 @@ if(! function_exists('getProductist')){
 if(! function_exists('getCustomerrData')){
     function getCustomerrData($where) {
 		$CI = & get_instance();
-		$ref = [];
-		$items = [];
 		$customertObj = $CI->common_model->getAll('*', 'customer', $where);
 		return $customertObj;
 	}
@@ -520,35 +521,32 @@ if(! function_exists('getProductPrice')){
 		}		
 
 		$productPriceObj = $CI->common_model->getAll( '*', 'product_price', $where, 'product_price asc');
-
 		return $productPriceObj;
-
 	}
-
 }
 
 if(! function_exists('getDiscount')){
     function getDiscount($type, $prdctAmnt, $discountVal) {
 		$totalDiscount = 0;
 		if($type == 'F'){
-			$totalDiscount = $prdctAmnt - $discountVal;
+			$totalDiscount = (float)$prdctAmnt - (float)$discountVal;
 		}else if($type == 'P'){
-			$totalDiscount = $prdctAmnt - ($prdctAmnt*$discountVal/100);
+			$totalDiscount = (float)$prdctAmnt - ((float)$prdctAmnt*(float)$discountVal/100);
 		}
 		return $totalDiscount;
 	}
 }
 
-
 if(! function_exists('getDiscountFormat')){
-	function getDiscountFormat($obj){		
+	function getDiscountFormat($obj){	
+		
 		$finalPrice		= '';
 		$price		 	= $obj['product_price'];
 		$discountVal	= $obj['discount'];
 		$discountType 	= $obj['discount_type'];
-		$quantity 	 	= $obj['quantity'];
+		$quantity 	 	= isset($obj['order_quantity']) ? $obj['order_quantity'] : $obj['quantity'];
 		$quantity_type	= $obj['quantity_type'];			
-
+		
 		if($discountType == 'F'){
 			$finalPrice = $price - $discountVal;
 		}else if($discountType == 'P'){
@@ -569,6 +567,7 @@ if(! function_exists('getDiscountFormat')){
 		);
 	}
 }
+
 if(! function_exists('updateOrderStatus')){
     function updateOrderStatus($oderId,$transactionId) {
 		$CI = & get_instance();
@@ -624,35 +623,49 @@ if(! function_exists('getOrderDetails')){
 		return $orderObj;
 	}
 }
+
 if(! function_exists('getCartListingObj')){
 	function getCartListingObj(){
 		$CI = & get_instance();
-		$table = 'order_details';
 		$cid = decode($CI->session->userdata('CID'));
-		$where = array(
-			'is_in_cart'=>'1'
+		$select = array(
+			'a.id as od_id',
+			'a.pid',
+			'a.price_id',
+			'a.quantity as order_quantity',
+			'd.image',
+			'd.url_slug',
+			'd.name',
+			'f.quantity_type',
+			'f.quantity',
+			'f.product_price',
+			'f.discount_type',
+			'f.discount',
 		);
+		
+		$where = array(
+			'a.is_in_cart'=>'1'
+		);
+		if($cid){
+			$where['a.cid'] = $cid;
+		}else{
+			$where['a.session_id'] = $CI->session->userdata('SESSION_ID');
+		}
+		return $CI->manual_model->getOrderDetails($select, $where);
+	}
+}
+
+if(! function_exists('removeInvalidCart')){
+	function removeInvalidCart($id){
+		$CI = & get_instance();
+		$cid = decode($CI->session->userdata('CID'));
+		$where = array('id'=> $id, 'is_in_cart'=>'1');
 		if($cid){
 			$where['cid'] = $cid;
 		}else{
 			$where['session_id'] = $CI->session->userdata('SESSION_ID');
 		}
-		
-		$data['cartProductObj'] = $CI->common_model->getAll('*', $table, $where);
-		if($data['cartProductObj']){
-/*			$productInfo = $CI->common_model->getAll('*', 'product', array('product_id' => $cartProduct->pid, 'status'=>'1'));
-			if(!$productInfo){
-			continue;
-			}
-			$productPriceObj = $CI->common_model->getAll('*', 'product_price', array('id' => $cartProduct->price_id));
-			$productPriceObj = json_decode(json_encode($productPriceObj), true);
-			$productPrice = getDiscountFormat($productPriceObj[0]);
-
-			$beforeDiscount_price += $productPrice['oreginal_price'] ? ($productPrice['oreginal_price'] * $cartProduct->quantity) : 0;
-
-			$afterDiscount_price += $productPrice['final_price'] * $cartProduct->quantity;*/
-		}
-		return($data);
+		return $CI->common_model->deleteData('order_details', $where);
 	}
 }
 ?>

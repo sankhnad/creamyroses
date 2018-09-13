@@ -38,10 +38,12 @@
 												$beforeDiscount_price = $afterDiscount_price = 0;
 												foreach($cartProductObj as $cartProduct){
 													$productInfo = $this->common_model->getAll('*', 'product', array('product_id' => $cartProduct->pid, 'status'=>'1'));
-													if(!$productInfo){
+													
+													$productPriceObj = $this->common_model->getAll('*', 'product_price', array('id' => $cartProduct->price_id));
+													if(!$productPriceObj){
 														continue;
 													}
-													$productPriceObj = $this->common_model->getAll('*', 'product_price', array('id' => $cartProduct->price_id));
+													
 													$productPriceObj = json_decode(json_encode($productPriceObj), true);
 													$productPrice = getDiscountFormat($productPriceObj[0]);
 													

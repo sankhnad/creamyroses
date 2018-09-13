@@ -30,7 +30,7 @@ class Login extends CI_Controller {
 		$remember = $this->input->post( 'remember');
 		//$smsVerify = $this->manual_model->check_isSMS_verifieds($email);
 		$result = $this->manual_model->checkLoginCustomerEmail($email);
-
+		
 		$mobile 	 = $result[0]->mobile;
 		$isSmsVerify = $result[0]->isSMS_verified;
 
@@ -197,7 +197,7 @@ class Login extends CI_Controller {
 		$otp	    = $this->input->post('otp');
 		$checkOtp 	= $this->common_model->getAll("id", 'customer', array('mobile_otp'=>$otp,'mobile'=>$mobile));
 		
-		if(count($checkOtp) > 0){
+		if($checkOtp){
 			$data = array(
 				'isSMS_verified' => '1',
 			);

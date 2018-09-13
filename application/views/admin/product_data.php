@@ -301,9 +301,9 @@ if(count($slctPrice) > 0){
 													</td>
 													<td class="discountFinalValue">
 														<?php if($slctDiscType[$i]== 'F'){
-																echo ($slctPrice[$i] - $selctDisc[$i]);
+																echo ((float)$slctPrice[$i] - (float)$selctDisc[$i]);
 															}else{
-																echo $slctPrice[$i] - ($slctPrice[$i]*$selctDisc[$i]/100);
+																echo ((float)$slctPrice[$i] - ((float)$slctPrice[$i]*(float)$selctDisc[$i]/100));
 															}
 														?>
 													 </td>
