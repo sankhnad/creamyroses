@@ -51,6 +51,23 @@ class Login extends CI_Controller {
 					$cid = $this->session->userdata('CID');
 					$SESSION_ID = $this->session->userdata('SESSION_ID');
 					
+					$previousCartObj = $this->common_model->getAll('id, pid', 'order_details', array('cid'=>$result[0]->id, 'is_in_cart'=>'1'));
+					
+					if($previousCartObj){
+						$currentCartObj = $this->common_model->getAll('id, pid', 'order_details', array('session_id'=> $SESSION_ID, 'is_in_cart'=>'1'));
+						$currentCartAry = json_decode(json_encode($currentCartObj));
+						$currentCart = array_column($currentCartAry, 'pid', 'id');
+						
+						$previousCartAry = json_decode(json_encode($previousCartObj));
+						$previousCart = array_column($previousCartAry, 'pid', 'pid');
+						
+						foreach($currentCartObj as $currentCartData){
+							if(in_array($currentCartData->pid, $previousCart)){
+								$this->common_model->deleteData('order_details', array('cid'=>$result[0]->id, 'is_in_cart'=>'1', 'pid'=>$currentCartData->pid));
+								echo 'dddd';
+							}
+						}
+					}
 					$this->common_model->updateData('order_details', array('session_id'=> $SESSION_ID), array('cid'=>$result[0]->id));
 					
 					if($remember){
