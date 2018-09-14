@@ -645,7 +645,6 @@ function editLocation(selfObj, id, type) {
 			if (type == 'state') {
 				$('input[name="sid"]').val(id);
 				$('input[name="name[]"]').val(data.stateName);
-				
 			} else if (type == 'city') {
 				$('select[name="sid"]').val(data.sid);
 				$('input[name="cid"]').val(id);
@@ -3529,6 +3528,7 @@ function editDelivery(selfObj, id, type) {
 			$('input[name="did"]').val(data.did);
 			$('select[name="tid[]"]').val(data.slotId);
 			$('input[name="name"]').val(data.optName);
+			$('input[name="price"]').val(data.price);
 
 			$('.acnLbl').html('Update');
 			$('.custmBPls').attr('disabled',true);

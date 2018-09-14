@@ -64,7 +64,6 @@ class Login extends CI_Controller {
 						foreach($currentCartObj as $currentCartData){
 							if(in_array($currentCartData->pid, $previousCart)){
 								$this->common_model->deleteData('order_details', array('cid'=>$result[0]->id, 'is_in_cart'=>'1', 'pid'=>$currentCartData->pid));
-								echo 'dddd';
 							}
 						}
 					}

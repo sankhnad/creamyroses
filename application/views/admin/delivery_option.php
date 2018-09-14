@@ -85,7 +85,7 @@
 
 		<!-- Modal:  Add Edit State Modal  -  Modal -->
 		<div id="locationAddEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
+		  <div class="modal-dialog modal-md">
 			<div class="modal-content">
 			  <form id="editNewDelivery">
 				<input type="hidden" name="did" />
@@ -95,7 +95,7 @@
 				</div>
 				<div class="modal-body">
 				<div class="row">
-				  	<div class="form-group col-md-11">
+				  	<div class="form-group col-md-12">
 						<label class="required">Delivery Option Name</label>
 							<input type="text" name="name" class="form-control" placeholder="Enter Delivery Option Name" required>
 					</div>
@@ -103,15 +103,16 @@
 				</div>
 				
 				<div class="row">
-				  	<div class="form-group col-md-11">
+				  	<div class="form-group col-md-12">
 						<label class="required">Price</label>
-							<input type="text" name="price" class="form-control" placeholder="Enter Price" required>
+						<input type="text" name="price" class="form-control" placeholder="Enter Price" required>
 					</div>
 
 				</div>
 				<div class="form-group">
-					<label>Time Slot List</label>
-					<select class="selectpicker" multiple="multiple" data-width="100%" name="tid[]" title="Select Time Slot" data-live-search="true" required>
+					<label>Time Slot List</label>						
+					<select class="selectpicker form-control" title="Select Time Slot" name="tid[]" data-live-search="true" data-width="100%" data-selected-text-format="count" data-size="5" multiple data-actions-box="true" required>
+						
                        <?php $slotList = ''; 
 					   		foreach($slotAry as $slotData){
 					   		
@@ -131,10 +132,8 @@
 			</div>
 		  </div>
 		</div>
-	
-	
-		<?php include('includes/footer.php')?>
 	</div>
+	
 	<!-- basic scripts -->
 	<?php include('includes/scripts.php')?>
 	<script src="<?=$iURL_assets?>admin/js/custom.js"></script>
