@@ -28,10 +28,10 @@
 					<h3>Have a coupon? <span class="coupon" id="showcoupon">Click here to enter your code</span></h3>
 					<div class="coupon-content" id="checkout-coupon">
 					  <div class="coupon-info">
-						<form action="">
+						<form action="#">
 						  <p class="checkout-coupon">
-							<input type="text" placeholder="Coupon code" id="couponCode">
-							<button type="submit" class="btn button-apply-coupon" name="apply_coupon" value="Apply coupon" onClick="checkCoupon(this)">Apply coupon</button>
+							<input type="text" placeholder="Coupon code">
+							<button type="submit" class="btn button-apply-coupon" name="apply_coupon" value="Apply coupon">Apply coupon</button>
 						  </p>
 						</form>
 					  </div>
@@ -47,72 +47,71 @@
 					</div>
 				</div>
 			  </div>
-			</div>		
-			<form id="order_form">	
+			</div>			
 			<div class="checkout-details-wrapper">
 			  <div class="row">
 				<div class="col-lg-6 col-md-6"> 
 				  <div class="billing-details-wrap">
-					
+					<form action="#">
 					  <h3 class="shoping-checkboxt-title">Billing Details <span data-toggle="modal" data-target="#addressListing" onClick="$('.isShipingAddress').val('0')" class="chooseAdresL">Choose Address</span></h3>
 					  <div class="row">
 						<div class="col-lg-12">
 						  <p class="single-form-row">
 							<label>Full Name <span class="required">*</span></label>
-							<input type="text" name="billing_name" required>
+							<input type="text" name="name" required>
 						  </p>
 						</div>								  
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>Email address <span class="required">*</span></label>
-							<input type="text" name="billing_email">
+							<input type="text" name="Email address">
 						  </p>
 						</div>
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>Mobile <span class="required">*</span></label>
-							<input type="text" name="billing_mobile" required>
+							<input type="text" name="mobile" required>
 						  </p>
 						</div>
 						<div class="col-lg-12">
 						  <p class="single-form-row">
 							<label>Street address <span class="required">*</span></label>
-							<input type="text" placeholder="House number and street name" name="billing_address_line_1" required>
+							<input type="text" placeholder="House number and street name" name="address_line_1" required>
 						  </p>
 						</div>
 						<div class="col-lg-12">
 						  <p class="single-form-row">
-							<input type="text" placeholder="Apartment, suite, unit etc. (optional)" name="billing_address_line_2">
+							<input type="text" placeholder="Apartment, suite, unit etc. (optional)" name="address_line_2">
 						  </p>
 						</div>
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>Postcode / ZIP  <span class="required">*</span></label>
-							<input type="text" name="billing_pin" required>
+							<input type="text" name="pin" required>
 						  </p>
 						</div>
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>Town / City <span class="required">*</span></label>
-							<input type="text" name="billing_city" required>
+							<input type="text" name="city" required>
 						  </p>
 						</div>
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>State<span class="required">*</span></label>
-							<input type="text" name="billing_stateCode" required>
+							<input type="text" name="stateCode" required>
 						  </p>
 						</div>
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>Land Mark</label>
-							<input type="text" name="billing_landmark">
+							<input type="text" name="landmark">
 						  </p>
 						</div>
 						<div class="col-lg-12">
 						  <p class="single-form-row">
 							<label>Remarks</label>
-							<input type="text" name="billing_remarks">
+							<input type="text" name="remarks">
 						  </p>
 						</div>
 						
@@ -130,7 +129,7 @@
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>Full Name <span class="required">*</span></label>
-									<input type="text" name="name" >
+									<input type="text" name="name" required>
 								  </p>
 								</div>								  
 								<div class="col-lg-6">
@@ -142,13 +141,13 @@
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Mobile <span class="required">*</span></label>
-									<input type="text" name="mobile" >
+									<input type="text" name="mobile" required>
 								  </p>
 								</div>
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>Street address <span class="required">*</span></label>
-									<input type="text" placeholder="House number and street name" name="address_line_1" >
+									<input type="text" placeholder="House number and street name" name="address_line_1" required>
 								  </p>
 								</div>
 								<div class="col-lg-12">
@@ -159,19 +158,19 @@
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Postcode / ZIP  <span class="required">*</span></label>
-									<input type="text" name="pin" >
+									<input type="text" name="pin" required>
 								  </p>
 								</div>
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Town / City <span class="required">*</span></label>
-									<input type="text" name="city" >
+									<input type="text" name="city" required>
 								  </p>
 								</div>
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>State<span class="required">*</span></label>
-									<input type="text" name="stateCode" >
+									<input type="text" name="stateCode" required>
 								  </p>
 								</div>
 								<div class="col-lg-12">
@@ -198,6 +197,7 @@
 						  </p>
 						</div>
 					  </div>
+					</form>
 				  </div>
 				  <!-- billing-details-wrap end --> 
 				</div>
@@ -219,7 +219,7 @@
 						  <tbody>
 							  <?php  
 								$getCartListingObj = getCartListingObj();
-								$totalOrderQty = $afterDiscount_price = $beforeDiscount_price = $totalPriceAfterDiscount = $afterCouponDiscount_Price = $beforeCouponDiscount_Price = 0;
+								$totalOrderQty = $afterDiscount_price = $beforeDiscount_price = $totalPriceAfterDiscount = 0;
 								if($getCartListingObj){
 									
 									foreach($getCartListingObj as $getCartListing){
@@ -232,7 +232,6 @@
 										$afterDiscount_price += $productPrice['final_price'] * $getCartListing->order_quantity;
 										
 										$totalOrderQty += $getCartListing->order_quantity;
-										
 							  	?>
 									<tr class="cart_item">
 									  <td class="product-name" width="70%"> <?=$getCartListing->name?> &nbsp; 
@@ -251,51 +250,13 @@
 							  <th>Cart Subtotal</th>
 							  <td class="text-right"><span class="amount"><strong><i class="fas fa-rupee-sign"></i> <?=number_format($beforeDiscount_price,2)?></strong></span></td>
 							</tr>
-							
 							<tr class="shipping">
 							  <th>Discount</th>
 							  <td class="text-right"><strong><span class="amount"><i class="fas fa-rupee-sign"></i> <?=number_format(($beforeDiscount_price - $afterDiscount_price),2)?></span></strong></td>
 							</tr>
-							
-							<?php
-										$afterCouponDiscount_Price = $afterDiscount_price;
-										
-										$couponCode = '';
-										$couponCode = $this->session->userdata('COUPON_CODE');
-										$couponCodeObj = $this->session->userdata('COUPON_DATA');
-										
-										$couponCal  = 0;
-										$couponSign = '';
-										$discountVal = 0;										
-
-										//echo "==".$beforeCouponDiscount_Price = $beforeDiscount_price - $afterDiscount_price;
-										
-										if(isset($couponCode)){
-											$couponType  = $couponCodeObj[0]->type;
-											$discountVal = $couponCodeObj[0]->discount;
-											if($couponType == 1){
-												$couponCal = $afterDiscount_price*$discountVal/100;
-												$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
-												$couponSign = '%';
-											}else{
-												$couponCal = $afterDiscount_price*$discountVal/100;
-												$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
-												$couponSign = '<i class="fas fa-rupee-sign"></i>';
-											}
-										}
-										
-										
-
-							?>
-							
-							<tr class="couponDiv <?=$couponCode !=''?'':'hide';?>" >
-							  <th>Coupon Discount (<?=number_format($discountVal,2).'&nbsp;'.$couponSign?>)</th>
-							  <td class="text-right"><strong><span class="amount"><i class="fas fa-rupee-sign"></i> <?=number_format(($couponCal),2)?></span></strong></td>
-							</tr>
-
 							<tr class="order-total">
 							  <th>Order Total</th>
-							  <td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="total_amount"> <?=number_format($afterCouponDiscount_Price,2)?></span></strong></td>
+							  <td class="text-right"><strong><span class="amount"><i class="fas fa-rupee-sign"></i> <?=number_format($afterDiscount_price,2)?></span></strong></td>
 							</tr>
 						  </tfoot>
 						</table>
@@ -309,9 +270,6 @@
 							<li><label><input checked type="radio" value="4" name="paymentOption"> Cash on Delivery</label></li>
 						</ul>
 						<div class="order-button-payment">
-						  <input type="hidden" name="cart_sub_total" value="<?=$beforeDiscount_price?>">
-						  <input type="hidden" name="discount_val" value="<?=$beforeDiscount_price - $afterDiscount_price?>">
-						  <input type="hidden" name="order_total_val" value="<?=$afterCouponDiscount_Price?>">
 						  <input type="submit" value="Place order" />
 						</div>
 					  </div>
@@ -320,10 +278,9 @@
 				</div>
 			  </div>
 			</div>
-				</form>
-
 		</div>
 	</section>
+	
 	<div id="addressListing" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -399,8 +356,6 @@
 
 		</div>
 	</div>
-						
-
 	
 
 	<?php include("includes/footer.php"); ?>

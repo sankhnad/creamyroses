@@ -1230,3 +1230,83 @@ function scrollToTop(area, target){
 		scrollTop: scrolTo
 	}, 1000);
 }
+
+function checkCoupon(selfObj){
+	var coupon = $('#couponCode').val();
+	var dataString = {
+		coupon: coupon,
+	};
+	if(coupon!=''){
+		$.ajax({
+			url: base_url + 'process/getCoupon',
+			dataType: 'json',
+			type: "POST",
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (obj) {
+				if(obj.result == 'error'){
+					swal("Sorry!", "Enter valid coupon.", "error");
+					$('#couponCode').val('');
+				}else{
+					timerAlert('Successful!!', 'Coupon apply.', 'reload', 500);
+					$('#checkout-coupon' ).slideToggle(500);
+					
+					var toataAmount = $('#total_amount').text();
+					var couponObj 	= obj.data;
+
+					var couponCal   = 0;
+					var discountVal = 0;
+					var couponSign  = '';
+					
+
+					//$.each(couponObj, function (key, value){
+//						//alert(value.type)
+//					});
+
+
+
+					
+										
+					
+					
+					
+				}
+			},
+			error: function () {
+				csrfError();
+			},
+		});
+	}else{
+		swal("Sorry!", "Enter valid coupon.", "error");
+	}
+}
+
+
+$(document).on("submit", "#order_form", function (e) {
+	e.preventDefault();
+	
+	$.ajax({
+			url: base_url + 'checkOut/order',
+			type: 'POST',
+			dataType: 'json',
+			data: new FormData(this),
+			processData: false,
+			contentType: false,
+			beforeSend: function () {
+				showLoader()
+			},
+			success: function (data) {
+				if (data.status == 'error') {
+					swal('Oops...!!', 'This email ID is not registered with us.', 'error');
+				} else {
+					timerAlert('Successful!!', 'You have been order create successfully', base_url);
+				}
+			},
+			error: function () {
+				csrfError();
+			}
+		});
+	
+});
