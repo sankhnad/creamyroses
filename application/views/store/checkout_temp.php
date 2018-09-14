@@ -54,7 +54,7 @@
 				<div class="col-lg-6 col-md-6"> 
 				  <div class="billing-details-wrap">
 					
-					  <h3 class="shoping-checkboxt-title">Billing Details <span data-toggle="modal" data-target="#addressListing" onClick="selectAddress(aid, '1')" class="chooseAdresL">Choose Address</span></h3>
+					  <h3 class="shoping-checkboxt-title">Billing Details <span data-toggle="modal" data-target="#addressListing" onClick="selectAddress('', '1')" class="chooseAdresL">Choose Address</span></h3>
 					  <div class="row">
 						<div class="col-lg-12">
 						  <p class="single-form-row">
@@ -65,7 +65,7 @@
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>Email address <span class="required">*</span></label>
-							<input type="text" name="billing_email">
+							<input type="text" name="billing_email" required>
 						  </p>
 						</div>
 						<div class="col-lg-6">
@@ -125,7 +125,7 @@
 						
 						<div class="col-lg-12">
 						  <div class="checkout-box-wrap">
-							<label> <input checked type="checkbox"> Save to your addressbook</label>
+							<label> <input type="checkbox"> Save to your addressbook</label>
 						  </div>
 						</div>
 						<div class="col-lg-12">
@@ -133,7 +133,7 @@
 							<label id="chekout-box-2"> <input type="checkbox"> Ship to a different address?</label>
 							<div class="ship-box-info">
 
-								<h3 class="shoping-checkboxt-title">Shiping Address <span onClick="selectAddress(aid, '2')" data-toggle="modal" data-target="#addressListing" class="chooseAdresL">Choose Address</span></h3>
+								<h3 class="shoping-checkboxt-title">Shiping Address <span onClick="selectAddress('', '2')" data-toggle="modal" data-target="#shippingAddressListing" class="chooseAdresL">Choose Address</span></h3>
 							  <div class="row">
 								<div class="col-lg-12">
 								  <p class="single-form-row">
@@ -144,7 +144,7 @@
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Email address <span class="required">*</span></label>
-									<input type="text" name="shipping_email">
+									<input type="text" name="shipping_email" >
 								  </p>
 								</div>
 								<div class="col-lg-6">
@@ -398,6 +398,82 @@
 								</ul>
 								<ul class="actionAdresULLI">
 									<li><a href="javascript:;" onClick="selectAddress('<?=$aidEncripted?>','1')">Select Address</a></li>
+									<!--<li><a target="_blank" href="<?=base_url();?>profile/getAddress/<?=$aidEncripted?>">Edit</a></li>-->
+									<li><a href="javascript:void(0)" onClick="deleteAddress(this, '<?=$aidEncripted?>')">Delete</a></li>
+								</ul>
+							</div>
+						</div>
+					<?php } ?>
+					<div class="clearfix"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<div id="shippingAddressListing" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Select Address</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" class="isShipingAddress" />
+						   
+					<?php foreach($addressList as $addressData){?>				
+						<div class="col-sm-4">
+							<div class="boxAddressDis <?=$addressData->isDefault == '1' ? 'defaultAdsULI':'' ?>">
+								<div class="defultBxRa">Default Address</div>
+								<ul class="addressULLI">
+									<?php
+									$aidEncripted = encode($addressData->aid);
+									if($addressData->type == '0'){
+										$aTyp = 'Home Address';
+										$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+									}else if($addressData->type == '1'){
+										$aTyp = 'Office Address';
+										$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+										echo '<li>' . $addressData->remarks . ''.$aTyp.'</li>';
+										$aTyp = '';
+									}else if($addressData->type == '2'){
+										$aTyp = 'Others';
+										$aTyp = '<span class="adsTypL">('.$aTyp.')<span>';
+									}
+									if ( $addressData->name ) {
+										echo '<li>' . $addressData->name . ''.$aTyp.'</li>';
+									}
+									if ( $addressData->address_line_1 ) {
+										echo '<li>' . $addressData->address_line_1 . ',</li>';
+									}
+									if ( $addressData->address_line_2 ) {
+										echo '<li>' . $addressData->address_line_2 . ',</li>';
+									}
+									if ( $addressData->landmark ) {
+										echo '<li>' . $addressData->landmark . ',</li>';
+									}
+									if ( $addressData->city ) {
+										echo '<li>' . $addressData->city . ', ' . $addressData->cityName . ',</li>';
+									}
+									if ( $addressData->pin ) {
+										echo '<li>India - ' . $addressData->pin . '</li>';
+									} else {
+										echo '<li>India</li>';
+									}
+									if ( $addressData->mobile ) {
+										echo '<li>Phone number: ' . $addressData->mobile . '</li>';
+									}
+
+									if ($addressData->type == '2'){
+										echo '<li>Remarks: ' . $addressData->remarks . '</li>';
+									}
+									?>
+								</ul>
+								<ul class="actionAdresULLI">
+									<li><a href="javascript:;" onClick="selectAddress('<?=$aidEncripted?>','2')">Select Address</a></li>
 									<!--<li><a target="_blank" href="<?=base_url();?>profile/getAddress/<?=$aidEncripted?>">Edit</a></li>-->
 									<li><a href="javascript:void(0)" onClick="deleteAddress(this, '<?=$aidEncripted?>')">Delete</a></li>
 								</ul>

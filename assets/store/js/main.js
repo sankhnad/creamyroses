@@ -1193,10 +1193,12 @@ function checkPinCode(selfObj){
 
 function selectAddress(aid, type) {
 	
-	var dataString = {
-		aid: aid,
-	};
-	$.ajax({
+	
+	if(aid !=''){
+		var dataString = {
+			aid: aid,
+		};
+		$.ajax({
 		url: base_url + 'checkout/getAddress',
 		dataType: 'json',
 		type: 'POST',
@@ -1213,6 +1215,8 @@ function selectAddress(aid, type) {
 			$('#order_form input[name="billing_city"]').val(data.city);
 			$('#order_form select[name="billing_stateCode"]').val(data.sid);
 			$('#order_form input[name="billing_landmark"]').val(data.landmark);
+			$('#addressListing').modal('hide');
+
 		}else if(type == 2){
 			$('#order_form input[name="shipping_name"]').val(data.name);
 			$('#order_form input[name="shipping_mobile"]').val(data.mobile);
@@ -1223,13 +1227,17 @@ function selectAddress(aid, type) {
 			$('#order_form input[name="shipping_city"]').val(data.city);
 			$('#order_form select[name="shipping_stateCode"]').val(data.sid);
 			$('#order_form input[name="shipping_landmark"]').val(data.landmark);
+			
+			
+			$('#shippingAddressListing').modal('hide');
+
 		}
-			$('#addressListing').modal('hide');
 		},
 		error: function () {
 			csrfError();
 		}
 	});
+	}
 }
 
 function scrollToTop(area, target){
