@@ -141,7 +141,7 @@ class Delivery extends CI_Controller {
 
 		}else{
 			$data['created_on '] = date("Y-m-d H:i:s", time());
-			$id = $this->common_model->saveData('delivery_option', $data);			
+			$id = $this->common_model->saveData('delivery_option', $data);
 		
 			foreach($timeAry as $timeData){
 				$Tdata[]= array(
@@ -191,9 +191,10 @@ class Delivery extends CI_Controller {
 		$type = $this->input->post('type');
 		
 		
-		 $deliveryAry = $this->common_model->getAll('name, option_id', 'delivery_option', array('option_id'=>$id));
+		 $deliveryAry = $this->common_model->getAll('name, price, option_id', 'delivery_option', array('option_id'=>$id));
 		 $slotAry = $this->common_model->getAll('slot_id', 'delivery_option_slot', array('option_id'=>$id));
-		 
+		
+		 $slotIds = array();
 		 foreach($slotAry as $data){
 		 	$slotIds[] = encode($data->slot_id);
 		 }
@@ -202,6 +203,7 @@ class Delivery extends CI_Controller {
 				'did' => encode($id),
 				'slotId' => $slotIds,
 				'optName' => $deliveryAry[0]->name,
+				'price' => $deliveryAry[0]->price,
 			);
 			
 			//echo '<pre>';print_r($result);die;
