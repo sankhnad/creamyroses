@@ -1191,10 +1191,10 @@ function checkPinCode(selfObj){
 	}
 }
 
-function selectAddress(aid, cid) {
+function selectAddress(aid, type) {
+	
 	var dataString = {
 		aid: aid,
-		cid: cid,
 	};
 	$.ajax({
 		url: base_url + 'checkout/getAddress',
@@ -1202,27 +1202,29 @@ function selectAddress(aid, cid) {
 		type: 'POST',
 		data: dataString,
 		success: function (data) {
-			//$("#addressAddEdit").hide();
-			alert(data.name)
+
+		if(type == 1){
 			$('#order_form input[name="billing_name"]').val(data.name);
 			$('#order_form input[name="billing_mobile"]').val(data.mobile);
 			$('#order_form input[name="billing_pin"]').val(data.pin);
 			$('#order_form input[name="billing_address_line_1"]').val(data.address_line_1);
 			$('#order_form input[name="billing_address_line_2"]').val(data.address_line_2);
-			$('#order_form input[name="landmark"]').val(data.landmark);
+			$('#order_form input[name="billing_landmark"]').val(data.landmark);
 			$('#order_form input[name="billing_city"]').val(data.city);
-			$('#order_form select[name="state"]').val(data.sid);
-			var isDefault = data.isDefault == '1' ? true : false;
-			$('#order_form input[name="isDefault"]').prop('checked', isDefault);
-			$('#order_form input[name="type"][value="' + data.type + '"]').prop('checked', true);
-			
-			if(data.type == '0'){
-				$('.otherTypAdrs label').html('Remarks');
-			}else if(data.type == '1'){
-				$('.otherTypAdrs label').html('Office Name');
-			}else if(data.type == '2'){
-				$('.otherTypAdrs label').html('Other');
-			}
+			$('#order_form select[name="billing_stateCode"]').val(data.sid);
+			$('#order_form input[name="billing_landmark"]').val(data.landmark);
+		}else if(type == 2){
+			$('#order_form input[name="shipping_name"]').val(data.name);
+			$('#order_form input[name="shipping_mobile"]').val(data.mobile);
+			$('#order_form input[name="shipping_pin"]').val(data.pin);
+			$('#order_form input[name="shipping_address_line_1"]').val(data.address_line_1);
+			$('#order_form input[name="shipping_address_line_2"]').val(data.address_line_2);
+			$('#order_form input[name="shipping_landmark"]').val(data.landmark);
+			$('#order_form input[name="shipping_city"]').val(data.city);
+			$('#order_form select[name="shipping_stateCode"]').val(data.sid);
+			$('#order_form input[name="shipping_landmark"]').val(data.landmark);
+		}
+			$('#addressListing').modal('hide');
 		},
 		error: function () {
 			csrfError();

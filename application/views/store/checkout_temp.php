@@ -54,7 +54,7 @@
 				<div class="col-lg-6 col-md-6"> 
 				  <div class="billing-details-wrap">
 					
-					  <h3 class="shoping-checkboxt-title">Billing Details <span data-toggle="modal" data-target="#addressListing" onClick="$('.isShipingAddress').val('0')" class="chooseAdresL">Choose Address</span></h3>
+					  <h3 class="shoping-checkboxt-title">Billing Details <span data-toggle="modal" data-target="#addressListing" onClick="selectAddress(aid, '1')" class="chooseAdresL">Choose Address</span></h3>
 					  <div class="row">
 						<div class="col-lg-12">
 						  <p class="single-form-row">
@@ -100,7 +100,14 @@
 						<div class="col-lg-6">
 						  <p class="single-form-row">
 							<label>State<span class="required">*</span></label>
-							<input type="text" name="billing_stateCode" required>
+							<select class="selectpicker" data-width="100%" name="billing_stateCode" title="Select State" data-live-search="true" required>
+								<?php 
+								foreach($stateAry as $stateData){
+								?>
+								<option value="<?=$stateData->sid?>"><?=$stateData->stateName?></option>
+								<?php } ?>
+							</select>
+							
 						  </p>
 						</div>
 						<div class="col-lg-6">
@@ -125,65 +132,72 @@
 						  <div class="checkout-box-wrap">
 							<label id="chekout-box-2"> <input type="checkbox"> Ship to a different address?</label>
 							<div class="ship-box-info">
-								<h3 class="shoping-checkboxt-title">Shiping Address <span onClick="$('.isShipingAddress').val('1')" data-toggle="modal" data-target="#addressListing" class="chooseAdresL">Choose Address</span></h3>
+
+								<h3 class="shoping-checkboxt-title">Shiping Address <span onClick="selectAddress(aid, '2')" data-toggle="modal" data-target="#addressListing" class="chooseAdresL">Choose Address</span></h3>
 							  <div class="row">
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>Full Name <span class="required">*</span></label>
-									<input type="text" name="name" >
+									<input type="text" name="shipping_name" >
 								  </p>
 								</div>								  
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Email address <span class="required">*</span></label>
-									<input type="text" name="Email address">
+									<input type="text" name="shipping_email">
 								  </p>
 								</div>
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Mobile <span class="required">*</span></label>
-									<input type="text" name="mobile" >
+									<input type="text" name="shipping_mobile" >
 								  </p>
 								</div>
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>Street address <span class="required">*</span></label>
-									<input type="text" placeholder="House number and street name" name="address_line_1" >
+									<input type="text" placeholder="House number and street name" name="shipping_address_line_1" >
 								  </p>
 								</div>
 								<div class="col-lg-12">
 								  <p class="single-form-row">
-									<input type="text" placeholder="Apartment, suite, unit etc. (optional)" name="address_line_2">
+									<input type="text" placeholder="Apartment, suite, unit etc. (optional)" name="shipping_address_line_2">
 								  </p>
 								</div>
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Postcode / ZIP  <span class="required">*</span></label>
-									<input type="text" name="pin" >
+									<input type="text" name="shipping_pin" >
 								  </p>
 								</div>
 								<div class="col-lg-6">
 								  <p class="single-form-row">
 									<label>Town / City <span class="required">*</span></label>
-									<input type="text" name="city" >
+									<input type="text" name="shipping_city" >
 								  </p>
 								</div>
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>State<span class="required">*</span></label>
-									<input type="text" name="stateCode" >
+									<select class="selectpicker" data-width="100%" name="shipping_stateCode" title="Select State" data-live-search="true" required>
+										<?php 
+										foreach($stateAry as $stateData){
+										?>
+										<option value="<?=$stateData->sid?>"><?=$stateData->stateName?></option>
+										<?php } ?>
+									</select>
 								  </p>
 								</div>
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>Land Mark</label>
-									<input type="text" name="landmark">
+									<input type="text" name="shipping_landmark">
 								  </p>
 								</div>
 								<div class="col-lg-12">
 								  <p class="single-form-row">
 									<label>Remarks</label>
-									<input type="text" name="remarks">
+									<input type="text" name="shipping_remarks">
 								  </p>
 								</div>
 							  </div>
@@ -383,8 +397,8 @@
 									?>
 								</ul>
 								<ul class="actionAdresULLI">
-									<li><a href="javascript:;" onClick="selectAddress('<?=$aidEncripted?>')">Select Address</a></li>
-									<li><a target="_blank" href="<?=base_url();?>profile/getAddress/<?=$aidEncripted?>">Edit</a></li>
+									<li><a href="javascript:;" onClick="selectAddress('<?=$aidEncripted?>','1')">Select Address</a></li>
+									<!--<li><a target="_blank" href="<?=base_url();?>profile/getAddress/<?=$aidEncripted?>">Edit</a></li>-->
 									<li><a href="javascript:void(0)" onClick="deleteAddress(this, '<?=$aidEncripted?>')">Delete</a></li>
 								</ul>
 							</div>
