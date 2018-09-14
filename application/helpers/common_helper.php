@@ -668,4 +668,63 @@ if(! function_exists('removeInvalidCart')){
 		return $CI->common_model->deleteData('order_details', $where);
 	}
 }
+
+if(! function_exists('getCartHTMLData')){
+	function getCartHTMLData(){
+		$CI = & get_instance();
+		$cid = decode($CI->session->userdata('CID'));
+		$iURL_product = $CI->config->item('default_path')['product'];
+		$html = '';
+		$getCartListingObj = getCartListingObj();
+		if($getCartListingObj){
+
+			$html .= '<ul class="mini-products-list" id="cart-sidebar">';
+
+					$totalOrderQty = $afterDiscount_price = $beforeDiscount_price = $totalPriceAfterDiscount = 0;
+					foreach($getCartListingObj as $getCartListing){
+
+						if(!$getCartListing->product_price){
+							removeInvalidCart($getCartListing->od_id);
+							continue;
+						}
+
+						$productPriceObj = json_decode(json_encode($getCartListing), true);
+
+						$productPrice = getDiscountFormat($productPriceObj);
+
+						$beforeDiscount_price += $productPrice['oreginal_price'] ? ($productPrice['oreginal_price'] * $getCartListing->order_quantity) : 0;
+
+						$afterDiscount_price += $productPrice['final_price'] * $getCartListing->order_quantity;
+
+						$totalOrderQty += $getCartListing->order_quantity;
+
+				$html .= '<li class="item last">
+							<div class="item-inner">
+								<a class="product-image" title="'.$getCartListing->name.'" href="'.base_url().$getCartListing->url_slug.'"><img alt="'.$getCartListing->name.'" src="'.$iURL_product.$getCartListing->image.'"> </a>
+								<div class="product-details">
+									<div class="access"><a class="btn-remove1" onClick="removeCartItem(this, '.$getCartListing->od_id.')" href="javascript:;">Remove</a> <a class="btn-edit" onClick="gotoPage(\''.base_url().'cart\')" title="Edit item" href="javascript:;"><i class="icon-pencil"></i></a> </div>
+
+									<strong>'.$getCartListing->quantity.' '.$getCartListing->quantity_type.'</strong> <span class="price">'.$getCartListing->order_quantity.' &nbsp; x &nbsp; <i class=\'fas fa-rupee-sign\'></i> '.$productPrice['final_price'].' =  <i class=\'fas fa-rupee-sign\'></i> '.number_format(($productPrice['final_price'] * $getCartListing->order_quantity),2).'</span>
+									<p class="product-name"><a href="'.base_url().$getCartListing->url_slug.'">'.trimData($getCartListing->name, 30).'</a> </p>
+								</div>
+							</div>
+						</li>';
+						}
+			$html .= '</ul>';
+
+			$html .= '<div class="actions">
+						<button class="btn-checkout" onClick="gotoPage(\''.base_url().'checkout\')" title="Checkout" type="button"><span>Checkout</span> </button>
+						<a href="javascript:;" onClick="gotoPage(\''.base_url().'cart\')" class="view-cart"><span>View Cart</span></a>
+					</div>';
+			$html .= '<script>
+						$(".shoppingCartValue").html("'.$totalOrderQty.' Items/ <i class=\'fas fa-rupee-sign\'></i> '.number_format($afterDiscount_price,2).'")
+					</script>';
+		} else {
+			echo '<li class="emptyCartWarn">Your cart is empty</li>';
+		}
+		return $html;
+	}
+}
 ?>
+
+

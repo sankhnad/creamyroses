@@ -42,6 +42,7 @@ class Cart extends CI_Controller {
 			$cidWhere = 'cid = '.$cid;
 		}else{
 			$cidWhere = 'session_id = "'.$session_id.'"';
+			$cid = NULL;
 		}
 		$cartData = $this->common_model->getAll('*',$table, $cidWhere. ' AND price_id = '.$price_id.' AND pid = '.$pid);
 		
@@ -111,10 +112,10 @@ class Cart extends CI_Controller {
 		echo json_encode(array('status'=>'success'));
 	}
 	
-	function updateCartValu(){
+	function updateCartValue(){
 		if(!$this->input->is_ajax_request()) {
-			exit( 'No direct script access allowed' );
+			//exit( 'No direct script access allowed' );
 		}
-		echo json_encode(getCartListingObj());
+		echo getCartHTMLData();
 	}
 }

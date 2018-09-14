@@ -1,13 +1,12 @@
-function updateCartValu(){
+function updateCartValue(){
 	$.ajax({
-		url: base_url + 'cart/updateCartValu',
-		dataType: 'json',
+		url: base_url + 'cart/updateCartValue',
 		type: 'POST',
 		beforeSend: function () {
 			showLoader();
 		},
-		success: function(obj){
-			console.log(obj);
+		success: function(data){
+			$('.top-cart-content').html(data);
 		},
 		error: function () {
 			csrfError();
@@ -49,8 +48,8 @@ function plusMinusCart(id, quantity){
 		beforeSend: function () {
 			showLoader();
 		},
-		success: function (obj){
-			
+		success: function (){
+			updateCartValue()
 		},
 		error: function () {
 			csrfError();
@@ -82,6 +81,10 @@ function removeCartItem(selfObj, id){
 			success: function (){
 				timerAlert('Successful!!', 'Now!, Your cart is empty.', 'reload', 500);
 				$(selfObj).closest('tr').remove();
+				updateCartValue();
+				if(!$(".boxContinerCartVa tr").length){
+					$('.boxContinerCartVa').html('<tr><td colspan="7" class="boxTxEmptyCart">Your cart is empty</td></tr>');
+				}
 			},
 			error: function () {
 				csrfError();
@@ -154,7 +157,7 @@ function addToCart(selfObj, type){
 				$(selfObj).html('Add more to cart').removeClass('disabled');
 				scrollToTop('#search_mini_form');
 			}
-			updateCartValu();
+			updateCartValue();
 		},
 		error: function () {
 			csrfError();
@@ -614,7 +617,16 @@ $(document).on("submit", "#register_customer", function (e) {
 		}
 	});
 });
-
+function GetURLParameter(sParam){
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split('&');
+	for (var i = 0; i < sURLVariables.length; i++){
+		var sParameterName = sURLVariables[i].split('=');
+		if (sParameterName[0] == sParam){
+			return sParameterName[1];
+		}
+	}
+}
 $(document).on("submit", "#login_customer", function (e) {
 	e.preventDefault();
 	if (!validateForm('login_customer')) return false; 
@@ -638,7 +650,7 @@ $(document).on("submit", "#login_customer", function (e) {
 				$('#login_customer').remove();
 				$('#confirmOTP_customer').show();
 			}else if (obj.status == 'success') {
-				var redictURL = window.location.hash.substring(1);
+				var redictURL = GetURLParameter('r');
 				redictURL = redictURL ? redictURL : base_url;
 				timerAlert('Login Successfully!', 'Successfully Logged in', redictURL);
 			}else{
@@ -909,8 +921,6 @@ function getPriceByWeight(weightId,selfObj){
 			showLoader();
 		},
 		success: function (obj) {
-			console.log(obj);
-			
 			var finalPrice, pSymbol, rSymbol, discountedPrice = '';
 			finalPrice = pSymbol = rSymbol = '';
 			
