@@ -46,5 +46,25 @@ class Process extends CI_Controller {
 		$result =  $this->manual_model->getProductDeliverySlot(array('b.*'), $slotWhere);
 		echo json_encode($result);
 	}
+	
+	public function getCoupon(){
+		if(!$this->input->is_ajax_request()){
+			exit( 'Unauthorized Access' );
+		}
+		$coupon 		= $this->input->post('coupon');
+		$cart_total 	= $this->input->post('cart_total');
+		$couponObj 		= $this->common_model->getAll( '*', 'coupon', array('code' => $coupon,'status'=> '1','total <='=> $cart_total));
+
+		if($couponObj){
+			$result = 'success';
+			$this->session->set_userdata('COUPON_CODE', $coupon);
+			$this->session->set_userdata('COUPON_DATA', $couponObj);
+		}else{
+			$result = 'error';
+		}
+	
+		echo json_encode(array('result'=>$result,'data'=>$couponObj));
+	}
+
 }
 

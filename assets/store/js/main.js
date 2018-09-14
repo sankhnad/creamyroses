@@ -1233,8 +1233,11 @@ function scrollToTop(area, target){
 
 function checkCoupon(selfObj){
 	var coupon = $('#couponCode').val();
+	var cart_total = $('#order_total_val').val();
+	
 	var dataString = {
 		coupon: coupon,
+		cart_total: cart_total,
 	};
 	if(coupon!=''){
 		$.ajax({
@@ -1250,7 +1253,9 @@ function checkCoupon(selfObj){
 					swal("Sorry!", "Enter valid coupon.", "error");
 					$('#couponCode').val('');
 				}else{
-					timerAlert('Successful!!', 'Coupon apply.', 'reload', 500);
+					//timerAlert('Successful!!', 'Coupon apply.', 'reload', 500);
+					swal("Successful!", "Enter valid coupon.", "success");
+
 					$('#checkout-coupon' ).slideToggle(500);
 					
 					var toataAmount = $('#total_amount').text();
@@ -1261,16 +1266,36 @@ function checkCoupon(selfObj){
 					var couponSign  = '';
 					
 
-					//$.each(couponObj, function (key, value){
-//						//alert(value.type)
-//					});
+					$.each(couponObj, function (key, value){
+							var couponCal= 0;
+							var afterCouponDiscount_Price = 0;
+							var couponSign = '';
+							
+					
+									var couponType  = value.type;
+									var discountVal = value.discount;
+									if(couponType == 1){
+										couponCal = cart_total*discountVal/100;
+										afterCouponDiscount_Price = cart_total - couponCal;
+										couponSign = '%';
+									}else{
+										couponCal = discountVal;
+										afterCouponDiscount_Price = cart_total - couponCal;
+										couponSign = '<i class="fas fa-rupee-sign"></i>';
+									}
+									
+									$('#disc_val').text(couponCal);
+									$('#total_amount').text(afterCouponDiscount_Price);
+									$('#order_total_val').val(afterCouponDiscount_Price);
+									
+									
+									$('#disc_type_val').text(discountVal+' '+couponSign);
+									
+									
+						});
 
 
-
-					
-										
-					
-					
+				
 					
 				}
 			},
