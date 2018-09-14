@@ -28,12 +28,12 @@
 					<h3>Have a coupon? <span class="coupon" id="showcoupon">Click here to enter your code</span></h3>
 					<div class="coupon-content" id="checkout-coupon">
 					  <div class="coupon-info">
-						<form action="">
+						
 						  <p class="checkout-coupon">
 							<input type="text" placeholder="Coupon code" id="couponCode">
-							<button type="submit" class="btn button-apply-coupon" name="apply_coupon" value="Apply coupon" onClick="checkCoupon(this)">Apply coupon</button>
+							<button type="button" class="btn button-apply-coupon" name="apply_coupon" value="Apply coupon" onClick="checkCoupon(this)">Apply coupon</button>
 						  </p>
-						</form>
+						
 					  </div>
 					</div>
 				  </div>
@@ -278,7 +278,7 @@
 												$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
 												$couponSign = '%';
 											}else{
-												$couponCal = $afterDiscount_price*$discountVal/100;
+												$couponCal = $discountVal;
 												$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
 												$couponSign = '<i class="fas fa-rupee-sign"></i>';
 											}
@@ -289,8 +289,8 @@
 							?>
 							
 							<tr class="couponDiv <?=$couponCode !=''?'':'hide';?>" >
-							  <th>Coupon Discount (<?=number_format($discountVal,2).'&nbsp;'.$couponSign?>)</th>
-							  <td class="text-right"><strong><span class="amount"><i class="fas fa-rupee-sign"></i> <?=number_format(($couponCal),2)?></span></strong></td>
+							  <th>Coupon Discount (<span id="disc_type_val"><?=$discountVal.'&nbsp;'.$couponSign?></span>)</th>
+							  <td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="disc_val"> <?=number_format(($couponCal),2)?></span></strong></td>
 							</tr>
 
 							<tr class="order-total">
@@ -311,7 +311,7 @@
 						<div class="order-button-payment">
 						  <input type="hidden" name="cart_sub_total" value="<?=$beforeDiscount_price?>">
 						  <input type="hidden" name="discount_val" value="<?=$beforeDiscount_price - $afterDiscount_price?>">
-						  <input type="hidden" name="order_total_val" value="<?=$afterCouponDiscount_Price?>">
+						  <input type="hidden" name="order_total_val" id="order_total_val" value="<?=$afterCouponDiscount_Price?>">
 						  <input type="submit" value="Place order" />
 						</div>
 					  </div>
