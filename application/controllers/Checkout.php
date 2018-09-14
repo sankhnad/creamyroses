@@ -63,7 +63,7 @@ class Checkout extends CI_Controller {
 	function getAddress(){
 		$output = '';
 		$aid = decode($this->input->post('aid'));
-		$cid = decode($this->input->post('cid'));
+		$cid = decode($this->session->userdata('CID'));
 		$where = array(
 			'cid'		=> $cid,
 			'aid'		=> $aid,

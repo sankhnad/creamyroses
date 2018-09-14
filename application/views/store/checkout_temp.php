@@ -383,7 +383,7 @@
 									?>
 								</ul>
 								<ul class="actionAdresULLI">
-									<li><a href="javascript:;">Select Address</a></li>
+									<li><a href="javascript:;" onClick="selectAddress('<?=$aidEncripted?>')">Select Address</a></li>
 									<li><a target="_blank" href="<?=base_url();?>profile/getAddress/<?=$aidEncripted?>">Edit</a></li>
 									<li><a href="javascript:void(0)" onClick="deleteAddress(this, '<?=$aidEncripted?>')">Delete</a></li>
 								</ul>
