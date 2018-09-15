@@ -1302,6 +1302,7 @@ function checkCoupon(selfObj){
 									}
 									
 									$('#disc_val').text(couponCal);
+									$('#coupon_val').val(couponCal);
 									$('#total_amount').text(afterCouponDiscount_Price);
 									$('#order_total_val').val(afterCouponDiscount_Price);
 									

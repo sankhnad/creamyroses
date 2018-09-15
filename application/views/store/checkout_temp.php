@@ -125,12 +125,12 @@
 						
 						<div class="col-lg-12">
 						  <div class="checkout-box-wrap">
-							<label> <input type="checkbox"> Save to your addressbook</label>
+							<label> <input type="checkbox" name="save_address"> Save to your addressbook</label>
 						  </div>
 						</div>
 						<div class="col-lg-12">
 						  <div class="checkout-box-wrap">
-							<label id="chekout-box-2"> <input type="checkbox"> Ship to a different address?</label>
+							<label id="chekout-box-2"> <input type="checkbox" name="diff_ship"> Ship to a different address?</label>
 							<div class="ship-box-info">
 
 								<h3 class="shoping-checkboxt-title">Shiping Address <span onClick="selectAddress('', '2')" data-toggle="modal" data-target="#shippingAddressListing" class="chooseAdresL">Choose Address</span></h3>
@@ -317,14 +317,15 @@
 						
 					  <div class="payment-method">
 						<ul class="payment-accordion">
-							<li><label><input type="radio" value="1" name="paymentOption"> Credit / Debit / ATM Card</label></li>
+<!--							<li><label><input type="radio" value="1" name="paymentOption"> Credit / Debit / ATM Card</label></li>
 							<li><label><input type="radio" value="2" name="paymentOption"> PayTM Wallet &nbsp; <img src="<?=$iURL_storeAssts?>images/paytm.png"></label> </li>
-							<li><label><input type="radio" value="3" name="paymentOption"> Net Banking</label></li>
-							<li><label><input checked type="radio" value="4" name="paymentOption"> Cash on Delivery</label></li>
+-->							<li><label><input type="radio" value="1" name="paymentOption"> PayuMoney</label></li>
+							<li><label><input checked type="radio" value="2" name="paymentOption"> Cash on Delivery</label></li>
 						</ul>
 						<div class="order-button-payment">
 						  <input type="hidden" name="cart_sub_total" value="<?=$beforeDiscount_price?>">
 						  <input type="hidden" name="discount_val" value="<?=$beforeDiscount_price - $afterDiscount_price?>">
+						  <input type="hidden" name="coupon_val" value="<?=$couponCal?>">
 						  <input type="hidden" name="order_total_val" id="order_total_val" value="<?=$afterCouponDiscount_Price?>">
 						  <input type="submit" value="Place order" />
 						</div>
