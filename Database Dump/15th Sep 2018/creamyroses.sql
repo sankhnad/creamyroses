@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2018 at 03:20 AM
+-- Generation Time: Sep 15, 2018 at 02:44 AM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -176,7 +176,10 @@ INSERT INTO `admin_audittrail` (`id`, `userID`, `user_type`, `ip`, `action`, `st
 (309, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-11 19:11:12'),
 (310, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-11 20:20:43'),
 (311, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-11 21:00:14'),
-(312, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-12 15:51:16');
+(312, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-12 15:51:16'),
+(313, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-13 22:41:42'),
+(314, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-14 13:59:01'),
+(315, 1, 0, '192.168.0.103', 'Login', 'Success', 'a:1:{s:7:"trigger";i:1;}', '2018-09-14 15:34:57');
 
 -- --------------------------------------------------------
 
@@ -319,7 +322,7 @@ CREATE TABLE `coupon` (
   `name` varchar(128) NOT NULL,
   `code` varchar(10) NOT NULL,
   `type` char(1) NOT NULL,
-  `discount` decimal(15,4) NOT NULL,
+  `discount` decimal(10,0) NOT NULL,
   `total` decimal(15,4) NOT NULL,
   `date_start` date DEFAULT NULL,
   `date_end` date DEFAULT NULL,
@@ -335,16 +338,8 @@ CREATE TABLE `coupon` (
 --
 
 INSERT INTO `coupon` (`cid`, `name`, `code`, `type`, `discount`, `total`, `date_start`, `date_end`, `uses_total`, `uses_customer`, `status`, `isDeleted`, `created_on`) VALUES
-(1, 'CoupanHoli', 'Holi123', '1', '2.0000', '2000.0000', '2018-11-07', '0000-00-00', 23, '50', 1, 1, '2018-07-29 02:40:48'),
-(2, 'test coupan', 'coupan1234', '1', '2.0000', '4000.0000', '0000-00-00', '0000-00-00', 23, '23', 1, 1, '2018-07-29 02:50:30'),
-(3, 'sdsds', 'dsdsds', '2', '450.0000', '2000.0000', '2018-11-07', '0000-00-00', 23, '23', 1, 1, '2018-07-29 02:54:59'),
-(4, 'newCoupan', 'newCoupan1', '1', '2.0000', '344.0000', '0000-00-00', '0000-00-00', 2, '4', 1, 1, '2018-07-29 03:00:35'),
-(5, 'zczxcz', 'zc', '1', '2.0000', '500.0000', '2018-09-07', '0000-00-00', 23, '4', 1, 0, '2018-07-29 03:04:56'),
-(6, 'zczxcz', 'zc', '1', '2.0000', '500.0000', '2018-09-07', '0000-00-00', 23, '4', 1, 0, '2018-07-29 03:06:46'),
-(7, 'Test New Product', 'sfsdfsdf', '1', '0.0000', '2000.0000', '0000-00-00', '0000-00-00', 23, '23', 1, 1, '2018-07-29 03:12:37'),
-(8, 'aa', 'aa120', '1', '2.0000', '340.0000', '2018-09-07', '0000-00-00', 23, '23', 1, 1, '2018-07-29 03:29:36'),
-(9, 'z11', '123', '1', '2.0000', '2000.0000', '2018-04-07', '0000-00-00', 23, '23', 1, 1, '2018-07-29 03:30:55'),
-(10, 'CODE45', '230', '1', '3.0000', '45.0000', '2018-10-07', '0000-00-00', 23, '23', 1, 1, '2018-07-29 03:32:11');
+(1, 'First', 'CouponOne', '1', '2', '200.0000', '2018-09-15', '2018-10-31', 23, '50', 1, 1, '2018-07-29 02:40:48'),
+(2, 'Second', 'CouponTwo', '2', '200', '400.0000', '2018-09-15', '2018-09-15', 23, '23', 1, 1, '2018-07-29 02:50:30');
 
 -- --------------------------------------------------------
 
@@ -459,9 +454,8 @@ CREATE TABLE `delivery_option` (
 --
 
 INSERT INTO `delivery_option` (`option_id`, `name`, `price`, `status`, `isDeleted`, `created_on`) VALUES
-(1, 'Fixed Time', 10, 1, 1, '2018-08-05 10:20:47'),
-(2, 'Standard Time', 20, 1, 1, '2018-08-05 10:49:33'),
-(3, 'Morning  Time', 30, 1, 1, '2018-08-05 11:27:51');
+(1, 'Standered Time', 30, 1, 1, '2018-09-14 16:12:51'),
+(2, 'Corporate Delivery', 100, 1, 1, '2018-09-14 16:15:37');
 
 -- --------------------------------------------------------
 
@@ -472,7 +466,7 @@ INSERT INTO `delivery_option` (`option_id`, `name`, `price`, `status`, `isDelete
 CREATE TABLE `delivery_option_slot` (
   `id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL COMMENT 'primary key of delivery_option table',
-  `slot_id` int(11) NOT NULL COMMENT '1: 8 - 10; 2: 10 - 12; 3: 12 - 12; 3: 2 - 4; 4: 4 - 6; 5: 6 - 8; 6: 8 - 10; 7: 10 - 11; 8: 11 - 12'
+  `slot_id` int(11) NOT NULL COMMENT 'Primary Key of time_slot table'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -480,15 +474,18 @@ CREATE TABLE `delivery_option_slot` (
 --
 
 INSERT INTO `delivery_option_slot` (`id`, `option_id`, `slot_id`) VALUES
-(27, 1, 4),
-(26, 1, 3),
-(12, 0, 4),
-(11, 0, 2),
-(25, 1, 2),
-(23, 2, 8),
-(22, 2, 7),
-(21, 2, 5),
-(24, 3, 1);
+(1, 2, 1),
+(2, 2, 2),
+(3, 2, 3),
+(4, 2, 4),
+(5, 2, 5),
+(6, 2, 6),
+(7, 2, 7),
+(8, 2, 8),
+(9, 1, 2),
+(10, 1, 3),
+(11, 1, 4),
+(12, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -685,6 +682,7 @@ CREATE TABLE `orders` (
   `pin_code` varchar(60) DEFAULT NULL,
   `phone_number` varchar(50) NOT NULL,
   `coupon` varchar(100) DEFAULT NULL,
+  `coupon_price` float DEFAULT NULL,
   `status_type` tinyint(4) NOT NULL DEFAULT '2' COMMENT '0:Cancled by customer; 1:Delivered; 2:Pending; 3:Dispatched; 4:Rejected by Shop;5:Failed;6:Order Placed',
   `is_Deleted` tinyint(2) NOT NULL DEFAULT '1' COMMENT '0:False;1:True',
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -694,8 +692,15 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `invoice_no`, `transaction_id`, `payment_mode`, `customer_id`, `address`, `pin_code`, `phone_number`, `coupon`, `status_type`, `is_Deleted`, `created_on`) VALUES
-(351, 3345, 'JKJKJJKJKKJKJ11122222222', 1, 22, 'D-154/4, Ganga Vihar, Delhi.', '110094', '9871123455', 'CODE45', 0, 1, '2018-09-11 16:53:08');
+INSERT INTO `orders` (`order_id`, `invoice_no`, `transaction_id`, `payment_mode`, `customer_id`, `address`, `pin_code`, `phone_number`, `coupon`, `coupon_price`, `status_type`, `is_Deleted`, `created_on`) VALUES
+(1, 49312, NULL, 1, 0, 'Jai Kaushik,jai123@gmail.com,ganga vihar,delhi 10094,110094,Delhi,Delhi,School,nbnbkjhkk', '110094', '9871123455', '', NULL, 2, 1, '2018-09-14 02:56:54'),
+(2, 64914, NULL, 1, 0, 'Jai Kaushik,jai123@gmail.com,ganga vihar,assas,110094,delhi,delhi,jlkjllk,assaasasa', '110094', '9871123455', '', NULL, 2, 1, '2018-09-14 02:58:59'),
+(3, 64384, NULL, 1, 0, 'Jai Kaushik,jai123@gmail.com,ganga vihar,assas,110094,delhi,delhi,jlkjllk,assaasasa', '110094', '9871123455', '', NULL, 2, 1, '2018-09-14 02:59:26'),
+(4, 95077, NULL, 1, 0, 'Jai Kaushik,jai123@gmail.com,ssdsdsddd,sdssdsds,110094,sdsdsdss,sdsds,sdsddsd,sdsdsdsd', '110094', '9871123455', '', NULL, 2, 1, '2018-09-14 03:01:40'),
+(5, 11147, NULL, 1, 0, 'Jai Kaushik,jai123@gmail.com,ganga vihar,delhi 10094,110094,delhi,delhi,jlkjllk,nbnbkjhkk', '110094', '9871123455', '', NULL, 2, 1, '2018-09-14 03:03:52'),
+(6, 57867, NULL, 1, 0, 'Jai Kaushik,jai123@gmail.com,ganga vihar,delhi 10094,110094,delhi,delhi,jlkjllk,nbnbkjhkk', '110094', '9871123455', '', NULL, 2, 1, '2018-09-14 03:04:38'),
+(7, 49194, NULL, 1, 0, 'Jai Kaushik,jai123@gmail.com,ganga vihar,delhi 10094,110094,delhi,delhi,jlkjllk,nbnbkjhkk', '110094', '9871123455', '', NULL, 2, 1, '2018-09-14 03:06:34'),
+(8, 56402, NULL, 1, 0, 'Raj Mishra ed,,D-15/44,Ganga Vihar, Delhi,110056,Delhi,12,Near Ganga Public School,', '110056', '9871123454', '', NULL, 2, 1, '2018-09-14 18:26:45');
 
 -- --------------------------------------------------------
 
@@ -730,8 +735,11 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `session_id`, `oid`, `cid`, `pid`, `delivary_option_id`, `pin_code`, `is_eggless`, `price_id`, `actual_price`, `discount`, `total_price`, `unit`, `cake_message`, `quantity`, `is_in_cart`, `created_on`, `delivery_date`, `delivery_time_slot`) VALUES
-(1, '683ERJYPAYRAK6H', 351, 22, 13, 3, 110094, 1, 65, 1500, 300, 1200, '1 kg', 'kjkjkjkjk', 1, 1, '2018-09-13 02:54:00', '2018-09-12', '11:00 AM - 12:00 PM'),
-(2, '683ERJYPAYRAK6H', 351, 22, 6, 2, 110094, 0, 9, 2000, 500, 1500, '2 kg', 'jskdfjslkdfjsdjlkjlksjlsfsd', 1, 1, '2018-09-13 02:54:00', '2018-09-12', '11:00 AM - 12:00 PM');
+(3, 'S5CY4S6GKXP2UK9', NULL, 22, 6, 0, 734005, 1, 9, NULL, NULL, NULL, NULL, '', 2, 1, '2018-09-14 08:21:44', '0000-00-00', ''),
+(4, '4VXM7Z0AE57E91H', NULL, 22, 6, 0, 734005, 1, 9, NULL, NULL, NULL, NULL, '', 1, 1, '2018-09-14 08:24:33', '0000-00-00', ''),
+(5, '8SYMKW2J0WP29SE', NULL, 22, 6, 0, 734005, 1, 9, NULL, NULL, NULL, NULL, '', 3, 1, '2018-09-14 08:25:33', '0000-00-00', ''),
+(6, 'X3BEVM2FSFKMSUQ', NULL, 22, 13, 0, 110094, 1, 65, NULL, NULL, NULL, NULL, 'sdsdsdssdsd', 2, 1, '2018-09-14 19:33:34', '0000-00-00', ''),
+(7, 'X3BEVM2FSFKMSUQ', NULL, 22, 13, 0, 110094, 1, 66, NULL, NULL, NULL, NULL, 'sdsdsdssdsd', 1, 1, '2018-09-14 19:33:58', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -1008,15 +1016,14 @@ CREATE TABLE `time_slot` (
 --
 
 INSERT INTO `time_slot` (`tid`, `slot`) VALUES
-(1, '8 - 10'),
-(2, '10 - 12'),
-(3, '12 - 2'),
-(4, '2 - 4'),
-(5, '4 - 6'),
-(6, '6 - 8'),
-(7, '8 - 10'),
-(8, '10 - 11'),
-(9, '11 - 12');
+(1, '10:00 AM - 12:00 PM'),
+(2, '12:00 PM - 02:00 PM'),
+(3, '02:00 PM - 04:00 PM'),
+(4, '04:00 PM - 06:00 PM'),
+(5, '06:00 PM  - 08:00 PM'),
+(6, '08:00 PM - 10:00 PM'),
+(7, '10:00 PM - 11:00 PM'),
+(8, '11:00 PM - 12:00 AM');
 
 -- --------------------------------------------------------
 
@@ -1151,6 +1158,7 @@ CREATE TABLE `wish_list` (
 --
 
 INSERT INTO `wish_list` (`id`, `pid`, `cid`, `created_on`) VALUES
+(5, 6, 22, '2018-09-14 16:46:50'),
 (4, 13, 22, '2018-09-08 18:26:09');
 
 --
@@ -1400,7 +1408,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `admin_audittrail`
 --
 ALTER TABLE `admin_audittrail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=316;
 --
 -- AUTO_INCREMENT for table `admin_contact_us`
 --
@@ -1445,12 +1453,12 @@ ALTER TABLE `customer_group_member`
 -- AUTO_INCREMENT for table `delivery_option`
 --
 ALTER TABLE `delivery_option`
-  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `delivery_option_slot`
 --
 ALTER TABLE `delivery_option_slot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `globals`
 --
@@ -1485,12 +1493,12 @@ ALTER TABLE `management_fees`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -1535,7 +1543,7 @@ ALTER TABLE `referals`
 -- AUTO_INCREMENT for table `time_slot`
 --
 ALTER TABLE `time_slot`
-  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `transaction_fees`
 --
@@ -1555,7 +1563,7 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `wish_list`
 --
 ALTER TABLE `wish_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
