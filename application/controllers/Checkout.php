@@ -141,88 +141,110 @@ class Checkout extends CI_Controller {
 	}
 	
 	function order(){
-			if(!$this->input->is_ajax_request()) {
-				exit( 'No direct script access allowed' );
+		if(!$this->input->is_ajax_request()) {
+			exit( 'No direct script access allowed' );
+		}
+
+		$session_id 	= $this->session->userdata('SESSION_ID');
+		$cid 			= decode($this->session->userdata('CID'));
+		$diff_ship = $this->input->post('diff_ship');
+		$save_address = $this->input->post('save_address');
+		$paymentOption = $this->input->post('paymentOption');
+		$couponCode = $this->input->post('couponCode');
+		
+
+		if($diff_ship){
+			$name 			= trim($this->input->post('shipping_name'));
+			$email 			= trim($this->input->post('shipping_email'));
+			$mobile 		= $this->input->post('shipping_mobile');
+			$addresline1 	= trim($this->input->post('shipping_address_line_1'));
+			$addresline2 	= trim($this->input->post('shipping_address_line_2'));
+			$pin 			= $this->input->post('shipping_pin');
+			$city 			= trim($this->input->post('shipping_city'));
+			$stateId		= $this->input->post('shipping_stateCode');
+			$landmark 		= trim($this->input->post('shipping_landmark'));
+			$remarks 		= $this->input->post('shipping_remarks');
+		}else{
+			$name 			= trim($this->input->post('billing_name'));
+			$email 			= trim($this->input->post('billing_email'));
+			$mobile 		= $this->input->post('billing_mobile');
+			$addresline1 	= trim($this->input->post('billing_address_line_1'));
+			$addresline2 	= trim($this->input->post('billing_address_line_2'));
+			$pin 			= $this->input->post('billing_pin');
+			$city 			= trim($this->input->post('billing_city'));
+			$stateId		= $this->input->post('billing_stateCode');
+			$landmark 		= trim($this->input->post('billing_landmark'));
+			$remarks 		= $this->input->post('billing_remarks');
+		}		
+
+		
+		$cartProductObj = $this->common_model->getAll('*', 'order_details', array('is_in_cart'=>'1', 'cid' => $cid));
+		
+		if(!$cartProductObj){
+			echo json_encode(array('status' => 'error', 'type'=>'cart') );
+			exit;
+		}
+		
+		$beforeDiscount_price = $afterDiscount_price = 0;
+		$ordeDetailsAry = array();
+		foreach($cartProductObj as $cartProduct){
+			$productInfo = $this->common_model->getAll('*', 'product', array('product_id' => $cartProduct->pid, 'status'=>'1'));
+
+			if(!$productInfo){
+				continue;
+			}
+			
+			$productPriceObj = $this->common_model->getAll('*', 'product_price', array('id' => $cartProduct->price_id));
+			if(!$productPriceObj){
+				continue;
 			}
 
-			echo '<pre>';print_r($this->session->userdata());die;
+			$productPriceObj = json_decode(json_encode($productPriceObj), true);
+			$productPrice = getDiscountFormat($productPriceObj[0]);
 
-			$post 			= $this->input->post();
-			$payment_option = $post['paymentOption'];
+			$beforeDiscount_price += $productPrice['oreginal_price'] ? ($productPrice['oreginal_price'] * $cartProduct->quantity) : 0;
+
+			$afterDiscount_price += $productPrice['final_price'] * $cartProduct->quantity;
 			
-			if(isset($post['diff_ship'])){
-				$name 			= trim($this->input->post('shipping_name'));
-				$email 			= trim($this->input->post('shipping_email'));
-				$mobile 		= $this->input->post('shipping_mobile');
-				$addresline1 	= trim($this->input->post('shipping_address_line_1'));
-				$addresline2 	= trim($this->input->post('shipping_address_line_2'));
-				$pin 			= $this->input->post('shipping_pin');
-				$city 			= trim($this->input->post('shipping_city'));
-				$stateId		= $this->input->post('shipping_stateCode');
-				$landmark 		= trim($this->input->post('shipping_landmark'));
-				
-				$remarks 		= $this->input->post('shipping_remarks');
-			}else{
-			
-				$name 			= trim($this->input->post('billing_name'));
-				$email 			= trim($this->input->post('billing_email'));
-				$mobile 		= $this->input->post('billing_mobile');
-				$addresline1 	= trim($this->input->post('billing_address_line_1'));
-				$addresline2 	= trim($this->input->post('billing_address_line_2'));
-				$pin 			= $this->input->post('billing_pin');
-				$city 			= trim($this->input->post('billing_city'));
-				$stateId		= $this->input->post('billing_stateCode');
-				$landmark 		= trim($this->input->post('billing_landmark'));
-				
-				$remarks 		= $this->input->post('billing_remarks');
-			}		
-			
-			$session_id 	= $this->session->userdata('SESSION_ID');
-			$cid 			= decode($this->session->userdata('CID'));
-			$coupon 		= decode($this->session->userdata('COUPON_CODE'))?decode($this->session->userdata('COUPON_CODE')):'';
-			$cart_sub_total = $post['cart_sub_total'];
-			$discount 		= $post['discount_val'];
-			$total_price    = $post['order_total_val'];
-			$coupon_price   = $post['coupon_val']?$post['coupon_val']:'';
-			$invoice_no  	= generateRandom(5,$type='number');
-			$payment_mode   = $post['paymentOption'];
-			$address  	  	= $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark;
-			$order_status 	= '2'; //pending 
-			
-	
-			
-			
-			$orderAray = array(
-				'invoice_no' 		=> $invoice_no,
-				'payment_mode' 		=> $payment_mode,
-				'customer_id' 		=> $cid,
-				'address' 			=> $address,
-				'pin_code' 			=> $pin,
-				'phone_number' 		=> $mobile,
-				'coupon' 			=> $coupon,
-				'coupon' 			=> $coupon_price,
-				'status_type' 		=> $order_status,
+			$ordeDetailsAry[] = array(
+				'is_in_cart'=>'0',
+				'actual_price' => $productPrice['oreginal_price'],
+				'discount' => $productPrice['discount_value'],
+				'total_price' => $productPrice['final_price'],
+				'unit' => $cartProduct->quantity,
 			);
-
 			
-			//if($payment_mode == 2)
-			
-						
-			$oid = $this->common_model->saveData('orders', $orderAray);	
-			
-				$orderDetailAray = array(
-					'oid' => $oid,
-					'is_in_cart' => 0,
-					'actual_price' => $cart_sub_total,
-					'discount' => $discount,
-					'total_price' => $total_price,
-				);
-				echo '<pre>';print_r($orderDetailAray);die;
-				$this->common_model->updateData('order_details', array('cid'=>$customer_id), $orderDetailAray);
-				
-			
-				//$this->session->unset_userdata('CID');
-			echo json_encode( array('status' => 'success') );
-		} 
-
+		}
+		
+		print_r($cartProductObj);
+		exit;
+		
+		if($paymentOption == '2'){
+			$order_status == '6';
+		}else if($paymentOption == '2'){
+			$order_status == '6';
+		}else{
+			$order_status == '5';
+		}
+		
+		$orderAray = array(
+			'invoice_no' 		=> 'INV'.generateRandom(5,$type='number'),
+			'payment_mode' 		=> $paymentOption,
+			'customer_id' 		=> $cid,
+			'address' 			=> $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark,
+			'pin_code' 			=> $pin,
+			'phone_number' 		=> $mobile,
+			'coupon' 			=> $XXXXXX,  // Coupon ka database se uski price nikal ke yaha pe daloge
+			'status_type' 		=> $order_status,
+		);
+		
+		$oid = $this->common_model->saveData('orders', $orderAray);	
+		
+		foreach($ordeDetailsAry as $ordeDetailsData){
+			$ordeDetailsUpdate = $ordeDetailsData;
+			$ordeDetailsUpdate['oid'] = $oid;
+			$this->common_model->updateData($table, array('is_in_cart'=>'1', 'cid' => $cid), $ordeDetailsUpdate);
+		}
+		echo json_encode( array('status' => 'success') );
+	} 
 }
