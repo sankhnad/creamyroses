@@ -190,8 +190,6 @@ class Checkout extends CI_Controller {
 			$order_status 	= '2'; //pending 
 			
 	
-			
-			
 			$orderAray = array(
 				'invoice_no' 		=> $invoice_no,
 				'payment_mode' 		=> $payment_mode,
