@@ -1348,37 +1348,28 @@ function checkCoupon(selfObj){
 					
 
 					$.each(couponObj, function (key, value){
-							var couponCal= 0;
-							var afterCouponDiscount_Price = 0;
-							var couponSign = '';
-							
-					
-									var couponType  = value.type;
-									var discountVal = value.discount;
-									if(couponType == 1){
-										couponCal = cart_total*discountVal/100;
-										afterCouponDiscount_Price = cart_total - couponCal;
-										couponSign = '%';
-									}else{
-										couponCal = discountVal;
-										afterCouponDiscount_Price = cart_total - couponCal;
-										couponSign = '<i class="fas fa-rupee-sign"></i>';
-									}
-									
-									$('#disc_val').text(couponCal);
-									$('#coupon_val').val(couponCal);
-									$('#total_amount').text(afterCouponDiscount_Price);
-									$('#order_total_val').val(afterCouponDiscount_Price);
-									
-									
-									$('#disc_type_val').text(discountVal+' '+couponSign);
-									
-									
-						});
-
-
-				
-					
+						var couponCal= 0;
+						var afterCouponDiscount_Price = 0;
+						var couponSign = '';					
+						var couponType  = value.type;
+						var discountVal = value.discount;
+						if(couponType == 1){
+							couponCal = cart_total*discountVal/100;
+							afterCouponDiscount_Price = cart_total - couponCal;
+							couponSign = '%';
+						}else{
+							couponCal = discountVal;
+							afterCouponDiscount_Price = cart_total - couponCal;
+							couponSign = '<i class="fas fa-rupee-sign"></i>';
+						}
+						alert(couponCal)
+						$('#disc_val').text(couponCal);
+						$('.couponDiv').removeClass('hide');
+						$('#coupon_val').val(couponCal);
+						$('#total_amount').text(afterCouponDiscount_Price);
+						$('#order_total_val').val(afterCouponDiscount_Price);							
+						$('#disc_type_val').text(discountVal+' '+couponSign);									
+					});					
 				}
 			},
 			error: function () {
