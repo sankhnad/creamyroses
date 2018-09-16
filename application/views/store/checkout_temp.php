@@ -162,7 +162,7 @@
 
 									<div class="col-lg-12">
 										<div class="checkout-box-wrap">
-											<label> <input type="checkbox" value="1" name="save_address"> Save to your addressbook</label>
+											<label> <input type="checkbox" value="1" name="save_address" id="isSaveAddress"> Save to your addressbook</label>
 										</div>
 									</div>
 									<div class="col-lg-12">

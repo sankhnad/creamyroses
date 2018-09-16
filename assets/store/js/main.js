@@ -1274,6 +1274,7 @@ function selectAddress(aid, type) {
 			$('#order_form select[name="billing_stateCode"]').val(data.sid);
 			$('#order_form input[name="billing_landmark"]').val(data.landmark);
 			$('#addressListing').modal('hide');
+			$('#isSaveAddress').addClass('disabled');
 
 		}else if(type == 2){
 			$('#order_form input[name="shipping_name"]').val(data.name);
@@ -1285,7 +1286,6 @@ function selectAddress(aid, type) {
 			$('#order_form input[name="shipping_city"]').val(data.city);
 			$('#order_form select[name="shipping_stateCode"]').val(data.sid);
 			$('#order_form input[name="shipping_landmark"]').val(data.landmark);
-			
 			
 			$('#shippingAddressListing').modal('hide');
 
@@ -1400,7 +1400,7 @@ $(document).on("submit", "#order_form", function (e) {
 			},
 			success: function (data) {
 				if (data.status == 'error') {
-					swal('Oops...!!', 'This email ID is not registered with us.', 'error');
+					swal('Oops...!!', 'Cart is empty.', 'error');
 				} else {
 					timerAlert('Successful!!', 'You have been order create successfully', base_url);
 				}

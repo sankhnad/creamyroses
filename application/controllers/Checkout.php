@@ -25,7 +25,7 @@ class Checkout extends CI_Controller {
 			'd.name',
 			'd.image',
 			
-			'e.price as shipingChrg',
+			
 		);
 		
 		$cartDetailsObj  = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.cid'=>$cid,'a.is_in_cart'=>'1'));
@@ -201,57 +201,53 @@ class Checkout extends CI_Controller {
 		
 		
 
-			$ship_name 			= trim($this->input->post('shipping_name'));
-			$ship_email 		= trim($this->input->post('shipping_email'));
-			$ship_mobile 		= $this->input->post('shipping_mobile');
-			$ship_addresline1 	= trim($this->input->post('shipping_address_line_1'));
-			$ship_addresline2 	= trim($this->input->post('shipping_address_line_2'));
-			$ship_pin 			= $this->input->post('shipping_pin');
-			$ship_city 			= trim($this->input->post('shipping_city'));
-			$ship_stateId		= $this->input->post('shipping_stateCode');
-			$ship_landmark 		= trim($this->input->post('shipping_landmark'));
-			$ship_remarks 		= $this->input->post('shipping_remarks');
-			
-			$stateObj 			= $this->common_model->getAll('*', 'location_state', array('sid' => $ship_stateId));
-			$ship_state			= $stateObj[0]->stateName;
-
-			
-
-			$name 			= trim($this->input->post('billing_name'));
-			$email 			= trim($this->input->post('billing_email'));
-			$mobile 		= $this->input->post('billing_mobile');
-			$addresline1 	= trim($this->input->post('billing_address_line_1'));
-			$addresline2 	= trim($this->input->post('billing_address_line_2'));
-			$pin 			= $this->input->post('billing_pin');
-			$city 			= trim($this->input->post('billing_city'));
-			$stateId		= $this->input->post('billing_stateCode');
-			$landmark 		= trim($this->input->post('billing_landmark'));
-			$remarks 		= $this->input->post('billing_remarks');
-			
-			$stateObj 		= $this->common_model->getAll('*', 'location_state', array('sid' => $stateId));
-			$state			= $stateObj[0]->stateName;
-
-
-			$billAddress 	 = $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark,
-
-
-			
-			
-			if($diff_ship){
-				$shipAddress	 = $ship_name.','.$ship_email.','.$ship_addresline1.','.$ship_addresline2.','.$ship_city.','.$ship_state.','.$ship_landmark;
-				$ship_pin		 = $ship_pin;
-				$ship_mobile	 = $ship_mobile;
-
-			}else{
-				$shipAddress 	 = $billAddress;
-				$ship_pin		 = $pin
-				$ship_mobile	 = $mobile
-			}
-			
-			
-
-		}	
+		$ship_name 			= trim($this->input->post('shipping_name'));
+		$ship_email 		= trim($this->input->post('shipping_email'));
+		$ship_mobile 		= $this->input->post('shipping_mobile');
+		$ship_addresline1 	= trim($this->input->post('shipping_address_line_1'));
+		$ship_addresline2 	= trim($this->input->post('shipping_address_line_2'));
+		$ship_pin 			= $this->input->post('shipping_pin');
+		$ship_city 			= trim($this->input->post('shipping_city'));
+		$ship_stateId		= $this->input->post('shipping_stateCode');
+		$ship_landmark 		= trim($this->input->post('shipping_landmark'));
+		$ship_remarks 		= $this->input->post('shipping_remarks');
 		
+		$stateObj 			= $this->common_model->getAll('*', 'location_state', array('sid' => $ship_stateId));
+		$ship_state			= $stateObj[0]->stateName;
+
+			
+
+		$name 			= trim($this->input->post('billing_name'));
+		$email 			= trim($this->input->post('billing_email'));
+		$mobile 		= $this->input->post('billing_mobile');
+		$addresline1 	= trim($this->input->post('billing_address_line_1'));
+		$addresline2 	= trim($this->input->post('billing_address_line_2'));
+		$pin 			= $this->input->post('billing_pin');
+		$city 			= trim($this->input->post('billing_city'));
+		$stateId		= $this->input->post('billing_stateCode');
+		$landmark 		= trim($this->input->post('billing_landmark'));
+		$remarks 		= $this->input->post('billing_remarks');
+		
+		$stateObj 		= $this->common_model->getAll('*', 'location_state', array('sid' => $stateId));
+		$state			= $stateObj[0]->stateName;
+
+
+		$billAddress 	 = $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark;
+
+
+			
+			
+		if($diff_ship){
+			$shipAddress	 = $ship_name.','.$ship_email.','.$ship_addresline1.','.$ship_addresline2.','.$ship_city.','.$ship_state.','.$ship_landmark;
+			$ship_pin		 = $ship_pin;
+			$ship_mobile	 = $ship_mobile;
+
+		}else{
+			$shipAddress 	 = $billAddress;
+			$ship_pin		 = $pin;
+			$ship_mobile	 = $mobile;
+		}
+			
 	
 		
 		$cartProductObj = $this->common_model->getAll('*', 'order_details', array('is_in_cart'=>'1', 'cid' => $cid));
@@ -292,7 +288,7 @@ class Checkout extends CI_Controller {
 			
 		}
 		
-		//echo '<pre>';print_r($applyCuponObj);die;
+
 		
 		
 		$afterCouponDiscount_Price = $afterDiscount_price;
@@ -301,8 +297,6 @@ class Checkout extends CI_Controller {
 
 		$couponCal = 0;
 		$discountVal = 0;
-
-		//echo "==".$beforeCouponDiscount_Price = $beforeDiscount_price - $afterDiscount_price;
 
 		if ( isset( $couponCode ) ) {
 			$coupon = $couponCode;
@@ -329,6 +323,26 @@ class Checkout extends CI_Controller {
 			$order_status = '5';
 		}
 		
+		if($save_address){
+				$addressData = array(
+					'cid'		=> $cid,
+					'name'		=> rtrim($name,','),
+					'mobile'	=> str_replace(' ', '', $mobile),
+					'email'		=> $email,
+					'pin'		=> $pin,
+					'address_line_1'=> rtrim($addresline1,','),
+					'address_line_2'=> rtrim($addresline2,','),
+					'landmark'	=> rtrim($landmark,','),
+					'city'		=> rtrim($city,','),
+					'stateCode'	=> $stateId,
+					'remarks'	=> $remarks,
+				);
+				
+				$addressData['created_on'] = date( "Y-m-d H:i:s", time() );
+				$aid = $this->common_model->saveData('address', $data );
+
+		}
+
 		$orderAray = array(
 			'invoice_no' 		=> 'INV'.generateRandom(5,$type='number'),
 			'payment_mode' 		=> $paymentOption,
