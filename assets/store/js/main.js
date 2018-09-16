@@ -1132,6 +1132,34 @@ function slotListingRefresh(optionListingTime){
 		$('select.slotTimeList').val(10);
 	}
 }
+
+
+
+function disableEnableSlot(cHours, cMinutes){
+	if(cHours >= 8){
+		$('select.slotTimeList option[value="2"]').attr('disabled',true);
+	}
+	if(cHours >= 10){
+		$('select.slotTimeList option[value="3"]').attr('disabled',true);
+	}
+	if(cHours >= 11){
+		$('select.slotTimeList option[value="4"]').attr('disabled',true);
+	}
+	if(cHours >= 13){
+		$('select.slotTimeList option[value="5"]').attr('disabled',true);
+	}
+	if(cHours >= 15){
+		$('select.slotTimeList option[value="6"]').attr('disabled',true);
+	}
+	if(cHours >= 17){
+		$('select.slotTimeList option[value="7"]').attr('disabled',true);
+		$('select.slotTimeList').val(8);
+	}
+	if(cHours >= 19){
+		$('select.slotTimeList option[value="8"]').attr('disabled',true);
+	}
+	
+}
 function pad (str, max) {
   str = str.toString();
   return str.length < max ? pad("0" + str, max) : str;
@@ -1159,19 +1187,22 @@ function getProductDeliverySlot(selfObj, type){
 	}
 	
 	
-	var dateDelivryAry = dateDelivryInp.split('/');
-	console.log(dateDelivryAry);
-	
 	if(type == 'date'){
 		
 	}else if(type == 'option'){
-		slotListingRefresh(optionListingTime);
+		
 	}
 	
-	$('.selectpicker').selectpicker('refresh');
+	slotListingRefresh(optionListingTime);
+	
+	
 	var priceDelivry = delivryOptionPrice > 0 ? '<i class=\'fas fa-rupee-sign\'></i> '+delivryOptionPrice : 'Free';
 	$('.optionPriceLs').html(priceDelivry);
-	return;
+	
+	if(todayDate == dateDelivryInp){
+		disableEnableSlot(cHours, cMinutes);
+	}
+	$('.selectpicker').selectpicker('refresh');
 }
 
 function checkPinCode(selfObj){
