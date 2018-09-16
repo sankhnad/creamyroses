@@ -15,6 +15,7 @@
 
 <body class="shopping-cart-page">
 	<?php include("includes/header.php"); ?>
+	<form id="order_form">
 	<section class="main-container col2-left-layout">
 		<div class="container">
 			<h2 class="text-center">Review Your Order &amp; Complete Checkout<br><br></h2>
@@ -29,7 +30,7 @@
 							<div class="coupon-content" id="checkout-coupon">
 								<div class="coupon-info">
 									<p class="checkout-coupon">
-										<input type="text" placeholder="Coupon code" id="couponCode">
+										<input type="text" placeholder="Coupon code" id="couponCode" name="c_name>
 										<button type="button" class="btn button-apply-coupon" name="apply_coupon" value="Apply coupon" onClick="checkCoupon(this)">Apply coupon</button>
 									</p>
 								</div>
@@ -49,7 +50,7 @@
 											<tr>
 												<td>
 													<div class="input-group date dateDelivryInp" data-provide="datepicker">
-														<input type="text" value="<?=date("d/m/Y", strtotime("+ 1 day"))?>" class="form-control">
+														<input type="text" name="delivery_date" value="<?=date("d/m/Y", strtotime("+ 1 day"))?>" class="form-control">
 														<div class="input-group-addon">
 															<span class="glyphicon glyphicon-th"></span>
 														</div>
@@ -68,13 +69,13 @@
 													</ul>
 												</td>
 												<td>
-													<select class="selectpicker" data-live-search="true" title="Select Time of Delivery" data-width="100%">
+													<select class="selectpicker" data-live-search="true" title="Select Time of Delivery" data-width="100%" name="delibery_time">
 														<?php foreach($getTimeSlotListObj as $getTimeSlotList){?>
 														<option value="<?=$getTimeSlotList->slot_id?>"><?=$getTimeSlotList->slot?></option>
 														<?php } ?>
 													</select>
 												</td>
-												<td class="optionPriceLs">Free</td>
+												<td class="optionPriceLs"><span name="deiveryCharge">Free</span></td>
 											</tr>
 										</table>
 								</div>
@@ -83,7 +84,6 @@
 					</div>
 				</div>
 			</div>
-			<form id="order_form">
 				<div class="checkout-details-wrapper">
 					<div class="row">
 						<div class="col-lg-6 col-md-6">
@@ -328,6 +328,7 @@
 
 												<tr class="order-total">
 													<th>Order Total</th>
+													<input type="hidden" value="<?=$afterDiscount_price?>" id="total_amount">
 													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="total_amount"> <?=number_format($afterDiscount_price,2)?></span></strong>
 													</td>
 												</tr>
@@ -354,10 +355,11 @@
 						</div>
 					</div>
 				</div>
-			</form>
+		
 
 		</div>
 	</section>
+	</form>
 	<div id="addressListing" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">

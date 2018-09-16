@@ -193,8 +193,8 @@ class Checkout extends CI_Controller {
 
 		$session_id 	= $this->session->userdata('SESSION_ID');
 		$cid 			= decode($this->session->userdata('CID'));
-		$couponCode 	= $this->session->userdata( 'COUPON_CODE' );
 		
+		$couponCode 	= $this->input->post('c_name');
 		$diff_ship 		= $this->input->post('diff_ship');
 		$save_address 	= $this->input->post('save_address');
 		$paymentOption  = $this->input->post('paymentOption');
@@ -282,6 +282,7 @@ class Checkout extends CI_Controller {
 		//echo "==".$beforeCouponDiscount_Price = $beforeDiscount_price - $afterDiscount_price;
 
 		if ( isset( $couponCode ) ) {
+			$coupon = $couponCode;
 			$couponType = $couponCodeObj[ 0 ]->type;
 			$discountVal = $couponCodeObj[ 0 ]->discount;
 			if ( $couponType == 1 ) {
@@ -291,7 +292,10 @@ class Checkout extends CI_Controller {
 				$couponCal = $discountVal;
 				$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
 			}
+		}else{
+			$coupon = $couponCal = '';
 		}
+		
 		$order_status = '';
 		
 		if($paymentOption == '1'){
@@ -309,7 +313,8 @@ class Checkout extends CI_Controller {
 			'address' 			=> $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark,
 			'pin_code' 			=> $pin,
 			'phone_number' 		=> $mobile,
-			'coupon' 			=> $couponCal,  
+			'coupon' 			=> $coupon,  
+			'coupon_price' 		=> $couponCal,  
 			'status_type' 		=> $order_status,
 		);
 		
