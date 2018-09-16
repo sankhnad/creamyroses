@@ -11329,7 +11329,7 @@ button.button.btn-proceed-checkout span {
 }
 
 #wishlist-table a.remove-item:before {
-	content: "\f014";
+	content: "\f2ed";
 	font-family: FontAwesome;
 	font-size: 14px;
 }
