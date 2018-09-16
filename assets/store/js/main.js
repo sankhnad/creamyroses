@@ -1123,18 +1123,18 @@ $(document).on("submit", "#customerAddEdit", function (e) {
 });
 
 function slotListingRefresh(optionListingTime){
-	$('select.slotTimeList option').attr('disabled',true);
+	$('select.slotTimeList option').attr('disabled',true).addClass('hide');
 	if(optionListingTime == '1'){
-		$('select.slotTimeList option[value="3"], select.slotTimeList option[value="4"], select.slotTimeList option[value="5"], select.slotTimeList option[value="6"], select.slotTimeList option[value="7"], select.slotTimeList option[value="8"]').attr('disabled',false);
+		$('select.slotTimeList option[value="3"], select.slotTimeList option[value="4"], select.slotTimeList option[value="5"], select.slotTimeList option[value="6"], select.slotTimeList option[value="7"], select.slotTimeList option[value="8"]').attr('disabled',false).removeClass('hide');
 		$('select.slotTimeList').val('');
 	}else if(optionListingTime == '2'){
-		$('select.slotTimeList option[value="2"]').attr('disabled',false);
+		$('select.slotTimeList option[value="2"]').attr('disabled',false).removeClass('hide');
 		$('select.slotTimeList').val(2);
 	}else if(optionListingTime == '3'){
-		$('select.slotTimeList option[value="9"]').attr('disabled',false);
+		$('select.slotTimeList option[value="9"]').attr('disabled',false).removeClass('hide');
 		$('select.slotTimeList').val(9);
 	}else if(optionListingTime == '4'){
-		$('select.slotTimeList option[value="10"]').attr('disabled',false);
+		$('select.slotTimeList option[value="10"]').attr('disabled',false).removeClass('hide');
 		$('select.slotTimeList').val(10);
 	}
 }
@@ -1143,28 +1143,27 @@ function slotListingRefresh(optionListingTime){
 
 function disableEnableSlot(cHours, cMinutes){
 	if(cHours >= 8){
-		$('select.slotTimeList option[value="2"]').attr('disabled',true);
+		$('select.slotTimeList option[value="2"]').attr('disabled',true).addClass('hide');
 	}
 	if(cHours >= 10){
-		$('select.slotTimeList option[value="3"]').attr('disabled',true);
+		$('select.slotTimeList option[value="3"]').attr('disabled',true).addClass('hide');
 	}
 	if(cHours >= 11){
-		$('select.slotTimeList option[value="4"]').attr('disabled',true);
+		$('select.slotTimeList option[value="4"]').attr('disabled',true).addClass('hide');
 	}
 	if(cHours >= 13){
-		$('select.slotTimeList option[value="5"]').attr('disabled',true);
+		$('select.slotTimeList option[value="5"]').attr('disabled',true).addClass('hide');
 	}
 	if(cHours >= 15){
-		$('select.slotTimeList option[value="6"]').attr('disabled',true);
+		$('select.slotTimeList option[value="6"]').attr('disabled',true).addClass('hide');
 	}
 	if(cHours >= 17){
-		$('select.slotTimeList option[value="7"]').attr('disabled',true);
+		$('select.slotTimeList option[value="7"]').attr('disabled',true).addClass('hide');
 		$('select.slotTimeList').val(8);
 	}
 	if(cHours >= 19){
-		$('select.slotTimeList option[value="8"]').attr('disabled',true);
-	}
-	
+		$('select.slotTimeList option[value="8"]').attr('disabled',true).addClass('hide');
+	}	
 }
 function pad (str, max) {
   str = str.toString();
@@ -1192,15 +1191,7 @@ function getProductDeliverySlot(selfObj, type){
 		$('.delOptionCL2').show();
 	}
 	
-	
-	if(type == 'date'){
-		
-	}else if(type == 'option'){
-		
-	}
-	
 	slotListingRefresh(optionListingTime);
-	
 	
 	var priceDelivry = delivryOptionPrice > 0 ? '<i class=\'fas fa-rupee-sign\'></i> '+delivryOptionPrice : 'Free';
 	$('.optionPriceLs').html(priceDelivry);
