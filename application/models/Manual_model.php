@@ -196,4 +196,33 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
+	
+	
+	function getTimeSlotList($select, $where, $order='', $inData=array(), $notinData=array(), $groupBy=''){
+		$this->db->select($select);
+		$this->db->from('delivery_option_slot AS a');
+		$this->db->join('delivery_option AS b', 'a.option_id = b.option_id', 'LEFT');
+		$this->db->join('time_slot AS c', 'a.slot_id = c.tid', 'LEFT');
+		$this->db->where($where);
+		
+		if($inData){
+			foreach($inData as $key=>$val){
+				$this->db->where_in($key, $val);
+			}			
+		}
+		if($notinData){
+			foreach($notinData as $key=>$val){
+				$this->db->where_not_in($key, $val);
+			}			
+		}
+		if($groupBy){
+			$this->db->group_by($groupBy);
+		}
+		if($order){
+			$this->db->order_by($order);
+		}
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result();		
+	}
 }

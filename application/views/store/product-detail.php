@@ -1,8 +1,4 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-	<?php
+<?php
 	$cid = decode( $this->session->userdata( 'CID' ) );
 	$pid = $productDataObj[ 0 ]->product_id;
 	$priceObj = getProductPrice( $productDataObj[ 0 ]->product_id );
@@ -10,7 +6,7 @@
 	$weightList = $shippingPrice = '';
 	$price = $discount_price = $fristWeightID = 0;
 
-	if ( $priceObj ) {
+	if($priceObj){
 		$price = $priceObj[ 0 ]->product_price;
 		$discount_price = getDiscount( $priceObj[ 0 ]->discount_type, $priceObj[ 0 ]->product_price, $priceObj[ 0 ]->discount );
 		$selCount = 1;
@@ -24,16 +20,14 @@
 			$selCount++;
 		}
 	}
-	?>
-
-	<head>
-		<?php include('includes/commonfile.php');?>
-
-		<title>
-			<?=$productDataObj[0]->name?>| Creamy Roses</title>
-
-		<?php include("includes/style.php"); ?>
-	</head>
+?>
+<!doctype html>
+<html lang="en">
+<head>
+	<?php include('includes/commonfile.php');?>
+	<title><?=$productDataObj[0]->name?>| Creamy Roses</title>
+	<?php include("includes/style.php"); ?>
+</head>
 
 	<body class="shopping-cart-page">
 		<?php include("includes/header.php"); ?>
@@ -127,6 +121,7 @@
 											<label class="js-upgrade-title">
 											<input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> class="isEggless" type="checkbox" /> Do you want to make it Eggless ? <!--Rs. 50-->
 											</label>
+										
 											<br>
 
 											<div class="clearfix"></div>
@@ -139,6 +134,7 @@
 														<?=$this->session->userdata('PIN_CODE') ? 'Change' : 'Check'?>
 													</span>
 													
+
 														<span class="pinValiMsg"> </span>
 														<span class="pinValiSuccMsg <?=$this->session->userdata('PIN_CODE') ? 'show_now_inline' : ''?>">Delivery Location PIN Code:  <m><?=$this->session->userdata('PIN_CODE')?></m>  </span>
 													</div>
@@ -373,27 +369,11 @@
 				</div>
 			</div>
 		</section>
-		<!-- Main Container End -->
-
+		
 		<?php include("includes/footer.php"); ?>
 		<?php include("includes/script.php"); ?>
 		<script>
 			getPriceByWeight( <?=$fristWeightID?>, this );
-
-			function initDateDelivry() {
-				var date = new Date();
-				date.setDate( date.getDate() - 0 );
-				$( '.dateDelivryInp' ).datepicker( {
-					format: "dd/mm/yyyy",
-					todayHighlight: true,
-					todayBtn: "linked",
-					autoclose: true,
-					startDate: date
-				} ).on( 'changeDate', function ( e ) {
-					getProductDeliverySlot( <?=$pid?> );
-				} );
-			}
-			initDateDelivry()
 		</script>
 		<script type="text/javascript" src="<?=$iURL_storeAssts?>js/cloud-zoom.js"></script>
 	</body>

@@ -36,7 +36,7 @@ class Delivery extends CI_Controller {
 			}
 		}	
 		
-		$recordsTotal = $this->common_model->countResults('location_state', array('isDeleted'=>'1'));
+		$recordsTotal = $this->common_model->countResults('delivery_option', array('isDeleted'=>'1'));
 		
 		$aColumns=array(
 			'name',
@@ -103,7 +103,7 @@ class Delivery extends CI_Controller {
 			
 			$row = array();
 			$row[] = $aRow['name'];
-			$row[] = $aRow['price'];
+			$row[] = $aRow['price'] ? : 'Free';
 			$row[] = $aRow['totalTimeSlot'];
 			$row[] = date('jS M Y | h:i A',strtotime($aRow['created_on']));
 			$row[] = $status;

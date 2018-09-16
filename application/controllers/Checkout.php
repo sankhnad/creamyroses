@@ -21,8 +21,6 @@ class Checkout extends CI_Controller {
 			'a.cake_message',
 			'a.unit',
 			'a.quantity',
-			'a.delivery_date',
-			'a.delivery_time_slot',
 			
 			'd.name',
 			'd.image',
@@ -45,8 +43,11 @@ class Checkout extends CI_Controller {
 		
 		$addressList = $this->manual_model->getFullCustomerAddress(array('a.isDeleted'=>'1'), array('a.isDefault','asc'));
 
-		$data['addressList'] = $addressList;
+		$data['deliveryOptionObj']  = $this->common_model->getAll('*','delivery_option', array('isDeleted' => '1', 'status' => '1'));
 		
+		$data['getTimeSlotListObj']  = $this->manual_model->getTimeSlotList(array('a.slot_id','c.slot'), array('b.isDeleted' => '1', 'b.status' => '1', 'a.option_id' => '1'), 'c.tid ASC');
+		
+		$data['addressList'] = $addressList;
 		$this->load->view('store/checkout_temp', $data);
 		//$this->load->view('store/checkout', $data);
 	}
@@ -59,7 +60,6 @@ class Checkout extends CI_Controller {
 		$this->load->view('store/newAddressData', $data);
 	}
 
-	
 	function getAddress(){
 		$output = '';
 		$aid = decode($this->input->post('aid'));
@@ -87,7 +87,6 @@ class Checkout extends CI_Controller {
 		}
 		echo json_encode($output);
 	}
-
 	
 	function editNewAddress(){
 		if(!$this->input->is_ajax_request() ) {
@@ -138,8 +137,7 @@ class Checkout extends CI_Controller {
 			$aid = $this->common_model->saveData($table, $data );
 		}
 		echo json_encode( array('aid' => encode($aid)) );
-	}
-	
+	}	
 	
 	public function getCoupon(){
 		if(!$this->input->is_ajax_request()){

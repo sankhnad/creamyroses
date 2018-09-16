@@ -12,7 +12,6 @@ function updateCartValue(){
 			csrfError();
 		}
 	});
-
 }
 
 function plusMinusCart(id, quantity){
@@ -544,6 +543,7 @@ $(document).on("submit", "#userPassword", function (e) {
 	var oPassword = $('.oPassword').val();
 	var nPassword = $('.nPassword').val();
 	var cPassword = $('.cPassword').val();
+
 	if (!oPassword || !nPassword || !cPassword) {
 		swal('Oops...', 'Please fill all fields', 'error');
 		return false;
