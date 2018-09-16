@@ -469,7 +469,6 @@ $('.validateEmail').on('blur', function(){
 	}
 });
 
-
 $(document).on("submit", "#forgetpassword", function (e) {
 	e.preventDefault();
 	var email = $('#forgetpassword input[name="email"]').val();
@@ -536,7 +535,6 @@ $(document).on("submit", "#validateforgetPassword", function (e) {
 		}
 	});
 });
-
 
 $(document).on("submit", "#userPassword", function (e) {
 	e.preventDefault();
@@ -617,6 +615,7 @@ $(document).on("submit", "#register_customer", function (e) {
 		}
 	});
 });
+
 function GetURLParameter(sParam){
 	var sPageURL = window.location.search.substring(1);
 	var sURLVariables = sPageURL.split('&');
@@ -627,6 +626,7 @@ function GetURLParameter(sParam){
 		}
 	}
 }
+
 $(document).on("submit", "#login_customer", function (e) {
 	e.preventDefault();
 	if (!validateForm('login_customer')) return false; 
@@ -684,6 +684,7 @@ function updateCitySelect(selfObj, id){
 		}
 	});
 }
+
 $('.viewAllCities').on('click',function(){
 	$('.allCityList, .otdcityLbl').slideDown();
 	$(this).remove();
@@ -691,6 +692,7 @@ $('.viewAllCities').on('click',function(){
 		scrollTop: $('#popularDelCities').offset().top
 	}, 2000);
 });
+
 function filterCity(element) {
 	//$('.allCityList, .otdcityLbl').slideDown();
 	//$('.viewAllCities').remove();
@@ -776,6 +778,7 @@ function ajaxPageTarget(targeT, page, fn) {
 		},
 	});
 }
+
 function timerAlert(sub, msg, target) {
 	swal({
 		title: sub,
@@ -812,6 +815,7 @@ function processTooltip() {
 		html: true
 	});
 }
+
 $(document).ready(function(){
 
 	//$(".sticky").sticky({topSpacing:0});
@@ -895,7 +899,6 @@ $(document).ready(function(){
 	wow.init();
 });
 
-//By Jai from Creamy Roses
 function gotoPageView(url) {
 	if (url == 'login') {
 		window.location.href = base_url + 'login';
@@ -1113,38 +1116,62 @@ $(document).on("submit", "#customerAddEdit", function (e) {
 	});
 });
 
-function getProductDeliverySlot(pid){
-	var dataString = {
-		pid: pid,
-	};
-	$.ajax({
-		url: base_url + 'process/getProductDeliverySlot',
-		dataType: 'json',
-		type: "POST",
-		data: dataString,
-		beforeSend: function () {
-			showLoader();
-		},
-		success: function (obj) {
-			console.log(obj);
-			var shippingPrice = '';
-			var htmlTml = '<ul>';
-			$.each(obj, function (key, value){
-				if(value.price > 0){
-					shippingPrice = '<i class="fas fa-rupee-sign"></i> '+value.price;
-				}else{
-					shippingPrice = 'Free';
-				}
-				
-				htmlTml += '<li><label><input type="radio" name="slotType" value="'+value.option_id+'"> '+value.name+'('+shippingPrice+')</label></li>';
-			});
-			htmlTml += '</ul>';
-			$('.deliverySlotOption').html(htmlTml)
-		},
-		error: function () {
-			csrfError();
-		},
-	});
+function slotListingRefresh(optionListingTime){
+	$('select.slotTimeList option').attr('disabled',true);
+	if(optionListingTime == '1'){
+		$('select.slotTimeList option[value="3"], select.slotTimeList option[value="4"], select.slotTimeList option[value="5"], select.slotTimeList option[value="6"], select.slotTimeList option[value="7"], select.slotTimeList option[value="8"]').attr('disabled',false);
+		$('select.slotTimeList').val('');
+	}else if(optionListingTime == '2'){
+		$('select.slotTimeList option[value="2"]').attr('disabled',false);
+		$('select.slotTimeList').val(2);
+	}else if(optionListingTime == '3'){
+		$('select.slotTimeList option[value="9"]').attr('disabled',false);
+		$('select.slotTimeList').val(9);
+	}else if(optionListingTime == '4'){
+		$('select.slotTimeList option[value="10"]').attr('disabled',false);
+		$('select.slotTimeList').val(10);
+	}
+}
+function pad (str, max) {
+  str = str.toString();
+  return str.length < max ? pad("0" + str, max) : str;
+}
+function getProductDeliverySlot(selfObj, type){
+	
+	var dateDelivryInp = $('.dateDelivryInp input').val();
+	var optionListingTime = $('.optionListingTime input:checked').val();
+	var delivryOptionPrice = $('.delOptionCL'+optionListingTime).data('price');
+	var slotTimeID = $('select.slotTimeList').val();
+	
+	var dNow = new Date();
+    var cDate = dNow.getDate();
+	var cMonth = dNow.getMonth()+1;
+    var cYear = dNow.getFullYear();
+    var cHours = dNow.getHours();
+    var cMinutes = dNow.getMinutes();	
+	var todayDate = moment().format('DD/MM/YYYY')
+	var tomorrowDate = moment().add(1,'days').format('DD/MM/YYYY')
+	
+	if(todayDate == dateDelivryInp || (tomorrowDate == dateDelivryInp && cHours > 18)){
+		$('.delOptionCL2').hide();
+	}else{
+		$('.delOptionCL2').show();
+	}
+	
+	
+	var dateDelivryAry = dateDelivryInp.split('/');
+	console.log(dateDelivryAry);
+	
+	if(type == 'date'){
+		
+	}else if(type == 'option'){
+		slotListingRefresh(optionListingTime);
+	}
+	
+	$('.selectpicker').selectpicker('refresh');
+	var priceDelivry = delivryOptionPrice > 0 ? '<i class=\'fas fa-rupee-sign\'></i> '+delivryOptionPrice : 'Free';
+	$('.optionPriceLs').html(priceDelivry);
+	return;
 }
 
 function checkPinCode(selfObj){
