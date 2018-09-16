@@ -50,7 +50,7 @@
 											<tr>
 												<td>
 													<div class="input-group date dateDelivryInp" data-provide="datepicker">
-														<input type="text" name="delivery_date" value="<?=date("d/m/Y", strtotime("+ 1 day"))?>" class="form-control">
+														<input type="text" name="delivery_date" onChange="getProductDeliverySlot(this, 'date')" value="<?=date("d/m/Y", strtotime("+ 1 day"))?>" class="form-control">
 														<div class="input-group-addon">
 															<span class="glyphicon glyphicon-th"></span>
 														</div>
@@ -59,9 +59,9 @@
 												<td>
 													<ul class="optionListingTime">
 														<?php foreach($deliveryOptionObj as $deliveryOptionData){?>
-														<li>
+														<li class="delOptionCL<?=$deliveryOptionData->option_id?>" data-price="<?=$deliveryOptionData->price?>">
 															<label>
-																<input type="radio" <?=$deliveryOptionData->option_id == '1' ? 'checked' :''?> name="slotType" value="<?=$deliveryOptionData->option_id?>"> 
+																<input type="radio" onChange="getProductDeliverySlot(this, 'option')" <?=$deliveryOptionData->option_id == '1' ? 'checked' :''?> name="slotType" value="<?=$deliveryOptionData->option_id?>"> 
 																<?=$deliveryOptionData->name?>
 															</label>
 														</li>
@@ -69,7 +69,8 @@
 													</ul>
 												</td>
 												<td>
-													<select class="selectpicker" data-live-search="true" title="Select Time of Delivery" data-width="100%" name="delibery_time">
+
+													<select class="selectpicker slotTimeList" name="delibery_time" onChange="getProductDeliverySlot(this, 'slot')" data-live-search="true" title="Select Time of Delivery" data-width="100%">
 														<?php foreach($getTimeSlotListObj as $getTimeSlotList){?>
 														<option value="<?=$getTimeSlotList->slot_id?>"><?=$getTimeSlotList->slot?></option>
 														<?php } ?>
@@ -537,16 +538,21 @@
 		
 		
 		function initDateDelivry() {
-			var date = new Date();
-			date.setDate( date.getDate() - 0 );
+			var dNow = new Date();
+			var cDate = dNow.getDate();
+			var cMonth = dNow.getMonth()+1;
+			var cYear = dNow.getFullYear();
+			var cHours = dNow.getHours();
+			var cMinutes = dNow.getMinutes();
+			var addDate = cHours > 18 ? 1 : 0;
+			dNow.setDate( dNow.getDate() - addDate);
 			$( '.dateDelivryInp' ).datepicker( {
 				format: "dd/mm/yyyy",
 				todayHighlight: true,
 				autoclose: true,
-				startDate: date
-			}).on( 'changeDate', function(e){
-				//getProductDeliverySlot();
+				startDate: dNow
 			});
+			getProductDeliverySlot(this,'option');
 		}
 		initDateDelivry()
 	</script>

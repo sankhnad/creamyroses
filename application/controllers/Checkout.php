@@ -45,7 +45,7 @@ class Checkout extends CI_Controller {
 
 		$data['deliveryOptionObj']  = $this->common_model->getAll('*','delivery_option', array('isDeleted' => '1', 'status' => '1'));
 		
-		$data['getTimeSlotListObj']  = $this->manual_model->getTimeSlotList(array('a.slot_id','c.slot'), array('b.isDeleted' => '1', 'b.status' => '1', 'a.option_id' => '1'), 'c.tid ASC');
+		$data['getTimeSlotListObj']  = $this->manual_model->getTimeSlotList(array('a.slot_id','c.slot'), array('b.isDeleted' => '1', 'b.status' => '1'), 'c.tid ASC');
 		
 		$data['addressList'] = $addressList;
 		$this->load->view('store/checkout_temp', $data);
@@ -329,3 +329,6 @@ class Checkout extends CI_Controller {
 		echo json_encode( array('status' => 'success') );
 	} 
 }
+
+
+
