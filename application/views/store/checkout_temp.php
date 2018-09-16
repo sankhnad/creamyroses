@@ -326,6 +326,11 @@
 													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="disc_val"> </span></strong>
 													</td>
 												</tr>
+												
+												<tr>
+													<th>Delivery Charge</th>
+													<td class="text-right"><strong class="deliveryCHageCal"> Free </strong></td>
+												</tr>
 
 												<tr class="order-total">
 													<th>Order Total</th>
@@ -545,7 +550,7 @@
 			var cHours = dNow.getHours();
 			var cMinutes = dNow.getMinutes();
 			var addDate = cHours > 18 ? 1 : 0;
-			dNow.setDate( dNow.getDate() - addDate);
+			dNow.setDate( dNow.getDate() + addDate);
 			$( '.dateDelivryInp' ).datepicker( {
 				format: "dd/mm/yyyy",
 				todayHighlight: true,
