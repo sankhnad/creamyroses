@@ -928,10 +928,16 @@ function getPriceByWeight(weightId,selfObj){
 			finalPrice = pSymbol = rSymbol = '';
 			
 			var price		 = parseFloat(obj[0].product_price);
-			var discountVal	 = parseFloat(obj[0].discount);
-			var discountType = obj[0].discount_type;
+			var discountVal	 = parseFloat(obj[0].discount ? obj[0].discount : 0);
+			var discountType = obj[0].discount_type ? obj[0].discount_type : 'F';
 			var quantity 	 = parseFloat(obj[0].quantity);
 			var quantity_type= obj[0].quantity_type;
+			
+			console.log(price);
+			console.log(discountVal);
+			console.log(discountType);
+			console.log(quantity);
+			console.log(quantity_type);
 			
 			if(discountType == 'F'){
 				finalPrice = price - discountVal;
