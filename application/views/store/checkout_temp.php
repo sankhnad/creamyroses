@@ -70,7 +70,7 @@
 												</td>
 												<td>
 
-													<select class="selectpicker slotTimeList" name="delibery_time" onChange="getProductDeliverySlot(this, 'slot')" data-live-search="true" title="Select Time of Delivery" data-width="100%">
+													<select class="selectpicker slotTimeList" name="delibery_time" data-live-search="true" title="Select Time of Delivery" data-width="100%">
 														<?php foreach($getTimeSlotListObj as $getTimeSlotList){?>
 														<option value="<?=$getTimeSlotList->slot_id?>"><?=$getTimeSlotList->slot?></option>
 														<?php } ?>
@@ -316,13 +316,9 @@
 													<td class="text-right"><strong><span class="amount">- <i class="fas fa-rupee-sign"></i> <?=number_format(($beforeDiscount_price - $afterDiscount_price),2)?></span></strong>
 													</td>
 												</tr>
-
-												
-
 												<tr class="couponDiv hide">
 													<th>Coupon Discount (
 														<span id="disc_type_val">
-															
 														</span>)</th>
 													<td class="text-right"><strong>-&nbsp;<i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="disc_val"> </span></strong>
 													</td>
