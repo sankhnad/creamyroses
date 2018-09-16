@@ -1258,7 +1258,7 @@ function checkCoupon(selfObj){
 	};
 	if(coupon!=''){
 		$.ajax({
-			url: base_url + 'process/getCoupon',
+			url: base_url + 'checkout/getCoupon',
 			dataType: 'json',
 			type: "POST",
 			data: dataString,

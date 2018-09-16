@@ -140,6 +140,56 @@ class Checkout extends CI_Controller {
 		echo json_encode( array('aid' => encode($aid)) );
 	}
 	
+	
+	public function getCoupon(){
+		if(!$this->input->is_ajax_request()){
+			exit( 'Unauthorized Access' );
+		}
+		$cid 			= decode($this->session->userdata('CID'));
+		$cartProductObj = $this->common_model->getAll('*', 'order_details', array('is_in_cart'=>'1', 'cid' => $cid));
+		
+		if(!$cartProductObj){
+			echo json_encode(array('status' => 'error', 'type'=>'cart') );
+			exit;
+		}
+		
+		$beforeDiscount_price = $afterDiscount_price = 0;
+		$ordeDetailsAry = array();
+		foreach($cartProductObj as $cartProduct){
+			$productInfo = $this->common_model->getAll('*', 'product', array('product_id' => $cartProduct->pid, 'status'=>'1'));
+
+			if(!$productInfo){
+				continue;
+			}
+			
+			$productPriceObj = $this->common_model->getAll('*', 'product_price', array('id' => $cartProduct->price_id));
+			if(!$productPriceObj){
+				continue;
+			}
+
+			$productPriceObj = json_decode(json_encode($productPriceObj), true);
+			$productPrice = getDiscountFormat($productPriceObj[0]);
+
+			$beforeDiscount_price += $productPrice['oreginal_price'] ? ($productPrice['oreginal_price'] * $cartProduct->quantity) : 0;
+
+			$afterDiscount_price += $productPrice['final_price'] * $cartProduct->quantity;
+
+		}
+			$coupon 		= $this->input->post('coupon');
+			$couponObj 		= $this->common_model->getAll( '*', 'coupon', array('code' => $coupon,'status'=> '1','total <='=> $afterDiscount_price));
+
+		
+		if($couponObj){
+			$result = 'success';
+			$this->session->set_userdata('COUPON_CODE', $coupon);
+			$this->session->set_userdata('COUPON_DATA', $couponObj);
+		}else{
+			$result = 'error';
+		}
+	
+		echo json_encode(array('result'=>$result,'data'=>$couponObj));
+	}
+
 	function order(){
 		if(!$this->input->is_ajax_request()) {
 			exit( 'No direct script access allowed' );
@@ -147,68 +197,14 @@ class Checkout extends CI_Controller {
 
 		$session_id 	= $this->session->userdata('SESSION_ID');
 		$cid 			= decode($this->session->userdata('CID'));
-		$diff_ship = $this->input->post('diff_ship');
-		$save_address = $this->input->post('save_address');
-		$paymentOption = $this->input->post('paymentOption');
-		$couponCode = $this->input->post('couponCode');
+		$couponCode 	= $this->session->userdata( 'COUPON_CODE' );
+		
+		$diff_ship 		= $this->input->post('diff_ship');
+		$save_address 	= $this->input->post('save_address');
+		$paymentOption  = $this->input->post('paymentOption');
+		
 		
 
-<<<<<<< HEAD
-			$post 			= $this->input->post();
-			$payment_option = $post['paymentOption'];
-			
-			if(isset($post['diff_ship'])){
-				$name 			= trim($this->input->post('shipping_name'));
-				$email 			= trim($this->input->post('shipping_email'));
-				$mobile 		= $this->input->post('shipping_mobile');
-				$addresline1 	= trim($this->input->post('shipping_address_line_1'));
-				$addresline2 	= trim($this->input->post('shipping_address_line_2'));
-				$pin 			= $this->input->post('shipping_pin');
-				$city 			= trim($this->input->post('shipping_city'));
-				$stateId		= $this->input->post('shipping_stateCode');
-				$landmark 		= trim($this->input->post('shipping_landmark'));
-				
-				$remarks 		= $this->input->post('shipping_remarks');
-			}else{
-			
-				$name 			= trim($this->input->post('billing_name'));
-				$email 			= trim($this->input->post('billing_email'));
-				$mobile 		= $this->input->post('billing_mobile');
-				$addresline1 	= trim($this->input->post('billing_address_line_1'));
-				$addresline2 	= trim($this->input->post('billing_address_line_2'));
-				$pin 			= $this->input->post('billing_pin');
-				$city 			= trim($this->input->post('billing_city'));
-				$stateId		= $this->input->post('billing_stateCode');
-				$landmark 		= trim($this->input->post('billing_landmark'));
-				
-				$remarks 		= $this->input->post('billing_remarks');
-			}		
-			
-			$session_id 	= $this->session->userdata('SESSION_ID');
-			$cid 			= decode($this->session->userdata('CID'));
-			$coupon 		= decode($this->session->userdata('COUPON_CODE'))?decode($this->session->userdata('COUPON_CODE')):'';
-			$cart_sub_total = $post['cart_sub_total'];
-			$discount 		= $post['discount_val'];
-			$total_price    = $post['order_total_val'];
-			$coupon_price   = $post['coupon_val']?$post['coupon_val']:'';
-			$invoice_no  	= generateRandom(5,$type='number');
-			$payment_mode   = $post['paymentOption'];
-			$address  	  	= $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark;
-			$order_status 	= '2'; //pending 
-			
-	
-			$orderAray = array(
-				'invoice_no' 		=> $invoice_no,
-				'payment_mode' 		=> $payment_mode,
-				'customer_id' 		=> $cid,
-				'address' 			=> $address,
-				'pin_code' 			=> $pin,
-				'phone_number' 		=> $mobile,
-				'coupon' 			=> $coupon,
-				'coupon' 			=> $coupon_price,
-				'status_type' 		=> $order_status,
-			);
-=======
 		if($diff_ship){
 			$name 			= trim($this->input->post('shipping_name'));
 			$email 			= trim($this->input->post('shipping_email'));
@@ -220,6 +216,8 @@ class Checkout extends CI_Controller {
 			$stateId		= $this->input->post('shipping_stateCode');
 			$landmark 		= trim($this->input->post('shipping_landmark'));
 			$remarks 		= $this->input->post('shipping_remarks');
+			
+
 		}else{
 			$name 			= trim($this->input->post('billing_name'));
 			$email 			= trim($this->input->post('billing_email'));
@@ -231,9 +229,11 @@ class Checkout extends CI_Controller {
 			$stateId		= $this->input->post('billing_stateCode');
 			$landmark 		= trim($this->input->post('billing_landmark'));
 			$remarks 		= $this->input->post('billing_remarks');
-		}		
->>>>>>> 68ca1308fd60ea00153b2bcb7f43eaef861aca9f
-
+		}	
+		
+			$stateObj 		= $this->common_model->getAll('*', 'location_state', array('sid' => $stateId));
+			$state= $stateObj[0]->stateName;
+	
 		
 		$cartProductObj = $this->common_model->getAll('*', 'order_details', array('is_in_cart'=>'1', 'cid' => $cid));
 		
@@ -273,15 +273,37 @@ class Checkout extends CI_Controller {
 			
 		}
 		
-		print_r($cartProductObj);
-		exit;
+		//echo '<pre>';print_r($applyCuponObj);die;
 		
-		if($paymentOption == '2'){
-			$order_status == '6';
+		
+		$afterCouponDiscount_Price = $afterDiscount_price;
+
+		$couponCodeObj  = $this->common_model->getAll('*', 'coupon', array('status'=>'1', 'code' => $couponCode));
+
+		$couponCal = 0;
+		$discountVal = 0;
+
+		//echo "==".$beforeCouponDiscount_Price = $beforeDiscount_price - $afterDiscount_price;
+
+		if ( isset( $couponCode ) ) {
+			$couponType = $couponCodeObj[ 0 ]->type;
+			$discountVal = $couponCodeObj[ 0 ]->discount;
+			if ( $couponType == 1 ) {
+				$couponCal = $afterDiscount_price * $discountVal / 100;
+				$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
+			} else {
+				$couponCal = $discountVal;
+				$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
+			}
+		}
+		$order_status = '';
+		
+		if($paymentOption == '1'){
+			$order_status = '6';
 		}else if($paymentOption == '2'){
-			$order_status == '6';
+			$order_status = '6';
 		}else{
-			$order_status == '5';
+			$order_status = '5';
 		}
 		
 		$orderAray = array(
@@ -291,16 +313,17 @@ class Checkout extends CI_Controller {
 			'address' 			=> $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark,
 			'pin_code' 			=> $pin,
 			'phone_number' 		=> $mobile,
-			'coupon' 			=> $XXXXXX,  // Coupon ka database se uski price nikal ke yaha pe daloge
+			'coupon' 			=> $couponCal,  
 			'status_type' 		=> $order_status,
 		);
 		
+		//echo '====<pre>';print_r($orderAray);die;
 		$oid = $this->common_model->saveData('orders', $orderAray);	
 		
 		foreach($ordeDetailsAry as $ordeDetailsData){
 			$ordeDetailsUpdate = $ordeDetailsData;
 			$ordeDetailsUpdate['oid'] = $oid;
-			$this->common_model->updateData($table, array('is_in_cart'=>'1', 'cid' => $cid), $ordeDetailsUpdate);
+			$this->common_model->updateData('order_details', array('is_in_cart'=>'1', 'cid' => $cid), $ordeDetailsUpdate);
 		}
 		echo json_encode( array('status' => 'success') );
 	} 
