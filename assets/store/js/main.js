@@ -1307,12 +1307,15 @@ function scrollToTop(area, target){
 }
 
 function checkCoupon(selfObj){
-	var coupon = $('#couponCode').val();
-	var cart_total = $('#order_total_val').val();
+	var coupon 		= $('#couponCode').val();
+	var cart_val 	= $('.cart_val').val();
+	var toataAmount = $('.total_amount').val();
+	
+	
 	
 	var dataString = {
 		coupon: coupon,
-		cart_total: cart_total,
+		cart_total: cart_val,
 	};
 	if(coupon!=''){
 		$.ajax({
@@ -1333,7 +1336,6 @@ function checkCoupon(selfObj){
 
 					$('#checkout-coupon' ).slideToggle(500);
 					
-					var toataAmount = $('#total_amount').val();
 					var couponObj 	= obj.data;
 
 					var couponCal   = 0;
@@ -1342,26 +1344,28 @@ function checkCoupon(selfObj){
 					
 
 					$.each(couponObj, function (key, value){
-						var couponCal= 0;
-						var afterCouponDiscount_Price = 0;
+												
+						var couponCal= finalVal = 0;
 						var couponSign = '';					
 						var couponType  = value.type;
 						var discountVal = value.discount;
+						alert(toataAmount)
 						if(couponType == 1){
-							couponCal = cart_total*discountVal/100;
-							afterCouponDiscount_Price = cart_total - couponCal;
-							couponSign = '%';
+							couponCal 	= cart_val*discountVal/100;
+							finalVal 	= toataAmount - couponCal;
+							couponSign 	= '%';
 						}else{
-							couponCal = discountVal;
-							afterCouponDiscount_Price = cart_total - couponCal;
-							couponSign = '<i class="fas fa-rupee-sign"></i>';
+							couponCal 	= discountVal;
+							finalVal 	= toataAmount - couponCal;
+							couponSign  = '<i class="fas fa-rupee-sign"></i>';
 						}
-						alert(couponCal)
+						
+												
+						$('#total_amount').text(finalVal);
 						$('#disc_val').text(couponCal);
 						$('.couponDiv').removeClass('hide');
 						$('#coupon_val').val(couponCal);
-						$('#total_amount').text(afterCouponDiscount_Price);
-						$('#order_total_val').val(afterCouponDiscount_Price);							
+						$('#order_total_val').val(finalVal);							
 						$('#disc_type_val').text(discountVal+' '+couponSign);									
 					});					
 				}

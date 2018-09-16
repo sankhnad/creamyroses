@@ -194,7 +194,9 @@ class Checkout extends CI_Controller {
 		//echo '<pre>';print_r($this->input->post());die;
 		$delivery_date 	 	 = $this->input->post('delivery_date') ? convertData($this->input->post('delivery_date')) : NULL;
 		$slotId				 = $this->input->post('slotType');
-		$deliveryOptObj 	 = $this->common_model->getAll( 'name', 'delivery_option', array('option_id' => $slotId,'status'=> '1','isDeleted'=>'1'));
+		$deliveryOptObj 	 = $this->common_model->getAll( 'name', 'delivery_option', array('option_id' => $slotId[0],'status'=> '1','isDeleted'=>'1'));
+				echo '<pre>';print_r($deliveryOptObj);die;
+
 		$deliveryOpt 		 = $deliveryOptObj[0]->name;
 		$deliveryOptPrice	 = $deliveryOptObj[0]->price;
 

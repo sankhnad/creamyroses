@@ -306,12 +306,13 @@
 											<tfoot>
 												<tr class="cart-subtotal">
 													<th>Cart Subtotal</th>
-													<td class="text-right"><span class="amount"><strong><i class="fas fa-rupee-sign"></i> <?=number_format($beforeDiscount_price,2)?></strong></span>
+													<td class="text-right"><span class="amount"><input type="hidden" value="<?=$beforeDiscount_price?>" class="cart_val"><strong><i class="fas fa-rupee-sign"></i> <?=number_format($beforeDiscount_price,2)?></strong></span>
 													</td>
 												</tr>
 
 												<tr class="shipping">
 													<th>Discount</th>
+													
 													<td class="text-right"><strong><span class="amount">- <i class="fas fa-rupee-sign"></i> <?=number_format(($beforeDiscount_price - $afterDiscount_price),2)?></span></strong>
 													</td>
 												</tr>
@@ -323,7 +324,7 @@
 														<span id="disc_type_val">
 															
 														</span>)</th>
-													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="disc_val"> </span></strong>
+													<td class="text-right"><strong>-&nbsp;<i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="disc_val"> </span></strong>
 													</td>
 												</tr>
 												
@@ -334,7 +335,7 @@
 
 												<tr class="order-total">
 													<th>Order Total</th>
-													<input type="hidden" value="<?=$afterDiscount_price?>" id="total_amount">
+													<input type="hidden" value="<?=$afterDiscount_price?>" class="total_amount">
 													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="total_amount"> <?=number_format($afterDiscount_price,2)?></span></strong>
 													</td>
 												</tr>
