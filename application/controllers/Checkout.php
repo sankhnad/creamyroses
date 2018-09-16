@@ -179,8 +179,6 @@ class Checkout extends CI_Controller {
 		
 		if($couponObj){
 			$result = 'success';
-			$this->session->set_userdata('COUPON_CODE', $coupon);
-			$this->session->set_userdata('COUPON_DATA', $couponObj);
 		}else{
 			$result = 'error';
 		}
