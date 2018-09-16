@@ -36,10 +36,47 @@
 							</div>
 						</div>
 						<div class="coupon-accordion">
-							<h3><span class="coupon" id="deliveryMethod">Click here to hide panel</span></h3>
+							<h3><span class="coupon" id="deliveryMethod">Delivery methods</span></h3>
 							<div class="coupon-content" id="deliveryMethodBox">
 								<div class="coupon-info">
-									This box is for time slot. Which have some comaptibility issue
+									<table class="table deliveryOptnTbl table-striped table-bordered">
+											<tr>
+												<th width="25%">Date of Delivery</th>
+												<th width="25%">Delivery option</th>
+												<th width="25%">Time of Delivery</th>
+												<th width="35%">Delivery Charge</th>
+											</tr>
+											<tr>
+												<td>
+													<div class="input-group date dateDelivryInp" data-provide="datepicker">
+														<input type="text" value="<?=date("d/m/Y", strtotime("+ 1 day"))?>" class="form-control">
+														<div class="input-group-addon">
+															<span class="glyphicon glyphicon-th"></span>
+														</div>
+													</div>
+												</td>
+												<td>
+													<ul class="optionListingTime">
+														<?php foreach($deliveryOptionObj as $deliveryOptionData){?>
+														<li>
+															<label>
+																<input type="radio" <?=$deliveryOptionData->option_id == '1' ? 'checked' :''?> name="slotType" value="<?=$deliveryOptionData->option_id?>"> 
+																<?=$deliveryOptionData->name?>
+															</label>
+														</li>
+														<?php } ?>
+													</ul>
+												</td>
+												<td>
+													<select class="selectpicker" data-live-search="true" title="Select Time of Delivery" data-width="100%">
+														<?php foreach($getTimeSlotListObj as $getTimeSlotList){?>
+														<option value="<?=$getTimeSlotList->slot_id?>"><?=$getTimeSlotList->slot?></option>
+														<?php } ?>
+													</select>
+												</td>
+												<td class="optionPriceLs">Free</td>
+											</tr>
+										</table>
 								</div>
 							</div>
 						</div>
@@ -476,25 +513,40 @@
 
 		</div>
 	</div>
-
-
-
-
 	<?php include("includes/footer.php"); ?>
 	<?php include("includes/script.php"); ?>
+	
 	<script>
 		/*--
 		    showcoupon toggle function
 		--------------------------*/
-		$( '#showcoupon' ).on( 'click', function () {
-			$( '#checkout-coupon' ).slideToggle( 500 );
-		} );
-		$( '#deliveryMethod' ).on( 'click', function () {
-			$( '#deliveryMethodBox' ).slideToggle( 500 );
-		} );
-		$( "#chekout-box-2" ).on( "change", function () {
-			$( ".ship-box-info" ).slideToggle( "100" );
-		} );
+		$('#showcoupon').on('click', function(){
+			$( '#checkout-coupon').slideToggle(500);
+		});
+		
+		$('#deliveryMethod').on('click', function(){
+			$('#deliveryMethodBox').slideToggle(500);
+		});
+		
+		$("#chekout-box-2").on("change", function(){
+			$(".ship-box-info").slideToggle("100");
+		});
+		
+		
+		
+		function initDateDelivry() {
+			var date = new Date();
+			date.setDate( date.getDate() - 0 );
+			$( '.dateDelivryInp' ).datepicker( {
+				format: "dd/mm/yyyy",
+				todayHighlight: true,
+				autoclose: true,
+				startDate: date
+			}).on( 'changeDate', function(e){
+				//getProductDeliverySlot();
+			});
+		}
+		initDateDelivry()
 	</script>
 	<style>
 		#deliveryMethodBox {

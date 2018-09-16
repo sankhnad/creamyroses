@@ -18496,3 +18496,27 @@ a.shop-now-btn {
   padding: 30px 13px;
   font-size: 15px;
 }
+.deliveryOptnTbl {
+  margin-bottom: 0;
+}
+.deliveryOptnTbl th{
+	text-align: center;
+}
+.deliveryOptnTbl td {
+  vertical-align: middle !important;
+}
+
+.optionListingTime{
+	list-style: none;
+	margin-bottom: 0;
+}
+.optionListingTime li {
+  margin: 2px;
+}
+.optionListingTime label {
+  margin: 0;
+}
+.optionPriceLs {
+  font-size: 30px;
+  text-align: center;
+}
