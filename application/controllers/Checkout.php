@@ -191,6 +191,17 @@ class Checkout extends CI_Controller {
 			exit( 'No direct script access allowed' );
 		}
 
+		//echo '<pre>';print_r($this->input->post());die;
+		$delivery_date 	 	 = $this->input->post('delivery_date') ? convertData($this->input->post('delivery_date')) : NULL;
+		$slotId				 = $this->input->post('slotType');
+		$deliveryOptObj 	 = $this->common_model->getAll( 'name', 'delivery_option', array('option_id' => $slotId,'status'=> '1','isDeleted'=>'1'));
+		$deliveryOpt 		 = $deliveryOptObj[0]->name;
+		$deliveryOptPrice	 = $deliveryOptObj[0]->price;
+
+		$delibery_time_id 	 = $this->input->post('delibery_time');
+		$timeSlotObj 	 	 = $this->common_model->getAll( 'slot', 'time_slot', array('tid' => $delibery_time_id));
+		$slotObj 	 	 = $deliveryOptObj[0]->slot;
+		
 		$session_id 	= $this->session->userdata('SESSION_ID');
 		$cid 			= decode($this->session->userdata('CID'));
 		
@@ -350,17 +361,23 @@ class Checkout extends CI_Controller {
 			'address' 			=> $billAddress,
 			'pin_code' 			=> $pin,
 			'phone_number' 		=> $mobile,
-			
 			'shipping_address' 	=> $shipAddress,
 			'shipping_pin_code' => $ship_pin,
 			'shipping_number' 	=> $ship_mobile,
-
 			'coupon' 			=> $coupon,  
-			'coupon_price' 		=> $couponCal,  
+			'coupon_price' 		=> $couponCal, 
+			
+			'delivery_date' 	=> $delivery_date,
+			'delivery_option' 	=> $deliveryOpt,
+			'delivery_time' 	=> $deliveryOptPrice,  
+			'delivery_price' 	=> $slotObj, 
+
+			
+			 
 			'status_type' 		=> $order_status,
 		);
 		
-		//echo '====<pre>';print_r($orderAray);die;
+		echo '====<pre>';print_r($orderAray);die;
 		$oid = $this->common_model->saveData('orders', $orderAray);	
 		
 		foreach($ordeDetailsAry as $ordeDetailsData){

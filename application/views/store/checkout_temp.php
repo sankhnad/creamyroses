@@ -61,7 +61,7 @@
 														<?php foreach($deliveryOptionObj as $deliveryOptionData){?>
 														<li class="delOptionCL<?=$deliveryOptionData->option_id?>" data-price="<?=$deliveryOptionData->price?>">
 															<label>
-																<input type="radio" onChange="getProductDeliverySlot(this, 'option')" <?=$deliveryOptionData->option_id == '1' ? 'checked' :''?> name="slotType" value="<?=$deliveryOptionData->option_id?>"> 
+																<input type="radio" onChange="getProductDeliverySlot(this, 'option')" <?=$deliveryOptionData->option_id == '1' ? 'checked' :''?> name="slotType[]" value="<?=$deliveryOptionData->option_id?>"> 
 																<?=$deliveryOptionData->name?>
 															</label>
 														</li>
