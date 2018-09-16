@@ -1329,11 +1329,11 @@ function checkCoupon(selfObj){
 					$('#couponCode').val('');
 				}else{
 					//timerAlert('Successful!!', 'Coupon apply.', 'reload', 500);
-					swal("Successful!", "Enter valid coupon.", "success");
+					swal("Successful!", "Coupon apply successfully!", "success");
 
 					$('#checkout-coupon' ).slideToggle(500);
 					
-					var toataAmount = $('#total_amount').text();
+					var toataAmount = $('#total_amount').val();
 					var couponObj 	= obj.data;
 
 					var couponCal   = 0;
