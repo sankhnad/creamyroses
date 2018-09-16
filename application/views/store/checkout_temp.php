@@ -30,7 +30,7 @@
 							<div class="coupon-content" id="checkout-coupon">
 								<div class="coupon-info">
 									<p class="checkout-coupon">
-										<input type="text" placeholder="Coupon code" id="couponCode" name="c_name>
+										<input type="text" placeholder="Coupon code" id="couponCode" name="c_name">
 										<button type="button" class="btn button-apply-coupon" name="apply_coupon" value="Apply coupon" onClick="checkCoupon(this)">Apply coupon</button>
 									</p>
 								</div>

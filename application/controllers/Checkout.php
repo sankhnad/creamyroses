@@ -201,20 +201,22 @@ class Checkout extends CI_Controller {
 		
 		
 
-		if($diff_ship){
-			$name 			= trim($this->input->post('shipping_name'));
-			$email 			= trim($this->input->post('shipping_email'));
-			$mobile 		= $this->input->post('shipping_mobile');
-			$addresline1 	= trim($this->input->post('shipping_address_line_1'));
-			$addresline2 	= trim($this->input->post('shipping_address_line_2'));
-			$pin 			= $this->input->post('shipping_pin');
-			$city 			= trim($this->input->post('shipping_city'));
-			$stateId		= $this->input->post('shipping_stateCode');
-			$landmark 		= trim($this->input->post('shipping_landmark'));
-			$remarks 		= $this->input->post('shipping_remarks');
+			$ship_name 			= trim($this->input->post('shipping_name'));
+			$ship_email 		= trim($this->input->post('shipping_email'));
+			$ship_mobile 		= $this->input->post('shipping_mobile');
+			$ship_addresline1 	= trim($this->input->post('shipping_address_line_1'));
+			$ship_addresline2 	= trim($this->input->post('shipping_address_line_2'));
+			$ship_pin 			= $this->input->post('shipping_pin');
+			$ship_city 			= trim($this->input->post('shipping_city'));
+			$ship_stateId		= $this->input->post('shipping_stateCode');
+			$ship_landmark 		= trim($this->input->post('shipping_landmark'));
+			$ship_remarks 		= $this->input->post('shipping_remarks');
+			
+			$stateObj 			= $this->common_model->getAll('*', 'location_state', array('sid' => $ship_stateId));
+			$ship_state			= $stateObj[0]->stateName;
+
 			
 
-		}else{
 			$name 			= trim($this->input->post('billing_name'));
 			$email 			= trim($this->input->post('billing_email'));
 			$mobile 		= $this->input->post('billing_mobile');
@@ -225,10 +227,31 @@ class Checkout extends CI_Controller {
 			$stateId		= $this->input->post('billing_stateCode');
 			$landmark 		= trim($this->input->post('billing_landmark'));
 			$remarks 		= $this->input->post('billing_remarks');
+			
+			$stateObj 		= $this->common_model->getAll('*', 'location_state', array('sid' => $stateId));
+			$state			= $stateObj[0]->stateName;
+
+
+			$billAddress 	 = $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark,
+
+
+			
+			
+			if($diff_ship){
+				$shipAddress	 = $ship_name.','.$ship_email.','.$ship_addresline1.','.$ship_addresline2.','.$ship_city.','.$ship_state.','.$ship_landmark;
+				$ship_pin		 = $ship_pin;
+				$ship_mobile	 = $ship_mobile;
+
+			}else{
+				$shipAddress 	 = $billAddress;
+				$ship_pin		 = $pin
+				$ship_mobile	 = $mobile
+			}
+			
+			
+
 		}	
 		
-			$stateObj 		= $this->common_model->getAll('*', 'location_state', array('sid' => $stateId));
-			$state= $stateObj[0]->stateName;
 	
 		
 		$cartProductObj = $this->common_model->getAll('*', 'order_details', array('is_in_cart'=>'1', 'cid' => $cid));
@@ -310,9 +333,14 @@ class Checkout extends CI_Controller {
 			'invoice_no' 		=> 'INV'.generateRandom(5,$type='number'),
 			'payment_mode' 		=> $paymentOption,
 			'customer_id' 		=> $cid,
-			'address' 			=> $name.','.$email.','.$addresline1.','.$addresline2.','.$city.','.$state.','.$landmark,
+			'address' 			=> $billAddress,
 			'pin_code' 			=> $pin,
 			'phone_number' 		=> $mobile,
+			
+			'shipping_address' 	=> $shipAddress,
+			'shipping_pin_code' => $ship_pin,
+			'shipping_number' 	=> $ship_mobile,
+
 			'coupon' 			=> $coupon,  
 			'coupon_price' 		=> $couponCal,  
 			'status_type' 		=> $order_status,
