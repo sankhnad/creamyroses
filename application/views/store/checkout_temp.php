@@ -70,7 +70,7 @@
 												</td>
 												<td>
 
-													<select class="selectpicker slotTimeList" name="delibery_time" data-live-search="true" title="Select Time of Delivery" data-width="100%">
+													<select class="selectpicker slotTimeList" name="delibery_time" data-live-search="true" title="Select Time of Delivery" data-width="100%" required>
 														<?php foreach($getTimeSlotListObj as $getTimeSlotList){?>
 														<option value="<?=$getTimeSlotList->slot_id?>"><?=$getTimeSlotList->slot?></option>
 														<?php } ?>

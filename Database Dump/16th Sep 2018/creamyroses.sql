@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2018 at 05:35 PM
+-- Generation Time: Sep 16, 2018 at 08:18 PM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -711,7 +711,9 @@ INSERT INTO `orders` (`order_id`, `invoice_no`, `transaction_id`, `payment_mode`
 (9, '0', NULL, 2, 22, 'Jai Kaushik,jaikaushik2012@gmail.com,D-15/4,Ganga Vihar, Delhi,Delhi,Delhi22,Near Ganga Public School', NULL, NULL, NULL, '110094', '9871145277', '141.12', NULL, NULL, NULL, NULL, NULL, 6, 1, '2018-09-15 20:39:34'),
 (10, '0', NULL, 2, 22, 'Jai Kaushik,jaikaushik2012@gmail.com,D-15/4,Ganga Vihar, Delhi,Delhi,Delhi22,Near Ganga Public School', NULL, NULL, NULL, '110094', '9871145277', '141.12', NULL, NULL, NULL, NULL, NULL, 6, 1, '2018-09-15 20:40:43'),
 (11, 'INV95295', NULL, 2, 22, 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', 'Jai Kaushik,jaikaushik2012@gmail.com,D-15/4,Ganga Vihar, Delhi,Delhi,Delhi22,Near Ganga Public School', '110094', '9871145277', '110056', '9871123454', '', NULL, NULL, NULL, NULL, NULL, 6, 1, '2018-09-16 15:24:12'),
-(12, 'INV15203', NULL, 2, 22, 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', '110056', '9871123454', '110056', '9871123454', '', NULL, NULL, NULL, NULL, NULL, 6, 1, '2018-09-16 15:33:59');
+(12, 'INV15203', NULL, 2, 22, 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', '110056', '9871123454', '110056', '9871123454', '', NULL, NULL, NULL, NULL, NULL, 6, 1, '2018-09-16 15:33:59'),
+(13, 'INV14815', NULL, 2, 22, 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', 'Jai Kaushik,jaikaushik2012@gmail.com,D-15/4,Ganga Vihar, Delhi,Delhi,Delhi22,Near Ganga Public School', '110094', '9871145277', '110056', '9871123454', 'CouponOne', '81', '2018-09-19', 'Early Morning Delivery', '150', 8, 6, 1, '2018-09-16 19:42:10'),
+(14, 'INV28725', NULL, 2, 22, 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', 'Raj Mishra ed,jaikaushik2012@gmail.com,D-15/44,Ganga Vihar, Delhi,Delhi,jk2,Near Ganga Public School', '110056', '9871123454', '110056', '9871123454', '', '', '2018-09-17', 'Midnight Delivery', '150', 10, 6, 1, '2018-09-16 20:00:50');
 
 -- --------------------------------------------------------
 
@@ -745,11 +747,12 @@ CREATE TABLE `order_details` (
 INSERT INTO `order_details` (`id`, `session_id`, `oid`, `cid`, `pid`, `pin_code`, `is_eggless`, `price_id`, `actual_price`, `discount`, `total_price`, `unit`, `cake_message`, `quantity`, `is_in_cart`, `created_on`) VALUES
 (3, 'S5CY4S6GKXP2UK9', 10, 22, 6, 734005, 1, 9, 3, 1, 2, '2', '', 4, 0, '2018-09-14 08:21:44'),
 (4, '4VXM7Z0AE57E91H', 10, 22, 6, 734005, 1, 9, 3, 1, 2, '2', '', 1, 0, '2018-09-14 08:24:33'),
-(6, 'X3BEVM2FSFKMSUQ', 10, 22, 13, 110094, 1, 65, 3, 1, 2, '2', 'sdsdsdssdsd', 11, 0, '2018-09-14 19:33:34'),
-(7, 'X3BEVM2FSFKMSUQ', 10, 22, 13, 110094, 1, 66, 3, 1, 2, '2', 'sdsdsdssdsd', 1, 1, '2018-09-14 19:33:58'),
-(10, 'GS2U1N7Y01S9KK6', 12, 22, 13, 110094, 1, 65, 1000, 20, 800, '1', 'dsdsdsdsdsds', 1, 1, '2018-09-16 05:52:56'),
-(11, 'GS2U1N7Y01S9KK6', 12, 22, 13, 110094, 1, 64, 1000, 20, 800, '1', '', 3, 1, '2018-09-16 07:36:55'),
-(12, '86G4ZYR935Q0BXW', 12, 22, 10, 110094, 1, 3, 1000, 20, 800, '1', 'sasasasassa', 1, 1, '2018-09-16 09:51:47');
+(6, 'X3BEVM2FSFKMSUQ', 10, 22, 13, 110094, 1, 65, 3, 1, 2, '2', 'sdsdsdssdsd', 12, 0, '2018-09-14 19:33:34'),
+(7, 'X3BEVM2FSFKMSUQ', 13, 22, 13, 110094, 1, 66, 1500, 50, 1450, '1', 'sdsdsdssdsd', 1, 0, '2018-09-14 19:33:58'),
+(10, 'GS2U1N7Y01S9KK6', 13, 22, 13, 110094, 1, 65, 1500, 50, 1450, '1', 'dsdsdsdsdsds', 1, 0, '2018-09-16 05:52:56'),
+(11, 'GS2U1N7Y01S9KK6', 13, 22, 13, 110094, 1, 64, 1500, 50, 1450, '1', '', 7, 0, '2018-09-16 07:36:55'),
+(12, '86G4ZYR935Q0BXW', 13, 22, 10, 110094, 1, 3, 1500, 50, 1450, '1', 'sasasasassa', 1, 0, '2018-09-16 09:51:47'),
+(13, 'G568FQPLWN868PN', 14, 22, 13, 110094, 1, 65, 1000, 20, 800, '1', '', 1, 0, '2018-09-16 14:20:14');
 
 -- --------------------------------------------------------
 
@@ -1176,7 +1179,6 @@ CREATE TABLE `wish_list` (
 --
 
 INSERT INTO `wish_list` (`id`, `pid`, `cid`, `created_on`) VALUES
-(5, 6, 22, '2018-09-14 16:46:50'),
 (4, 13, 22, '2018-09-08 18:26:09');
 
 --
@@ -1511,12 +1513,12 @@ ALTER TABLE `management_fees`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `product`
 --

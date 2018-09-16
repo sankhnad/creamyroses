@@ -191,18 +191,17 @@ class Checkout extends CI_Controller {
 			exit( 'No direct script access allowed' );
 		}
 
-		//echo '<pre>';print_r($this->input->post());die;
 		$delivery_date 	 	 = $this->input->post('delivery_date') ? convertData($this->input->post('delivery_date')) : NULL;
 		$slotId				 = $this->input->post('slotType');
-		$deliveryOptObj 	 = $this->common_model->getAll( 'name', 'delivery_option', array('option_id' => $slotId[0],'status'=> '1','isDeleted'=>'1'));
-				echo '<pre>';print_r($deliveryOptObj);die;
-
+		$deliveryOptObj 	 = $this->common_model->getAll( 'name,price', 'delivery_option', array('option_id' => $slotId[0],'status'=> '1','isDeleted'=>'1'));
+		
 		$deliveryOpt 		 = $deliveryOptObj[0]->name;
 		$deliveryOptPrice	 = $deliveryOptObj[0]->price;
 
 		$delibery_time_id 	 = $this->input->post('delibery_time');
 		$timeSlotObj 	 	 = $this->common_model->getAll( 'slot', 'time_slot', array('tid' => $delibery_time_id));
-		$slotObj 	 	 = $deliveryOptObj[0]->slot;
+
+		$slotObj 	 	 	 = $timeSlotObj[0]->slot;
 		
 		$session_id 	= $this->session->userdata('SESSION_ID');
 		$cid 			= decode($this->session->userdata('CID'));
@@ -310,8 +309,9 @@ class Checkout extends CI_Controller {
 
 		$couponCal = 0;
 		$discountVal = 0;
+				//echo '<pre>';print_r($timeSlotObj);die;
 
-		if ( isset( $couponCode ) ) {
+		if ($couponCode!= '') {
 			$coupon = $couponCode;
 			$couponType = $couponCodeObj[ 0 ]->type;
 			$discountVal = $couponCodeObj[ 0 ]->discount;
@@ -379,7 +379,6 @@ class Checkout extends CI_Controller {
 			'status_type' 		=> $order_status,
 		);
 		
-		echo '====<pre>';print_r($orderAray);die;
 		$oid = $this->common_model->saveData('orders', $orderAray);	
 		
 		foreach($ordeDetailsAry as $ordeDetailsData){
