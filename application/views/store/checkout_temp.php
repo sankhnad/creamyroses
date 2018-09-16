@@ -278,49 +278,20 @@
 													</td>
 												</tr>
 
-												<?php
-												$afterCouponDiscount_Price = $afterDiscount_price;
+												
 
-												$couponCode = '';
-												$couponCode = $this->session->userdata( 'COUPON_CODE' );
-												$couponCodeObj = $this->session->userdata( 'COUPON_DATA' );
-
-												$couponCal = 0;
-												$couponSign = '';
-												$discountVal = 0;
-
-												//echo "==".$beforeCouponDiscount_Price = $beforeDiscount_price - $afterDiscount_price;
-
-												if ( isset( $couponCode ) ) {
-													$couponType = $couponCodeObj[ 0 ]->type;
-													$discountVal = $couponCodeObj[ 0 ]->discount;
-													if ( $couponType == 1 ) {
-														$couponCal = $afterDiscount_price * $discountVal / 100;
-														$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
-														$couponSign = '%';
-													} else {
-														$couponCal = $discountVal;
-														$afterCouponDiscount_Price = $afterDiscount_price - $couponCal;
-														$couponSign = '<i class="fas fa-rupee-sign"></i>';
-													}
-												}
-
-
-
-												?>
-
-												<tr class="couponDiv <?=$couponCode !=''?'':'hide';?>">
+												<tr class="couponDiv hide">
 													<th>Coupon Discount (
 														<span id="disc_type_val">
-															<?=$discountVal.'&nbsp;'.$couponSign?>
+															
 														</span>)</th>
-													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="disc_val"> <?=number_format(($couponCal),2)?></span></strong>
+													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="disc_val"> </span></strong>
 													</td>
 												</tr>
 
 												<tr class="order-total">
 													<th>Order Total</th>
-													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="total_amount"> <?=number_format($afterCouponDiscount_Price,2)?></span></strong>
+													<td class="text-right"><strong><i class="fas fa-rupee-sign"></i>&nbsp;<span class="amount" id="total_amount"> <?=number_format($afterDiscount_price,2)?></span></strong>
 													</td>
 												</tr>
 											</tfoot>
