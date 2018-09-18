@@ -1,5 +1,5 @@
 <?php
-if ( $customerData ) {
+if($customerData){
 	$actionBtn = 'Update';
 	$fname = $customerData[ 0 ]->fname;
 	$lname = $customerData[ 0 ]->lname;
@@ -13,6 +13,7 @@ if ( $customerData ) {
 	$actionBtn = 'Save';
 	$status = $isSMS_verified = $isEmail_verified = $gender = 1;
 	$fname = $lname = $email = $username = $mobile = $avtar = $dob = $doa = '';
+	redirect(base_url().'login');
 }
 ?>
 <!DOCTYPE html>
@@ -58,6 +59,7 @@ if ( $customerData ) {
 																			</div>
 																		</div>
 																	</div>
+																	
 																	<div class="col-sm-4 mb15">
 																		<div class="form-group">
 																			<label class="col-md-12">Last Name</label>
@@ -75,6 +77,7 @@ if ( $customerData ) {
 																			</div>
 																		</div>
 																	</div>
+																	
 																	<div class="col-sm-4 mb15">
 																		<div class="form-group">
 																			<label class="col-md-12">Mobile e.g. "9999999999" *</label>
@@ -105,6 +108,16 @@ if ( $customerData ) {
 																					<span class="input-group-addon"> <i class="far fa-calendar-alt bigger-110"></i></span>
 																				</div>
 																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-8 col-md-offset-2 ">
+																		<div class="boxTrG">
+																			<strong>Reward Balance</strong><br><i class="fas fa-rupee-sign"></i> <?=getRewardBalance();?>
+																		</div>
+																		<div class="boxTrG boxTrGRight">
+																			<strong>Referal Code</strong><br><?=$customerData[0]->referral_code?>
 																		</div>
 																	</div>
 																</div>
@@ -156,10 +169,6 @@ if ( $customerData ) {
 		$( '.date-picker' ).datepicker( {
 			autoclose: true,
 		});
-		$( '.datapicker' ).daterangepicker( {
-			singleDatePicker: true,
-			showDropdowns: true,
-		} );
 	</script>
 </body>
 </html>

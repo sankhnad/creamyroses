@@ -31,9 +31,8 @@ if ( $defaultAddress ) {
 					<div id='mainContentWrapper'>
 						<div class="col-md-12">
 							<h2 style="text-align: center;">
-                            Review Your Order &amp; Complete Checkout
-                        </h2>
-						
+                            	Review Your Order &amp; Complete Checkout
+                        	</h2>
 							<hr/>
 							<a href="#" class="btn btn-info" style="width: 100%;">Cart Details</a>
 							<hr/>
@@ -43,10 +42,8 @@ if ( $defaultAddress ) {
 										<div class="panel panel-default">
 											<div class="panel-heading">
 												<h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Review
-                                                    Your Order</a>
-                                            </h4>
-											
+                                                	<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Review Your Order</a>
+												</h4>
 											</div>
 											<div id="collapseOne" class="panel-collapse collapse in">
 												<div class="panel-body">

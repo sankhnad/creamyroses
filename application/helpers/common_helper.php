@@ -725,6 +725,23 @@ if(! function_exists('getCartHTMLData')){
 		return $html;
 	}
 }
+
+if(! function_exists('getRewardBalance')){
+	function getRewardBalance(){
+		$CI = & get_instance();
+		$cid = decode($CI->session->userdata('CID'));
+		if($cid){
+			$creditBal = $CI->common_model->getAll('SUM(amount) AS credit', 'referals', array('ref_cid'=>$cid, 'status'=>'1'));
+			$debitBal = $CI->common_model->getAll('SUM(amount) AS debit', 'referals', array('ref_cid'=>$cid, 'status'=>'0'));
+			
+			$creditBal = $creditBal ? $creditBal[0]->credit : 0;
+			$debitBal = $debitBal ? $debitBal[0]->debit : 0;
+			return ($creditBal - $debitBal);
+		}
+		
+		return 0;
+	}
+}
 ?>
 
 

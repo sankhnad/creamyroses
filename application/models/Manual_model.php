@@ -184,6 +184,7 @@ class Manual_model extends CI_Model {
 		}
 		$query = $this->db->query($sql);
 	}
+	
 	function getOrderDetails($select, $where){
 		$this->db->select($select);
 		$this->db->from('order_details AS a');
@@ -196,7 +197,6 @@ class Manual_model extends CI_Model {
 		//echo $this->db->last_query();
 		return $query->result();		
 	}
-	
 	
 	function getTimeSlotList($select, $where, $order='', $inData=array(), $notinData=array(), $groupBy=''){
 		$this->db->select($select);

@@ -87,6 +87,7 @@ class Profile extends CI_Controller {
 		$data['activeNav'] = 'orders';		
 		$this->load->view('store/orders', $data);
 	}
+	
 	function addAddress(){
 		$data['activeNav'] = 'address';	
 		$data['data'] = array();	
@@ -232,6 +233,4 @@ class Profile extends CI_Controller {
 			
 		echo json_encode( array( 'status' => true, 'cid' => encode($cid)) );
 	}
-
-
 }

@@ -1346,7 +1346,6 @@ function checkCoupon(selfObj){
 						var couponSign = '';					
 						var couponType  = value.type;
 						var discountVal = value.discount;
-						alert(toataAmount)
 						if(couponType == 1){
 							couponCal 	= cart_val*discountVal/100;
 							finalVal 	= toataAmount - couponCal;

@@ -18523,3 +18523,21 @@ a.shop-now-btn {
   font-size: 30px;
   text-align: center;
 }
+.boxTrG {
+    border: 3px dashed #ccc;
+    border-radius: 50px;
+    display: inline-block;
+    font-size: 17px;
+    padding: 10px 0px;
+    text-align: center;
+    width: 48%;
+	color: #F37869;
+	margin-top: 15px;
+}
+
+.boxTrGRight{
+	float: right;
+}
+.boxTrG strong{
+	color: #444;	
+}

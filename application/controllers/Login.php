@@ -31,19 +31,21 @@ class Login extends CI_Controller {
 		//$smsVerify = $this->manual_model->check_isSMS_verifieds($email);
 		$result = $this->manual_model->checkLoginCustomerEmail($email);
 		
-		$mobile 	 = $result[0]->mobile;
-		$isSmsVerify = $result[0]->isSMS_verified;
-
-		if($isSmsVerify != '1'){
-			echo json_encode( array( 'status' => 'pending','mobile' => $mobile ));
-			$dataAray = array(
-				'otp' => $result[0]->mobile_otp,
-				'number' => $mobile,
-			);
-			sendCommonSMS('activateAccount', $dataAray);
-			return(false);
-		}
+		
 		if($result){
+			$mobile 	 = $result[0]->mobile;
+			$isSmsVerify = $result[0]->isSMS_verified;
+
+			if($isSmsVerify != '1'){
+				echo json_encode( array( 'status' => 'pending','mobile' => $mobile ));
+				$dataAray = array(
+					'otp' => $result[0]->mobile_otp,
+					'number' => $mobile,
+				);
+				sendCommonSMS('activateAccount', $dataAray);
+				return(false);
+			}
+			
 			if($password == $result[0]->password){
 				if($result[0]->status == '1'){
 					$id = encode($result[0]->id);
@@ -100,7 +102,7 @@ class Login extends CI_Controller {
 		$mobile 			 = $this->input->post('mobile');
 		$password 			 = $this->input->post('password');		
 		$assign_rferral_code = trim($this->input->post('assign_rferral_code'));		
-		$rferral_code 		 = 'CRS'.generateRandom(5, 'number');
+		$rferral_code 		 = substr(strtoupper($fname), 0, 3).generateRandom(7, 'number');
 		$ref_amount = 20;
 		
 		$chekEmail = $this->checkCustEmailAvlb( $email, 'email');
@@ -113,21 +115,23 @@ class Login extends CI_Controller {
 				$status = 'mobile-error';
 			}
 		}
+		
 		if($status){
 			echo json_encode( array( 'status' => $status ) );
 			return(false);
 		}
 
 		$mobile_otp = 	generateRandom(5,$type='number');
+		
 		$data = array(
-				'fname'					=> $fname,
-				'lname'					=> $lname,
-				'email'					=> $email,
-				'mobile'				=> str_replace(' ', '', $mobile),
-				'mobile_otp'			=> $mobile_otp,
-				'password'				=> md5($password),
-				'referral_code'			=> $rferral_code,
-				'created_on'			=> date("Y-m-d H:i:s", time()),
+			'fname'					=> $fname,
+			'lname'					=> $lname,
+			'email'					=> $email,
+			'mobile'				=> str_replace(' ', '', $mobile),
+			'mobile_otp'			=> $mobile_otp,
+			'password'				=> md5($password),
+			'referral_code'			=> $rferral_code,
+			'created_on'			=> date("Y-m-d H:i:s", time()),
 		);
 		
 		$id = $this->common_model->saveData( "customer", $data );	
@@ -151,6 +155,7 @@ class Login extends CI_Controller {
 				}
 			}
 		}
+		
 		$dataAray = array(
 			'otp' => $data['mobile_otp'],
 			'number' => $data['mobile'],

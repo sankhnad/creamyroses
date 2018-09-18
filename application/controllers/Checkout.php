@@ -24,8 +24,6 @@ class Checkout extends CI_Controller {
 			
 			'd.name',
 			'd.image',
-			
-			
 		);
 		
 		$cartDetailsObj  = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.cid'=>$cid,'a.is_in_cart'=>'1'));
@@ -250,10 +248,9 @@ class Checkout extends CI_Controller {
 			
 			
 		if($diff_ship){
-			$shipAddress	 = $ship_name.','.$ship_email.','.$ship_addresline1.','.$ship_addresline2.','.$ship_city.','.$ship_state.','.$ship_landmark;
+			$shipAddress	 = $ship_name.', '.$ship_email.', '.$ship_addresline1.', '.$ship_addresline2.', '.$ship_city.', '.$ship_state.', '.$ship_landmark;
 			$ship_pin		 = $ship_pin;
 			$ship_mobile	 = $ship_mobile;
-
 		}else{
 			$shipAddress 	 = $billAddress;
 			$ship_pin		 = $pin;
@@ -298,6 +295,7 @@ class Checkout extends CI_Controller {
 				'unit' => $cartProduct->quantity,
 			);
 			
+			
 		}
 		
 
@@ -326,7 +324,8 @@ class Checkout extends CI_Controller {
 			$coupon = $couponCal = '';
 		}
 		
-		$order_status = '';
+		$currentRewardBal = getRewardBalance();
+		$currentRewardBal > 50 ? 50 : $currentRewardBal;
 		
 		if($paymentOption == '1'){
 			$order_status = '6';
@@ -356,6 +355,7 @@ class Checkout extends CI_Controller {
 
 		}
 
+		
 		$orderAray = array(
 			'invoice_no' 		=> 'INV'.generateRandom(5,$type='number'),
 			'payment_mode' 		=> $paymentOption,
@@ -372,14 +372,21 @@ class Checkout extends CI_Controller {
 			'delivery_date' 	=> $delivery_date,
 			'delivery_option' 	=> $deliveryOpt,
 			'delivery_time' 	=> $deliveryOptPrice,  
-			'delivery_price' 	=> $slotObj, 
-
-			
+			'delivery_price' 	=> $slotObj,			
 			 
 			'status_type' 		=> $order_status,
 		);
 		
+
 		$oid = $this->common_model->saveData('orders', $orderAray);	
+		
+		$referalsData = array(
+			'ref_cid' => $cid,
+			'used_by_cid' => $oid,
+			'amount' => $currentRewardBal,
+			'status' => '0',
+		);
+		$this->common_model->saveData('referals', $referalsData);
 		
 		foreach($ordeDetailsAry as $ordeDetailsData){
 			$ordeDetailsUpdate = $ordeDetailsData;
