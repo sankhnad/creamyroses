@@ -223,7 +223,7 @@ class Checkout extends CI_Controller {
 		$ship_remarks 		= $this->input->post('shipping_remarks');
 		
 		$stateObj 			= $this->common_model->getAll('*', 'location_state', array('sid' => $ship_stateId));
-		$ship_state			= $stateObj[0]->stateName;
+		$ship_state			= $stateObj ? $stateObj[0]->stateName : NULL;
 
 			
 

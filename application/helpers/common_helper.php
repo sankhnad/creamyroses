@@ -392,6 +392,7 @@ if(! function_exists('getCategoryList')){
 			$thisRef[ 'name' ] = $categoryData->name;
 			$thisRef[ 'url_slug' ] = $categoryData->url_slug;
 			$thisRef[ 'status' ] = $categoryData->status;
+			$thisRef[ 'isDeleted' ] = $categoryData->isDeleted;
 			$thisRef[ 'isTopBar' ] = $categoryData->isTopBar;
 			$thisRef[ 'isLeftBar' ] = $categoryData->isLeftBar;
 			$thisRef[ 'icon' ] = $categoryData->icon;
@@ -618,8 +619,8 @@ if(! function_exists('updateOrderStatus')){
 if(! function_exists('getOrderDetails')){
     function getOrderDetails($orderId) {
 		$CI = & get_instance();
-		$where['a.order_id'] = $orderId;	
-		$orderObj 		     = $CI->manual_model->getOrderDetailsData('a.*,b.product_name', $where);
+		$where['a.oid'] = $orderId;	
+		$orderObj 		     = $CI->manual_model->getOrderDetails('a.*', $where);
 		return $orderObj;
 	}
 }

@@ -168,14 +168,7 @@ if(count($slctPrice) > 0){
 														</div>
 													</div>
 													
-													<div class="col-md-4">
-														<div class="form-group">
-															<label>Delivery Option</label>
-															<select name="delivery_option[]"  multiple="multiple" class="selectpicker"  title="Select Delivery Option" data-live-search="true" data-size="5"  data-width="100%" >
-																<?=$delOptList?>
-															</select>
-														</div>
-													</div>
+													
 													
 													<div class="col-md-12">
 														<div class="form-group">

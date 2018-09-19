@@ -117,7 +117,7 @@
 					<b class="arrow"></b>
 				</li>				
 				
-				<li class="<?=$activeMenu == 'fees_rate' ? 'active open':''?>">
+				<!--<li class="<?=$activeMenu == 'fees_rate' ? 'active open':''?>">
 					<a href="javascript;:" class="dropdown-toggle"> <i class="menu-icon fas fa-percent"></i>
 						<span class="menu-text"> Fees and Rate</span>
 						<b class="arrow fa fa-angle-down"></b>
@@ -140,15 +140,15 @@
 						</li>
 						
 					</ul>
-				</li>				
+				</li>-->				
 				
-				<li class="<?=$activeMenu == 'reports' ? 'active':''?>">
+				<!--<li class="<?=$activeMenu == 'reports' ? 'active':''?>">
 					<a href="<?=admin_url()?>reports">
 						<i class="menu-icon fas fa-chart-line"></i>
 						<span class="menu-text"> Reports </span>
 					</a>
 					<b class="arrow"></b>
-				</li>
+				</li>-->
 				
 				<li class="<?=$activeMenu == 'others' ? 'active open':''?>">
 					<a href="javascript;:" class="dropdown-toggle"> <i class="menu-icon fab fa-nintendo-switch"></i>
@@ -161,14 +161,14 @@
 								<a href="<?=admin_url()?>coupons"><i class="menu-icon fa fa-caret-right"></i> Manage Coupons</a>
 								<b class="arrow"></b>
 						</li>
-						<li class="<?=$activeSubMenu == 'manage_users' ? 'active':''?>">
+						<!--<li class="<?=$activeSubMenu == 'manage_users' ? 'active':''?>">
 							<a href="<?=admin_url()?>others/manage_users"><i class="menu-icon fa fa-caret-right"></i> Manage Users</a>
 							<b class="arrow"></b>
-						</li>
-						<li class="<?=$activeSubMenu == 'templates' ? 'active':''?>">
+						</li>-->
+						<!--<li class="<?=$activeSubMenu == 'templates' ? 'active':''?>">
 							<a href="<?=admin_url()?>others/templates"><i class="menu-icon fa fa-caret-right"></i> SMS/Email Template</a>
 							<b class="arrow"></b>
-						</li>
+						</li>-->
 					</ul>
 				</li>
 				
@@ -190,7 +190,7 @@
 					</ul>
 				</li>
 				
-				<li class="<?=$activeMenu == 'contact_msg' ? 'active':''?>">
+				<!--<li class="<?=$activeMenu == 'contact_msg' ? 'active':''?>">
 					<a href="<?=admin_url()?>contact/message">
 						<i class="menu-icon far fa-life-ring"></i>
 						<span class="menu-text"> Support 
@@ -201,7 +201,7 @@
 						
 					</a>
 					<b class="arrow"></b>
-				</li>
+				</li>-->
 			</ul>
 			<!-- /.nav-list -->
 			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

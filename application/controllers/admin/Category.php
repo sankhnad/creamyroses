@@ -55,7 +55,7 @@ class Category extends CI_Controller {
 						' . $fldTopBar . $fldLeftBar . '
 						<a target="_blank" href="' . base_url() . 'admin/category/edit/' . $encriptedID . '" data-tooltip="tooltip" title="Edit" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></a>
 						<button type="button" data-tooltip="tooltip" data-status="' . $value[ 'status' ] . '" onclick="changeCatStatus(this, \'' . $encriptedID . '\', \'status\', \'category\')" title="Click to ' . $ststbtn . '" class="btn ' . $ststCls . ' btn-xs"><i class="fa fa-power-off"></i></button>
-						<button type="button" data-tooltip="tooltip" onclick="changeCatStatus(this, \'' . $encriptedID . '\', \'delete\', \'category\')" title="Delete" class="btn btn-danger btn-xs btn-xs"><i class="fa fa-trash"></i></button>
+						<button type="button" data-tooltip="tooltip" data-status="' . $value[ 'isDeleted' ] . '" onclick="changeCatStatus(this, \'' . $encriptedID . '\', \'delete\', \'category\')" title="Delete" class="btn btn-danger btn-xs btn-xs"><i class="fa fa-trash"></i></button>
 					</div>
 				</div>';
 				if ( array_key_exists( 'child', $value ) ) {

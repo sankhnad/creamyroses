@@ -211,30 +211,8 @@ if($vendorDisAry){
 							</div>
 							<div class="col-sm-12">
 							  <div class="row">
-								<div class="col-sm-4">
-								  <div class="form-group">
-									<div class="col-md-12">
-									  <div class="borderChexBx">
-										<label>Email Verified</label>
-										<label class="switchS">
-										<input name="verifiedEmail" value="1" class="switchS-input" type="checkbox" <?=$isEmail_verified == 1 ? 'checked' : ''?> />
-										<span class="switchS-label" data-on="Yes" data-off="No"></span> <span class="switchS-handle"></span> </label>
-									  </div>
-									</div>
-								  </div>
-								</div>
-								<div class="col-sm-4">
-								  <div class="form-group">
-									<div class="col-md-12">
-									  <div class="borderChexBx">
-										<label>SMS Verified</label>
-										<label class="switchS">
-										<input name="verifiedSMS" value="1" class="switchS-input" type="checkbox" <?=$isSMS_verified == 1 ? 'checked' : ''?> />
-										<span class="switchS-label" data-on="Yes" data-off="No"></span> <span class="switchS-handle"></span> </label>
-									  </div>
-									</div>
-								  </div>
-								</div>
+								
+								
 								<div class="col-sm-4">
 								  <div class="form-group">
 									<div class="col-md-12">

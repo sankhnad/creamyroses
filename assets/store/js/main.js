@@ -1380,7 +1380,7 @@ $(document).on("submit", "#order_form", function (e) {
 	e.preventDefault();
 	
 	$.ajax({
-			url: base_url + 'checkOut/order',
+			url: base_url + 'checkout/order',
 			type: 'POST',
 			dataType: 'json',
 			data: new FormData(this),

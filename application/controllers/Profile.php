@@ -85,9 +85,60 @@ class Profile extends CI_Controller {
 	
 	function orders(){
 		$data['activeNav'] = 'orders';		
+		$cid = decode($this->session->userdata('CID'));
+
+		$data['ordersAry'] = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1','customer_id'=>$cid));
 		$this->load->view('store/orders', $data);
 	}
-	
+
+	function orderDetails($orderId){
+		$data['activeNav'] = 'orders';		
+		//echo "==".$orderId;
+		$oid = decode($orderId);
+		//$data['ordersAry'] = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1','customer_id'=>$cid));
+		$aColumns=array(
+			'a.pin_code',
+			'a.is_eggless',
+			'a.actual_price',
+			'a.discount',
+			'a.total_price',
+			'a.cake_message',
+			'a.unit',
+			'a.quantity',
+
+			
+			'd.name',
+			'd.image',
+			
+		);
+		
+		
+		
+		$orderObj		 	 = $this->common_model->getAll('*', 'orders', array('is_Deleted'=>'1','order_id'=>$oid));
+		//echo '<pre>';print_r($orderObj);die;
+		$cid 				 = $orderObj[0]->customer_id;
+		$coupon				 = $orderObj[0]->coupon;
+		$billingAddressObj 	 = $this->common_model->getAll('*', 'address', array('isDeleted'=>'1','isDefault'=>'1','cid'=>$cid));
+		$couponObj 	 		 = $this->common_model->getAll('*', 'coupon', array('name'=>$coupon));
+		
+		$orderDetailsObj 	 = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.oid'=>$oid,'a.is_in_cart'=>'0'));
+
+		
+		$data['orderDetailsObj']   =  $orderDetailsObj;
+		$data['orderObj'] 		   =  $orderObj;
+		$data['orderDetailsObj']   =  $orderDetailsObj;
+		$data['billingAddressObj'] =  $billingAddressObj;
+		$data['couponObj'] =  $couponObj;
+		//echo '<pre>';print_r($couponObj);die;		
+		
+		
+		
+		
+		
+		
+		$this->load->view('store/order_details', $data);
+	}
+
 	function addAddress(){
 		$data['activeNav'] = 'address';	
 		$data['data'] = array();	
