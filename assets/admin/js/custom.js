@@ -1,3 +1,215 @@
+$(document).on("submit", "#editNewBanner", function (e) {
+	e.preventDefault();
+	var id = $('input[name="bid"]').val();
+	if (id != '') {
+		var msg = 'Updated';
+	} else {
+		var msg = 'Added';
+	}
+	$.ajax({
+		url: admin_url + 'banner/storeBanner',
+		dataType: 'json',
+		type: 'POST',
+		data: new FormData(this),
+		processData: false,
+		contentType: false,
+		beforeSend: function () {
+				showLoader();
+		},
+		success: function (data) {
+			timerAlert('Successfull!', 'Banner has been successfully '+msg, admin_url+'banner');
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+});
+
+$(document).on("submit", "#editNewTestimonials", function (e) {
+	e.preventDefault();
+	var id = $('input[name="tid"]').val();
+	if (id != '') {
+		var msg = 'Updated';
+	} else {
+		var msg = 'Added';
+	}
+	$.ajax({
+		url: admin_url + 'testimonials/storeTestimonials',
+		dataType: 'json',
+		type: 'POST',
+		data: new FormData(this),
+		processData: false,
+		contentType: false,
+		beforeSend: function () {
+				showLoader();
+		},
+		success: function (data) {
+			timerAlert('Successfull!', 'Testimonials has been successfully '+msg, admin_url+'testimonials');
+		},
+		error: function () {
+			csrfError();
+		}
+	});
+});
+
+function changeTestimonialsStatus(selfObj, id, type, target){ 
+	var msg = '';
+	var dataString = {
+		id: id,
+		type: type,
+	};
+
+	if ($(selfObj).find('input').is(':checked')) {
+		dataString.value = '0';
+		isCheck = false;
+		msg = 'Do you want to mark this '+type+' as inactive?';
+	} else {
+		dataString.value = '1';
+		isCheck = true;
+		msg = 'Do you want to mark this '+type+' as active?';
+	}
+
+	swal({
+		title: "Are you sure?",
+		text: msg,
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes, I am sure!",
+		cancelButtonText: "No, cancel it!"
+	}).then(function () {
+		$.ajax({
+			url: admin_url + 'testimonials/changeStatus',
+			type: "POST",
+			dataType: 'json',
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function () {
+				$('div[data-statusid="'+id+'"]').find('input').prop('checked', isCheck);
+			},
+			error: function () {
+				csrfError();
+			}
+		});
+	});
+	processTooltip();
+}
+
+function deleteTestimonial(selfObj, id, type) {
+	swal({
+		title: "Are you sure!!",
+		text: "Do you want to you want to delete this record?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes",
+		cancelButtonText: "No"
+	}).then(function () {
+		var dataString = {
+			id: id,
+			type: type
+		};
+		$.ajax({
+			url: admin_url + 'testimonials/deleteData',
+			dataType: 'json',
+			type: "POST",
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (data) {
+					timerAlert('Successful!!', 'Record has been deleted Successfully');
+					$(selfObj).closest('tr').remove();
+			},
+			error: function () {
+				csrfError();
+			},
+		});
+
+	});
+}
+
+function changeBannerStatus(selfObj, id, type, target){ 
+var msg = '';
+	var dataString = {
+		id: id,
+		type: type,
+	};
+
+	if ($(selfObj).find('input').is(':checked')) {
+		dataString.value = '0';
+		isCheck = false;
+		msg = 'Do you want to mark this '+type+' as inactive?';
+	} else {
+		dataString.value = '1';
+		isCheck = true;
+		msg = 'Do you want to mark this '+type+' as active?';
+	}
+
+	swal({
+		title: "Are you sure?",
+		text: msg,
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes, I am sure!",
+		cancelButtonText: "No, cancel it!"
+	}).then(function () {
+		$.ajax({
+			url: admin_url + 'banner/changeStatus',
+			type: "POST",
+			dataType: 'json',
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function () {
+				$('div[data-statusid="'+id+'"]').find('input').prop('checked', isCheck);
+			},
+			error: function () {
+				csrfError();
+			}
+		});
+	});
+	processTooltip();
+}
+
+function deleteBanner(selfObj, id, type) {
+	swal({
+		title: "Are you sure!!",
+		text: "Do you want to you want to delete this record?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes",
+		cancelButtonText: "No"
+	}).then(function () {
+		var dataString = {
+			id: id,
+			type: type
+		};
+		$.ajax({
+			url: admin_url + 'banner/deleteData',
+			dataType: 'json',
+			type: "POST",
+			data: dataString,
+			beforeSend: function () {
+				showLoader();
+			},
+			success: function (data) {
+					timerAlert('Successful!!', 'Record has been deleted Successfully');
+					$(selfObj).closest('tr').remove();
+			},
+			error: function () {
+				csrfError();
+			},
+		});
+
+	});
+}
+
 function productPriceTable(){
 	var productTbl = '<tr>'+
 		'<td>'+
@@ -37,6 +249,7 @@ function productPriceTable(){
 	'</tr>';
 	return productTbl;
 }
+
 function productPriceTableEdit(){
 	var productTbl = '<tr> '+
 		'<td colspan="6"></td> '+
@@ -46,6 +259,7 @@ function productPriceTableEdit(){
 	'</tr>';
 	return productTbl;
 }
+
 function addRemovePriceTablBox(selfObj,type,status){
 	if(status == 1){
 		if(type == 'add'){
@@ -79,10 +293,10 @@ function resetManulReviewForm(){
 	$('.reviewerRatingValue').val('');
 	$(".reviewerRating").rateYo("rating", '0');
 }
+
 $('.resetBtnRevewi').click(function(){
 	resetManulReviewForm()
 });
-
 
 $('.manualREvBoxBtn').click(function(){
 	$('.manualReviewFomCnt').slideDown();
@@ -3540,8 +3754,6 @@ function editDelivery(selfObj, id, type) {
 	});
 }
 
-
-
 function deleteDelivery(selfObj, id, type) {
 	swal({
 		title: "Are you sure!!",
@@ -3627,7 +3839,6 @@ function changeDeliveryStatus(selfObj, id, type) {
 	});
 	processTooltip();
 }
-
 
 function getQuantity(selfObj){
 		$(selfObj).closest('tr').find('.gStatLbl').addClass('label-danger').html('Inactive').removeClass('label-success');

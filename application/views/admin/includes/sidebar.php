@@ -161,6 +161,16 @@
 								<a href="<?=admin_url()?>coupons"><i class="menu-icon fa fa-caret-right"></i> Manage Coupons</a>
 								<b class="arrow"></b>
 						</li>
+						<li class="<?=$activeSubMenu == 'banner' ? 'active':''?>">
+							<a href="<?=admin_url()?>banner"><i class="menu-icon fa fa-caret-right"></i> Banner</a>
+							<b class="arrow"></b>
+						</li>
+
+						<li class="<?=$activeSubMenu == 'testimonials' ? 'active':''?>">
+							<a href="<?=admin_url()?>testimonials"><i class="menu-icon fa fa-caret-right"></i> Testimonials</a>
+							<b class="arrow"></b>
+						</li>
+						
 						<!--<li class="<?=$activeSubMenu == 'manage_users' ? 'active':''?>">
 							<a href="<?=admin_url()?>others/manage_users"><i class="menu-icon fa fa-caret-right"></i> Manage Users</a>
 							<b class="arrow"></b>
