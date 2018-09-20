@@ -1195,6 +1195,19 @@ function getProductDeliverySlot(selfObj, type){
 	
 	var priceDelivry = delivryOptionPrice > 0 ? '<i class=\'fas fa-rupee-sign\'></i> '+delivryOptionPrice : 'Free';
 	$('.optionPriceLs').html(priceDelivry);
+	$('.deliveryCHageCal').html(priceDelivry);
+	
+	var orderTotal = $('.total_amount').val();
+	
+	if(delivryOptionPrice > 0){
+		var orderTotalAfterDelChrg = orderTotal - delivryOptionPrice;
+	}else{
+		var orderTotalAfterDelChrg = orderTotal;
+	}
+	
+	//var finalOrderPrice = '<i class=\'fas fa-rupee-sign\'></i> '+orderTotalAfterDelChrg;
+	$('#total_amount').html(orderTotalAfterDelChrg);
+
 	
 	if(todayDate == dateDelivryInp){
 		disableEnableSlot(cHours, cMinutes);
@@ -1347,7 +1360,7 @@ function checkCoupon(selfObj){
 						var couponType  = value.type;
 						var discountVal = value.discount;
 						if(couponType == 1){
-							couponCal 	= cart_val*discountVal/100;
+							couponCal 	= toataAmount*discountVal/100;
 							finalVal 	= toataAmount - couponCal;
 							couponSign 	= '%';
 						}else{
@@ -1355,9 +1368,9 @@ function checkCoupon(selfObj){
 							finalVal 	= toataAmount - couponCal;
 							couponSign  = '<i class="fas fa-rupee-sign"></i>';
 						}
-						
 												
 						$('#total_amount').text(finalVal);
+						$('.total_amount').val(finalVal);
 						$('#disc_val').text(couponCal);
 						$('.couponDiv').removeClass('hide');
 						$('#coupon_val').val(couponCal);
