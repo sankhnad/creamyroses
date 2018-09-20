@@ -13,18 +13,15 @@ class Checkout extends CI_Controller {
 		$cid = decode($this->session->userdata('CID'));
 		
 		$aColumns=array(
-			'a.pin_code',
-			'a.is_eggless',
-			'a.actual_price',
-			'a.discount',
-			'a.total_price',
-			'a.cake_message',
-			'a.unit',
-			'a.quantity',
-			
-			'd.name',
-			'd.image',
+			'a.*',
 		);
+		
+		if($cid){
+			$where['a.cid'] = $cid;
+		}else{
+			$where['a.session_id'] = $this->session->userdata('SESSION_ID');
+		}
+		$where['a.is_in_cart'] = '1';
 		
 		$cartDetailsObj  = $this->manual_model->getOrderDetails(str_replace( " , ", " ", implode( ", ", $aColumns )), array('a.cid'=>$cid,'a.is_in_cart'=>'1'));
 
