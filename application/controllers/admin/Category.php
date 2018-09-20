@@ -187,12 +187,9 @@ class Category extends CI_Controller {
 			'parent_id' => $categoryID,
 			'name' => trim($name),
 			'url_slug' => trim($slug),
-			'isTopBar' => trim($isTop),
-			'isLeftBar' => trim($isLeft),
 			'meta_description' => trim($metaDesc),
 			'meta_keyword' => trim($metaKey),
 			'description' => trim($desc),
-			'mobile_display' => trim($mobileViwe),
 			'status' => $status,
 		);
 		$notId = '';

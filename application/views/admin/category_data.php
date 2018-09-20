@@ -4,13 +4,10 @@ if ( $catAray ) {
 	$url_slug = $catAray[ 0 ]->url_slug;
 	$img = $catAray[ 0 ]->image;
 	$icon = $catAray[ 0 ]->icon;
-	$isTop = $catAray[ 0 ]->isTopBar;
-	$isLeft = $catAray[ 0 ]->isLeftBar;
 	$sortOrder = $catAray[ 0 ]->sort_order;
 	$metaTDesc = $catAray[ 0 ]->meta_description;
 	$metaTKey = $catAray[ 0 ]->meta_keyword;
 	$description = $catAray[ 0 ]->description;
-	$isMobile = $catAray[ 0 ]->mobile_display;
 	$isStatus = $catAray[ 0 ]->status;
 
 	$typeLbl = 'Update';
@@ -121,47 +118,9 @@ if ( $catAray ) {
 													</div>
 												</div>
 											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<div class="col-md-12">
-														<div class="borderChexBx" data-toggle="tooltip" title="Display in the top menu bar. Only works for the top parent categories.">
-															<label>Top header</label>
-															<label class="switchS">
-																<input name="isTop" value="1" class="switchS-input" type="checkbox" <?=$isTop == '1' ? 'checked' : ''?> />
-																<span class="switchS-label" data-on="Yes" data-off="No"></span>
-																<span class="switchS-handle"></span> 
-															</label>														
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<div class="col-md-12">
-														<div class="borderChexBx" data-toggle="tooltip" title="Display in the left menu panel. Only works for the top parent categories.">
-															<label>Left Menu</label>
-															<label class="switchS">
-																<input name="isLeft" value="1" class="switchS-input" type="checkbox" <?=$isLeft == '1' ? 'checked' : ''?> />
-																<span class="switchS-label" data-on="Yes" data-off="No"></span>
-																<span class="switchS-handle"></span>
-															</label>														
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<div class="col-md-12">
-														<div class="borderChexBx" data-toggle="tooltip" title="Display in the top menu bar. Only works for the top parent categories.">
-															<label>Visible on mobile</label>
-															<label class="switchS">
-																<input name="isMobile" value="1" class="switchS-input" type="checkbox" <?=$isMobile == '1' ? 'checked' : ''?> />
-																<span class="switchS-label" data-on="Yes" data-off="No"></span> <span class="switchS-handle"></span>
-															</label>														
-														</div>
-													</div>
-												</div>
-											</div>
+											
+											
+											
 											<div class="col-sm-6">
 												<div class="form-group">
 													<div class="col-md-12">
