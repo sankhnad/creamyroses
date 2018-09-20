@@ -368,13 +368,13 @@ class Checkout extends CI_Controller {
 			
 			'delivery_date' 	=> $delivery_date,
 			'delivery_option' 	=> $deliveryOpt,
-			'delivery_time' 	=> $deliveryOptPrice,  
-			'delivery_price' 	=> $slotObj,			
+			'delivery_time' 	=> $slotObj,  
+			'delivery_price' 	=> $deliveryOptPrice,			
+			'delivery_price' 	=> $deliveryOptPrice,			
 			 
-			'status_type' 		=> $order_status,
+			'reward_balance' 	=> $currentRewardBal,
 		);
-		
-
+		//echo '<pre>';print_r($orderAray);die;
 		$oid = $this->common_model->saveData('orders', $orderAray);	
 		
 		$referalsData = array(
