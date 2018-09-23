@@ -440,8 +440,8 @@ class Checkout extends CI_Controller {
 			$config['mailtype'] = 'html';
 
 			$this->email->initialize($config);
-			$this->email->from('info@sankhnad.com', 'Creamy Roses');
-			$this->email->to($email,'info@sankhnad.com,raj_mishra9933@yahoo.com');
+			$this->email->from('creamyroses@sankhnad.com', 'Creamy Roses');
+			$this->email->to($email,'creamyroses@sankhnad.com,raj_mishra9933@yahoo.com');
 			$this->email->subject('Order received from Creamy Roses, Order Id '.$oid.' ');
 			
 			$message = $this->load->view("store/includes/order_confirmation", $mailAry,true);	
