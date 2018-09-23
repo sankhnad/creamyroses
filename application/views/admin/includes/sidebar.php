@@ -149,6 +149,19 @@
 					</a>
 					<b class="arrow"></b>
 				</li>-->
+				<li class="<?=$activeMenu == 'pages' ? 'active open':''?>">
+					<a href="javascript;:" class="dropdown-toggle"> <i class="menu-icon far fa-file-alt"></i>
+						<span class="menu-text"> Pages</span>
+						<b class="arrow fa fa-angle-down"></b>
+					</a>
+					<b class="arrow"></b>
+					<ul class="submenu">
+						<li class="<?=$activeSubMenu == 'home_page' ? 'active':''?>">
+							<a href="<?=admin_url()?>pages/home"><i class="menu-icon fa fa-caret-right"></i> Home Page</a>
+							<b class="arrow"></b>
+						</li>
+					</ul>
+				</li>
 				
 				<li class="<?=$activeMenu == 'others' ? 'active open':''?>">
 					<a href="javascript;:" class="dropdown-toggle"> <i class="menu-icon fab fa-nintendo-switch"></i>

@@ -75,17 +75,17 @@ if ($testimonialsAray) {
 											</div>
 											<div class="col-sm-6">
 												<div class="form-group">
-													<label class="col-md-12">Designation &nbsp; <span class="required"></span></label>
+													<label class="col-md-12">Company &nbsp; <span class="required"></span></label>
 													<div class="col-md-12">
-														<input type="text" name="designation" class="form-control" value="<?=$designation?>" placeholder="Enter Designation" required/>
+														<input type="text" name="company" class="form-control" value="<?=$company?>" placeholder="Enter Compoany Name" required/>
 													</div>
 												</div>
 											</div>
 											<div class="col-sm-6">
 												<div class="form-group">
-													<label class="col-md-12">Company &nbsp; <span class="required"></span></label>
+													<label class="col-md-12">Place &nbsp; <span class="required"></span></label>
 													<div class="col-md-12">
-														<input type="text" name="company" class="form-control" value="<?=$company?>" placeholder="Enter Compoany Name" required/>
+														<input type="text" name="designation" class="form-control" value="<?=$designation?>" placeholder="Enter Designation" required/>
 													</div>
 												</div>
 											</div>
@@ -115,7 +115,7 @@ if ($testimonialsAray) {
 												<div class="form-group">
 													<label class="col-md-12">Description</label>
 													<div class="col-md-12">
-														<textarea name="description" rows="8" class="summernote"><?=$description?></textarea>
+														<textarea name="description" maxlength="200" rows="8" class="form-control"><?=$description?></textarea>
 													</div>
 												</div>
 											</div>
@@ -124,7 +124,7 @@ if ($testimonialsAray) {
 									<div class="col-sm-4">										
 										<div class="form-group dropyCHet col-sm-12">
 											<label>Image</label>
-											<input name="img" type="file" data-allowed-file-extensions="png jpg gif jpeg" class="dropify" data-max-file-size="2M" data-default-file="<?=$iURL_testimonials?><?=$img ? $img : 'default.jpg'?>"/>
+											<input name="img" type="file" data-allowed-file-extensions="png jpg gif jpeg" class="dropify" data-max-file-size="2M" data-default-file="<?=$iURL_testimonials?><?=$img ? $img : 'user.png'?>"/>
 										</div>										
 									</div>
 

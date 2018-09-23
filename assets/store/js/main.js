@@ -810,7 +810,8 @@ function csrfError() {
 
 function processTooltip() {
 	$('.tooltip.fade').removeClass('in');
-	$('[data-tooltip="tooltip"], [data-toggle="tooltip"]').tooltip({
+	$('.tooltip.fade.in').remove();
+	$('[data-toggle="tooltip"], [data-tooltip="true"], [data-tooltip="tooltip"]').tooltip({
 		container: 'body',
 		html: true
 	});
@@ -819,7 +820,7 @@ function processTooltip() {
 $(document).ready(function(){
 
 	//$(".sticky").sticky({topSpacing:0});
-	
+	processTooltip();
 	
 	if($('.productSlider').length > 0){
 		var productSlider = $('.productSlider');

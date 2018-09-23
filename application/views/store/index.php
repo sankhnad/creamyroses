@@ -11,45 +11,31 @@
 	<section class="slid-sec main-slid-sec">
 	    <div class="container-fluid">
 	      	<div class="row">
-				<!-- Main Slider -->
-				<div class="col-md-3 hide"> 
-					<!-- New line required  -->
-					<div class="product">
-						<div class="like-bnr">
-							<!-- <h5>Ultra-portable Bluetooth</h5>
-							<h4>M5 Speaker Audio</h4>
-							<span class="price"><i class="fas fa-rupee-sign"></i> 570.00</span> <a href="#." class="btn-round margin-top-10">Shop now</a> --> 
-						</div>
-					</div>
-				</div>
-		        <!-- Main Slider  -->
 		        <div class="col-md-12 no-padding">					
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					    <!-- Indicators -->
 					    <ol class="carousel-indicators">
-					      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					      <li data-target="#myCarousel" data-slide-to="1"></li>
-					      <li data-target="#myCarousel" data-slide-to="2"></li>
+							<?php $sliderObj =  getSlider();
+							$i = 0;
+							$imgSlid = '';
+							foreach($sliderObj as $sliderData){
+								$isActive = $i == '0' ? 'active':'';
+								if(!$sliderData->avtar){
+									continue;
+								}
+							?>
+					      	<li data-target="#myCarousel" data-slide-to="<?=$i?>" class="<?=$isActive?>"></li>
+							<?php
+								$imgSlid .= '<div class="item '.$isActive.'">
+								<div class="updateBxLe">'.$sliderData->heading.'</div>
+								<div class="updateBxDis">'.$sliderData->description.'<br><br><a href="'.$sliderData->button_link.'">'.$sliderData->button_text.'</a></div>
+								<img src="'.$iURL_banner.$sliderData->avtar.'" alt="Chicago" style="width:100%;"></div>';
+								$i++; } ?>
 					    </ol>
 
 					    <!-- Wrapper for slides -->
 					    <div class="carousel-inner">
-					      <div class="item active">
-					        <img src="<?=$iURL_storeAssts?>images/slider/slide1.jpg" alt="Los Angeles" style="width:100%;">
-					      </div>
-
-					      <div class="item">
-					        <img src="<?=$iURL_storeAssts?>images/slider/slide2.jpg" alt="Chicago" style="width:100%;">
-					      </div>
-					    
-					      <div class="item">
-					        <img src="<?=$iURL_storeAssts?>images/slider/slide3.jpg" alt="New york" style="width:100%;">
-					      </div>
-					    
-					      <div class="item">
-					        <img src="<?=$iURL_storeAssts?>images/slider/slide4.jpg" alt="New york" style="width:100%;">
-					      </div>
-
+					      <?=$imgSlid?>
 					    </div>
 
 					    <!-- Left and right controls -->
@@ -72,7 +58,6 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-9 col-sm-push-3">
-
 					<div style="overflow:hidden">
 						<div class="figure banner-with-effects effect-sadie1 banner-width  with-button" style="background-color:#ffffff"><img src="<?=$iURL_storeAssts?>images/watch.jpg" alt="">
 							<div class="figcaption">
@@ -310,26 +295,12 @@
 
 							</div>
 						</div>
-					</div>
-
-					
-
-					
+					</div>					
 				</div>
 
 				<aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
-					<div class="hide">
-					<div class="sideoffer-banner">
-					
-					<a href="#" title="Side Offer Banner">
-						 
-						<img class="hidden-xs" src="<?=$iURL_storeAssts?>images/custom-slide1.jpg" alt="Side Offer Banner"></a>
-
-				
-					</div>
-					</div>
 					<div class="featured-add-box">
-						<div class="featured-add-inner"> <a href="#"> <img src="<?=$iURL_storeAssts?>images/ads-08.jpg" alt="f-img"></a>
+						<div class="featured-add-inner"> <a href="#"> <img src="<?=$iURL_uploads?>pages/side-banner.jpg" alt="f-img"></a>
 							<div class="banner-content">
 								<div class="banner-text">Electronics</div>
 								<div class="banner-text1">20% off</div>
@@ -369,45 +340,20 @@
 						<div class="ts-testimonial-widget">
 							<div class="slider-items-products">
 								<div id="testimonials-slider" class="product-flexslider hidden-buttons home-testimonials">
-									<div class="slider-items slider-width-col4 fadeInUp owl-carousel owl-theme" style="opacity: 1; display: block;">
-									 
-													<div class="holder">
-														<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lid est laborum dolo rumes fugats untras. dolore magna aliquam erat volutpat. Aenean est auctorwisiet urna. Aliquam erat volutpat...</p>
-														<div class="testimonial-arrow-down"></div>
-														<div class="thumb">
-															<div class="customer-img"> <img src="<?=$iURL_storeAssts?>images/photo1.jpg" alt="Saraha Smith"> </div>
-															<div class="customer-bio"> <strong class="name"><a href="#" target="_blank">Saraha Smith</a></strong> <span>Happy Customer</span> </div>
-														</div>
-													</div>
-												
-													<div class="holder">
-														<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lid est laborum dolo rumes fugats untras. dolore magna aliquam erat volutpat. Aenean est auctorwisiet urna. Aliquam erat volutpat...</p>
-														<div class="testimonial-arrow-down"></div>
-														<div class="thumb">
-															<div class="customer-img"> <img src="<?=$iURL_storeAssts?>images/photo.jpg" alt="Stephen Doe"> </div>
-															<div class="customer-bio"> <strong class="name"><a href="#" target="_blank">Stephen Doe</a></strong> <span>Happy Customer</span> </div>
-														</div>
-													</div>
-												
-													<div class="holder">
-														<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lid est laborum dolo rumes fugats untras. dolore magna aliquam erat volutpat. Aenean est auctorwisiet urna. Aliquam erat volutpat...</p>
-														<div class="testimonial-arrow-down"></div>
-														<div class="thumb">
-															<div class="customer-img"> <img src="<?=$iURL_storeAssts?>images/photo1.jpg" alt="Mark doe"> </div>
-															<div class="customer-bio"> <strong class="name"><a href="#" target="_blank">Mark doe</a></strong> <span>Happy Customer</span> </div>
-														</div>
-													</div>
-											 
-													<div class="holder">
-														<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lid est laborum dolo rumes fugats untras. dolore magna aliquam erat volutpat. Aenean est auctorwisiet urna. Aliquam erat volutpat...</p>
-														<div class="testimonial-arrow-down"></div>
-														<div class="thumb">
-															<div class="customer-img"> <img src="<?=$iURL_storeAssts?>images/photo.jpg" alt="John Doe"> </div>
-															<div class="customer-bio"> <strong class="name"><a href="#" target="_blank">John Doe</a></strong> <span>Happy Customer</span> </div>
-														</div>
-													</div>
-												
-											
+									<div class="slider-items slider-width-col4 fadeInUp owl-carousel owl-theme">
+										<?php
+											$testimonialObj =  getTestimonial();
+											foreach($testimonialObj as $testimonialData){
+										?>
+										<div class="holder">
+											<p data-tooltip="true" title="<?=strlen($testimonialData->description) > 200 ? $testimonialData->description : ''?>"><?=trimData($testimonialData->description, 200)?></p>
+											<div class="testimonial-arrow-down"></div>
+											<div class="thumb">
+												<div class="customer-img"> <img src="<?=$iURL_testimonials?><?=$testimonialData->avtar ? $testimonialData->avtar : 'user.png'?>" alt="<?=$testimonialData->name?>"> </div>
+												<div class="customer-bio"> <strong class="name"><a href="#"><?=$testimonialData->name?></a></strong> <span><?=$testimonialData->company?>, <?=$testimonialData->designation?></span> </div>
+											</div>
+										</div>
+										<?php } ?>
 									</div>
 								</div>
 							</div>

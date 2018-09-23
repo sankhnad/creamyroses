@@ -114,10 +114,7 @@ class Testimonials extends CI_Controller {
 							<li class=\'prvImgPoA\'><img src=\''.$avtarURL.'\' /></li>
 							<li class=\'prvImgPoA\'><strong>Name: </strong>'.$aRow['name'].'</li>
 							<li class=\'prvImgPoA\'><strong>Designation: </strong>'.$aRow['designation'].'</li>
-							<li class=\'prvImgPoA\'><strong>Company: </strong>'.$aRow['company'].'</li>
-							
-							
-						
+							<li class=\'prvImgPoA\'><strong>Company: </strong>'.$aRow['company'].'</li>						
 					    </ul>';
 			
 			$fullName = '<a href="javascript:;" data-trigger="hover"  data-toggle="popover"  data-content="'.$cDetail.'">'.$aRow['name'].'</a>';			  

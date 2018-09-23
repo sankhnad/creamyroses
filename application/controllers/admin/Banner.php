@@ -23,15 +23,12 @@ class Banner extends CI_Controller {
 		
 		
 		if(isset($_REQUEST['filterData'])){
-			foreach($_REQUEST['filterData'] as $inDataKey => $inDataVal){
-				
+			foreach($_REQUEST['filterData'] as $inDataKey => $inDataVal){				
 				if($inDataKey == 'filter_status'){
 					if($inDataVal){
 						$inData .= ' AND status IN("'.implode('","', $inDataVal).'")';
 					}
 				}
-				
-				
 			}
 		}
 		

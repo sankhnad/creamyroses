@@ -777,7 +777,7 @@ div.effect-sadie1+div.effect-sadie1 {
 }
 
 .figure.effect-sadie1 img {
-	max-width: 100% !important;
+	width: 100%;
 }
 
 .figure.effect-sadie1.with-button a {
@@ -12818,9 +12818,10 @@ a.button.wishlist {
 }
 
 .home-testimonials .customer-bio {
-	width: 130px;
 	float: right;
 	padding-top: 15px;
+	text-align: right;
+	width: 175px;
 }
 
 .home-testimonials strong.name {
@@ -18540,4 +18541,25 @@ a.shop-now-btn {
 }
 .boxTrG strong{
 	color: #444;	
+}
+.updateBxLe, .updateBxDis, .updateBxBtn{
+  font-size: 22px;
+  width: 40%;
+  position: absolute;
+  right: 180px;
+  text-align: right;
+  text-shadow: 1px 1px 1px #fff;
+  top: 30px;
+}
+.updateBxDis {
+  font-size: 14px;
+  top: 80px;
+}
+
+.updateBxDis a {
+	background-color: #ee2b7a;
+	color: #fff;
+	font-size: 16px;
+	padding: 4px 15px;
+	text-shadow: none;
 }
