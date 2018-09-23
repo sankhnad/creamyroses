@@ -276,6 +276,7 @@ if(! function_exists('getProductWishList')){
 		);
 		return $CI->common_model->getAll('id', 'wish_list', $data);
 	}
+
 }
 
 
@@ -741,6 +742,20 @@ if(! function_exists('getRewardBalance')){
 		}
 		
 		return 0;
+	}
+}
+
+if(! function_exists('getTestimonial')){
+	function getTestimonial(){
+		$CI = & get_instance();
+		return $CI->common_model->getAll('*', 'testimonials', array('isDeleted'=>'1', 'status'=>'1'));
+	}
+}
+
+if(!function_exists('getSlider')){
+	function getSlider(){
+		$CI = & get_instance();
+		return $CI->common_model->getAll('*', 'banner', array('isDeleted'=>'1', 'status'=>'1'));
 	}
 }
 ?>

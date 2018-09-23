@@ -5,15 +5,11 @@ if ($bannerAray) {
 	$img 		= $bannerAray[ 0 ]->avtar;
 	$buttonText = $bannerAray[ 0 ]->button_text;
 	$buttonLink = $bannerAray[ 0 ]->button_link;
-	$isStatus 	= $bannerAray[ 0 ]->status;
-	
+	$isStatus 	= $bannerAray[ 0 ]->status;	
 
 	$typeLbl 	 = 'Update';
 	$linkTopBrod = $heading;
 	$lngk = 'edit';
-
-
-
 } else {
 	$heading = $description = $img = $buttonText = $buttonLink = $isStatus = '';
 	
