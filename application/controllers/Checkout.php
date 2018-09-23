@@ -198,8 +198,13 @@ class Checkout extends CI_Controller {
 
 		$slotObj 	 	 	 = $timeSlotObj[0]->slot;
 		
-		$session_id 	= $this->session->userdata('SESSION_ID');
-		$cid 			= decode($this->session->userdata('CID'));
+		$session_id 		 = $this->session->userdata('SESSION_ID');
+		$cid 				= decode($this->session->userdata('CID'));
+		$customerObj		= $this->common_model->getAll('*', 'customer', array('id'=>$cid));
+		
+		$cust_name 			= $customerObj[0]->fname.''.$customerObj[0]->fname;
+		
+
 		
 		$couponCode 	= $this->input->post('c_name');
 		$diff_ship 		= $this->input->post('diff_ship');
@@ -284,12 +289,14 @@ class Checkout extends CI_Controller {
 
 			$afterDiscount_price += $productPrice['final_price'] * $cartProduct->quantity;
 			
+			//echo '<pre>';print_r($productPriceObj);die;
 			$ordeDetailsAry[] = array(
 				'is_in_cart'=>'0',
 				'actual_price' => $productPrice['oreginal_price'],
 				'discount' => $productPrice['discount_value'],
 				'total_price' => $productPrice['final_price'],
-				'unit' => $cartProduct->quantity,
+				'unit' => $productPriceObj[0]['quantity_type'],
+				'quantity' => $cartProduct->quantity,
 			);
 			
 			
@@ -389,6 +396,59 @@ class Checkout extends CI_Controller {
 			$ordeDetailsUpdate = $ordeDetailsData;
 			$ordeDetailsUpdate['oid'] = $oid;
 			$this->common_model->updateData('order_details', array('is_in_cart'=>'1', 'cid' => $cid), $ordeDetailsUpdate);
+		}
+		
+		if($oid){
+		
+		$orderDetailObj 		= $this->common_model->getAll('*', 'order_details', array('oid'=>$oid));
+		
+		$mailAry = array(
+			'order_no' 			=> $oid,
+			'invoice_no' 		=> 'INV'.generateRandom(5,$type='number'),
+			'payment_mode' 		=> $paymentOption,
+			'customer_name' 	=> $cust_name,
+			'address' 			=> $billAddress,
+			'pin_code' 			=> $pin,
+			'phone_number' 		=> $mobile,
+			'shipping_address' 	=> $shipAddress,
+			'shipping_pin_code' => $ship_pin,
+			'shipping_number' 	=> $ship_mobile,
+			'coupon' 			=> $coupon,  
+			'coupon_price' 		=> $couponCal, 
+			
+			'delivery_date' 	=> $delivery_date,
+			'delivery_option' 	=> $deliveryOpt,
+			'delivery_time' 	=> $slotObj,  
+			'delivery_price' 	=> $deliveryOptPrice,			
+			'delivery_price' 	=> $deliveryOptPrice,			
+			 
+			'reward_balance' 	=> $currentRewardBal,
+			
+			'orderDetailObj' 	=> $orderDetailObj,
+		);
+		
+
+
+			$message = '';
+
+			$this->load->library('email');
+
+			$config['charset'] = 'UTF-8';
+
+			$config['wordwrap'] = TRUE;
+
+			$config['mailtype'] = 'html';
+
+			$this->email->initialize($config);
+			$this->email->from('info@sankhnad.com', 'Creamy Roses');
+			$this->email->to($email,'info@sankhnad.com,raj_mishra9933@yahoo.com');
+			$this->email->subject('Order received from Creamy Roses, Order Id '.$oid.' ');
+			
+			$message = $this->load->view("store/includes/order_confirmation", $mailAry,true);	
+					
+			$this->email->message( $message );
+		    $this->email->send();
+
 		}
 		echo json_encode( array('status' => 'success') );
 	} 

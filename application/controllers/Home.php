@@ -7,7 +7,7 @@ class Home extends CI_Controller {
 	}
 	
 	public function index(){
-		$typeAry 		   = $this->common_model->getAll('*', 'type', '','sort_order asc');
+		$typeAry 		   = $this->common_model->getAll('*', 'type', array('status'=>'1', 'isDeleted'=>'1'),'sort_order asc');
 		$data['activeNav'] = 'home';		
 		$data['typeAry']   = $typeAry;
 				
