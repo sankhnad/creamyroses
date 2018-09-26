@@ -202,7 +202,7 @@ class Checkout extends CI_Controller {
 		$cid 				= decode($this->session->userdata('CID'));
 		$customerObj		= $this->common_model->getAll('*', 'customer', array('id'=>$cid));
 		
-		$cust_name 			= $customerObj[0]->fname.''.$customerObj[0]->fname;
+		$cust_name 			= $customerObj[0]->fname.'&nbsp;'.$customerObj[0]->lname;
 		
 
 		
@@ -250,10 +250,12 @@ class Checkout extends CI_Controller {
 			
 			
 		if($diff_ship){
+			$toEmail 		 = $ship_email;
 			$shipAddress	 = $ship_name.', '.$ship_email.', '.$ship_addresline1.', '.$ship_addresline2.', '.$ship_city.', '.$ship_state.', '.$ship_landmark;
 			$ship_pin		 = $ship_pin;
 			$ship_mobile	 = $ship_mobile;
 		}else{
+			$toEmail 		 = $email;
 			$shipAddress 	 = $billAddress;
 			$ship_pin		 = $pin;
 			$ship_mobile	 = $mobile;
@@ -399,7 +401,6 @@ class Checkout extends CI_Controller {
 		}
 		
 		if($oid){
-		
 		$orderDetailObj 		= $this->common_model->getAll('*', 'order_details', array('oid'=>$oid));
 		
 		$mailAry = array(
@@ -441,7 +442,8 @@ class Checkout extends CI_Controller {
 
 			$this->email->initialize($config);
 			$this->email->from('creamyroses@sankhnad.com', 'Creamy Roses');
-			$this->email->to($email,'creamyroses@sankhnad.com,raj_mishra9933@yahoo.com');
+			$this->email->to($toEmail,'creamyroses@sankhnad.com','raj_mishra9933@yahoo.com','ankit.chawla96@gmail.com');
+			$this->email->cc('ankit.chawla96@gmail.com','raj_mishra9933@yahoo.com);
 			$this->email->subject('Order received from Creamy Roses, Order Id '.$oid.' ');
 			
 			$message = $this->load->view("store/includes/order_confirmation", $mailAry,true);	
