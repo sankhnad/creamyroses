@@ -10,7 +10,7 @@
 		
 			<div class="navbar-header pull-left">
 				<a href="<?=admin_url()?>" class="navbarLogo">
-					<img src="<?=$iURL_assets?>logo.png" />
+					<span>Creamy</span> Roses
 				</a>
 			</div>
 			<div class="navbar-buttons navbar-header pull-right" role="navigation">

@@ -13,7 +13,8 @@ if ( $productAray ) {
 	$metaTDesc 		= $productAray[ 0 ]->meta_description;
 	$metaTKey 		= $productAray[ 0 ]->meta_keyword;
 	$description 	= $productAray[ 0 ]->description;
-	$isEggless 	   		= $productAray[ 0 ]->isEggless;
+	$isEggless 		= $productAray[ 0 ]->isEggless;
+	$isPhotoCake	= $productAray[ 0 ]->isPhotoCake;
 
 	$deliveryDesc 	= $productAray[ 0 ]->delivery_description;
 	$refundDesc 	= $productAray[ 0 ]->refund_description;
@@ -24,7 +25,7 @@ if ( $productAray ) {
 	$lngk 			= 'edit';
 	
 } else {
-	$prdctName = $url_slug = $tags = $img = $model = $dimWidth = $sort = $outOfStockId = $sku = $subStock = $availDate = $metaTTitle =  $metaTDesc = $metaTKey = $description = $prdStock = $deliveryDesc = $refundDesc = $discount_type = $discount = $price = '';
+	$prdctName = $url_slug = $tags = $img = $model = $dimWidth = $sort = $outOfStockId = $sku = $subStock = $availDate = $metaTTitle =  $metaTDesc = $metaTKey = $description = $prdStock = $deliveryDesc = $refundDesc = $discount_type = $discount = $price = $isPhotoCake = '';
 	$catSelctIDs = array();
 	$typeLbl 	   		= 'Create';
 	$linkTopBrod   		= 'New Product';
@@ -241,6 +242,18 @@ if(count($slctPrice) > 0){
 														<label>Eggless option?</label>
 														<label class="switchS switchSCuStatus">
 														  <input name="isEggless" value="1" class="switchS-input"  type="checkbox" <?=$isEggless == '1' ? 'checked' : ''?>>
+														  <span class="switchS-label" data-on="Yes" data-off="No"></span> <span class="switchS-handle"></span> 
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>&nbsp;</label>
+													<div class="borderChexBx">
+														<label>Is this a Photo Cake?</label>
+														<label class="switchS switchSCuStatus">
+														  <input name="isPhotoCake" value="1" class="switchS-input"  type="checkbox" <?=$isPhotoCake == '1' ? 'checked' : ''?>>
 														  <span class="switchS-label" data-on="Yes" data-off="No"></span> <span class="switchS-handle"></span> 
 														</label>
 													</div>
