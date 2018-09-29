@@ -13,8 +13,7 @@
 				<div class="col-sm-10 col-sm-offset-1">
 					<div class="login-container">
 						<div class="center logoLoginAra">
-							<img src="<?=$iURL_assets?>logo.png" height="80px" />
-							<div>&copy; <strong>FIMCO</strong> <i>Inform, Advise, Execute</i></div>
+							<img src="<?=$iURL_assets?>logo.png" height="120px" />
 						</div>
 						<div class="space-6"></div>
 						<div class="position-relative">

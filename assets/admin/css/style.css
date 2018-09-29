@@ -17089,11 +17089,14 @@ input.typeahead.scrollable~.tt-menu{
   content: "\f00c";
 }
 .navbarLogo {
+  color: #b4d887;
   display: inline-block;
-  width: 125px;
+  font-size: 26px;
+  font-weight: bold;
 }
-.navbarLogo img{
-	width: 100%;
+
+.navbarLogo > span {
+  color: #f37869;
 }
 .userRoalPanlM{
     padding:4px 2px 5px;
@@ -18074,6 +18077,9 @@ table.fixTblShort thead .sorting::after, table.fixTblShort thead .sorting_asc::a
 	padding: 8px;
 	position: relative;
 	text-align: center;
+}
+.photoCake{
+	
 }
 
 

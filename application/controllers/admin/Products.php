@@ -226,6 +226,7 @@ class Products extends CI_Controller {
 		$availableDate	= $this->input->post('date') ? convertData($this->input->post('date')) : NULL;
 		$sort			= $this->input->post('sort');
 		$isEggless		= $this->input->post( 'isEggless' ) ? $this->input->post( 'isEggless' ) : '0';
+		$isPhotoCake		= $this->input->post( 'isPhotoCake' ) ? $this->input->post( 'isPhotoCake' ) : '0';
 	
 		$metaTitle 		= trim($this->input->post('meta_title'));
 		$metaDesc 		= trim($this->input->post('meta_desc'));
@@ -247,13 +248,12 @@ class Products extends CI_Controller {
 			'date_available'=> $availableDate,
 			'sort_number' 	=> $sort,
 			'isEggless' 	=> $isEggless,
+			'isPhotoCake' 	=> $isPhotoCake,
 			'meta_title' => $metaTitle,
 			'meta_description' => $metaDesc,
 			'meta_keyword' => $metaKey,
 			'delivery_description' => $deliveryDesc,
 			'refund_description' => $refundDesc,
-			
-			
 		);
 		$notId = '';
 		if($pid){

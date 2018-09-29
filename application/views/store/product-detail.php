@@ -122,8 +122,13 @@
 											<input <?=$productDataObj[0]->isEggless == '1' ? 'checked' : ''?> class="isEggless" type="checkbox" /> Do you want to make it Eggless ? <!--Rs. 50-->
 											</label>
 										
-											<br>
-
+											<br><br>
+											<?php if($productDataObj[0]->isPhotoCake == '1'){?>
+												<label class="photoCake">
+													<input type="file" /> Upload your photo
+												</label>
+											<?php } ?>
+											
 											<div class="clearfix"></div>
 											<div class="boxTopShap">
 												<div class="delivery_lbl_b">Delivery</div>
